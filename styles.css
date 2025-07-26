@@ -1,0 +1,114 @@
+/* -----------------------------------------
+   Global Styles
+   ----------------------------------------- */
+:root {
+  --brand-red: #ef5350;
+  --brand-yellow: #ffeb3b;
+  --brand-blue: #42a5f5;
+  --brand-grey: #212121;
+  --text-light: #ffffff;
+  --text-dark: #111111;
+  --backdrop: rgba(0, 0, 0, 0.45);
+  --radius: 6px;
+  --transition: 0.25s ease-in-out;
+}
+
+html,
+body {
+  margin: 0;
+  height: 100%;
+  font-family: "Segoe UI", Roboto, system-ui, -apple-system, sans-serif;
+  color: var(--text-light);
+  background: var(--brand-grey);
+  overflow: hidden;
+}
+
+/* -----------------------------------------
+   Layout Helpers
+   ----------------------------------------- */
+.flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* -----------------------------------------
+   Camera Feed
+   ----------------------------------------- */
+#cam {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: brightness(0.9) contrast(1.1);
+}
+
+/* -----------------------------------------
+   Overlay Elements
+   ----------------------------------------- */
+#label {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 12px 16px;
+  background: var(--backdrop);
+  text-align: center;
+  font-size: 1.4rem;
+  backdrop-filter: blur(4px);
+}
+
+#start {
+  position: absolute;
+  inset: 0;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  font-size: 2rem;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  color: var(--text-light);
+  border: none;
+  background: linear-gradient(135deg, var(--brand-red), var(--brand-yellow));
+
+  transition: filter var(--transition), transform var(--transition);
+}
+#start:focus-visible { outline: 3px dashed var(--brand-yellow); outline-offset: 4px; }
+#start:hover          { filter: brightness(1.05);             }
+#start:active         { transform: scale(0.97);               }
+
+#alert {
+  display:none;
+  position:absolute;
+  top:0; left:0; right:0;
+  background:var(--brand-red);
+  color:var(--text-light);
+  padding:6px;
+  text-align:center;
+  font-size:1rem;
+}
+
+header.app-header {
+  position:absolute;
+  top:0; left:0; right:0;
+  padding:8px 16px;
+  display:flex;
+  align-items:center;
+  gap:12px;
+  pointer-events:none; /* allow clicks through to #start */
+}
+header.app-header .logo {
+  width:36px; height:36px; border-radius:50%;
+  background:var(--brand-yellow);
+}
+header.app-header h1 {
+  margin:0;
+  font-size:1.2rem;
+  font-weight:600;
+}
+
+/* Hidden worker canvas */
+canvas { display:none; }
