@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Pokedex Demo</title>
+
+  <!-- mobile viewport & installable PWA hints -->
+  <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no">
+  <meta name="mobile-web-app-capable"        content="yes">
+  <meta name="apple-mobile-web-app-capable"  content="yes">
+
+  <!-- external stylesheet replacing inline styles -->
+  <link rel="stylesheet" href="styles.css">
+  <link rel="manifest" href="manifest.webmanifest">
+  <meta name="theme-color" content="#ef5350">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+</head>
+
+<body>
+  <header class="app-header">
+    <div class="logo"></div>
+    <h1>Pointkedex</h1>
+  </header>
+
+  <div id="alert"></div>
+
+  <video  id="cam"    playsinline autoplay muted></video>
+  <canvas id="worker"></canvas>                 <!-- used only to grab a crop -->
+  <div    id="label">loading…</div>
+  <button id="start">Tap to start</button>
+
+  <script type="module">
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('/service-worker.js').catch(console.error);
+      });
+    }
+  </script>
+  <script type="module" src="app.js"></script>
+</body>
+</html>
+
