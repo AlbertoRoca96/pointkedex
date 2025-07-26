@@ -38,6 +38,7 @@ document.getElementById("start").onclick = async () => {
   const cam    = document.getElementById("cam");
   const worker = document.getElementById("worker");
   const label  = document.getElementById("label");
+  const endpoint = (window.API_BASE || "") + "/api/predict";
 
   /* open rear camera – Android multi‑lens fallback */
   async function openCamera () {
@@ -107,7 +108,7 @@ document.getElementById("start").onclick = async () => {
     const jpeg = worker.toDataURL("image/jpeg", JPEG_QUAL);
     let res;
     try {
-      res = await fetch("/api/predict", {
+      res = await fetch(endpoint, {
         method : "POST",
         headers: { "Content-Type": "application/json" },
         body   : JSON.stringify({ image: jpeg })

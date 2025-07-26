@@ -1,0 +1,7 @@
+{
+  "buildCommand": "",
+  "outputDirectory": ".",
+  "ignoreCommand": "echo nothing to ignore",
+  "cleanUrls": true,
+  "rewrites": [{ "source": "/(.*)", "destination": "/index.html" }]
+    
