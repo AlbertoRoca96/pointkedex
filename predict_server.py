@@ -66,6 +66,8 @@ def static_proxy(path: str) -> Any:
 
 
 # ───── Prediction endpoint ──────────────────────────────
+# Extra: also serve under /pointkedex/ so the same deployment can sit at domain root
+# while static site is under /pointkedex on GitHub Pages.
 def _preprocess(b64_jpeg: str) -> np.ndarray:
     """Convert base-64 JPEG (with or without data-URL header) into model input."""
     # Accept both “abcd…” and “data:image/jpeg;base64,abcd…”
@@ -79,7 +81,8 @@ def _preprocess(b64_jpeg: str) -> np.ndarray:
     return np.expand_dims(arr, axis=0)        # shape (1, 224, 224, 3)
 
 
-@app.route("/api/predict", methods=["POST"])
+@app.route('/api/predict', methods=['POST'])
+@app.route('/pointkedex/api/predict', methods=['POST'])
 def predict() -> Any:
     data    = request.get_json(silent=True) or {}
     img_b64 = data.get("image")
