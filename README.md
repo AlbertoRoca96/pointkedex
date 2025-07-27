@@ -76,6 +76,28 @@ Because the front-end uses a **relative URL** (`/api/predict`) everything will j
 
 The included Dockerfile builds the model, installs Gunicorn + Flask + TensorFlow, and exposes port 8000.
 
+### Quick local test with Docker + ngrok 🐳⚡️
+
+```bash
+# build image without bloating the context (see .dockerignore we just added)
+docker build -t pointkedex .
+
+# run locally on :8000 and automatically expose it to the internet via ngrok
+# (set NGROK_AUTHTOKEN once – https://dashboard.ngrok.com/get-started/your-authtoken)
+docker run -e NGROK_AUTHTOKEN="$NGROK_AUTHTOKEN" -p 8000:8000 pointkedex
+```
+
+The container boots Gunicorn + Flask on http://localhost:8000 **and** spins up ngrok.
+Copy the forwarding URL printed by ngrok (e.g. https://fuzzy-pony.ngrok.io) and pass it
+to the front-end:
+
+```
+https://<your-github-username>.github.io/pointkedex/?api=https://fuzzy-pony.ngrok.io/
+```
+
+No more "loading…" – predictions now flow nicely.  Deploy the same image to any
+Docker-friendly host (Render, Fly, Railway…) and swap the URL once you’re happy.
+
 ```bash
 docker build -t pointkedex .
 docker run -p 8000:8000 pointkedex
