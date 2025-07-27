@@ -1,0 +1,20 @@
+# Ignore heavy client-side TF-JS shards to keep build context tiny
+web_model/**/*.bin
+pointkedex/web_model/**/*.bin
+repo/web_model/**/*.bin
+
+# Python virtualenvs
+.venv/
+__pycache__/
+*.pyc
+
+# Node modules (if any)
+node_modules/
+
+# Git, CI artefacts
+.git/
+.github/
+
+# OS clutter
+.DS_Store
+Thumbs.db
