@@ -1,4 +1,18 @@
-# Pointkedex
+
+## Pointkedex
+
+### ⚠️ Important: where’s the API?
+This repo ships only the static front-end.  The classifier endpoint it expects lives at: `api/predict`.
+
+1. Deploy the Python `predict_server.py` anywhere you like (Render, Fly, Vercel, etc.).
+2. Note the base URL of that deployment.  Let’s pretend it’s `https://poke-api.fly.dev/`.
+3. When opening the site pass that URL in the `api` query-param so the front-end knows where to POST:
+   ```
+   https://albertoroca96.github.io/pointkedex/?api=https://poke-api.fly.dev/
+   ```
+4. Profit.
+
+If you skip step 1 you’ll only ever see “loading...” because GitHub Pages is purely static and will 404 on `/api/predict`.
 
 A lightweight in-browser Pokedex that lets you *point your camera at a Pokémon* and instantly get its name and some Pokédex trivia. Everything runs completely offline in the browser thanks to TensorFlow.js and a distilled ResNet-50 model (\~14&nbsp;MB after compression 😎).
 

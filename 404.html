@@ -27,13 +27,13 @@
 
   <video  id="cam"    playsinline autoplay muted></video>
   <canvas id="worker"></canvas>                 <!-- used only to grab a crop -->
-  <div    id="label">loading…</div>
+  <div    id="label">loading...</div>
   <button id="start">Tap to start</button>
 
   <script type="module">
     if ('serviceWorker' in navigator) {
       window.addEventListener('load', () => {
-        navigator.serviceWorker.register('service-worker.js').catch(console.error);
+        navigator.serviceWorker.register('./service-worker.js').catch(console.error);
       });
     }
   </script>
