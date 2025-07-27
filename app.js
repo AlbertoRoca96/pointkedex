@@ -38,7 +38,7 @@ document.getElementById("start").onclick = async () => {
   const cam    = document.getElementById("cam");
   const worker = document.getElementById("worker");
   const label  = document.getElementById("label");
-  const endpoint = (window.API_BASE || "") + "/api/predict";
+    const endpoint = (window.API_BASE || "") + "api/predict";  // no leading slash so GH-Pages subfolder works
 
   /* open rear camera – Android multi‑lens fallback */
   async function openCamera () {
