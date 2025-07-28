@@ -2,8 +2,7 @@
 #   https://github.com/azure/functions-action
 # More GitHub Actions for Azure:
 #   https://github.com/Azure/actions
-# More info on Python, GitHub Actions, and Azure Functions:
-#   https://aka.ms/python-webapps-actions
+# More info: https://aka.ms/python-webapps-actions
 
 name: Build and deploy Python project to Azure Function App - Pup-Cloud
 
@@ -14,7 +13,7 @@ on:
   workflow_dispatch:
 
 env:
-  # The ZIP we deploy is created in the build job as release.zip
+  # the ZIP we create in the build job
   AZURE_FUNCTIONAPP_PACKAGE_PATH: './release.zip'
   PYTHON_VERSION: '3.12'
 
@@ -41,9 +40,9 @@ jobs:
       - name: Install dependencies
         run: pip install -r requirements.txt
 
-      # Optional: add a test step here
+      # Optional: test step could go here
 
-      # Package only the backend folder into release.zip
+      # Zip the CONTENTS of backend/ (not the folder itself)
       - name: Zip artifact for deployment
         run: |
           cd backend
