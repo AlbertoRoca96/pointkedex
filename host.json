@@ -2,17 +2,6 @@
   "version": "2.0",
   "extensionBundle": {
     "id": "Microsoft.Azure.Functions.ExtensionBundle",
-    "version": "[3.*,4.0.0)"
-  },
-
-  "http": {
-    "routePrefix": ""
-  },
-
-  "logging": {
-    "logLevel": {
-      "Function.HttpPredict": "Information",
-      "AzureFunctions": "Warning"
-    }
+    "version": "[3.*, 4.0.0)"
   }
 }
