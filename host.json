@@ -6,7 +6,7 @@
   },
 
   "http": {
-    "routePrefix": ""          // keeps the route exactly “/predict”, not “/api/predict”
+    "routePrefix": ""
   },
 
   "logging": {
