@@ -13,7 +13,7 @@ on:
   workflow_dispatch:
 
 env:
-  # the ZIP we create in the build job
+  # we’ll deploy this zip straight to the Function App
   AZURE_FUNCTIONAPP_PACKAGE_PATH: './release.zip'
   PYTHON_VERSION: '3.12'
 
@@ -32,7 +32,7 @@ jobs:
         with:
           python-version: ${{ env.PYTHON_VERSION }}
 
-      - name: Create and start virtual environment
+      - name: Create and activate virtual environment
         run: |
           python -m venv venv
           source venv/bin/activate
@@ -40,13 +40,10 @@ jobs:
       - name: Install dependencies
         run: pip install -r requirements.txt
 
-      # Optional: test step could go here
-
-      # Zip the CONTENTS of backend/ (not the folder itself)
+      # ── Zip the ENTIRE repo (root) ──────────────────────
       - name: Zip artifact for deployment
-        run: |
-          cd backend
-          zip -r ../release.zip .
+        run: zip -r release.zip . \
+               -x 'venv/*' '.git/*' '.github/*'        # ignore local venv & git metadata
 
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v4
@@ -67,7 +64,7 @@ jobs:
         with:
           name: python-app
 
-      - name: Login to Azure
+      - name: Azure login (OIDC)
         uses: azure/login@v2
         with:
           client-id:       ${{ secrets.AZUREAPPSERVICE_CLIENTID_CB70A3F269874835BA3BDC2E8DD09B91 }}
