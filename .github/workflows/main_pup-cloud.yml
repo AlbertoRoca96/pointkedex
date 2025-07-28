@@ -1,7 +1,7 @@
 # .github/workflows/main_pup-cloud.yml
-# Build & deploy the entire repo root to Azure Functions (Consumption plan).
+# Build & deploy everything in repo root to Azure Functions (Linux Consumption).
 
-name: Build and deploy Python project to Azure Function App – Pup‑Cloud
+name: Build and deploy Python project to Azure Function App – Pup‑Cloud
 
 on:
   push:
@@ -10,13 +10,13 @@ on:
 
 env:
   PYTHON_VERSION: '3.12'
-  PACKAGE_ZIP: release.zip          # filename we’ll pass to the deploy step
+  PACKAGE_ZIP:    release.zip       # the file we deploy
 
 jobs:
   build:
     runs-on: ubuntu-latest
     permissions:
-      contents: read                # needed for checkout
+      contents: read
 
     steps:
     - name: Checkout repository
@@ -27,11 +27,11 @@ jobs:
       with:
         python-version: ${{ env.PYTHON_VERSION }}
 
-    - name: Install dependencies
+    - name: Install requirements
       run: pip install -r requirements.txt
 
-    # Zip the repo ROOT, skipping venv, .git, workflow files, and artifacts
-    - name: Create deployment package
+    # ── Create the deployment package from *repo root* ──
+    - name: Create ZIP package
       run: |
         zip -r "${{ env.PACKAGE_ZIP }}" . \
             -x "venv/*" ".git/*" ".github/*"
@@ -46,7 +46,7 @@ jobs:
     needs: build
     runs-on: ubuntu-latest
     permissions:
-      id-token: write               # OIDC auth to Azure
+      id-token: write          # OIDC
       contents: read
 
     steps:
