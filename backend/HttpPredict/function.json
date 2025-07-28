@@ -1,0 +1,7 @@
+{
+  "route": "predict",
+  "authLevel": "anonymous",
+  "type": "httpTrigger",
+  "direction": "in",
+  "methods": ["post"]
+}
