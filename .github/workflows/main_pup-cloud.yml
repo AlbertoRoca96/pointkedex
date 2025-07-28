@@ -1,6 +1,9 @@
-# Docs for the Azure Web Apps Deploy action: https://github.com/azure/functions-action
-# More GitHub Actions for Azure: https://github.com/Azure/actions
-# More info on Python, GitHub Actions, and Azure Functions: https://aka.ms/python-webapps-actions
+# Docs for the Azure Web Apps Deploy action:
+#   https://github.com/azure/functions-action
+# More GitHub Actions for Azure:
+#   https://github.com/Azure/actions
+# More info on Python, GitHub Actions, and Azure Functions:
+#   https://aka.ms/python-webapps-actions
 
 name: Build and deploy Python project to Azure Function App - Pup-Cloud
 
@@ -11,15 +14,15 @@ on:
   workflow_dispatch:
 
 env:
-  # Azure will look inside this folder when it deploys
-  AZURE_FUNCTIONAPP_PACKAGE_PATH: './backend'
+  # The ZIP we deploy is created in the build job as release.zip
+  AZURE_FUNCTIONAPP_PACKAGE_PATH: './release.zip'
   PYTHON_VERSION: '3.12'
 
 jobs:
   build:
     runs-on: ubuntu-latest
     permissions:
-      contents: read   # required for actions/checkout
+      contents: read
 
     steps:
       - name: Checkout repository
@@ -38,11 +41,13 @@ jobs:
       - name: Install dependencies
         run: pip install -r requirements.txt
 
-      # Optional: Add step to run tests here
+      # Optional: add a test step here
 
-      # ── 1. zip the *folder* so it re‑appears after unzip ──
+      # Package only the backend folder into release.zip
       - name: Zip artifact for deployment
-        run: zip -r release.zip backend
+        run: |
+          cd backend
+          zip -r ../release.zip .
 
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v4
@@ -63,9 +68,6 @@ jobs:
         with:
           name: python-app
 
-      - name: Unzip artifact for deployment
-        run: unzip release.zip
-
       - name: Login to Azure
         uses: azure/login@v2
         with:
@@ -73,7 +75,6 @@ jobs:
           tenant-id:       ${{ secrets.AZUREAPPSERVICE_TENANTID_0BCEA4CB4732493CBEEBDDCF82D43069 }}
           subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_8CEBB76FBDB54BA3AE0AC59A264FA309 }}
 
-      # ── 2. package path now matches the folder that exists ──
       - name: Deploy to Azure Functions
         uses: Azure/functions-action@v1
         id: deploy-to-function
