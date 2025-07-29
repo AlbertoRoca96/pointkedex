@@ -7,12 +7,12 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: read    # for checkout
-  id-token: write   # for OIDC login
+  contents: read      # for actions/checkout
+  id-token: write     # for Azure OIDC login (if you ever switch back)
 
 env:
   WEBAPP_NAME: Pup-Cloud2
-  ACR_NAME:    pupcloud2    # → pupcloud2.azurecr.io
+  ACR_NAME:    pupcloud2    # <— no “.azurecr.io” here
 
 jobs:
   build_and_deploy:
@@ -22,26 +22,32 @@ jobs:
       - name: 📂 Checkout code
         uses: actions/checkout@v4
 
-      - name: 🔑 Azure login (OIDC)
+      - name: 🔑 Azure login (SPN + secret)
         uses: azure/login@v2
         with:
           client-id:       ${{ secrets.AZURE_CLIENT_ID }}
           tenant-id:       ${{ secrets.AZURE_TENANT_ID }}
           subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
-          auth-type:       oidc
+          client-secret:   ${{ secrets.AZURE_CLIENT_SECRET }}
 
       - name: 🐳 ACR login
         uses: azure/docker-login@v1
         with:
           login-server: ${{ env.ACR_NAME }}.azurecr.io
 
-      - name: 🏗️ Build & push Docker image
+      - name: 🏗 Build & push Docker image
         run: |
           IMAGE_TAG=${{ github.sha }}
           FULL_IMAGE=${{ env.ACR_NAME }}.azurecr.io/${{ env.WEBAPP_NAME }}:$IMAGE_TAG
-
           docker build -t $FULL_IMAGE .
           docker push    $FULL_IMAGE
+
+      - name: 🚀 Deploy to Web App for Containers
+        uses: azure/webapps-deploy@v3
+        with:
+          app-name: ${{ env.WEBAPP_NAME }}
+          images:   ${{ env.ACR_NAME }}.azurecr.io/${{ env.WEBAPP_NAME }}:${{ github.sha }}
+
 
       - name: 🚀 Deploy to Web App for Containers
         uses: azure/webapps-deploy@v3
