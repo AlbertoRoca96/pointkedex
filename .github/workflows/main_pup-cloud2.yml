@@ -1,5 +1,7 @@
+# .github/workflows/main_pup-cloud2.yml
 name: Build & Deploy Docker to Azure Web App
 
+# Trigger on push to main or manual run
 on:
   push:
     branches: [ main ]
@@ -7,41 +9,51 @@ on:
 
 permissions:
   contents: read      # for actions/checkout
-  id-token: write     # only needed if you switch back to OIDC
+  id-token: write     # only if you ever go back to OIDC
 
 env:
-  WEBAPP_NAME: Pup-Cloud2
-  ACR_NAME:    pupcloud2  # ← your registry “short name” (no “.azurecr.io”)
+  # Your Azure Web App (case‑sensitive, matches Azure resource)
+  APP_NAME:     Pup-Cloud2
+  # ACR login server short name (all lowercase, no ".azurecr.io")
+  ACR_NAME:     pupcloud2
+  # Docker repo name inside ACR (all lowercase)
+  IMAGE_REPO:   pup-cloud2
 
 jobs:
   build_and_deploy:
     runs-on: ubuntu-latest
 
     steps:
+      # 1) Grab your code
       - name: 📂 Checkout code
         uses: actions/checkout@v4
 
-      - name: 🔑 Login to Azure (Service Principal)
-        uses: azure/login@v1
+      # 2) Login to Azure with a Service Principal + secret
+      - name: 🔑 Azure login (Service Principal)
+        uses: azure/login@v2
         with:
           client-id:       ${{ secrets.AZURE_CLIENT_ID }}
           tenant-id:       ${{ secrets.AZURE_TENANT_ID }}
           subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
           client-secret:   ${{ secrets.AZURE_CLIENT_SECRET }}
 
+      # 3) Login to your ACR so 'docker push' works
       - name: 🐳 Login to ACR
         run: az acr login --name ${{ env.ACR_NAME }}
 
+      # 4) Build & push your Docker image (must be lowercase)
       - name: 🏗️ Build & push Docker image
         run: |
-          IMAGE_TAG=${GITHUB_SHA::8}   # shorten if you like
-          FULL_IMAGE=${{ env.ACR_NAME }}.azurecr.io/${{ env.WEBAPP_NAME }}:$IMAGE_TAG
+          # take first 8 chars of SHA to keep tags short
+          TAG=${GITHUB_SHA::8}
+          FULL_IMAGE=${{ env.ACR_NAME }}.azurecr.io/${{ env.IMAGE_REPO }}:$TAG
 
           docker build -t $FULL_IMAGE .
           docker push    $FULL_IMAGE
 
+      # 5) Deploy that image to your Web App for Containers
       - name: 🚀 Deploy to Web App for Containers
         uses: azure/webapps-deploy@v3
         with:
-          app-name: ${{ env.WEBAPP_NAME }}
-          images:   ${{ env.ACR_NAME }}.azurecr.io/${{ env.WEBAPP_NAME }}:${GITHUB_SHA::8}
+          app-name: ${{ env.APP_NAME }}
+          images:   ${{ env.ACR_NAME }}.azurecr.io/${{ env.IMAGE_REPO }}:${GITHUB_SHA::8}
