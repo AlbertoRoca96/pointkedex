@@ -1,3 +1,4 @@
+# .github/workflows/deploy_container.yml
 name: Build & Deploy Docker to Azure Web App
 
 on:
@@ -6,23 +7,23 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: read    # for actions/checkout
-  id-token: write   # for azure/login OIDC
+  contents: read   # for actions/checkout
+  id-token: write  # for Azure OIDC login
 
 env:
-  WEBAPP_NAME: Pup-Cloud2
-  IMAGE_NAME: ghcr.io/${{ github.repository }}:latest
+  WEBAPP_NAME: Pup-Cloud2     # your App Service for Containers name
+  ACR_LOGIN: ${{ secrets.ACR_NAME }}.azurecr.io
 
 jobs:
   build_and_deploy:
     runs-on: ubuntu-latest
 
     steps:
-      # 1) Grab the latest code
-      - name: Checkout repository
-        uses: actions/checkout@v3
+      # 1️⃣ Checkout your repo
+      - name: Checkout code
+        uses: actions/checkout@v4
 
-      # 2) Authenticate to Azure via OIDC
+      # 2️⃣ Sign in to Azure (OIDC)
       - name: Azure Login (OIDC)
         uses: azure/login@v2
         with:
@@ -30,29 +31,30 @@ jobs:
           tenant-id:       ${{ secrets.AZURE_TENANT_ID }}
           subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
 
-      # 3) Set up Docker Buildx (optional, but recommended for multi‑platform)
-      - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v2
+      # 3️⃣ Build the Docker image
+      - name: Build Docker image
+        run: |
+          docker build \
+            -t $ACR_LOGIN/${{ env.WEBAPP_NAME }}:${{ github.sha }} \
+            .
 
-      # 4) Log in to GitHub Container Registry so we can push
-      - name: Log in to GitHub Container Registry
-        uses: docker/login-action@v2
+      # 4️⃣ Log in to ACR
+      - name: Log in to Azure Container Registry
+        uses: azure/docker-login@v1
         with:
-          registry: ghcr.io
-          username: ${{ github.actor }}
-          password: ${{ secrets.GITHUB_TOKEN }}
+          login-server: $ACR_LOGIN
+          client-id:    ${{ secrets.AZURE_CLIENT_ID }}
+          tenant-id:    ${{ secrets.AZURE_TENANT_ID }}
+          subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
 
-      # 5) Build & push the image
-      - name: Build and push Docker image
-        uses: docker/build-push-action@v4
-        with:
-          context: .
-          push: true
-          tags: ${{ env.IMAGE_NAME }}
+      # 5️⃣ Push the image
+      - name: Push image to ACR
+        run: |
+          docker push $ACR_LOGIN/${{ env.WEBAPP_NAME }}:${{ github.sha }}
 
-      # 6) Deploy that image to your Azure Web App for Containers
+      # 6️⃣ Tell your Web App to pull & run that image
       - name: Deploy to Azure Web App for Containers
         uses: azure/webapps-deploy@v3
         with:
           app-name: ${{ env.WEBAPP_NAME }}
-          images:   ${{ env.IMAGE_NAME }}
+          images:   $ACR_LOGIN/${{ env.WEBAPP_NAME }}:${{ github.sha }}
