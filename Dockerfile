@@ -1,38 +1,37 @@
-######################  Stage 1 – builder  ######################
+######################  Stage 1 – builder  ######################
 FROM python:3.11-slim AS builder
 WORKDIR /app
 
-# -- Build‑time ARG so the URL can be injected from the workflow
-ARG MODEL_URL
-ENV MODEL_FILE=pokedex_resnet50.h5
-
-# 1) Grab source **except** the model (keeps context tiny)
+# copy source *and* the h5 that the workflow downloaded
 COPY . /app
+#           └── includes pokedex_resnet50.h5 in repo root
 
-# 2) Fetch the release asset (fail fast if 404)
+# install both TF + PyTorch stacks once (they share many deps)
 RUN apt-get update && \
-    apt-get install -y --no-install-recommends curl ca-certificates && \
-    curl -L --fail -o "$MODEL_FILE" "$MODEL_URL"
-
-# 3) Install deps and convert to TF‑JS
-RUN pip install --no-cache-dir \
+    apt-get install -y --no-install-recommends ca-certificates && \
+    rm -rf /var/lib/apt/lists/* && \
+    pip install --no-cache-dir \
       tensorflow pillow tensorflowjs \
-      torch==2.2.1 torchvision==0.17.1 torchaudio==2.2.1 ultralytics && \
-    tensorflowjs_converter \
+      torch==2.2.1 torchvision==0.17.1 torchaudio==2.2.1 ultralytics
+
+# convert the Keras model to TensorFlow‑JS format
+RUN tensorflowjs_converter \
         --input_format=keras \
-        "$MODEL_FILE" \
+        /app/pokedex_resnet50.h5 \
         /app/web_model_res
 
-######################  Stage 2 – runtime  ######################
+######################  Stage 2 – runtime  ######################
 FROM python:3.11-slim
 WORKDIR /app
 
+# bring everything across (including web_model_res directory)
 COPY --from=builder /app /app
+
 RUN pip install --no-cache-dir \
       gunicorn flask flask-cors tensorflow pillow numpy \
       torch==2.2.1 torchvision==0.17.1 ultralytics
 
 ENV PORT=80
 EXPOSE 80
-CMD ["gunicorn","-b","0.0.0.0:80","predict_server:app","--workers","2","--threads","4","--timeout","120"]
-
+CMD ["gunicorn","-b","0.0.0.0:80","predict_server:app",
+     "--workers","2","--threads","4","--timeout","120"]
