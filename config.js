@@ -8,5 +8,5 @@
 
   window.API_BASE = param
     ? ensureSlash(param)
-    : 'https://pup-cloud-gvfdfae9fbcqddex.canadacentral-01.azurewebsites.net/';
+    : 'https://pup-cloud2-e0hfedenfbh6gugg.canadacentral-01.azurewebsites.net/';
 })();
