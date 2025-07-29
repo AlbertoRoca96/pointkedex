@@ -1,18 +1,17 @@
 {
-  "scriptFile": "__init__.py",
   "bindings": [
     {
       "authLevel": "anonymous",
       "type": "httpTrigger",
       "direction": "in",
       "name": "req",
-      "methods": [ "post" ],
-      "route": "api/predict"
+      "methods": ["GET","POST"],
+      "route": "{*route}"
     },
     {
       "type": "http",
       "direction": "out",
-      "name": "res"
+      "name": "$return"
     }
   ]
 }
