@@ -7,23 +7,23 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: read   # for actions/checkout
-  id-token: write  # for Azure OIDC login
-
-env:
-  WEBAPP_NAME: Pup-Cloud2     # your App Service for Containers name
-  ACR_LOGIN: ${{ secrets.ACR_NAME }}.azurecr.io
+  contents: read        # for checkout
+  id-token: write       # for OIDC
 
 jobs:
   build_and_deploy:
     runs-on: ubuntu-latest
 
+    # these env vars are available to all steps in this job
+    env:
+      WEBAPP_NAME: Pup-Cloud2
+      ACR_NAME:    pupcloud2            # your registry short name
+      IMAGE_TAG:   ${{ github.sha }}
+
     steps:
-      # 1️⃣ Checkout your repo
       - name: Checkout code
         uses: actions/checkout@v4
 
-      # 2️⃣ Sign in to Azure (OIDC)
       - name: Azure Login (OIDC)
         uses: azure/login@v2
         with:
@@ -31,30 +31,20 @@ jobs:
           tenant-id:       ${{ secrets.AZURE_TENANT_ID }}
           subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
 
-      # 3️⃣ Build the Docker image
-      - name: Build Docker image
+      - name: Register AlertsManagement provider
         run: |
-          docker build \
-            -t $ACR_LOGIN/${{ env.WEBAPP_NAME }}:${{ github.sha }} \
-            .
+          az provider register --namespace Microsoft.AlertsManagement
 
-      # 4️⃣ Log in to ACR
-      - name: Log in to Azure Container Registry
-        uses: azure/docker-login@v1
-        with:
-          login-server: $ACR_LOGIN
-          client-id:    ${{ secrets.AZURE_CLIENT_ID }}
-          tenant-id:    ${{ secrets.AZURE_TENANT_ID }}
-          subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+      - name: ACR Login
+        run: az acr login --name ${{ env.ACR_NAME }}
 
-      # 5️⃣ Push the image
-      - name: Push image to ACR
+      - name: Build & Push image to ACR
         run: |
-          docker push $ACR_LOGIN/${{ env.WEBAPP_NAME }}:${{ github.sha }}
+          docker build -t ${{ env.ACR_NAME }}.azurecr.io/${{ env.WEBAPP_NAME }}:${{ env.IMAGE_TAG }} .
+          docker push ${{ env.ACR_NAME }}.azurecr.io/${{ env.WEBAPP_NAME }}:${{ env.IMAGE_TAG }}
 
-      # 6️⃣ Tell your Web App to pull & run that image
-      - name: Deploy to Azure Web App for Containers
+      - name: Deploy to Web App for Containers
         uses: azure/webapps-deploy@v3
         with:
           app-name: ${{ env.WEBAPP_NAME }}
-          images:   $ACR_LOGIN/${{ env.WEBAPP_NAME }}:${{ github.sha }}
+          images:   ${{ env.ACR_NAME }}.azurecr.io/${{ env.WEBAPP_NAME }}:${{ env.IMAGE_TAG }}
