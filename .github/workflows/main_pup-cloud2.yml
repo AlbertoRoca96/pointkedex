@@ -1,66 +1,49 @@
-# .github/workflows/main_pup-cloud2.yml
 name: Build & Deploy Docker to Azure Web App
 
-# Trigger on push to main or via manual dispatch
 on:
   push:
     branches: [ main ]
   workflow_dispatch:
 
 permissions:
-  contents: read      # for actions/checkout
-  id-token: write     # in case you switch back to OIDC-based login
+  contents: read      # required for actions/checkout
+  id-token: write     # required to mint OIDC tokens (if you switch to OIDC)
 
 env:
-  WEBAPP_NAME: pup-cloud2       # Exact name of your Azure Web App
-  ACR_NAME:    pupcloud2        # Your ACR short name (no “.azurecr.io”)
-  IMAGE_REPO:  pup-cloud2       # Lowercase repo inside ACR
-  TAG_NAME:    alroca           # The exact GitHub Release tag
-  ASSET_FILE:  pokedex_resnet50.h5  # Name of the .h5 asset in that release
+  WEBAPP_NAME: pup-cloud2    # exact Azure Web App name (lowercase!)
+  ACR_NAME:    pupcloud2     # your ACR short name (no “.azurecr.io”)
+  IMAGE_REPO:  pup-cloud2    # repository name inside ACR
 
 jobs:
   build_and_deploy:
     runs-on: ubuntu-latest
 
     steps:
-      # 1) Checkout your application code (no LFS needed—model comes from the release)
+      # 1) Grab your application (no LFS needed)
       - name: 📂 Checkout code
         uses: actions/checkout@v4
 
-      # 2) Pull the .h5 model from your GitHub Release
-      - name: 📥 Download model asset from Release
-        uses: robinraju/release-downloader@v1.9
-        with:
-          repository:    ${{ github.repository }}
-          tag:           ${{ env.TAG_NAME }}
-          fileName:      ${{ env.ASSET_FILE }}
-          out-file-path: ./      # places pokedex_resnet50.h5 beside the Dockerfile
-
-      # 3) Login to Azure using your Service Principal + secret
+      # 2) Login to Azure using a Service Principal secret
+      #    (AZURE_CREDENTIALS = JSON with clientId, clientSecret, subscriptionId, tenantId)
       - name: 🔑 Azure login (SPN + secret)
         uses: azure/login@v2
         with:
-          client-id:       ${{ secrets.AZURE_CLIENT_ID }}
-          tenant-id:       ${{ secrets.AZURE_TENANT_ID }}
-          subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
-          client-secret:   ${{ secrets.AZURE_CLIENT_SECRET }}
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
 
-      # 4) Login to ACR so docker push can authenticate
-      - name: 🐳 ACR login
-        uses: azure/docker-login@v1
-        with:
-          login-server: ${{ env.ACR_NAME }}.azurecr.io
+      # 3) Login to ACR so that `docker push` can authenticate
+      - name: 🐳 ACR login via Azure CLI
+        run: az acr login --name ${{ env.ACR_NAME }}
 
-      # 5) Build & push your Docker image
+      # 4) Build & push your image
       - name: 🏗️ Build & push Docker image
         run: |
           IMAGE_TAG=${{ github.sha }}
           FULL_IMAGE=${{ env.ACR_NAME }}.azurecr.io/${{ env.IMAGE_REPO }}:$IMAGE_TAG
 
           docker build -t "$FULL_IMAGE" .
-          docker push "$FULL_IMAGE"
+          docker push    "$FULL_IMAGE"
 
-      # 6) Deploy that image to your Web App for Containers
+      # 5) Deploy that image to your Web App for Containers
       - name: 🚀 Deploy to Web App for Containers
         uses: azure/webapps-deploy@v3
         with:
