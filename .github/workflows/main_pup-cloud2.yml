@@ -1,56 +1,68 @@
-name: Build & Deploy to Azure Web App
+# .github/workflows/main_pup-cloud2.yml
+name: Build & Deploy Docker to Azure Web App
 
+# Trigger on push to main or via manual dispatch
 on:
   push:
     branches: [ main ]
   workflow_dispatch:
 
+permissions:
+  contents: read      # for actions/checkout
+  id-token: write     # in case you switch back to OIDC-based login
+
 env:
-  APP_NAME:   Pup-Cloud2
-  ACR_NAME:   pupcloud2              # <name>.azurecr.io
-  IMAGE_REPO: pup-cloud2
-  TAG_NAME:   alroca                # <-- *exact* release tag
-  ASSET_FILE: pokedex_resnet50.h5
+  WEBAPP_NAME: Pup-Cloud2       # Exact name of your Azure Web App
+  ACR_NAME:    pupcloud2        # Your ACR short name (no “.azurecr.io”)
+  IMAGE_REPO:  pup-cloud2       # Lowercase repo inside ACR
+  TAG_NAME:    alroca           # The exact GitHub Release tag
+  ASSET_FILE:  pokedex_resnet50.h5  # Name of the .h5 asset in that release
 
 jobs:
-  build-and-deploy:
+  build_and_deploy:
     runs-on: ubuntu-latest
 
     steps:
-    # 0) Checkout code (no LFS needed – model lives in the release)
-    - name: 📂 Checkout code
-      uses: actions/checkout@v4
+      # 1) Checkout your application code (no LFS needed—model comes from the release)
+      - name: 📂 Checkout code
+        uses: actions/checkout@v4
 
-    # 1) Pull the h5 from the tagged release
-    - name: 📥 Download model asset
-      uses: robinraju/release-downloader@v1.9
-      with:
-        repository: ${{ github.repository }}
-        tag:        ${{ env.TAG_NAME }}
-        fileName:   ${{ env.ASSET_FILE }}
-        out-file-path: ./          # places file beside Dockerfile
+      # 2) Pull the .h5 model from your GitHub Release
+      - name: 📥 Download model asset from Release
+        uses: robinraju/release-downloader@v1.9
+        with:
+          repository:    ${{ github.repository }}
+          tag:           ${{ env.TAG_NAME }}
+          fileName:      ${{ env.ASSET_FILE }}
+          out-file-path: ./      # places pokedex_resnet50.h5 beside the Dockerfile
 
-    # 2) Azure login (supported 'creds' input)
-    - name: 🔑 Azure login
-      uses: azure/login@v2
-      with:
-        creds: ${{ secrets.AZURE_CREDENTIALS }}   # JSON produced by az ad sp create-for-rbac
+      # 3) Login to Azure using your Service Principal + secret
+      - name: 🔑 Azure login (SPN + secret)
+        uses: azure/login@v2
+        with:
+          client-id:       ${{ secrets.AZURE_CLIENT_ID }}
+          tenant-id:       ${{ secrets.AZURE_TENANT_ID }}
+          subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+          client-secret:   ${{ secrets.AZURE_CLIENT_SECRET }}
 
-    # 3) ACR login so docker push can authenticate
-    - name: 🐳 Login to ACR
-      run: az acr login --name ${{ env.ACR_NAME }}
+      # 4) Login to ACR so docker push can authenticate
+      - name: 🐳 ACR login
+        uses: azure/docker-login@v1
+        with:
+          login-server: ${{ env.ACR_NAME }}.azurecr.io
 
-    # 4) Build & push
-    - name: 🏗️ Build and push container
-      run: |
-        TAG=${GITHUB_SHA::8}
-        FULL=${{ env.ACR_NAME }}.azurecr.io/${{ env.IMAGE_REPO }}:$TAG
-        docker build -t "$FULL" .
-        docker push "$FULL"
+      # 5) Build & push your Docker image
+      - name: 🏗️ Build & push Docker image
+        run: |
+          IMAGE_TAG=${{ github.sha }}
+          FULL_IMAGE=${{ env.ACR_NAME }}.azurecr.io/${{ env.IMAGE_REPO }}:$IMAGE_TAG
 
-    # 5) Deploy
-    - name: 🚀 Deploy to Web App for Containers
-      uses: azure/webapps-deploy@v3
-      with:
-        app-name: ${{ env.APP_NAME }}
-        images:   ${{ env.ACR_NAME }}.azurecr.io/${{ env.IMAGE_REPO }}:${{ github.sha }}
+          docker build -t "$FULL_IMAGE" .
+          docker push "$FULL_IMAGE"
+
+      # 6) Deploy that image to your Web App for Containers
+      - name: 🚀 Deploy to Web App for Containers
+        uses: azure/webapps-deploy@v3
+        with:
+          app-name: ${{ env.WEBAPP_NAME }}
+          images:   ${{ env.ACR_NAME }}.azurecr.io/${{ env.IMAGE_REPO }}:${{ github.sha }}
