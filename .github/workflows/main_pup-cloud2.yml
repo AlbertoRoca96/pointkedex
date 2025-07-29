@@ -1,53 +1,53 @@
 # .github/workflows/deploy_container.yml
-# Build the Docker image in repo‑root and deploy to the
-# *Linux Web App for Containers* named “Pup‑Cloud2”.
-#
-# Prerequisites
-#   • Web App (Linux) created in Azure Portal, publish‑type: Docker Container
-#   • Three GitHub secrets set:
-#       AZURE_CLIENT_ID, AZURE_TENANT_ID, AZURE_SUBSCRIPTION_ID
-#   • (Optional) WEBAPP_NAME secret if you don’t want to hard‑code the name.
-
-name: Build & Deploy container to Pup‑Cloud2
+# Build your Docker image, push to ACR, and update your Web App for Containers.
+name: Build & Deploy Docker to Azure Web App
 
 on:
   push:
-    branches: [ main ]          # trigger on every push to main
-  workflow_dispatch:            # manual run button
+    branches: [ main ]
+  workflow_dispatch:
 
 permissions:
-  contents: read                # for checkout
-  id-token: write               # federated OIDC login
+  contents: read    # for checkout
+  id-token: write   # for federated Azure login
 
 env:
-  # change if you rename the web‑app
-  WEBAPP_NAME: Pup-Cloud2
-  IMAGE_NAME: ${{ github.repository }}:latest     # ghcr.io/<user>/<repo>:latest
+  WEBAPP_NAME: Pup-Cloud2         # your Web App name
+  IMAGE_NAME: ${{ secrets.ACR_NAME }}.azurecr.io/${{ env.WEBAPP_NAME }}:${{ github.sha }}
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
 
     steps:
-    # 1. Checkout code
-    - uses: actions/checkout@v4
+    # 1) Get the code
+    - name: Checkout repo
+      uses: actions/checkout@v4
 
-    # 2. Azure sign‑in (OIDC)
-    - name: Azure login (OIDC)
+    # 2) Log in to Azure with OIDC
+    - name: Azure Login (OIDC)
       uses: azure/login@v2
       with:
         client-id:       ${{ secrets.AZURE_CLIENT_ID }}
         tenant-id:       ${{ secrets.AZURE_TENANT_ID }}
         subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
 
-    # 3. Build Docker image (uses the Dockerfile in repo root)
-    - name: Build container image
-      run: |
-        docker build -t $IMAGE_NAME .
+    # 3) Log in to your Azure Container Registry
+    - name: Log in to ACR
+      run: az acr login --name ${{ secrets.ACR_NAME }}
 
-    # 4. Deploy image straight to Web App (Azure handles a single‑push registry for you)
-    - name: Deploy to Web App for Containers
-      uses: azure/webapps-deploy@v3
-      with:
-        app-name:    ${{ env.WEBAPP_NAME }}
-        images:      ${{ env.IMAGE_NAME }}
+    # 4) Build & push the Docker image
+    - name: Build & push image
+      run: |
+        docker build --file Dockerfile \
+                     --tag $IMAGE_NAME \
+                     .
+        docker push $IMAGE_NAME
+
+    # 5) Point your Web App to the new image
+    - name: Update Web App Container
+      run: |
+        az webapp config container set \
+          --resource-group ${{ secrets.AZURE_RG }} \
+          --name ${{ env.WEBAPP_NAME }} \
+          --docker-custom-image-name $IMAGE_NAME
