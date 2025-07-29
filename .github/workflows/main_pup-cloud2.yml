@@ -1,4 +1,4 @@
-# .github/workflows/deploy_container.yml
+# .github/workflows/main_pup-cloud2.yml
 name: Build & Deploy Docker to Azure Web App
 
 on:
@@ -7,19 +7,17 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: read        # for checkout
-  id-token: write       # for OIDC
+  contents: read        # for actions/checkout
+  id-token: write       # for azure/login OIDC
+
+env:
+  WEBAPP_NAME: Pup-Cloud2
+  ACR_NAME:    pupcloud2
+  IMAGE_TAG:   ${{ github.sha }}
 
 jobs:
   build_and_deploy:
     runs-on: ubuntu-latest
-
-    # these env vars are available to all steps in this job
-    env:
-      WEBAPP_NAME: Pup-Cloud2
-      ACR_NAME:    pupcloud2            # your registry short name
-      IMAGE_TAG:   ${{ github.sha }}
-
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -31,17 +29,16 @@ jobs:
           tenant-id:       ${{ secrets.AZURE_TENANT_ID }}
           subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
 
-      - name: Register AlertsManagement provider
-        run: |
-          az provider register --namespace Microsoft.AlertsManagement
-
       - name: ACR Login
-        run: az acr login --name ${{ env.ACR_NAME }}
+        run: |
+          az acr login --name ${{ env.ACR_NAME }}
 
       - name: Build & Push image to ACR
         run: |
-          docker build -t ${{ env.ACR_NAME }}.azurecr.io/${{ env.WEBAPP_NAME }}:${{ env.IMAGE_TAG }} .
-          docker push ${{ env.ACR_NAME }}.azurecr.io/${{ env.WEBAPP_NAME }}:${{ env.IMAGE_TAG }}
+          IMAGE_FULL=${{ env.ACR_NAME }}.azurecr.io/${{ env.WEBAPP_NAME }}:${{ env.IMAGE_TAG }}
+          echo "Building $IMAGE_FULL"
+          docker build -t $IMAGE_FULL .
+          docker push $IMAGE_FULL
 
       - name: Deploy to Web App for Containers
         uses: azure/webapps-deploy@v3
