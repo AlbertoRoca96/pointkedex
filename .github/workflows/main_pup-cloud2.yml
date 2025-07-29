@@ -1,3 +1,4 @@
+# .github/workflows/main_pup-cloud2.yml
 name: Build & Deploy Docker to Azure Web App
 
 on:
@@ -6,42 +7,47 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: read      # required for actions/checkout
-  id-token: write     # required to mint OIDC tokens (if you switch to OIDC)
+  contents: read      # for actions/checkout
+  id-token: write     # if you ever switch back to OIDC
 
 env:
-  WEBAPP_NAME: pup-cloud2    # exact Azure Web App name (lowercase!)
-  ACR_NAME:    pupcloud2     # your ACR short name (no “.azurecr.io”)
-  IMAGE_REPO:  pup-cloud2    # repository name inside ACR
+  WEBAPP_NAME: pup-cloud2       # exact Web App name, lowercase
+  ACR_NAME:    pupcloud2        # your ACR short name (no “.azurecr.io”)
+  IMAGE_REPO:  pup-cloud2       # repo inside ACR (must be lowercase)
+  TAG_NAME:    alroca           # your _exact_ GitHub Release tag
 
 jobs:
   build_and_deploy:
     runs-on: ubuntu-latest
 
     steps:
-      # 1) Grab your application (no LFS needed)
+      # 1) Checkout all your code (no LFS; model comes via Dockerfile)
       - name: 📂 Checkout code
         uses: actions/checkout@v4
 
-      # 2) Login to Azure using a Service Principal secret
-      #    (AZURE_CREDENTIALS = JSON with clientId, clientSecret, subscriptionId, tenantId)
+      # 2) Azure login (SPN + secret)
       - name: 🔑 Azure login (SPN + secret)
         uses: azure/login@v2
         with:
-          creds: ${{ secrets.AZURE_CREDENTIALS }}
+          client-id:       ${{ secrets.AZURE_CLIENT_ID }}
+          tenant-id:       ${{ secrets.AZURE_TENANT_ID }}
+          subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+          client-secret:   ${{ secrets.AZURE_CLIENT_SECRET }}
 
-      # 3) Login to ACR so that `docker push` can authenticate
-      - name: 🐳 ACR login via Azure CLI
+      # 3) Login to ACR via Azure CLI (so `docker push` works)
+      - name: 🐳 ACR login
         run: az acr login --name ${{ env.ACR_NAME }}
 
-      # 4) Build & push your image
+      # 4) Build & push Docker image (inject TAG_NAME into the build)
       - name: 🏗️ Build & push Docker image
         run: |
           IMAGE_TAG=${{ github.sha }}
           FULL_IMAGE=${{ env.ACR_NAME }}.azurecr.io/${{ env.IMAGE_REPO }}:$IMAGE_TAG
 
-          docker build -t "$FULL_IMAGE" .
-          docker push    "$FULL_IMAGE"
+          docker build \
+            --build-arg TAG_NAME=${{ env.TAG_NAME }} \
+            -t "$FULL_IMAGE" .
+          docker push "$FULL_IMAGE"
 
       # 5) Deploy that image to your Web App for Containers
       - name: 🚀 Deploy to Web App for Containers
