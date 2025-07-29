@@ -12,7 +12,7 @@ permissions:
   id-token: write     # in case you switch back to OIDC-based login
 
 env:
-  WEBAPP_NAME: Pup-Cloud2       # Exact name of your Azure Web App
+  WEBAPP_NAME: pup-cloud2       # Exact name of your Azure Web App
   ACR_NAME:    pupcloud2        # Your ACR short name (no “.azurecr.io”)
   IMAGE_REPO:  pup-cloud2       # Lowercase repo inside ACR
   TAG_NAME:    alroca           # The exact GitHub Release tag
