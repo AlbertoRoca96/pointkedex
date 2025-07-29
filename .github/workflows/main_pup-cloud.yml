@@ -1,60 +1,28 @@
 # .github/workflows/main_pup-cloud.yml
-# Build & deploy everything in repo root to Azure Functions (Linux Consumption).
+# Deploy the repo‑root (Python Function + static assets) to Azure Functions
+# Linux Consumption plan – no manual zip/unzip steps.
 
-name: Build and deploy Python project to Azure Function App – Pup‑Cloud
+name: Deploy Python Function App – Pup‑Cloud
 
 on:
   push:
     branches: [main]
   workflow_dispatch:
 
-env:
-  PYTHON_VERSION: '3.12'
-  PACKAGE_ZIP:    release.zip       # the file we deploy
+permissions:
+  contents: read          # checkout
+  id-token: write         # federated (OIDC) login to Azure
 
 jobs:
-  build:
+  deploy:
     runs-on: ubuntu-latest
-    permissions:
-      contents: read
 
     steps:
+    # 1 ▸ pull the latest commit
     - name: Checkout repository
       uses: actions/checkout@v4
 
-    - name: Set up Python
-      uses: actions/setup-python@v5
-      with:
-        python-version: ${{ env.PYTHON_VERSION }}
-
-    - name: Install requirements
-      run: pip install -r requirements.txt
-
-    # ── Create the deployment package from *repo root* ──
-    - name: Create ZIP package
-      run: |
-        zip -r "${{ env.PACKAGE_ZIP }}" . \
-            -x "venv/*" ".git/*" ".github/*"
-
-    - name: Upload artifact
-      uses: actions/upload-artifact@v4
-      with:
-        name: python-app
-        path: ${{ env.PACKAGE_ZIP }}
-
-  deploy:
-    needs: build
-    runs-on: ubuntu-latest
-    permissions:
-      id-token: write          # OIDC
-      contents: read
-
-    steps:
-    - name: Download artifact
-      uses: actions/download-artifact@v4
-      with:
-        name: python-app
-
+    # 2 ▸ sign in to Azure (RBAC service‑principal creds are stored as GitHub Secrets)
     - name: Azure login (OIDC)
       uses: azure/login@v2
       with:
@@ -62,9 +30,11 @@ jobs:
         tenant-id:       ${{ secrets.AZUREAPPSERVICE_TENANTID_0BCEA4CB4732493CBEEBDDCF82D43069 }}
         subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_8CEBB76FBDB54BA3AE0AC59A264FA309 }}
 
+    # 3 ▸ push everything in repo‑root to the Function App.
+    #     The action zips the contents on‑the‑fly and sets WEBSITE_RUN_FROM_PACKAGE.
     - name: Deploy to Azure Functions
       uses: Azure/functions-action@v1
       with:
-        app-name:  Pup-Cloud
+        app-name:  Pup-Cloud          # ← exact Function App name
         slot-name: Production
-        package:   ${{ env.PACKAGE_ZIP }}
+        package:   '.'                # deploy *this* folder (repo root)
