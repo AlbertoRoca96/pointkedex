@@ -6,14 +6,14 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: read        # checkout
-  id-token: write       # future OIDC if desired
+  contents: read        # for actions/checkout
+  id-token: write       # for azure/login OIDC
 
 env:
-  WEBAPP_NAME: pup-cloud2        # Azure Web App (lower‑case)
-  ACR_NAME:    pupcloud2         # ACR short name (no .azurecr.io)
-  IMAGE_REPO:  pup-cloud2        # repo name inside ACR
-  TAG_NAME:    alroca            # exact GitHub Release tag
+  WEBAPP_NAME: pup-cloud2           # Azure Web App (lower-case)
+  ACR_NAME:    pupcloud2            # ACR short name (no .azurecr.io)
+  IMAGE_REPO:  pup-cloud2           # repo name inside ACR
+  TAG_NAME:    alroca               # exact GitHub Release tag
   ASSET_FILE:  pokedex_resnet50.h5
   ACR_USERNAME: PupCloud2
   ACR_PASSWORD: Vb1JK69MXN4EtFrCtHx8jOoEo9hwvF2jdcboOYkQ9d+ACRBDo0Wj
@@ -23,26 +23,26 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      # 1) Code checkout (no LFS; model is downloaded later)
+      # 1) Checkout the code
       - name: 📂 Checkout repo
         uses: actions/checkout@v4
 
-      # 2) Azure login – use OIDC (no secret) OR SPN‑secret via AZURE_CREDENTIALS
+      # 2) Azure login (OIDC)
       - name: 🔑 Azure login (OIDC)
         uses: azure/login@v2
         with:
           client-id:       ${{ secrets.AZURE_CLIENT_ID }}
           tenant-id:       ${{ secrets.AZURE_TENANT_ID }}
           subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
-          client-secret:   ${{ secrets.AZURE_CLIENT_SECRET }}
+          # (no client-secret needed for OIDC)
 
-      # 3) ACR login (CLI) so docker push can authenticate
+      # 3) ACR login
       - name: 🐳 ACR login
         run: |
           echo "${{ env.ACR_PASSWORD }}" | docker login ${{ env.ACR_NAME }}.azurecr.io \
             --username "${{ env.ACR_USERNAME }}" --password-stdin
 
-      # 4) Build & push container ─ we compute MODEL_URL once and pass it in
+      # 4) Build & push Docker image
       - name: 🏗️ Build & push Docker image
         run: |
           IMAGE_TAG=${{ github.sha }}
@@ -56,10 +56,10 @@ jobs:
             -t "$FULL_IMAGE" .
           docker push "$FULL_IMAGE"
 
-      # 5) Deploy the freshly‑pushed image
+      # 5) Deploy the freshly-pushed image
       - name: 🚀 Deploy to Web App for Containers
         uses: azure/webapps-deploy@v3
         with:
-          app-name:        ${{ env.WEBAPP_NAME }}
-          resource-group:  Pup-Cloud2_group      # ← the RG where your app lives
-          images:          ${{ env.ACR_NAME }}.azurecr.io/${{ env.IMAGE_REPO }}:${{ github.sha }}
+          app-name:           ${{ env.WEBAPP_NAME }}
+          resource-group-name: Pup-Cloud2_group     # ← corrected
+          images:             ${{ env.ACR_NAME }}.azurecr.io/${{ env.IMAGE_REPO }}:${{ github.sha }}
