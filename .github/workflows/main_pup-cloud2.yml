@@ -1,50 +1,53 @@
 # .github/workflows/main_pup-cloud2.yml
 name: Build & Deploy Docker to Azure Web App
 
-# Trigger on push to main or manual run
+# Trigger on push to main or manual dispatch
 on:
   push:
     branches: [ main ]
   workflow_dispatch:
 
 permissions:
-  contents: read      # for actions/checkout
-  id-token: write     # only if you ever go back to OIDC
+  contents: read      # for actions/checkout (and LFS)
+  id-token: write     # only if you ever switch back to OIDC
 
 env:
-  # Your Azure Web App (case‑sensitive, matches Azure resource)
-  APP_NAME:     Pup-Cloud2
-  # ACR login server short name (all lowercase, no ".azurecr.io")
-  ACR_NAME:     pupcloud2
-  # Docker repo name inside ACR (all lowercase)
-  IMAGE_REPO:   pup-cloud2
+  # Your Azure Web App name (must match exactly, case‐sensitive)
+  APP_NAME:   Pup-Cloud2
+  # Your ACR login‐server short name (all lowercase, no ".azurecr.io")
+  ACR_NAME:   pupcloud2
+  # Docker repository name inside ACR (all lowercase, hyphens okay)
+  IMAGE_REPO: pup-cloud2
 
 jobs:
   build_and_deploy:
     runs-on: ubuntu-latest
 
     steps:
-      # 1) Grab your code
-      - name: 📂 Checkout code
+      # 1) Fetch code + Git LFS files (so your .h5 really exists in the build context)
+      - name: 📂 Checkout code (with LFS)
         uses: actions/checkout@v4
+        with:
+          lfs: true
 
-      # 2) Login to Azure with a Service Principal + secret
+      # 2) Log in to Azure using a Service Principal + secret
       - name: 🔑 Azure login (Service Principal)
         uses: azure/login@v2
         with:
-          client-id:       ${{ secrets.AZURE_CLIENT_ID }}
-          tenant-id:       ${{ secrets.AZURE_TENANT_ID }}
+          auth-type: service_principal
+          client-id: ${{ secrets.AZURE_CLIENT_ID }}
+          tenant-id: ${{ secrets.AZURE_TENANT_ID }}
           subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
-          client-secret:   ${{ secrets.AZURE_CLIENT_SECRET }}
+          client-secret: ${{ secrets.AZURE_CLIENT_SECRET }}
 
-      # 3) Login to your ACR so 'docker push' works
+      # 3) Log in to ACR so that 'docker push' can authenticate
       - name: 🐳 Login to ACR
         run: az acr login --name ${{ env.ACR_NAME }}
 
-      # 4) Build & push your Docker image (must be lowercase)
-      - name: 🏗️ Build & push Docker image
+      # 4) Build & push your image
+      - name: 🏗️ Build & Push Docker Image
         run: |
-          # take first 8 chars of SHA to keep tags short
+          # shorten the SHA so tags stay manageable
           TAG=${GITHUB_SHA::8}
           FULL_IMAGE=${{ env.ACR_NAME }}.azurecr.io/${{ env.IMAGE_REPO }}:$TAG
 
