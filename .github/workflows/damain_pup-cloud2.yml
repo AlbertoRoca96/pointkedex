@@ -15,8 +15,7 @@ env:
   IMAGE_REPO:  pup-cloud2           # repo name inside ACR
   TAG_NAME:    alroca               # exact GitHub Release tag
   ASSET_FILE:  pokedex_resnet50.h5
-  ACR_USERNAME: PupCloud2
-  ACR_PASSWORD: Vb1JK69MXN4EtFrCtHx8jOoEo9hwvF2jdcboOYkQ9d+ACRBDo0Wj
+
 
 jobs:
   build_and_deploy:
@@ -37,9 +36,9 @@ jobs:
 
       # 3) ACR login
       - name: 🐳 ACR login
-        run: |
-          echo "${{ env.ACR_PASSWORD }}" | docker login ${{ env.ACR_NAME }}.azurecr.io \
-            --username "${{ env.ACR_USERNAME }}" --password-stdin
+        uses: azure/docker-login@v2
+        with:
+          login-server: ${{ env.ACR_NAME }}.azurecr.io
 
       # 4) Build & push Docker image
       - name: 🏗️ Build & push Docker image
@@ -55,9 +54,7 @@ jobs:
             -t "$FULL_IMAGE" .
           docker push "$FULL_IMAGE"
 
-      # **Solution: add a short delay to let Azure cache update before deployment**
-      - name: ⏳ Wait for Azure to refresh resource cache
-        run: sleep 120
+
 
       # 5) Deploy the freshly‑pushed image
       - name: 🚀 Deploy to Web App for Containers
