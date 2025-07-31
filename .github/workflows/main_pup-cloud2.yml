@@ -1,22 +1,32 @@
-# .github/workflows/deploy.yml
 name: Deploy to HF Space
-on: [push, workflow_dispatch]
+
+on:
+  push:
+    branches: [main]        # run on every push to main
+  workflow_dispatch:        # add a manual "Run workflow" button
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
+
     steps:
-      - uses: actions/checkout@v4
+      - name: Check out repo
+        uses: actions/checkout@v4
+
       - name: Set up Git user
         run: |
           git config --global user.email "github-actions@users.noreply.github.com"
           git config --global user.name  "github-actions"
-      - name: Login to HF
-        env: { HF_TOKEN: ${{ secrets.HF_TOKEN }} }
+
+      - name: Log in to Hugging Face
+        env:
+          HF_TOKEN: ${{ secrets.HF_TOKEN }}   # <-- multi-line map, no braces
         run: |
           pip install --quiet --user huggingface_hub
           huggingface-cli login --token "$HF_TOKEN" --yes
+
       - name: Push to Space
         run: |
           git remote add space https://huggingface.co/spaces/AlbertoRoca96-web/pointkedex-api
+          # Force-push the current commit SHA to the Space's main branch
           git push --force space ${{ github.sha }}:main
