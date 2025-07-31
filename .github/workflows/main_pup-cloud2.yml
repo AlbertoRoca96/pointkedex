@@ -55,14 +55,16 @@ jobs:
             -t "$FULL_IMAGE" .
           docker push "$FULL_IMAGE"
 
-      # **Solution: add a short delay to let Azure cache update before deployment**
+      # **Solution: short delay to let Azure refresh its cache**
       - name: ⏳ Wait for Azure to refresh resource cache
         run: sleep 120
 
-      # 5) Deploy the freshly‑pushed image
-      - name: 🚀 Deploy to Web App for Containers
+      # 5) Deploy the freshly-pushed image
+      - name: 🚀 Deploy to Web App for Containers
         uses: azure/webapps-deploy@v3
         with:
-          app-name:             ${{ env.WEBAPP_NAME }}
-          resource-group-name:  Pup-Cloud2_group     # ← corrected
-          images:               ${{ env.ACR_NAME }}.azurecr.io/${{ env.IMAGE_REPO }}:${{ github.sha }}
+          app-name:            ${{ env.WEBAPP_NAME }}
+          resource-group-name: Pup-Cloud2_group       # must exactly match your RG
+          images:              ${{ env.ACR_NAME }}.azurecr.io/${{ env.IMAGE_REPO }}:${{ github.sha }}
+          slot-name:           production
+          package:             .
