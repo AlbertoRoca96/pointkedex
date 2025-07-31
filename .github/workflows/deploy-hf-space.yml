@@ -8,26 +8,38 @@ on:
 jobs:
   deploy:
     runs-on: ubuntu-latest
-
     steps:
-      - name: Check out repo (full history, no submodules)
+      - name: Check out code
         uses: actions/checkout@v4
         with:
-          fetch-depth: 0          # important: get full history so push isn't a shallow update
+          fetch-depth: 0
           submodules: 'false'
 
-      - name: Ensure full history (safe guard)
+      - name: Download .h5 from GitHub Release
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}    # built-in token is fine if release is public or accessible
+          REPO: "AlbertoRoca96/pointkedex"
+          ASSET_NAME: "pokedex_resnet50.h5"
         run: |
-          if [ -f .git/shallow ]; then
-            echo "Repository is shallow; unshallowing..."
-            git fetch --prune --unshallow
-          else
-            echo "Full clone already."
+          # install jq for JSON parsing
+          apt-get update && apt-get install -y jq curl
+
+          echo "Fetching latest release info..."
+          release_info=$(curl -s -H "Accept: application/vnd.github+json" \
+            -H "Authorization: token ${GITHUB_TOKEN}" \
+            "https://api.github.com/repos/${REPO}/releases/latest")
+
+          asset_url=$(echo "$release_info" | jq -r \
+            ".assets[] | select(.name==\"${ASSET_NAME}\") | .browser_download_url")
+
+          if [ -z "$asset_url" ] || [ "$asset_url" = "null" ]; then
+            echo "ERROR: Could not find asset '${ASSET_NAME}' in latest release."
+            exit 1
           fi
 
-      - name: Enable Git LFS
-        run: |
-          git lfs install --local
+          echo "Downloading ${ASSET_NAME}..."
+          curl -L -H "Authorization: token ${GITHUB_TOKEN}" -o "${ASSET_NAME}" "$asset_url"
+          ls -lh "${ASSET_NAME}"
 
       - name: Login to HF Hub
         env:
@@ -36,27 +48,10 @@ jobs:
           pip install --quiet --user huggingface_hub
           huggingface-cli login --token "$HF_TOKEN" --add-to-git-credential
 
-      - name: Push to Space with retry
+      - name: Push to Space with embedded PAT
         env:
           HF_USERNAME: AlbertoRoca96-web
           HF_TOKEN: ${{ secrets.HF_TOKEN }}
         run: |
-          set -e
-          TARGET="https://${HF_USERNAME}:${HF_TOKEN}@huggingface.co/spaces/${HF_USERNAME}/pointkedex"
-          # retry logic to tolerate transient LFS hook glitches
-          for i in 1 2 3; do
-            echo "Attempt #$i pushing to Space..."
-            if git push --force "$TARGET" main:main; then
-              echo "Push succeeded"
-              break
-            else
-              echo "Push failed; sleeping before retry"
-              sleep $((i * 5))
-              # refresh LFS state just in case
-              git lfs install --local
-            fi
-            if [ "$i" = "3" ]; then
-              echo "All retries exhausted, failing."
-              exit 1
-            fi
-          done
+          git remote add space https://${HF_USERNAME}:${HF_TOKEN}@huggingface.co/spaces/${HF_USERNAME}/pointkedex
+          git push --force space main:main
