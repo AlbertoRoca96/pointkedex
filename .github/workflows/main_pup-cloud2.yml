@@ -1,3 +1,4 @@
+# .github/workflows/deploy.yml
 name: Build & Deploy Docker to Azure Web App
 
 on:
@@ -10,53 +11,45 @@ permissions:
   id-token: write
 
 env:
-  WEBAPP_NAME: pup-cloud2           # must be lowercase and exactly match your App Service name
-  RESOURCE_GROUP: Pup-Cloud2_group  # must exactly match the RG in Azure (case-sensitive)
-  ACR_NAME: pupcloud2               # your ACR short name
-  IMAGE_REPO: pup-cloud2            # repo name in ACR
-  TAG_NAME: alroca                  # GitHub Release tag
-  ASSET_FILE: pokedex_resnet50.h5
+  ACR_NAME:    pupcloud2                  # your ACR login name
+  IMAGE_REPO:  pup-cloud2                 # your ACR repo
+  TAG_NAME:    alroca                     # GitHub release tag
+  ASSET_FILE:  pokedex_resnet50.h5
 
 jobs:
   build_and_deploy:
     runs-on: ubuntu-latest
 
     steps:
-      - name: 📂 Checkout repository
+      # 1) Get code
+      - name: 📂 Checkout repo
         uses: actions/checkout@v4
 
+      # 2) Log in to Azure with OIDC (for CLI + az commands)
       - name: 🔑 Azure login (OIDC)
         uses: azure/login@v2
         with:
-          client-id:       ${{ secrets.AZURE_CLIENT_ID }}
-          tenant-id:       ${{ secrets.AZURE_TENANT_ID }}
           subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+          tenant-id:       ${{ secrets.AZURE_TENANT_ID }}
+          client-id:       ${{ secrets.AZURE_CLIENT_ID }}
 
-      - name: 🐳 ACR login
-        run: |
-          echo "${{ secrets.ACR_PASSWORD }}" \
-            | docker login ${{ env.ACR_NAME }}.azurecr.io \
-              --username "${{ secrets.ACR_USERNAME }}" --password-stdin
-
+      # 3) Build & push the image
       - name: 🏗️ Build & push Docker image
         run: |
           IMAGE_TAG=${{ github.sha }}
           FULL_IMAGE=${{ env.ACR_NAME }}.azurecr.io/${{ env.IMAGE_REPO }}:$IMAGE_TAG
-
           MODEL_URL="https://github.com/${{ github.repository }}/releases/download/${{ env.TAG_NAME }}/${{ env.ASSET_FILE }}"
-
           docker build \
             --build-arg MODEL_URL="$MODEL_URL" \
             --build-arg ASSET_FILE="${{ env.ASSET_FILE }}" \
             -t "$FULL_IMAGE" .
           docker push "$FULL_IMAGE"
 
-      - name: ⏳ Wait for Azure cache to update
-        run: sleep 90
-
+      # 4) Deploy using the Web App publish profile
       - name: 🚀 Deploy to Azure Web App for Containers
         uses: azure/webapps-deploy@v3
         with:
-          app-name:            ${{ env.WEBAPP_NAME }}
-          resource-group-name: ${{ env.RESOURCE_GROUP }}
-          images:              ${{ env.ACR_NAME }}.azurecr.io/${{ env.IMAGE_REPO }}:${{ github.sha }}
+          app-name:         pup-cloud2
+          resource-group:   Pup-Cloud2_group      # EXACTLY your RG name
+          publish-profile:  ${{ secrets.AZURE_PUP_CLOUD2_PUBLISH_PROFILE }}
+          images:           ${{ env.ACR_NAME }}.azurecr.io/${{ env.IMAGE_REPO }}:${{ github.sha }}
