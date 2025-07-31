@@ -2,27 +2,28 @@ name: Deploy to HF Space
 
 on:
   push:
-    branches: [main]
-  workflow_dispatch:
+    branches: [main]          # run on every push to main
+  workflow_dispatch:          # manual “Run workflow” button
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
 
     steps:
-      # 1. get the code – skip sub-modules or remove them from the repo
+      # 1️⃣  Check out the code – 100 % vanilla, NO sub-modules.
       - uses: actions/checkout@v4
-        with: { submodules: 'false' }
+        with:
+          submodules: 'false'        # <-- critical: skip sub-module init
 
-      # 2. log in to HF Hub
+      # 2️⃣  Log in to Hugging Face Hub (non-interactive).
       - name: Login to HF Hub
         env:
-          HF_TOKEN: ${{ secrets.HF_TOKEN }}
+          HF_TOKEN: ${{ secrets.HF_TOKEN }}   # PAT with write scope
         run: |
           pip install --quiet --user huggingface_hub
           huggingface-cli login --token "$HF_TOKEN" --add-to-git-credential
 
-      # 3. push this commit to your Space repo
+      # 3️⃣  Force-push this commit to the Space repo.
       - name: Push to Space
         run: |
           git remote add space https://huggingface.co/spaces/AlbertoRoca96-web/pointkedex-api
