@@ -1,4 +1,4 @@
-name: Build & Deploy Docker to Azure Web App (MI)
+name: Build & Deploy Docker to Azure Web App
 
 on:
   push:
@@ -6,87 +6,85 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: read        # checkout
-  id-token: write       # OIDC for azure/login
+  contents: read        # for actions/checkout
+  id-token: write       # for azure/login OIDC
 
 env:
-  # ─────────── Azure resource names ───────────
-  WEBAPP_NAME:      Pup-Cloud2
-  RESOURCE_GROUP:   Pup-Cloud2_group
-  ACR_NAME:         pupcloud2              # ↖ short name (no .azurecr.io)
-  IMAGE_REPO:       pup-cloud2
-
-  # ─────────── Model release info ────────────
-  TAG_NAME:         alroca
-  ASSET_FILE:       pokedex_resnet50.h5
-
-  # ─────────── User-assigned identity ────────
-  UMI_RESOURCE_ID:  /subscriptions/a30eb1d2-c757-4f30-9e92-74bddc0063a2/resourceGroups/Pup-Cloud2_group/providers/Microsoft.ManagedIdentity/userAssignedIdentities/pupcloud2-umi
+  WEBAPP_NAME: Pup-Cloud2           # exact name of the Web App in ARM
+  RESOURCE_GROUP: Pup-Cloud2_group  # exact resource group
+  ACR_NAME: pupcloud2               # short name (no .azurecr.io)
+  IMAGE_REPO: pup-cloud2            # repository inside ACR
+  TAG_NAME: alroca                 # GitHub Release tag holding model
+  ASSET_FILE: pokedex_resnet50.h5   # model asset name
 
 jobs:
   build_and_deploy:
     runs-on: ubuntu-latest
 
     steps:
-    # 1️⃣  Checkout
-    - name: 📂 Checkout repository
-      uses: actions/checkout@v4
+      - name: 📂 Checkout repository
+        uses: actions/checkout@v4
 
-    # 2️⃣  Azure login via federated OIDC
-    - name: 🔑 Azure login (OIDC)
-      uses: azure/login@v2
-      with:
-        client-id:       ${{ secrets.AZURE_CLIENT_ID }}
-        tenant-id:       ${{ secrets.AZURE_TENANT_ID }}
-        subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+      - name: 🔑 Azure login (OIDC)
+        uses: azure/login@v2
+        with:
+          client-id:       ${{ secrets.AZURE_CLIENT_ID }}
+          tenant-id:       ${{ secrets.AZURE_TENANT_ID }}
+          subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
 
-    # 3️⃣  Log in to ACR (push only)
-    - name: 🐳 ACR login
-      run: az acr login --name ${{ env.ACR_NAME }}
+      - name: 🐳 Login to ACR using federated identity
+        run: az acr login --name ${{ env.ACR_NAME }}
 
-    # 4️⃣  Build & push container
-    - name: 🏗️ Build & push Docker image
-      run: |
-        IMAGE_TAG=${{ github.sha }}
-        FULL_IMAGE=${{ env.ACR_NAME }}.azurecr.io/${{ env.IMAGE_REPO }}:$IMAGE_TAG
-        MODEL_URL="https://github.com/${{ github.repository }}/releases/download/${{ env.TAG_NAME }}/${{ env.ASSET_FILE }}"
+      - name: 🏗️ Build & push Docker image
+        run: |
+          IMAGE_TAG=${{ github.sha }}
+          FULL_IMAGE=${{ env.ACR_NAME }}.azurecr.io/${{ env.IMAGE_REPO }}:$IMAGE_TAG
 
-        docker build \
-          --build-arg MODEL_URL="$MODEL_URL" \
-          --build-arg ASSET_FILE="${{ env.ASSET_FILE }}" \
-          -t "$FULL_IMAGE" .
-        docker push "$FULL_IMAGE"
-        echo "FULL_IMAGE=$FULL_IMAGE" >> $GITHUB_ENV
+          MODEL_URL="https://github.com/${{ github.repository }}/releases/download/${{ env.TAG_NAME }}/${{ env.ASSET_FILE }}"
 
-    # 5️⃣  Attach the user-assigned identity to the Web App (safe to re-run)
-    - name: 🆔 Attach UMI to Web App
-      run: |
-        az webapp identity assign \
-          --name ${{ env.WEBAPP_NAME }} \
-          --resource-group ${{ env.RESOURCE_GROUP }} \
-          --identities ${{ env.UMI_RESOURCE_ID }}
+          docker build \
+            --build-arg MODEL_URL="$MODEL_URL" \
+            --build-arg ASSET_FILE="${{ env.ASSET_FILE }}" \
+            -t "$FULL_IMAGE" .
 
-    # 6️⃣  Ensure the identity can pull from ACR (AcrPull role)
-    - name: 🔑 Grant AcrPull to UMI
-      run: |
-        PRINCIPAL_ID=$(az identity show --ids ${{ env.UMI_RESOURCE_ID }} --query principalId -o tsv)
-        ACR_ID=$(az acr show -n ${{ env.ACR_NAME }} --query id -o tsv)
-        az role assignment create \
-          --assignee $PRINCIPAL_ID \
-          --role "AcrPull" \
-          --scope $ACR_ID || true   # ← idempotent
+          docker push "$FULL_IMAGE"
+          echo "FULL_IMAGE=$FULL_IMAGE" >> $GITHUB_ENV
 
-    # 7️⃣  Configure the Web App to use the image **and** the identity
-    - name: 🔄 Configure Web App container settings
-      run: |
-        az webapp config container set \
-          --name  ${{ env.WEBAPP_NAME }} \
-          --resource-group ${{ env.RESOURCE_GROUP }} \
-          --docker-custom-image-name $FULL_IMAGE \
-          --docker-registry-server-url https://${{ env.ACR_NAME }}.azurecr.io \
-          --acr-use-managed-identity true \
-          --acr-user-assigned-identity ${{ env.UMI_RESOURCE_ID }}
+      - name: 🛠️ Ensure Web App + Plan exist
+        run: |
+          az group create -n ${{ env.RESOURCE_GROUP }} -l canadacentral
 
-    # 8️⃣  Small delay – let ARM propagate
-    - name: ⏳ ARM cache flush
-      run: sleep 30
+          az appservice plan create \
+            -g ${{ env.RESOURCE_GROUP }} \
+            -n ${{ env.WEBAPP_NAME }}-plan \
+            --is-linux --sku B1 || true
+
+          az webapp create \
+            -g ${{ env.RESOURCE_GROUP }} \
+            -p ${{ env.WEBAPP_NAME }}-plan \
+            -n ${{ env.WEBAPP_NAME }} \
+            --deployment-container-image-name "${{ env.ACR_NAME }}.azurecr.io/${{ env.IMAGE_REPO }}@${{ github.sha }}" || true
+
+      - name: ⏳ Wait for ARM cache propagation
+        run: sleep 30
+
+      - name: 🔄 Configure Web App to use the pushed image (managed identity)
+        run: |
+          az webapp config container set \
+            --name ${{ env.WEBAPP_NAME }} \
+            --resource-group ${{ env.RESOURCE_GROUP }} \
+            --docker-custom-image-name ${{ env.ACR_NAME }}.azurecr.io/${{ env.IMAGE_REPO }}:${{ github.sha }} \
+            --docker-registry-server-url https://${{ env.ACR_NAME }}.azurecr.io
+
+      - name: 🔑 Assign AcrPull role to Web App's system identity
+        run: |
+          PRINCIPAL_ID=$(az webapp show -g ${{ env.RESOURCE_GROUP }} -n ${{ env.WEBAPP_NAME }} --query identity.principalId -o tsv)
+          ACR_ID=$(az acr show -n ${{ env.ACR_NAME }} --query id -o tsv)
+          az role assignment create \
+            --assignee "$PRINCIPAL_ID" \
+            --role acrpull \
+            --scope "$ACR_ID" || true
+
+      - name: 🚀 Trigger deployment (restart to pick up container config)
+        run: |
+          az webapp restart -g ${{ env.RESOURCE_GROUP }} -n ${{ env.WEBAPP_NAME }}
