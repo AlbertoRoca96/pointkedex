@@ -2,18 +2,13 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <title>Pokedex Demo</title>
-
-  <!-- mobile viewport & installable PWA hints -->
+  <title>Pointkedex</title>
   <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no">
   <meta name="mobile-web-app-capable"        content="yes">
   <meta name="apple-mobile-web-app-capable"  content="yes">
-
-  <!-- external stylesheet replacing inline styles -->
   <link rel="stylesheet" href="styles.css">
-  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="manifest"  href="manifest.webmanifest">
   <meta name="theme-color" content="#ef5350">
-  <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 </head>
 
@@ -26,19 +21,39 @@
   <div id="alert"></div>
 
   <video  id="cam"    playsinline autoplay muted></video>
-  <canvas id="worker"></canvas>                 <!-- used only to grab a crop -->
-  <div    id="label">loading...</div>
-  <button id="start">Tap to start</button>
+  <canvas id="worker"></canvas>
+  <div    id="label">loading…</div>
+  <button  id="start">Tap to start</button>
+
+  <!-- Prompt modal -->
+  <div id="prompt" class="overlay">
+    <div class="dialog">
+      <p id="prompt-text"></p>
+      <div class="dialog-btns">
+        <button id="btn-stats">Show stats</button>
+        <button id="btn-dismiss">Dismiss</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Stats card -->
+  <div id="stats-panel" class="overlay">
+    <div class="card">
+      <button id="stats-close" class="close">×</button>
+      <h2 id="stats-name"></h2>
+      <p id="stats-desc"></p>
+      <div id="stats-types"></div>
+      <table id="stats-table"></table>
+      <p id="stats-misc"></p>
+    </div>
+  </div>
 
   <script type="module">
     if ('serviceWorker' in navigator) {
-      window.addEventListener('load', () => {
-        navigator.serviceWorker.register('./service-worker.js').catch(console.error);
-      });
+      window.addEventListener('load', () => navigator.serviceWorker.register('./service-worker.js'));
     }
   </script>
   <script src="config.js"></script>
   <script type="module" src="app.js"></script>
 </body>
 </html>
-
