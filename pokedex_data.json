@@ -1,5 +1,6 @@
 {
   "abomasnow": {
+    "dex": 460,
     "types": [
       "grass",
       "ice"
@@ -26,6 +27,7 @@
     ]
   },
   "abra": {
+    "dex": 63,
     "types": [
       "psychic"
     ],
@@ -53,6 +55,7 @@
     ]
   },
   "absol": {
+    "dex": 359,
     "types": [
       "dark"
     ],
@@ -78,6 +81,7 @@
     ]
   },
   "accelgor": {
+    "dex": 617,
     "types": [
       "bug"
     ],
@@ -104,6 +108,7 @@
     ]
   },
   "aegislash": {
+    "dex": 681,
     "types": [
       "steel",
       "ghost"
@@ -130,6 +135,7 @@
     ]
   },
   "aerodactyl": {
+    "dex": 142,
     "types": [
       "rock",
       "flying"
@@ -156,6 +162,7 @@
     ]
   },
   "aggron": {
+    "dex": 306,
     "types": [
       "steel",
       "rock"
@@ -184,6 +191,7 @@
     ]
   },
   "aipom": {
+    "dex": 190,
     "types": [
       "normal"
     ],
@@ -210,6 +218,7 @@
     ]
   },
   "alakazam": {
+    "dex": 65,
     "types": [
       "psychic"
     ],
@@ -237,6 +246,7 @@
     ]
   },
   "alcremie": {
+    "dex": 869,
     "types": [
       "fairy"
     ],
@@ -262,6 +272,7 @@
     ]
   },
   "alomomola": {
+    "dex": 594,
     "types": [
       "water"
     ],
@@ -287,6 +298,7 @@
     ]
   },
   "altaria": {
+    "dex": 334,
     "types": [
       "dragon",
       "flying"
@@ -313,6 +325,7 @@
     ]
   },
   "amaura": {
+    "dex": 698,
     "types": [
       "rock",
       "ice"
@@ -339,6 +352,7 @@
     ]
   },
   "ambipom": {
+    "dex": 424,
     "types": [
       "normal"
     ],
@@ -365,6 +379,7 @@
     ]
   },
   "amoonguss": {
+    "dex": 591,
     "types": [
       "grass",
       "poison"
@@ -391,6 +406,7 @@
     ]
   },
   "ampharos": {
+    "dex": 181,
     "types": [
       "electric"
     ],
@@ -417,6 +433,7 @@
     ]
   },
   "annihilape": {
+    "dex": 979,
     "types": [
       "fighting",
       "ghost"
@@ -445,6 +462,7 @@
     ]
   },
   "anorith": {
+    "dex": 347,
     "types": [
       "rock",
       "bug"
@@ -471,6 +489,7 @@
     ]
   },
   "appletun": {
+    "dex": 842,
     "types": [
       "grass",
       "dragon"
@@ -501,6 +520,7 @@
     ]
   },
   "applin": {
+    "dex": 840,
     "types": [
       "grass",
       "dragon"
@@ -531,6 +551,7 @@
     ]
   },
   "araquanid": {
+    "dex": 752,
     "types": [
       "water",
       "bug"
@@ -557,6 +578,7 @@
     ]
   },
   "arbok": {
+    "dex": 24,
     "types": [
       "poison"
     ],
@@ -583,6 +605,7 @@
     ]
   },
   "arboliva": {
+    "dex": 930,
     "types": [
       "grass",
       "normal"
@@ -610,6 +633,7 @@
     ]
   },
   "arcanine": {
+    "dex": 59,
     "types": [
       "fire"
     ],
@@ -636,6 +660,7 @@
     ]
   },
   "arceus": {
+    "dex": 493,
     "types": [
       "normal"
     ],
@@ -659,6 +684,7 @@
     ]
   },
   "archaludon": {
+    "dex": 1018,
     "types": [
       "steel",
       "dragon"
@@ -686,6 +712,7 @@
     ]
   },
   "archen": {
+    "dex": 566,
     "types": [
       "rock",
       "flying"
@@ -711,6 +738,7 @@
     ]
   },
   "archeops": {
+    "dex": 567,
     "types": [
       "rock",
       "flying"
@@ -736,6 +764,7 @@
     ]
   },
   "arctibax": {
+    "dex": 997,
     "types": [
       "dragon",
       "ice"
@@ -763,6 +792,7 @@
     ]
   },
   "arctovish": {
+    "dex": 883,
     "types": [
       "water",
       "ice"
@@ -789,6 +819,7 @@
     ]
   },
   "arctozolt": {
+    "dex": 881,
     "types": [
       "electric",
       "ice"
@@ -815,6 +846,7 @@
     ]
   },
   "ariados": {
+    "dex": 168,
     "types": [
       "bug",
       "poison"
@@ -842,6 +874,7 @@
     ]
   },
   "armaldo": {
+    "dex": 348,
     "types": [
       "rock",
       "bug"
@@ -868,6 +901,7 @@
     ]
   },
   "armarouge": {
+    "dex": 936,
     "types": [
       "fire",
       "psychic"
@@ -895,6 +929,7 @@
     ]
   },
   "aromatisse": {
+    "dex": 683,
     "types": [
       "fairy"
     ],
@@ -920,6 +955,7 @@
     ]
   },
   "aron": {
+    "dex": 304,
     "types": [
       "steel",
       "rock"
@@ -948,6 +984,7 @@
     ]
   },
   "arrokuda": {
+    "dex": 846,
     "types": [
       "water"
     ],
@@ -973,6 +1010,7 @@
     ]
   },
   "articuno": {
+    "dex": 144,
     "types": [
       "ice",
       "flying"
@@ -998,6 +1036,7 @@
     ]
   },
   "audino": {
+    "dex": 531,
     "types": [
       "normal"
     ],
@@ -1023,6 +1062,7 @@
     ]
   },
   "aurorus": {
+    "dex": 699,
     "types": [
       "rock",
       "ice"
@@ -1049,6 +1089,7 @@
     ]
   },
   "avalugg": {
+    "dex": 713,
     "types": [
       "ice"
     ],
@@ -1075,6 +1116,7 @@
     ]
   },
   "axew": {
+    "dex": 610,
     "types": [
       "dragon"
     ],
@@ -1102,6 +1144,7 @@
     ]
   },
   "azelf": {
+    "dex": 482,
     "types": [
       "psychic"
     ],
@@ -1125,6 +1168,7 @@
     ]
   },
   "azumarill": {
+    "dex": 184,
     "types": [
       "water",
       "fairy"
@@ -1153,6 +1197,7 @@
     ]
   },
   "azurill": {
+    "dex": 298,
     "types": [
       "normal",
       "fairy"
@@ -1181,6 +1226,7 @@
     ]
   },
   "bagon": {
+    "dex": 371,
     "types": [
       "dragon"
     ],
@@ -1207,6 +1253,7 @@
     ]
   },
   "baltoy": {
+    "dex": 343,
     "types": [
       "ground",
       "psychic"
@@ -1232,6 +1279,7 @@
     ]
   },
   "banette": {
+    "dex": 354,
     "types": [
       "ghost"
     ],
@@ -1258,6 +1306,7 @@
     ]
   },
   "barbaracle": {
+    "dex": 689,
     "types": [
       "rock",
       "water"
@@ -1285,6 +1334,7 @@
     ]
   },
   "barboach": {
+    "dex": 339,
     "types": [
       "water",
       "ground"
@@ -1312,6 +1362,7 @@
     ]
   },
   "barraskewda": {
+    "dex": 847,
     "types": [
       "water"
     ],
@@ -1337,6 +1388,7 @@
     ]
   },
   "basculegion": {
+    "dex": 902,
     "types": [
       "water",
       "ghost"
@@ -1364,6 +1416,7 @@
     ]
   },
   "basculin": {
+    "dex": 550,
     "types": [
       "water"
     ],
@@ -1390,6 +1443,7 @@
     ]
   },
   "bastiodon": {
+    "dex": 411,
     "types": [
       "rock",
       "steel"
@@ -1416,6 +1470,7 @@
     ]
   },
   "baxcalibur": {
+    "dex": 998,
     "types": [
       "dragon",
       "ice"
@@ -1443,6 +1498,7 @@
     ]
   },
   "bayleef": {
+    "dex": 153,
     "types": [
       "grass"
     ],
@@ -1469,6 +1525,7 @@
     ]
   },
   "beartic": {
+    "dex": 614,
     "types": [
       "ice"
     ],
@@ -1495,6 +1552,7 @@
     ]
   },
   "beautifly": {
+    "dex": 267,
     "types": [
       "bug",
       "flying"
@@ -1524,6 +1582,7 @@
     ]
   },
   "beedrill": {
+    "dex": 15,
     "types": [
       "bug",
       "poison"
@@ -1551,6 +1610,7 @@
     ]
   },
   "beheeyem": {
+    "dex": 606,
     "types": [
       "psychic"
     ],
@@ -1577,6 +1637,7 @@
     ]
   },
   "beldum": {
+    "dex": 374,
     "types": [
       "steel",
       "psychic"
@@ -1604,6 +1665,7 @@
     ]
   },
   "bellibolt": {
+    "dex": 939,
     "types": [
       "electric"
     ],
@@ -1630,6 +1692,7 @@
     ]
   },
   "bellossom": {
+    "dex": 182,
     "types": [
       "grass"
     ],
@@ -1657,6 +1720,7 @@
     ]
   },
   "bellsprout": {
+    "dex": 69,
     "types": [
       "grass",
       "poison"
@@ -1684,6 +1748,7 @@
     ]
   },
   "bergmite": {
+    "dex": 712,
     "types": [
       "ice"
     ],
@@ -1710,6 +1775,7 @@
     ]
   },
   "bewear": {
+    "dex": 760,
     "types": [
       "normal",
       "fighting"
@@ -1737,6 +1803,7 @@
     ]
   },
   "bibarel": {
+    "dex": 400,
     "types": [
       "normal",
       "water"
@@ -1764,6 +1831,7 @@
     ]
   },
   "bidoof": {
+    "dex": 399,
     "types": [
       "normal"
     ],
@@ -1790,6 +1858,7 @@
     ]
   },
   "binacle": {
+    "dex": 688,
     "types": [
       "rock",
       "water"
@@ -1817,6 +1886,7 @@
     ]
   },
   "bisharp": {
+    "dex": 625,
     "types": [
       "dark",
       "steel"
@@ -1845,6 +1915,7 @@
     ]
   },
   "blacephalon": {
+    "dex": 806,
     "types": [
       "fire",
       "ghost"
@@ -1869,6 +1940,7 @@
     ]
   },
   "blastoise": {
+    "dex": 9,
     "types": [
       "water"
     ],
@@ -1895,6 +1967,7 @@
     ]
   },
   "blaziken": {
+    "dex": 257,
     "types": [
       "fire",
       "fighting"
@@ -1922,6 +1995,7 @@
     ]
   },
   "blipbug": {
+    "dex": 824,
     "types": [
       "bug"
     ],
@@ -1949,6 +2023,7 @@
     ]
   },
   "blissey": {
+    "dex": 242,
     "types": [
       "normal"
     ],
@@ -1976,6 +2051,7 @@
     ]
   },
   "blitzle": {
+    "dex": 522,
     "types": [
       "electric"
     ],
@@ -2002,6 +2078,7 @@
     ]
   },
   "boldore": {
+    "dex": 525,
     "types": [
       "rock"
     ],
@@ -2029,6 +2106,7 @@
     ]
   },
   "boltund": {
+    "dex": 836,
     "types": [
       "electric"
     ],
@@ -2054,6 +2132,7 @@
     ]
   },
   "bombirdier": {
+    "dex": 962,
     "types": [
       "flying",
       "dark"
@@ -2080,6 +2159,7 @@
     ]
   },
   "bonsly": {
+    "dex": 438,
     "types": [
       "rock"
     ],
@@ -2106,6 +2186,7 @@
     ]
   },
   "bouffalant": {
+    "dex": 626,
     "types": [
       "normal"
     ],
@@ -2131,6 +2212,7 @@
     ]
   },
   "bounsweet": {
+    "dex": 761,
     "types": [
       "grass"
     ],
@@ -2158,6 +2240,7 @@
     ]
   },
   "braixen": {
+    "dex": 654,
     "types": [
       "fire"
     ],
@@ -2184,6 +2267,7 @@
     ]
   },
   "brambleghast": {
+    "dex": 947,
     "types": [
       "grass",
       "ghost"
@@ -2210,6 +2294,7 @@
     ]
   },
   "bramblin": {
+    "dex": 946,
     "types": [
       "grass",
       "ghost"
@@ -2236,6 +2321,7 @@
     ]
   },
   "braviary": {
+    "dex": 628,
     "types": [
       "normal",
       "flying"
@@ -2263,6 +2349,7 @@
     ]
   },
   "breloom": {
+    "dex": 286,
     "types": [
       "grass",
       "fighting"
@@ -2290,6 +2377,7 @@
     ]
   },
   "brionne": {
+    "dex": 729,
     "types": [
       "water"
     ],
@@ -2316,6 +2404,7 @@
     ]
   },
   "bronzong": {
+    "dex": 437,
     "types": [
       "steel",
       "psychic"
@@ -2343,6 +2432,7 @@
     ]
   },
   "bronzor": {
+    "dex": 436,
     "types": [
       "steel",
       "psychic"
@@ -2370,6 +2460,7 @@
     ]
   },
   "brutebonnet": {
+    "dex": 986,
     "types": [
       "grass",
       "dark"
@@ -2394,6 +2485,7 @@
     ]
   },
   "bruxish": {
+    "dex": 779,
     "types": [
       "water",
       "psychic"
@@ -2420,6 +2512,7 @@
     ]
   },
   "budew": {
+    "dex": 406,
     "types": [
       "grass",
       "poison"
@@ -2448,6 +2541,7 @@
     ]
   },
   "buizel": {
+    "dex": 418,
     "types": [
       "water"
     ],
@@ -2473,6 +2567,7 @@
     ]
   },
   "bulbasaur": {
+    "dex": 1,
     "types": [
       "grass",
       "poison"
@@ -2500,6 +2595,7 @@
     ]
   },
   "buneary": {
+    "dex": 427,
     "types": [
       "normal"
     ],
@@ -2526,6 +2622,7 @@
     ]
   },
   "bunnelby": {
+    "dex": 659,
     "types": [
       "normal"
     ],
@@ -2552,6 +2649,7 @@
     ]
   },
   "burmy": {
+    "dex": 412,
     "types": [
       "bug"
     ],
@@ -2578,6 +2676,7 @@
     ]
   },
   "butterfree": {
+    "dex": 12,
     "types": [
       "bug",
       "flying"
@@ -2605,6 +2704,7 @@
     ]
   },
   "buzzwole": {
+    "dex": 794,
     "types": [
       "bug",
       "fighting"
@@ -2629,6 +2729,7 @@
     ]
   },
   "cacnea": {
+    "dex": 331,
     "types": [
       "grass"
     ],
@@ -2654,6 +2755,7 @@
     ]
   },
   "cacturne": {
+    "dex": 332,
     "types": [
       "grass",
       "dark"
@@ -2680,6 +2782,7 @@
     ]
   },
   "calyrex": {
+    "dex": 898,
     "types": [
       "psychic",
       "grass"
@@ -2704,6 +2807,7 @@
     ]
   },
   "camerupt": {
+    "dex": 323,
     "types": [
       "fire",
       "ground"
@@ -2731,6 +2835,7 @@
     ]
   },
   "capsakid": {
+    "dex": 951,
     "types": [
       "grass"
     ],
@@ -2757,6 +2862,7 @@
     ]
   },
   "carbink": {
+    "dex": 703,
     "types": [
       "rock",
       "fairy"
@@ -2782,6 +2888,7 @@
     ]
   },
   "carkol": {
+    "dex": 838,
     "types": [
       "rock",
       "fire"
@@ -2810,6 +2917,7 @@
     ]
   },
   "carnivine": {
+    "dex": 455,
     "types": [
       "grass"
     ],
@@ -2833,6 +2941,7 @@
     ]
   },
   "carracosta": {
+    "dex": 565,
     "types": [
       "water",
       "rock"
@@ -2860,6 +2969,7 @@
     ]
   },
   "carvanha": {
+    "dex": 318,
     "types": [
       "water",
       "dark"
@@ -2886,6 +2996,7 @@
     ]
   },
   "cascoon": {
+    "dex": 268,
     "types": [
       "bug"
     ],
@@ -2913,6 +3024,7 @@
     ]
   },
   "castform": {
+    "dex": 351,
     "types": [
       "normal"
     ],
@@ -2936,6 +3048,7 @@
     ]
   },
   "caterpie": {
+    "dex": 10,
     "types": [
       "bug"
     ],
@@ -2962,6 +3075,7 @@
     ]
   },
   "celebi": {
+    "dex": 251,
     "types": [
       "psychic",
       "grass"
@@ -2986,6 +3100,7 @@
     ]
   },
   "celesteela": {
+    "dex": 797,
     "types": [
       "steel",
       "flying"
@@ -3010,6 +3125,7 @@
     ]
   },
   "centiskorch": {
+    "dex": 851,
     "types": [
       "fire",
       "bug"
@@ -3037,6 +3153,7 @@
     ]
   },
   "ceruledge": {
+    "dex": 937,
     "types": [
       "fire",
       "ghost"
@@ -3064,6 +3181,7 @@
     ]
   },
   "cetitan": {
+    "dex": 975,
     "types": [
       "ice"
     ],
@@ -3090,6 +3208,7 @@
     ]
   },
   "cetoddle": {
+    "dex": 974,
     "types": [
       "ice"
     ],
@@ -3116,6 +3235,7 @@
     ]
   },
   "chandelure": {
+    "dex": 609,
     "types": [
       "ghost",
       "fire"
@@ -3144,6 +3264,7 @@
     ]
   },
   "chansey": {
+    "dex": 113,
     "types": [
       "normal"
     ],
@@ -3171,6 +3292,7 @@
     ]
   },
   "charcadet": {
+    "dex": 935,
     "types": [
       "fire"
     ],
@@ -3197,6 +3319,7 @@
     ]
   },
   "charizard": {
+    "dex": 6,
     "types": [
       "fire",
       "flying"
@@ -3224,6 +3347,7 @@
     ]
   },
   "charjabug": {
+    "dex": 737,
     "types": [
       "bug",
       "electric"
@@ -3250,6 +3374,7 @@
     ]
   },
   "charmander": {
+    "dex": 4,
     "types": [
       "fire"
     ],
@@ -3276,6 +3401,7 @@
     ]
   },
   "charmeleon": {
+    "dex": 5,
     "types": [
       "fire"
     ],
@@ -3302,6 +3428,7 @@
     ]
   },
   "chatot": {
+    "dex": 441,
     "types": [
       "normal",
       "flying"
@@ -3328,6 +3455,7 @@
     ]
   },
   "cherrim": {
+    "dex": 421,
     "types": [
       "grass"
     ],
@@ -3352,6 +3480,7 @@
     ]
   },
   "cherubi": {
+    "dex": 420,
     "types": [
       "grass"
     ],
@@ -3376,6 +3505,7 @@
     ]
   },
   "chesnaught": {
+    "dex": 652,
     "types": [
       "grass",
       "fighting"
@@ -3403,6 +3533,7 @@
     ]
   },
   "chespin": {
+    "dex": 650,
     "types": [
       "grass"
     ],
@@ -3429,6 +3560,7 @@
     ]
   },
   "chewtle": {
+    "dex": 833,
     "types": [
       "water"
     ],
@@ -3455,6 +3587,7 @@
     ]
   },
   "chiyu": {
+    "dex": 1004,
     "types": [
       "dark",
       "fire"
@@ -3479,6 +3612,7 @@
     ]
   },
   "chienpao": {
+    "dex": 1002,
     "types": [
       "dark",
       "ice"
@@ -3503,6 +3637,7 @@
     ]
   },
   "chikorita": {
+    "dex": 152,
     "types": [
       "grass"
     ],
@@ -3529,6 +3664,7 @@
     ]
   },
   "chimchar": {
+    "dex": 390,
     "types": [
       "fire"
     ],
@@ -3555,6 +3691,7 @@
     ]
   },
   "chimecho": {
+    "dex": 358,
     "types": [
       "psychic"
     ],
@@ -3579,6 +3716,7 @@
     ]
   },
   "chinchou": {
+    "dex": 170,
     "types": [
       "water",
       "electric"
@@ -3606,6 +3744,7 @@
     ]
   },
   "chingling": {
+    "dex": 433,
     "types": [
       "psychic"
     ],
@@ -3630,6 +3769,7 @@
     ]
   },
   "cinccino": {
+    "dex": 573,
     "types": [
       "normal"
     ],
@@ -3656,6 +3796,7 @@
     ]
   },
   "cinderace": {
+    "dex": 815,
     "types": [
       "fire"
     ],
@@ -3682,6 +3823,7 @@
     ]
   },
   "clamperl": {
+    "dex": 366,
     "types": [
       "water"
     ],
@@ -3708,6 +3850,7 @@
     ]
   },
   "clauncher": {
+    "dex": 692,
     "types": [
       "water"
     ],
@@ -3732,6 +3875,7 @@
     ]
   },
   "clawitzer": {
+    "dex": 693,
     "types": [
       "water"
     ],
@@ -3756,6 +3900,7 @@
     ]
   },
   "claydol": {
+    "dex": 344,
     "types": [
       "ground",
       "psychic"
@@ -3781,6 +3926,7 @@
     ]
   },
   "clefable": {
+    "dex": 36,
     "types": [
       "fairy"
     ],
@@ -3808,6 +3954,7 @@
     ]
   },
   "clefairy": {
+    "dex": 35,
     "types": [
       "fairy"
     ],
@@ -3835,6 +3982,7 @@
     ]
   },
   "cleffa": {
+    "dex": 173,
     "types": [
       "fairy"
     ],
@@ -3862,6 +4010,7 @@
     ]
   },
   "clobbopus": {
+    "dex": 852,
     "types": [
       "fighting"
     ],
@@ -3887,6 +4036,7 @@
     ]
   },
   "clodsire": {
+    "dex": 980,
     "types": [
       "poison",
       "ground"
@@ -3915,6 +4065,7 @@
     ]
   },
   "cloyster": {
+    "dex": 91,
     "types": [
       "water",
       "ice"
@@ -3942,6 +4093,7 @@
     ]
   },
   "coalossal": {
+    "dex": 839,
     "types": [
       "rock",
       "fire"
@@ -3970,6 +4122,7 @@
     ]
   },
   "cobalion": {
+    "dex": 638,
     "types": [
       "steel",
       "fighting"
@@ -3994,6 +4147,7 @@
     ]
   },
   "cofagrigus": {
+    "dex": 563,
     "types": [
       "ghost"
     ],
@@ -4019,6 +4173,7 @@
     ]
   },
   "combee": {
+    "dex": 415,
     "types": [
       "bug",
       "flying"
@@ -4045,6 +4200,7 @@
     ]
   },
   "combusken": {
+    "dex": 256,
     "types": [
       "fire",
       "fighting"
@@ -4072,6 +4228,7 @@
     ]
   },
   "comfey": {
+    "dex": 764,
     "types": [
       "fairy"
     ],
@@ -4097,6 +4254,7 @@
     ]
   },
   "conkeldurr": {
+    "dex": 534,
     "types": [
       "fighting"
     ],
@@ -4124,6 +4282,7 @@
     ]
   },
   "copperajah": {
+    "dex": 879,
     "types": [
       "steel"
     ],
@@ -4149,6 +4308,7 @@
     ]
   },
   "corphish": {
+    "dex": 341,
     "types": [
       "water"
     ],
@@ -4175,6 +4335,7 @@
     ]
   },
   "corsola": {
+    "dex": 222,
     "types": [
       "water",
       "rock"
@@ -4202,6 +4363,7 @@
     ]
   },
   "corviknight": {
+    "dex": 823,
     "types": [
       "flying",
       "steel"
@@ -4230,6 +4392,7 @@
     ]
   },
   "corvisquire": {
+    "dex": 822,
     "types": [
       "flying"
     ],
@@ -4257,6 +4420,7 @@
     ]
   },
   "cosmoem": {
+    "dex": 790,
     "types": [
       "psychic"
     ],
@@ -4283,6 +4447,7 @@
     ]
   },
   "cosmog": {
+    "dex": 789,
     "types": [
       "psychic"
     ],
@@ -4309,6 +4474,7 @@
     ]
   },
   "cottonee": {
+    "dex": 546,
     "types": [
       "grass",
       "fairy"
@@ -4336,6 +4502,7 @@
     ]
   },
   "crabominable": {
+    "dex": 740,
     "types": [
       "fighting",
       "ice"
@@ -4363,6 +4530,7 @@
     ]
   },
   "crabrawler": {
+    "dex": 739,
     "types": [
       "fighting"
     ],
@@ -4389,6 +4557,7 @@
     ]
   },
   "cradily": {
+    "dex": 346,
     "types": [
       "rock",
       "grass"
@@ -4415,6 +4584,7 @@
     ]
   },
   "cramorant": {
+    "dex": 845,
     "types": [
       "flying",
       "water"
@@ -4439,6 +4609,7 @@
     ]
   },
   "cranidos": {
+    "dex": 408,
     "types": [
       "rock"
     ],
@@ -4464,6 +4635,7 @@
     ]
   },
   "crawdaunt": {
+    "dex": 342,
     "types": [
       "water",
       "dark"
@@ -4491,6 +4663,7 @@
     ]
   },
   "cresselia": {
+    "dex": 488,
     "types": [
       "psychic"
     ],
@@ -4514,6 +4687,7 @@
     ]
   },
   "croagunk": {
+    "dex": 453,
     "types": [
       "poison",
       "fighting"
@@ -4541,6 +4715,7 @@
     ]
   },
   "crobat": {
+    "dex": 169,
     "types": [
       "poison",
       "flying"
@@ -4568,6 +4743,7 @@
     ]
   },
   "crocalor": {
+    "dex": 910,
     "types": [
       "fire"
     ],
@@ -4594,6 +4770,7 @@
     ]
   },
   "croconaw": {
+    "dex": 159,
     "types": [
       "water"
     ],
@@ -4620,6 +4797,7 @@
     ]
   },
   "crustle": {
+    "dex": 558,
     "types": [
       "bug",
       "rock"
@@ -4647,6 +4825,7 @@
     ]
   },
   "cryogonal": {
+    "dex": 615,
     "types": [
       "ice"
     ],
@@ -4670,6 +4849,7 @@
     ]
   },
   "cubchoo": {
+    "dex": 613,
     "types": [
       "ice"
     ],
@@ -4696,6 +4876,7 @@
     ]
   },
   "cubone": {
+    "dex": 104,
     "types": [
       "ground"
     ],
@@ -4722,6 +4903,7 @@
     ]
   },
   "cufant": {
+    "dex": 878,
     "types": [
       "steel"
     ],
@@ -4747,6 +4929,7 @@
     ]
   },
   "cursola": {
+    "dex": 864,
     "types": [
       "ghost"
     ],
@@ -4772,6 +4955,7 @@
     ]
   },
   "cutiefly": {
+    "dex": 742,
     "types": [
       "bug",
       "fairy"
@@ -4799,6 +4983,7 @@
     ]
   },
   "cyclizar": {
+    "dex": 967,
     "types": [
       "dragon",
       "normal"
@@ -4824,6 +5009,7 @@
     ]
   },
   "cyndaquil": {
+    "dex": 155,
     "types": [
       "fire"
     ],
@@ -4850,6 +5036,7 @@
     ]
   },
   "dachsbun": {
+    "dex": 927,
     "types": [
       "fairy"
     ],
@@ -4875,6 +5062,7 @@
     ]
   },
   "darkrai": {
+    "dex": 491,
     "types": [
       "dark"
     ],
@@ -4898,6 +5086,7 @@
     ]
   },
   "darmanitan": {
+    "dex": 555,
     "types": [
       "fire"
     ],
@@ -4923,6 +5112,7 @@
     ]
   },
   "dartrix": {
+    "dex": 723,
     "types": [
       "grass",
       "flying"
@@ -4950,6 +5140,7 @@
     ]
   },
   "darumaka": {
+    "dex": 554,
     "types": [
       "fire"
     ],
@@ -4975,6 +5166,7 @@
     ]
   },
   "decidueye": {
+    "dex": 724,
     "types": [
       "grass",
       "ghost"
@@ -5002,6 +5194,7 @@
     ]
   },
   "dedenne": {
+    "dex": 702,
     "types": [
       "electric",
       "fairy"
@@ -5028,6 +5221,7 @@
     ]
   },
   "deerling": {
+    "dex": 585,
     "types": [
       "normal",
       "grass"
@@ -5055,6 +5249,7 @@
     ]
   },
   "deino": {
+    "dex": 633,
     "types": [
       "dark",
       "dragon"
@@ -5081,6 +5276,7 @@
     ]
   },
   "delcatty": {
+    "dex": 301,
     "types": [
       "normal"
     ],
@@ -5107,6 +5303,7 @@
     ]
   },
   "delibird": {
+    "dex": 225,
     "types": [
       "ice",
       "flying"
@@ -5133,6 +5330,7 @@
     ]
   },
   "delphox": {
+    "dex": 655,
     "types": [
       "fire",
       "psychic"
@@ -5160,6 +5358,7 @@
     ]
   },
   "deoxys": {
+    "dex": 386,
     "types": [
       "psychic"
     ],
@@ -5183,6 +5382,7 @@
     ]
   },
   "dewgong": {
+    "dex": 87,
     "types": [
       "water",
       "ice"
@@ -5210,6 +5410,7 @@
     ]
   },
   "dewott": {
+    "dex": 502,
     "types": [
       "water"
     ],
@@ -5236,6 +5437,7 @@
     ]
   },
   "dewpider": {
+    "dex": 751,
     "types": [
       "water",
       "bug"
@@ -5262,6 +5464,7 @@
     ]
   },
   "dhelmise": {
+    "dex": 781,
     "types": [
       "ghost",
       "grass"
@@ -5286,6 +5489,7 @@
     ]
   },
   "dialga": {
+    "dex": 483,
     "types": [
       "steel",
       "dragon"
@@ -5311,6 +5515,7 @@
     ]
   },
   "diancie": {
+    "dex": 719,
     "types": [
       "rock",
       "fairy"
@@ -5335,6 +5540,7 @@
     ]
   },
   "diggersby": {
+    "dex": 660,
     "types": [
       "normal",
       "ground"
@@ -5362,6 +5568,7 @@
     ]
   },
   "diglett": {
+    "dex": 50,
     "types": [
       "ground"
     ],
@@ -5388,6 +5595,7 @@
     ]
   },
   "dipplin": {
+    "dex": 1011,
     "types": [
       "grass",
       "dragon"
@@ -5418,6 +5626,7 @@
     ]
   },
   "ditto": {
+    "dex": 132,
     "types": [
       "normal"
     ],
@@ -5442,6 +5651,7 @@
     ]
   },
   "dodrio": {
+    "dex": 85,
     "types": [
       "normal",
       "flying"
@@ -5469,6 +5679,7 @@
     ]
   },
   "doduo": {
+    "dex": 84,
     "types": [
       "normal",
       "flying"
@@ -5496,6 +5707,7 @@
     ]
   },
   "dolliv": {
+    "dex": 929,
     "types": [
       "grass",
       "normal"
@@ -5523,6 +5735,7 @@
     ]
   },
   "dondozo": {
+    "dex": 977,
     "types": [
       "water"
     ],
@@ -5548,6 +5761,7 @@
     ]
   },
   "donphan": {
+    "dex": 232,
     "types": [
       "ground"
     ],
@@ -5573,6 +5787,7 @@
     ]
   },
   "dottler": {
+    "dex": 825,
     "types": [
       "bug",
       "psychic"
@@ -5601,6 +5816,7 @@
     ]
   },
   "doublade": {
+    "dex": 680,
     "types": [
       "steel",
       "ghost"
@@ -5627,6 +5843,7 @@
     ]
   },
   "dracovish": {
+    "dex": 882,
     "types": [
       "water",
       "dragon"
@@ -5653,6 +5870,7 @@
     ]
   },
   "dracozolt": {
+    "dex": 880,
     "types": [
       "electric",
       "dragon"
@@ -5679,6 +5897,7 @@
     ]
   },
   "dragalge": {
+    "dex": 691,
     "types": [
       "poison",
       "dragon"
@@ -5706,6 +5925,7 @@
     ]
   },
   "dragapult": {
+    "dex": 887,
     "types": [
       "dragon",
       "ghost"
@@ -5734,6 +5954,7 @@
     ]
   },
   "dragonair": {
+    "dex": 148,
     "types": [
       "dragon"
     ],
@@ -5760,6 +5981,7 @@
     ]
   },
   "dragonite": {
+    "dex": 149,
     "types": [
       "dragon",
       "flying"
@@ -5787,6 +6009,7 @@
     ]
   },
   "drakloak": {
+    "dex": 886,
     "types": [
       "dragon",
       "ghost"
@@ -5815,6 +6038,7 @@
     ]
   },
   "drampa": {
+    "dex": 780,
     "types": [
       "normal",
       "dragon"
@@ -5841,6 +6065,7 @@
     ]
   },
   "drapion": {
+    "dex": 452,
     "types": [
       "poison",
       "dark"
@@ -5868,6 +6093,7 @@
     ]
   },
   "dratini": {
+    "dex": 147,
     "types": [
       "dragon"
     ],
@@ -5894,6 +6120,7 @@
     ]
   },
   "drednaw": {
+    "dex": 834,
     "types": [
       "water",
       "rock"
@@ -5921,6 +6148,7 @@
     ]
   },
   "dreepy": {
+    "dex": 885,
     "types": [
       "dragon",
       "ghost"
@@ -5949,6 +6177,7 @@
     ]
   },
   "drifblim": {
+    "dex": 426,
     "types": [
       "ghost",
       "flying"
@@ -5976,6 +6205,7 @@
     ]
   },
   "drifloon": {
+    "dex": 425,
     "types": [
       "ghost",
       "flying"
@@ -6003,6 +6233,7 @@
     ]
   },
   "drilbur": {
+    "dex": 529,
     "types": [
       "ground"
     ],
@@ -6029,6 +6260,7 @@
     ]
   },
   "drizzile": {
+    "dex": 817,
     "types": [
       "water"
     ],
@@ -6055,6 +6287,7 @@
     ]
   },
   "drowzee": {
+    "dex": 96,
     "types": [
       "psychic"
     ],
@@ -6081,6 +6314,7 @@
     ]
   },
   "druddigon": {
+    "dex": 621,
     "types": [
       "dragon"
     ],
@@ -6106,6 +6340,7 @@
     ]
   },
   "dubwool": {
+    "dex": 832,
     "types": [
       "normal"
     ],
@@ -6132,6 +6367,7 @@
     ]
   },
   "ducklett": {
+    "dex": 580,
     "types": [
       "water",
       "flying"
@@ -6159,6 +6395,7 @@
     ]
   },
   "dudunsparce": {
+    "dex": 982,
     "types": [
       "normal"
     ],
@@ -6185,6 +6422,7 @@
     ]
   },
   "dugtrio": {
+    "dex": 51,
     "types": [
       "ground"
     ],
@@ -6211,6 +6449,7 @@
     ]
   },
   "dunsparce": {
+    "dex": 206,
     "types": [
       "normal"
     ],
@@ -6237,6 +6476,7 @@
     ]
   },
   "duosion": {
+    "dex": 578,
     "types": [
       "psychic"
     ],
@@ -6264,6 +6504,7 @@
     ]
   },
   "duraludon": {
+    "dex": 884,
     "types": [
       "steel",
       "dragon"
@@ -6291,6 +6532,7 @@
     ]
   },
   "durant": {
+    "dex": 632,
     "types": [
       "bug",
       "steel"
@@ -6317,6 +6559,7 @@
     ]
   },
   "dusclops": {
+    "dex": 356,
     "types": [
       "ghost"
     ],
@@ -6343,6 +6586,7 @@
     ]
   },
   "dusknoir": {
+    "dex": 477,
     "types": [
       "ghost"
     ],
@@ -6369,6 +6613,7 @@
     ]
   },
   "duskull": {
+    "dex": 355,
     "types": [
       "ghost"
     ],
@@ -6395,6 +6640,7 @@
     ]
   },
   "dustox": {
+    "dex": 269,
     "types": [
       "bug",
       "poison"
@@ -6424,6 +6670,7 @@
     ]
   },
   "dwebble": {
+    "dex": 557,
     "types": [
       "bug",
       "rock"
@@ -6451,6 +6698,7 @@
     ]
   },
   "eelektrik": {
+    "dex": 603,
     "types": [
       "electric"
     ],
@@ -6476,6 +6724,7 @@
     ]
   },
   "eelektross": {
+    "dex": 604,
     "types": [
       "electric"
     ],
@@ -6501,6 +6750,7 @@
     ]
   },
   "eevee": {
+    "dex": 133,
     "types": [
       "normal"
     ],
@@ -6534,6 +6784,7 @@
     ]
   },
   "eiscue": {
+    "dex": 875,
     "types": [
       "ice"
     ],
@@ -6557,6 +6808,7 @@
     ]
   },
   "ekans": {
+    "dex": 23,
     "types": [
       "poison"
     ],
@@ -6583,6 +6835,7 @@
     ]
   },
   "eldegoss": {
+    "dex": 830,
     "types": [
       "grass"
     ],
@@ -6609,6 +6862,7 @@
     ]
   },
   "electabuzz": {
+    "dex": 125,
     "types": [
       "electric"
     ],
@@ -6635,6 +6889,7 @@
     ]
   },
   "electivire": {
+    "dex": 466,
     "types": [
       "electric"
     ],
@@ -6661,6 +6916,7 @@
     ]
   },
   "electrike": {
+    "dex": 309,
     "types": [
       "electric"
     ],
@@ -6687,6 +6943,7 @@
     ]
   },
   "electrode": {
+    "dex": 101,
     "types": [
       "electric"
     ],
@@ -6713,6 +6970,7 @@
     ]
   },
   "elekid": {
+    "dex": 239,
     "types": [
       "electric"
     ],
@@ -6739,6 +6997,7 @@
     ]
   },
   "elgyem": {
+    "dex": 605,
     "types": [
       "psychic"
     ],
@@ -6765,6 +7024,7 @@
     ]
   },
   "emboar": {
+    "dex": 500,
     "types": [
       "fire",
       "fighting"
@@ -6792,6 +7052,7 @@
     ]
   },
   "emolga": {
+    "dex": 587,
     "types": [
       "electric",
       "flying"
@@ -6817,6 +7078,7 @@
     ]
   },
   "empoleon": {
+    "dex": 395,
     "types": [
       "water",
       "steel"
@@ -6844,6 +7106,7 @@
     ]
   },
   "enamorus": {
+    "dex": 905,
     "types": [
       "fairy",
       "flying"
@@ -6869,6 +7132,7 @@
     ]
   },
   "entei": {
+    "dex": 244,
     "types": [
       "fire"
     ],
@@ -6893,6 +7157,7 @@
     ]
   },
   "escavalier": {
+    "dex": 589,
     "types": [
       "bug",
       "steel"
@@ -6920,6 +7185,7 @@
     ]
   },
   "espathra": {
+    "dex": 956,
     "types": [
       "psychic"
     ],
@@ -6946,6 +7212,7 @@
     ]
   },
   "espeon": {
+    "dex": 196,
     "types": [
       "psychic"
     ],
@@ -6978,6 +7245,7 @@
     ]
   },
   "espurr": {
+    "dex": 677,
     "types": [
       "psychic"
     ],
@@ -7004,6 +7272,7 @@
     ]
   },
   "eternatus": {
+    "dex": 890,
     "types": [
       "poison",
       "dragon"
@@ -7028,6 +7297,7 @@
     ]
   },
   "excadrill": {
+    "dex": 530,
     "types": [
       "ground",
       "steel"
@@ -7055,6 +7325,7 @@
     ]
   },
   "exeggcute": {
+    "dex": 102,
     "types": [
       "grass",
       "psychic"
@@ -7081,6 +7352,7 @@
     ]
   },
   "exeggutor": {
+    "dex": 103,
     "types": [
       "grass",
       "psychic"
@@ -7107,6 +7379,7 @@
     ]
   },
   "exploud": {
+    "dex": 295,
     "types": [
       "normal"
     ],
@@ -7133,6 +7406,7 @@
     ]
   },
   "falinks": {
+    "dex": 870,
     "types": [
       "fighting"
     ],
@@ -7157,6 +7431,7 @@
     ]
   },
   "farfetchd": {
+    "dex": 83,
     "types": [
       "normal",
       "flying"
@@ -7184,6 +7459,7 @@
     ]
   },
   "farigiraf": {
+    "dex": 981,
     "types": [
       "normal",
       "psychic"
@@ -7211,6 +7487,7 @@
     ]
   },
   "fearow": {
+    "dex": 22,
     "types": [
       "normal",
       "flying"
@@ -7237,6 +7514,7 @@
     ]
   },
   "feebas": {
+    "dex": 349,
     "types": [
       "water"
     ],
@@ -7263,6 +7541,7 @@
     ]
   },
   "fennekin": {
+    "dex": 653,
     "types": [
       "fire"
     ],
@@ -7289,6 +7568,7 @@
     ]
   },
   "feraligatr": {
+    "dex": 160,
     "types": [
       "water"
     ],
@@ -7315,6 +7595,7 @@
     ]
   },
   "ferroseed": {
+    "dex": 597,
     "types": [
       "grass",
       "steel"
@@ -7340,6 +7621,7 @@
     ]
   },
   "ferrothorn": {
+    "dex": 598,
     "types": [
       "grass",
       "steel"
@@ -7366,6 +7648,7 @@
     ]
   },
   "fezandipiti": {
+    "dex": 1016,
     "types": [
       "poison",
       "fairy"
@@ -7391,6 +7674,7 @@
     ]
   },
   "fidough": {
+    "dex": 926,
     "types": [
       "fairy"
     ],
@@ -7416,6 +7700,7 @@
     ]
   },
   "finizen": {
+    "dex": 963,
     "types": [
       "water"
     ],
@@ -7441,6 +7726,7 @@
     ]
   },
   "finneon": {
+    "dex": 456,
     "types": [
       "water"
     ],
@@ -7467,6 +7753,7 @@
     ]
   },
   "flaaffy": {
+    "dex": 180,
     "types": [
       "electric"
     ],
@@ -7493,6 +7780,7 @@
     ]
   },
   "flabebe": {
+    "dex": 669,
     "types": [
       "fairy"
     ],
@@ -7519,6 +7807,7 @@
     ]
   },
   "flamigo": {
+    "dex": 973,
     "types": [
       "flying",
       "fighting"
@@ -7545,6 +7834,7 @@
     ]
   },
   "flapple": {
+    "dex": 841,
     "types": [
       "grass",
       "dragon"
@@ -7575,6 +7865,7 @@
     ]
   },
   "flareon": {
+    "dex": 136,
     "types": [
       "fire"
     ],
@@ -7607,6 +7898,7 @@
     ]
   },
   "fletchinder": {
+    "dex": 662,
     "types": [
       "fire",
       "flying"
@@ -7634,6 +7926,7 @@
     ]
   },
   "fletchling": {
+    "dex": 661,
     "types": [
       "normal",
       "flying"
@@ -7661,6 +7954,7 @@
     ]
   },
   "flittle": {
+    "dex": 955,
     "types": [
       "psychic"
     ],
@@ -7687,6 +7981,7 @@
     ]
   },
   "floatzel": {
+    "dex": 419,
     "types": [
       "water"
     ],
@@ -7712,6 +8007,7 @@
     ]
   },
   "floette": {
+    "dex": 670,
     "types": [
       "fairy"
     ],
@@ -7738,6 +8034,7 @@
     ]
   },
   "floragato": {
+    "dex": 907,
     "types": [
       "grass"
     ],
@@ -7764,6 +8061,7 @@
     ]
   },
   "florges": {
+    "dex": 671,
     "types": [
       "fairy"
     ],
@@ -7790,6 +8088,7 @@
     ]
   },
   "fluttermane": {
+    "dex": 987,
     "types": [
       "ghost",
       "fairy"
@@ -7814,6 +8113,7 @@
     ]
   },
   "flygon": {
+    "dex": 330,
     "types": [
       "ground",
       "dragon"
@@ -7840,6 +8140,7 @@
     ]
   },
   "fomantis": {
+    "dex": 753,
     "types": [
       "grass"
     ],
@@ -7865,6 +8166,7 @@
     ]
   },
   "foongus": {
+    "dex": 590,
     "types": [
       "grass",
       "poison"
@@ -7891,6 +8193,7 @@
     ]
   },
   "forretress": {
+    "dex": 205,
     "types": [
       "bug",
       "steel"
@@ -7917,6 +8220,7 @@
     ]
   },
   "fraxure": {
+    "dex": 611,
     "types": [
       "dragon"
     ],
@@ -7944,6 +8248,7 @@
     ]
   },
   "frigibax": {
+    "dex": 996,
     "types": [
       "dragon",
       "ice"
@@ -7971,6 +8276,7 @@
     ]
   },
   "frillish": {
+    "dex": 592,
     "types": [
       "water",
       "ghost"
@@ -7998,6 +8304,7 @@
     ]
   },
   "froakie": {
+    "dex": 656,
     "types": [
       "water"
     ],
@@ -8024,6 +8331,7 @@
     ]
   },
   "frogadier": {
+    "dex": 657,
     "types": [
       "water"
     ],
@@ -8050,6 +8358,7 @@
     ]
   },
   "froslass": {
+    "dex": 478,
     "types": [
       "ice",
       "ghost"
@@ -8077,6 +8386,7 @@
     ]
   },
   "frosmoth": {
+    "dex": 873,
     "types": [
       "ice",
       "bug"
@@ -8103,6 +8413,7 @@
     ]
   },
   "fuecoco": {
+    "dex": 909,
     "types": [
       "fire"
     ],
@@ -8129,6 +8440,7 @@
     ]
   },
   "furfrou": {
+    "dex": 676,
     "types": [
       "normal"
     ],
@@ -8152,6 +8464,7 @@
     ]
   },
   "furret": {
+    "dex": 162,
     "types": [
       "normal"
     ],
@@ -8178,6 +8491,7 @@
     ]
   },
   "gabite": {
+    "dex": 444,
     "types": [
       "dragon",
       "ground"
@@ -8205,6 +8519,7 @@
     ]
   },
   "gallade": {
+    "dex": 475,
     "types": [
       "psychic",
       "fighting"
@@ -8234,6 +8549,7 @@
     ]
   },
   "galvantula": {
+    "dex": 596,
     "types": [
       "bug",
       "electric"
@@ -8261,6 +8577,7 @@
     ]
   },
   "garbodor": {
+    "dex": 569,
     "types": [
       "poison"
     ],
@@ -8287,6 +8604,7 @@
     ]
   },
   "garchomp": {
+    "dex": 445,
     "types": [
       "dragon",
       "ground"
@@ -8314,6 +8632,7 @@
     ]
   },
   "gardevoir": {
+    "dex": 282,
     "types": [
       "psychic",
       "fairy"
@@ -8343,6 +8662,7 @@
     ]
   },
   "garganacl": {
+    "dex": 934,
     "types": [
       "rock"
     ],
@@ -8370,6 +8690,7 @@
     ]
   },
   "gastly": {
+    "dex": 92,
     "types": [
       "ghost",
       "poison"
@@ -8396,6 +8717,7 @@
     ]
   },
   "gastrodon": {
+    "dex": 423,
     "types": [
       "water",
       "ground"
@@ -8423,6 +8745,7 @@
     ]
   },
   "genesect": {
+    "dex": 649,
     "types": [
       "bug",
       "steel"
@@ -8447,6 +8770,7 @@
     ]
   },
   "gengar": {
+    "dex": 94,
     "types": [
       "ghost",
       "poison"
@@ -8473,6 +8797,7 @@
     ]
   },
   "geodude": {
+    "dex": 74,
     "types": [
       "rock",
       "ground"
@@ -8501,6 +8826,7 @@
     ]
   },
   "gholdengo": {
+    "dex": 1000,
     "types": [
       "steel",
       "ghost"
@@ -8526,6 +8852,7 @@
     ]
   },
   "gible": {
+    "dex": 443,
     "types": [
       "dragon",
       "ground"
@@ -8553,6 +8880,7 @@
     ]
   },
   "gigalith": {
+    "dex": 526,
     "types": [
       "rock"
     ],
@@ -8580,6 +8908,7 @@
     ]
   },
   "gimmighoul": {
+    "dex": 999,
     "types": [
       "ghost"
     ],
@@ -8604,6 +8933,7 @@
     ]
   },
   "girafarig": {
+    "dex": 203,
     "types": [
       "normal",
       "psychic"
@@ -8631,6 +8961,7 @@
     ]
   },
   "giratina": {
+    "dex": 487,
     "types": [
       "ghost",
       "dragon"
@@ -8656,6 +8987,7 @@
     ]
   },
   "glaceon": {
+    "dex": 471,
     "types": [
       "ice"
     ],
@@ -8688,6 +9020,7 @@
     ]
   },
   "glalie": {
+    "dex": 362,
     "types": [
       "ice"
     ],
@@ -8715,6 +9048,7 @@
     ]
   },
   "glameow": {
+    "dex": 431,
     "types": [
       "normal"
     ],
@@ -8741,6 +9075,7 @@
     ]
   },
   "glastrier": {
+    "dex": 896,
     "types": [
       "ice"
     ],
@@ -8764,6 +9099,7 @@
     ]
   },
   "gligar": {
+    "dex": 207,
     "types": [
       "ground",
       "flying"
@@ -8791,6 +9127,7 @@
     ]
   },
   "glimmet": {
+    "dex": 969,
     "types": [
       "rock",
       "poison"
@@ -8817,6 +9154,7 @@
     ]
   },
   "glimmora": {
+    "dex": 970,
     "types": [
       "rock",
       "poison"
@@ -8843,6 +9181,7 @@
     ]
   },
   "gliscor": {
+    "dex": 472,
     "types": [
       "ground",
       "flying"
@@ -8870,6 +9209,7 @@
     ]
   },
   "gloom": {
+    "dex": 44,
     "types": [
       "grass",
       "poison"
@@ -8898,6 +9238,7 @@
     ]
   },
   "gogoat": {
+    "dex": 673,
     "types": [
       "grass"
     ],
@@ -8923,6 +9264,7 @@
     ]
   },
   "golbat": {
+    "dex": 42,
     "types": [
       "poison",
       "flying"
@@ -8950,6 +9292,7 @@
     ]
   },
   "goldeen": {
+    "dex": 118,
     "types": [
       "water"
     ],
@@ -8976,6 +9319,7 @@
     ]
   },
   "golduck": {
+    "dex": 55,
     "types": [
       "water"
     ],
@@ -9002,6 +9346,7 @@
     ]
   },
   "golem": {
+    "dex": 76,
     "types": [
       "rock",
       "ground"
@@ -9030,6 +9375,7 @@
     ]
   },
   "golett": {
+    "dex": 622,
     "types": [
       "ground",
       "ghost"
@@ -9057,6 +9403,7 @@
     ]
   },
   "golisopod": {
+    "dex": 768,
     "types": [
       "bug",
       "water"
@@ -9082,6 +9429,7 @@
     ]
   },
   "golurk": {
+    "dex": 623,
     "types": [
       "ground",
       "ghost"
@@ -9109,6 +9457,7 @@
     ]
   },
   "goodra": {
+    "dex": 706,
     "types": [
       "dragon"
     ],
@@ -9136,6 +9485,7 @@
     ]
   },
   "goomy": {
+    "dex": 704,
     "types": [
       "dragon"
     ],
@@ -9163,6 +9513,7 @@
     ]
   },
   "gorebyss": {
+    "dex": 368,
     "types": [
       "water"
     ],
@@ -9189,6 +9540,7 @@
     ]
   },
   "gossifleur": {
+    "dex": 829,
     "types": [
       "grass"
     ],
@@ -9215,6 +9567,7 @@
     ]
   },
   "gothita": {
+    "dex": 574,
     "types": [
       "psychic"
     ],
@@ -9242,6 +9595,7 @@
     ]
   },
   "gothitelle": {
+    "dex": 576,
     "types": [
       "psychic"
     ],
@@ -9269,6 +9623,7 @@
     ]
   },
   "gothorita": {
+    "dex": 575,
     "types": [
       "psychic"
     ],
@@ -9296,6 +9651,7 @@
     ]
   },
   "gougingfire": {
+    "dex": 1020,
     "types": [
       "fire",
       "dragon"
@@ -9320,6 +9676,7 @@
     ]
   },
   "gourgeist": {
+    "dex": 711,
     "types": [
       "ghost",
       "grass"
@@ -9347,6 +9704,7 @@
     ]
   },
   "grafaiai": {
+    "dex": 945,
     "types": [
       "poison",
       "normal"
@@ -9374,6 +9732,7 @@
     ]
   },
   "granbull": {
+    "dex": 210,
     "types": [
       "fairy"
     ],
@@ -9400,6 +9759,7 @@
     ]
   },
   "grapploct": {
+    "dex": 853,
     "types": [
       "fighting"
     ],
@@ -9425,6 +9785,7 @@
     ]
   },
   "graveler": {
+    "dex": 75,
     "types": [
       "rock",
       "ground"
@@ -9453,6 +9814,7 @@
     ]
   },
   "greattusk": {
+    "dex": 984,
     "types": [
       "ground",
       "fighting"
@@ -9477,6 +9839,7 @@
     ]
   },
   "greavard": {
+    "dex": 971,
     "types": [
       "ghost"
     ],
@@ -9502,6 +9865,7 @@
     ]
   },
   "greedent": {
+    "dex": 820,
     "types": [
       "normal"
     ],
@@ -9527,6 +9891,7 @@
     ]
   },
   "greninja": {
+    "dex": 658,
     "types": [
       "water",
       "dark"
@@ -9554,6 +9919,7 @@
     ]
   },
   "grimer": {
+    "dex": 88,
     "types": [
       "poison"
     ],
@@ -9580,6 +9946,7 @@
     ]
   },
   "grimmsnarl": {
+    "dex": 861,
     "types": [
       "dark",
       "fairy"
@@ -9608,6 +9975,7 @@
     ]
   },
   "grookey": {
+    "dex": 810,
     "types": [
       "grass"
     ],
@@ -9634,6 +10002,7 @@
     ]
   },
   "grotle": {
+    "dex": 388,
     "types": [
       "grass"
     ],
@@ -9660,6 +10029,7 @@
     ]
   },
   "groudon": {
+    "dex": 383,
     "types": [
       "ground"
     ],
@@ -9683,6 +10053,7 @@
     ]
   },
   "grovyle": {
+    "dex": 253,
     "types": [
       "grass"
     ],
@@ -9709,6 +10080,7 @@
     ]
   },
   "growlithe": {
+    "dex": 58,
     "types": [
       "fire"
     ],
@@ -9735,6 +10107,7 @@
     ]
   },
   "grubbin": {
+    "dex": 736,
     "types": [
       "bug"
     ],
@@ -9760,6 +10133,7 @@
     ]
   },
   "grumpig": {
+    "dex": 326,
     "types": [
       "psychic"
     ],
@@ -9786,6 +10160,7 @@
     ]
   },
   "gulpin": {
+    "dex": 316,
     "types": [
       "poison"
     ],
@@ -9812,6 +10187,7 @@
     ]
   },
   "gumshoos": {
+    "dex": 735,
     "types": [
       "normal"
     ],
@@ -9838,6 +10214,7 @@
     ]
   },
   "gurdurr": {
+    "dex": 533,
     "types": [
       "fighting"
     ],
@@ -9865,6 +10242,7 @@
     ]
   },
   "guzzlord": {
+    "dex": 799,
     "types": [
       "dark",
       "dragon"
@@ -9889,6 +10267,7 @@
     ]
   },
   "gyarados": {
+    "dex": 130,
     "types": [
       "water",
       "flying"
@@ -9915,6 +10294,7 @@
     ]
   },
   "hakamoo": {
+    "dex": 783,
     "types": [
       "dragon",
       "fighting"
@@ -9943,6 +10323,7 @@
     ]
   },
   "happiny": {
+    "dex": 440,
     "types": [
       "normal"
     ],
@@ -9970,6 +10351,7 @@
     ]
   },
   "hariyama": {
+    "dex": 297,
     "types": [
       "fighting"
     ],
@@ -9996,6 +10378,7 @@
     ]
   },
   "hatenna": {
+    "dex": 856,
     "types": [
       "psychic"
     ],
@@ -10023,6 +10406,7 @@
     ]
   },
   "hatterene": {
+    "dex": 858,
     "types": [
       "psychic",
       "fairy"
@@ -10051,6 +10435,7 @@
     ]
   },
   "hattrem": {
+    "dex": 857,
     "types": [
       "psychic"
     ],
@@ -10078,6 +10463,7 @@
     ]
   },
   "haunter": {
+    "dex": 93,
     "types": [
       "ghost",
       "poison"
@@ -10104,6 +10490,7 @@
     ]
   },
   "hawlucha": {
+    "dex": 701,
     "types": [
       "fighting",
       "flying"
@@ -10130,6 +10517,7 @@
     ]
   },
   "haxorus": {
+    "dex": 612,
     "types": [
       "dragon"
     ],
@@ -10157,6 +10545,7 @@
     ]
   },
   "heatmor": {
+    "dex": 631,
     "types": [
       "fire"
     ],
@@ -10182,6 +10571,7 @@
     ]
   },
   "heatran": {
+    "dex": 485,
     "types": [
       "fire",
       "steel"
@@ -10207,6 +10597,7 @@
     ]
   },
   "heliolisk": {
+    "dex": 695,
     "types": [
       "electric",
       "normal"
@@ -10234,6 +10625,7 @@
     ]
   },
   "helioptile": {
+    "dex": 694,
     "types": [
       "electric",
       "normal"
@@ -10261,6 +10653,7 @@
     ]
   },
   "heracross": {
+    "dex": 214,
     "types": [
       "bug",
       "fighting"
@@ -10287,6 +10680,7 @@
     ]
   },
   "herdier": {
+    "dex": 507,
     "types": [
       "normal"
     ],
@@ -10314,6 +10708,7 @@
     ]
   },
   "hippopotas": {
+    "dex": 449,
     "types": [
       "ground"
     ],
@@ -10339,6 +10734,7 @@
     ]
   },
   "hippowdon": {
+    "dex": 450,
     "types": [
       "ground"
     ],
@@ -10364,6 +10760,7 @@
     ]
   },
   "hitmonchan": {
+    "dex": 107,
     "types": [
       "fighting"
     ],
@@ -10392,6 +10789,7 @@
     ]
   },
   "hitmonlee": {
+    "dex": 106,
     "types": [
       "fighting"
     ],
@@ -10420,6 +10818,7 @@
     ]
   },
   "hitmontop": {
+    "dex": 237,
     "types": [
       "fighting"
     ],
@@ -10448,6 +10847,7 @@
     ]
   },
   "hooh": {
+    "dex": 250,
     "types": [
       "fire",
       "flying"
@@ -10473,6 +10873,7 @@
     ]
   },
   "honchkrow": {
+    "dex": 430,
     "types": [
       "dark",
       "flying"
@@ -10500,6 +10901,7 @@
     ]
   },
   "honedge": {
+    "dex": 679,
     "types": [
       "steel",
       "ghost"
@@ -10526,6 +10928,7 @@
     ]
   },
   "hoopa": {
+    "dex": 720,
     "types": [
       "psychic",
       "ghost"
@@ -10550,6 +10953,7 @@
     ]
   },
   "hoothoot": {
+    "dex": 163,
     "types": [
       "normal",
       "flying"
@@ -10577,6 +10981,7 @@
     ]
   },
   "hoppip": {
+    "dex": 187,
     "types": [
       "grass",
       "flying"
@@ -10605,6 +11010,7 @@
     ]
   },
   "horsea": {
+    "dex": 116,
     "types": [
       "water"
     ],
@@ -10632,6 +11038,7 @@
     ]
   },
   "houndoom": {
+    "dex": 229,
     "types": [
       "dark",
       "fire"
@@ -10659,6 +11066,7 @@
     ]
   },
   "houndour": {
+    "dex": 228,
     "types": [
       "dark",
       "fire"
@@ -10686,6 +11094,7 @@
     ]
   },
   "houndstone": {
+    "dex": 972,
     "types": [
       "ghost"
     ],
@@ -10711,6 +11120,7 @@
     ]
   },
   "huntail": {
+    "dex": 367,
     "types": [
       "water"
     ],
@@ -10737,6 +11147,7 @@
     ]
   },
   "hydrapple": {
+    "dex": 1019,
     "types": [
       "grass",
       "dragon"
@@ -10767,6 +11178,7 @@
     ]
   },
   "hydreigon": {
+    "dex": 635,
     "types": [
       "dark",
       "dragon"
@@ -10793,6 +11205,7 @@
     ]
   },
   "hypno": {
+    "dex": 97,
     "types": [
       "psychic"
     ],
@@ -10819,6 +11232,7 @@
     ]
   },
   "igglybuff": {
+    "dex": 174,
     "types": [
       "normal",
       "fairy"
@@ -10847,6 +11261,7 @@
     ]
   },
   "illumise": {
+    "dex": 314,
     "types": [
       "bug"
     ],
@@ -10872,6 +11287,7 @@
     ]
   },
   "impidimp": {
+    "dex": 859,
     "types": [
       "dark",
       "fairy"
@@ -10900,6 +11316,7 @@
     ]
   },
   "incineroar": {
+    "dex": 727,
     "types": [
       "fire",
       "dark"
@@ -10927,6 +11344,7 @@
     ]
   },
   "indeedee": {
+    "dex": 876,
     "types": [
       "psychic",
       "normal"
@@ -10953,6 +11371,7 @@
     ]
   },
   "infernape": {
+    "dex": 392,
     "types": [
       "fire",
       "fighting"
@@ -10980,6 +11399,7 @@
     ]
   },
   "inkay": {
+    "dex": 686,
     "types": [
       "dark",
       "psychic"
@@ -11007,6 +11427,7 @@
     ]
   },
   "inteleon": {
+    "dex": 818,
     "types": [
       "water"
     ],
@@ -11033,6 +11454,7 @@
     ]
   },
   "ironboulder": {
+    "dex": 1022,
     "types": [
       "rock",
       "psychic"
@@ -11057,6 +11479,7 @@
     ]
   },
   "ironbundle": {
+    "dex": 991,
     "types": [
       "ice",
       "water"
@@ -11081,6 +11504,7 @@
     ]
   },
   "ironcrown": {
+    "dex": 1023,
     "types": [
       "steel",
       "psychic"
@@ -11105,6 +11529,7 @@
     ]
   },
   "ironhands": {
+    "dex": 992,
     "types": [
       "fighting",
       "electric"
@@ -11129,6 +11554,7 @@
     ]
   },
   "ironjugulis": {
+    "dex": 993,
     "types": [
       "dark",
       "flying"
@@ -11153,6 +11579,7 @@
     ]
   },
   "ironleaves": {
+    "dex": 1010,
     "types": [
       "grass",
       "psychic"
@@ -11177,6 +11604,7 @@
     ]
   },
   "ironmoth": {
+    "dex": 994,
     "types": [
       "fire",
       "poison"
@@ -11201,6 +11629,7 @@
     ]
   },
   "ironthorns": {
+    "dex": 995,
     "types": [
       "rock",
       "electric"
@@ -11225,6 +11654,7 @@
     ]
   },
   "irontreads": {
+    "dex": 990,
     "types": [
       "ground",
       "steel"
@@ -11249,6 +11679,7 @@
     ]
   },
   "ironvaliant": {
+    "dex": 1006,
     "types": [
       "fairy",
       "fighting"
@@ -11273,6 +11704,7 @@
     ]
   },
   "ivysaur": {
+    "dex": 2,
     "types": [
       "grass",
       "poison"
@@ -11300,6 +11732,7 @@
     ]
   },
   "jangmoo": {
+    "dex": 782,
     "types": [
       "dragon"
     ],
@@ -11327,6 +11760,7 @@
     ]
   },
   "jellicent": {
+    "dex": 593,
     "types": [
       "water",
       "ghost"
@@ -11354,6 +11788,7 @@
     ]
   },
   "jigglypuff": {
+    "dex": 39,
     "types": [
       "normal",
       "fairy"
@@ -11382,6 +11817,7 @@
     ]
   },
   "jirachi": {
+    "dex": 385,
     "types": [
       "steel",
       "psychic"
@@ -11406,6 +11842,7 @@
     ]
   },
   "jolteon": {
+    "dex": 135,
     "types": [
       "electric"
     ],
@@ -11438,6 +11875,7 @@
     ]
   },
   "joltik": {
+    "dex": 595,
     "types": [
       "bug",
       "electric"
@@ -11465,6 +11903,7 @@
     ]
   },
   "jumpluff": {
+    "dex": 189,
     "types": [
       "grass",
       "flying"
@@ -11493,6 +11932,7 @@
     ]
   },
   "jynx": {
+    "dex": 124,
     "types": [
       "ice",
       "psychic"
@@ -11520,6 +11960,7 @@
     ]
   },
   "kabuto": {
+    "dex": 140,
     "types": [
       "rock",
       "water"
@@ -11547,6 +11988,7 @@
     ]
   },
   "kabutops": {
+    "dex": 141,
     "types": [
       "rock",
       "water"
@@ -11574,6 +12016,7 @@
     ]
   },
   "kadabra": {
+    "dex": 64,
     "types": [
       "psychic"
     ],
@@ -11601,6 +12044,7 @@
     ]
   },
   "kakuna": {
+    "dex": 14,
     "types": [
       "bug",
       "poison"
@@ -11627,6 +12071,7 @@
     ]
   },
   "kangaskhan": {
+    "dex": 115,
     "types": [
       "normal"
     ],
@@ -11652,6 +12097,7 @@
     ]
   },
   "karrablast": {
+    "dex": 588,
     "types": [
       "bug"
     ],
@@ -11678,6 +12124,7 @@
     ]
   },
   "kartana": {
+    "dex": 798,
     "types": [
       "grass",
       "steel"
@@ -11702,6 +12149,7 @@
     ]
   },
   "kecleon": {
+    "dex": 352,
     "types": [
       "normal"
     ],
@@ -11726,6 +12174,7 @@
     ]
   },
   "keldeo": {
+    "dex": 647,
     "types": [
       "water",
       "fighting"
@@ -11750,6 +12199,7 @@
     ]
   },
   "kilowattrel": {
+    "dex": 941,
     "types": [
       "electric",
       "flying"
@@ -11777,6 +12227,7 @@
     ]
   },
   "kingambit": {
+    "dex": 983,
     "types": [
       "dark",
       "steel"
@@ -11805,6 +12256,7 @@
     ]
   },
   "kingdra": {
+    "dex": 230,
     "types": [
       "water",
       "dragon"
@@ -11833,6 +12285,7 @@
     ]
   },
   "kingler": {
+    "dex": 99,
     "types": [
       "water"
     ],
@@ -11859,6 +12312,7 @@
     ]
   },
   "kirlia": {
+    "dex": 281,
     "types": [
       "psychic",
       "fairy"
@@ -11888,6 +12342,7 @@
     ]
   },
   "klang": {
+    "dex": 600,
     "types": [
       "steel"
     ],
@@ -11915,6 +12370,7 @@
     ]
   },
   "klawf": {
+    "dex": 950,
     "types": [
       "rock"
     ],
@@ -11940,6 +12396,7 @@
     ]
   },
   "kleavor": {
+    "dex": 900,
     "types": [
       "bug",
       "rock"
@@ -11968,6 +12425,7 @@
     ]
   },
   "klefki": {
+    "dex": 707,
     "types": [
       "steel",
       "fairy"
@@ -11993,6 +12451,7 @@
     ]
   },
   "klink": {
+    "dex": 599,
     "types": [
       "steel"
     ],
@@ -12020,6 +12479,7 @@
     ]
   },
   "klinklang": {
+    "dex": 601,
     "types": [
       "steel"
     ],
@@ -12047,6 +12507,7 @@
     ]
   },
   "koffing": {
+    "dex": 109,
     "types": [
       "poison"
     ],
@@ -12073,6 +12534,7 @@
     ]
   },
   "komala": {
+    "dex": 775,
     "types": [
       "normal"
     ],
@@ -12096,6 +12558,7 @@
     ]
   },
   "kommoo": {
+    "dex": 784,
     "types": [
       "dragon",
       "fighting"
@@ -12124,6 +12587,7 @@
     ]
   },
   "koraidon": {
+    "dex": 1007,
     "types": [
       "fighting",
       "dragon"
@@ -12148,6 +12612,7 @@
     ]
   },
   "krabby": {
+    "dex": 98,
     "types": [
       "water"
     ],
@@ -12174,6 +12639,7 @@
     ]
   },
   "kricketot": {
+    "dex": 401,
     "types": [
       "bug"
     ],
@@ -12199,6 +12665,7 @@
     ]
   },
   "kricketune": {
+    "dex": 402,
     "types": [
       "bug"
     ],
@@ -12224,6 +12691,7 @@
     ]
   },
   "krokorok": {
+    "dex": 552,
     "types": [
       "ground",
       "dark"
@@ -12252,6 +12720,7 @@
     ]
   },
   "krookodile": {
+    "dex": 553,
     "types": [
       "ground",
       "dark"
@@ -12280,6 +12749,7 @@
     ]
   },
   "kubfu": {
+    "dex": 891,
     "types": [
       "fighting"
     ],
@@ -12304,6 +12774,7 @@
     ]
   },
   "kyogre": {
+    "dex": 382,
     "types": [
       "water"
     ],
@@ -12327,6 +12798,7 @@
     ]
   },
   "kyurem": {
+    "dex": 646,
     "types": [
       "dragon",
       "ice"
@@ -12351,6 +12823,7 @@
     ]
   },
   "lairon": {
+    "dex": 305,
     "types": [
       "steel",
       "rock"
@@ -12379,6 +12852,7 @@
     ]
   },
   "lampent": {
+    "dex": 608,
     "types": [
       "ghost",
       "fire"
@@ -12407,6 +12881,7 @@
     ]
   },
   "landorus": {
+    "dex": 645,
     "types": [
       "ground",
       "flying"
@@ -12432,6 +12907,7 @@
     ]
   },
   "lanturn": {
+    "dex": 171,
     "types": [
       "water",
       "electric"
@@ -12459,6 +12935,7 @@
     ]
   },
   "lapras": {
+    "dex": 131,
     "types": [
       "water",
       "ice"
@@ -12485,6 +12962,7 @@
     ]
   },
   "larvesta": {
+    "dex": 636,
     "types": [
       "bug",
       "fire"
@@ -12511,6 +12989,7 @@
     ]
   },
   "larvitar": {
+    "dex": 246,
     "types": [
       "rock",
       "ground"
@@ -12538,6 +13017,7 @@
     ]
   },
   "latias": {
+    "dex": 380,
     "types": [
       "dragon",
       "psychic"
@@ -12562,6 +13042,7 @@
     ]
   },
   "latios": {
+    "dex": 381,
     "types": [
       "dragon",
       "psychic"
@@ -12586,6 +13067,7 @@
     ]
   },
   "leafeon": {
+    "dex": 470,
     "types": [
       "grass"
     ],
@@ -12618,6 +13100,7 @@
     ]
   },
   "leavanny": {
+    "dex": 542,
     "types": [
       "bug",
       "grass"
@@ -12646,6 +13129,7 @@
     ]
   },
   "lechonk": {
+    "dex": 915,
     "types": [
       "normal"
     ],
@@ -12672,6 +13156,7 @@
     ]
   },
   "ledian": {
+    "dex": 166,
     "types": [
       "bug",
       "flying"
@@ -12699,6 +13184,7 @@
     ]
   },
   "ledyba": {
+    "dex": 165,
     "types": [
       "bug",
       "flying"
@@ -12726,6 +13212,7 @@
     ]
   },
   "lickilicky": {
+    "dex": 463,
     "types": [
       "normal"
     ],
@@ -12752,6 +13239,7 @@
     ]
   },
   "lickitung": {
+    "dex": 108,
     "types": [
       "normal"
     ],
@@ -12778,6 +13266,7 @@
     ]
   },
   "liepard": {
+    "dex": 510,
     "types": [
       "dark"
     ],
@@ -12804,6 +13293,7 @@
     ]
   },
   "lileep": {
+    "dex": 345,
     "types": [
       "rock",
       "grass"
@@ -12830,6 +13320,7 @@
     ]
   },
   "lilligant": {
+    "dex": 549,
     "types": [
       "grass"
     ],
@@ -12856,6 +13347,7 @@
     ]
   },
   "lillipup": {
+    "dex": 506,
     "types": [
       "normal"
     ],
@@ -12883,6 +13375,7 @@
     ]
   },
   "linoone": {
+    "dex": 264,
     "types": [
       "normal"
     ],
@@ -12910,6 +13403,7 @@
     ]
   },
   "litleo": {
+    "dex": 667,
     "types": [
       "fire",
       "normal"
@@ -12937,6 +13431,7 @@
     ]
   },
   "litten": {
+    "dex": 725,
     "types": [
       "fire"
     ],
@@ -12963,6 +13458,7 @@
     ]
   },
   "litwick": {
+    "dex": 607,
     "types": [
       "ghost",
       "fire"
@@ -12991,6 +13487,7 @@
     ]
   },
   "lokix": {
+    "dex": 920,
     "types": [
       "bug",
       "dark"
@@ -13017,6 +13514,7 @@
     ]
   },
   "lombre": {
+    "dex": 271,
     "types": [
       "water",
       "grass"
@@ -13045,6 +13543,7 @@
     ]
   },
   "lopunny": {
+    "dex": 428,
     "types": [
       "normal"
     ],
@@ -13071,6 +13570,7 @@
     ]
   },
   "lotad": {
+    "dex": 270,
     "types": [
       "water",
       "grass"
@@ -13099,6 +13599,7 @@
     ]
   },
   "loudred": {
+    "dex": 294,
     "types": [
       "normal"
     ],
@@ -13125,6 +13626,7 @@
     ]
   },
   "lucario": {
+    "dex": 448,
     "types": [
       "fighting",
       "steel"
@@ -13152,6 +13654,7 @@
     ]
   },
   "ludicolo": {
+    "dex": 272,
     "types": [
       "water",
       "grass"
@@ -13180,6 +13683,7 @@
     ]
   },
   "lugia": {
+    "dex": 249,
     "types": [
       "psychic",
       "flying"
@@ -13205,6 +13709,7 @@
     ]
   },
   "lumineon": {
+    "dex": 457,
     "types": [
       "water"
     ],
@@ -13231,6 +13736,7 @@
     ]
   },
   "lunala": {
+    "dex": 792,
     "types": [
       "psychic",
       "ghost"
@@ -13258,6 +13764,7 @@
     ]
   },
   "lunatone": {
+    "dex": 337,
     "types": [
       "rock",
       "psychic"
@@ -13282,6 +13789,7 @@
     ]
   },
   "lurantis": {
+    "dex": 754,
     "types": [
       "grass"
     ],
@@ -13307,6 +13815,7 @@
     ]
   },
   "luvdisc": {
+    "dex": 370,
     "types": [
       "water"
     ],
@@ -13331,6 +13840,7 @@
     ]
   },
   "luxio": {
+    "dex": 404,
     "types": [
       "electric"
     ],
@@ -13358,6 +13868,7 @@
     ]
   },
   "luxray": {
+    "dex": 405,
     "types": [
       "electric"
     ],
@@ -13385,6 +13896,7 @@
     ]
   },
   "lycanroc": {
+    "dex": 745,
     "types": [
       "rock"
     ],
@@ -13411,6 +13923,7 @@
     ]
   },
   "mabosstiff": {
+    "dex": 943,
     "types": [
       "dark"
     ],
@@ -13437,6 +13950,7 @@
     ]
   },
   "machamp": {
+    "dex": 68,
     "types": [
       "fighting"
     ],
@@ -13464,6 +13978,7 @@
     ]
   },
   "machoke": {
+    "dex": 67,
     "types": [
       "fighting"
     ],
@@ -13491,6 +14006,7 @@
     ]
   },
   "machop": {
+    "dex": 66,
     "types": [
       "fighting"
     ],
@@ -13518,6 +14034,7 @@
     ]
   },
   "magby": {
+    "dex": 240,
     "types": [
       "fire"
     ],
@@ -13544,6 +14061,7 @@
     ]
   },
   "magcargo": {
+    "dex": 219,
     "types": [
       "fire",
       "rock"
@@ -13571,6 +14089,7 @@
     ]
   },
   "magearna": {
+    "dex": 801,
     "types": [
       "steel",
       "fairy"
@@ -13595,6 +14114,7 @@
     ]
   },
   "magikarp": {
+    "dex": 129,
     "types": [
       "water"
     ],
@@ -13620,6 +14140,7 @@
     ]
   },
   "magmar": {
+    "dex": 126,
     "types": [
       "fire"
     ],
@@ -13646,6 +14167,7 @@
     ]
   },
   "magmortar": {
+    "dex": 467,
     "types": [
       "fire"
     ],
@@ -13672,6 +14194,7 @@
     ]
   },
   "magnemite": {
+    "dex": 81,
     "types": [
       "electric",
       "steel"
@@ -13700,6 +14223,7 @@
     ]
   },
   "magneton": {
+    "dex": 82,
     "types": [
       "electric",
       "steel"
@@ -13728,6 +14252,7 @@
     ]
   },
   "magnezone": {
+    "dex": 462,
     "types": [
       "electric",
       "steel"
@@ -13756,6 +14281,7 @@
     ]
   },
   "makuhita": {
+    "dex": 296,
     "types": [
       "fighting"
     ],
@@ -13782,6 +14308,7 @@
     ]
   },
   "malamar": {
+    "dex": 687,
     "types": [
       "dark",
       "psychic"
@@ -13809,6 +14336,7 @@
     ]
   },
   "mamoswine": {
+    "dex": 473,
     "types": [
       "ice",
       "ground"
@@ -13837,6 +14365,7 @@
     ]
   },
   "manaphy": {
+    "dex": 490,
     "types": [
       "water"
     ],
@@ -13861,6 +14390,7 @@
     ]
   },
   "mandibuzz": {
+    "dex": 630,
     "types": [
       "dark",
       "flying"
@@ -13888,6 +14418,7 @@
     ]
   },
   "manectric": {
+    "dex": 310,
     "types": [
       "electric"
     ],
@@ -13914,6 +14445,7 @@
     ]
   },
   "mankey": {
+    "dex": 56,
     "types": [
       "fighting"
     ],
@@ -13941,6 +14473,7 @@
     ]
   },
   "mantine": {
+    "dex": 226,
     "types": [
       "water",
       "flying"
@@ -13968,6 +14501,7 @@
     ]
   },
   "mantyke": {
+    "dex": 458,
     "types": [
       "water",
       "flying"
@@ -13995,6 +14529,7 @@
     ]
   },
   "maractus": {
+    "dex": 556,
     "types": [
       "grass"
     ],
@@ -14020,6 +14555,7 @@
     ]
   },
   "mareanie": {
+    "dex": 747,
     "types": [
       "poison",
       "water"
@@ -14047,6 +14583,7 @@
     ]
   },
   "mareep": {
+    "dex": 179,
     "types": [
       "electric"
     ],
@@ -14073,6 +14610,7 @@
     ]
   },
   "marill": {
+    "dex": 183,
     "types": [
       "water",
       "fairy"
@@ -14101,6 +14639,7 @@
     ]
   },
   "marowak": {
+    "dex": 105,
     "types": [
       "ground"
     ],
@@ -14127,6 +14666,7 @@
     ]
   },
   "marshadow": {
+    "dex": 802,
     "types": [
       "fighting",
       "ghost"
@@ -14151,6 +14691,7 @@
     ]
   },
   "marshtomp": {
+    "dex": 259,
     "types": [
       "water",
       "ground"
@@ -14178,6 +14719,7 @@
     ]
   },
   "maschiff": {
+    "dex": 942,
     "types": [
       "dark"
     ],
@@ -14204,6 +14746,7 @@
     ]
   },
   "masquerain": {
+    "dex": 284,
     "types": [
       "bug",
       "flying"
@@ -14230,6 +14773,7 @@
     ]
   },
   "maushold": {
+    "dex": 925,
     "types": [
       "normal"
     ],
@@ -14256,6 +14800,7 @@
     ]
   },
   "mawile": {
+    "dex": 303,
     "types": [
       "steel",
       "fairy"
@@ -14282,6 +14827,7 @@
     ]
   },
   "medicham": {
+    "dex": 308,
     "types": [
       "fighting",
       "psychic"
@@ -14308,6 +14854,7 @@
     ]
   },
   "meditite": {
+    "dex": 307,
     "types": [
       "fighting",
       "psychic"
@@ -14334,6 +14881,7 @@
     ]
   },
   "meganium": {
+    "dex": 154,
     "types": [
       "grass"
     ],
@@ -14360,6 +14908,7 @@
     ]
   },
   "melmetal": {
+    "dex": 809,
     "types": [
       "steel"
     ],
@@ -14383,6 +14932,7 @@
     ]
   },
   "meloetta": {
+    "dex": 648,
     "types": [
       "normal",
       "psychic"
@@ -14407,6 +14957,7 @@
     ]
   },
   "meltan": {
+    "dex": 808,
     "types": [
       "steel"
     ],
@@ -14430,6 +14981,7 @@
     ]
   },
   "meowscarada": {
+    "dex": 908,
     "types": [
       "grass",
       "dark"
@@ -14457,6 +15009,7 @@
     ]
   },
   "meowstic": {
+    "dex": 678,
     "types": [
       "psychic"
     ],
@@ -14483,6 +15036,7 @@
     ]
   },
   "meowth": {
+    "dex": 52,
     "types": [
       "normal"
     ],
@@ -14510,6 +15064,7 @@
     ]
   },
   "mesprit": {
+    "dex": 481,
     "types": [
       "psychic"
     ],
@@ -14533,6 +15088,7 @@
     ]
   },
   "metagross": {
+    "dex": 376,
     "types": [
       "steel",
       "psychic"
@@ -14560,6 +15116,7 @@
     ]
   },
   "metang": {
+    "dex": 375,
     "types": [
       "steel",
       "psychic"
@@ -14587,6 +15144,7 @@
     ]
   },
   "metapod": {
+    "dex": 11,
     "types": [
       "bug"
     ],
@@ -14612,6 +15170,7 @@
     ]
   },
   "mew": {
+    "dex": 151,
     "types": [
       "psychic"
     ],
@@ -14635,6 +15194,7 @@
     ]
   },
   "mewtwo": {
+    "dex": 150,
     "types": [
       "psychic"
     ],
@@ -14659,6 +15219,7 @@
     ]
   },
   "mienfoo": {
+    "dex": 619,
     "types": [
       "fighting"
     ],
@@ -14685,6 +15246,7 @@
     ]
   },
   "mienshao": {
+    "dex": 620,
     "types": [
       "fighting"
     ],
@@ -14711,6 +15273,7 @@
     ]
   },
   "mightyena": {
+    "dex": 262,
     "types": [
       "dark"
     ],
@@ -14737,6 +15300,7 @@
     ]
   },
   "milcery": {
+    "dex": 868,
     "types": [
       "fairy"
     ],
@@ -14762,6 +15326,7 @@
     ]
   },
   "milotic": {
+    "dex": 350,
     "types": [
       "water"
     ],
@@ -14788,6 +15353,7 @@
     ]
   },
   "miltank": {
+    "dex": 241,
     "types": [
       "normal"
     ],
@@ -14813,6 +15379,7 @@
     ]
   },
   "mimejr": {
+    "dex": 439,
     "types": [
       "psychic",
       "fairy"
@@ -14841,6 +15408,7 @@
     ]
   },
   "mimikyu": {
+    "dex": 778,
     "types": [
       "ghost",
       "fairy"
@@ -14865,6 +15433,7 @@
     ]
   },
   "minccino": {
+    "dex": 572,
     "types": [
       "normal"
     ],
@@ -14891,6 +15460,7 @@
     ]
   },
   "minior": {
+    "dex": 774,
     "types": [
       "rock",
       "flying"
@@ -14915,6 +15485,7 @@
     ]
   },
   "minun": {
+    "dex": 312,
     "types": [
       "electric"
     ],
@@ -14939,6 +15510,7 @@
     ]
   },
   "miraidon": {
+    "dex": 1008,
     "types": [
       "electric",
       "dragon"
@@ -14963,6 +15535,7 @@
     ]
   },
   "misdreavus": {
+    "dex": 200,
     "types": [
       "ghost"
     ],
@@ -14987,6 +15560,7 @@
     ]
   },
   "mismagius": {
+    "dex": 429,
     "types": [
       "ghost"
     ],
@@ -15011,6 +15585,7 @@
     ]
   },
   "moltres": {
+    "dex": 146,
     "types": [
       "fire",
       "flying"
@@ -15036,6 +15611,7 @@
     ]
   },
   "monferno": {
+    "dex": 391,
     "types": [
       "fire",
       "fighting"
@@ -15063,6 +15639,7 @@
     ]
   },
   "morelull": {
+    "dex": 755,
     "types": [
       "grass",
       "fairy"
@@ -15090,6 +15667,7 @@
     ]
   },
   "morgrem": {
+    "dex": 860,
     "types": [
       "dark",
       "fairy"
@@ -15118,6 +15696,7 @@
     ]
   },
   "morpeko": {
+    "dex": 877,
     "types": [
       "electric",
       "dark"
@@ -15142,6 +15721,7 @@
     ]
   },
   "mothim": {
+    "dex": 414,
     "types": [
       "bug",
       "flying"
@@ -15169,6 +15749,7 @@
     ]
   },
   "mrmime": {
+    "dex": 122,
     "types": [
       "psychic",
       "fairy"
@@ -15197,6 +15778,7 @@
     ]
   },
   "mrrime": {
+    "dex": 866,
     "types": [
       "ice",
       "psychic"
@@ -15225,6 +15807,7 @@
     ]
   },
   "mudbray": {
+    "dex": 749,
     "types": [
       "ground"
     ],
@@ -15251,6 +15834,7 @@
     ]
   },
   "mudkip": {
+    "dex": 258,
     "types": [
       "water"
     ],
@@ -15277,6 +15861,7 @@
     ]
   },
   "mudsdale": {
+    "dex": 750,
     "types": [
       "ground"
     ],
@@ -15303,6 +15888,7 @@
     ]
   },
   "muk": {
+    "dex": 89,
     "types": [
       "poison"
     ],
@@ -15329,6 +15915,7 @@
     ]
   },
   "munchlax": {
+    "dex": 446,
     "types": [
       "normal"
     ],
@@ -15355,6 +15942,7 @@
     ]
   },
   "munkidori": {
+    "dex": 1015,
     "types": [
       "poison",
       "psychic"
@@ -15380,6 +15968,7 @@
     ]
   },
   "munna": {
+    "dex": 517,
     "types": [
       "psychic"
     ],
@@ -15406,6 +15995,7 @@
     ]
   },
   "murkrow": {
+    "dex": 198,
     "types": [
       "dark",
       "flying"
@@ -15433,6 +16023,7 @@
     ]
   },
   "musharna": {
+    "dex": 518,
     "types": [
       "psychic"
     ],
@@ -15459,6 +16050,7 @@
     ]
   },
   "nacli": {
+    "dex": 932,
     "types": [
       "rock"
     ],
@@ -15486,6 +16078,7 @@
     ]
   },
   "naclstack": {
+    "dex": 933,
     "types": [
       "rock"
     ],
@@ -15513,6 +16106,7 @@
     ]
   },
   "naganadel": {
+    "dex": 804,
     "types": [
       "poison",
       "dragon"
@@ -15538,6 +16132,7 @@
     ]
   },
   "natu": {
+    "dex": 177,
     "types": [
       "psychic",
       "flying"
@@ -15565,6 +16160,7 @@
     ]
   },
   "necrozma": {
+    "dex": 800,
     "types": [
       "psychic"
     ],
@@ -15588,6 +16184,7 @@
     ]
   },
   "nickit": {
+    "dex": 827,
     "types": [
       "dark"
     ],
@@ -15614,6 +16211,7 @@
     ]
   },
   "nidoking": {
+    "dex": 34,
     "types": [
       "poison",
       "ground"
@@ -15642,6 +16240,7 @@
     ]
   },
   "nidoqueen": {
+    "dex": 31,
     "types": [
       "poison",
       "ground"
@@ -15670,6 +16269,7 @@
     ]
   },
   "nidoranf": {
+    "dex": 29,
     "types": [
       "poison"
     ],
@@ -15697,6 +16297,7 @@
     ]
   },
   "nidoranm": {
+    "dex": 32,
     "types": [
       "poison"
     ],
@@ -15724,6 +16325,7 @@
     ]
   },
   "nidorina": {
+    "dex": 30,
     "types": [
       "poison"
     ],
@@ -15751,6 +16353,7 @@
     ]
   },
   "nidorino": {
+    "dex": 33,
     "types": [
       "poison"
     ],
@@ -15778,6 +16381,7 @@
     ]
   },
   "nihilego": {
+    "dex": 793,
     "types": [
       "rock",
       "poison"
@@ -15802,6 +16406,7 @@
     ]
   },
   "nincada": {
+    "dex": 290,
     "types": [
       "bug",
       "ground"
@@ -15829,6 +16434,7 @@
     ]
   },
   "ninetales": {
+    "dex": 38,
     "types": [
       "fire"
     ],
@@ -15854,6 +16460,7 @@
     ]
   },
   "ninjask": {
+    "dex": 291,
     "types": [
       "bug",
       "flying"
@@ -15881,6 +16488,7 @@
     ]
   },
   "noctowl": {
+    "dex": 164,
     "types": [
       "normal",
       "flying"
@@ -15908,6 +16516,7 @@
     ]
   },
   "noibat": {
+    "dex": 714,
     "types": [
       "flying",
       "dragon"
@@ -15935,6 +16544,7 @@
     ]
   },
   "noivern": {
+    "dex": 715,
     "types": [
       "flying",
       "dragon"
@@ -15962,6 +16572,7 @@
     ]
   },
   "nosepass": {
+    "dex": 299,
     "types": [
       "rock"
     ],
@@ -15988,6 +16599,7 @@
     ]
   },
   "numel": {
+    "dex": 322,
     "types": [
       "fire",
       "ground"
@@ -16015,6 +16627,7 @@
     ]
   },
   "nuzleaf": {
+    "dex": 274,
     "types": [
       "grass",
       "dark"
@@ -16043,6 +16656,7 @@
     ]
   },
   "nymble": {
+    "dex": 919,
     "types": [
       "bug"
     ],
@@ -16068,6 +16682,7 @@
     ]
   },
   "obstagoon": {
+    "dex": 862,
     "types": [
       "dark",
       "normal"
@@ -16096,6 +16711,7 @@
     ]
   },
   "octillery": {
+    "dex": 224,
     "types": [
       "water"
     ],
@@ -16122,6 +16738,7 @@
     ]
   },
   "oddish": {
+    "dex": 43,
     "types": [
       "grass",
       "poison"
@@ -16150,6 +16767,7 @@
     ]
   },
   "ogerpon": {
+    "dex": 1017,
     "types": [
       "grass"
     ],
@@ -16173,6 +16791,7 @@
     ]
   },
   "oinkologne": {
+    "dex": 916,
     "types": [
       "normal"
     ],
@@ -16199,6 +16818,7 @@
     ]
   },
   "okidogi": {
+    "dex": 1014,
     "types": [
       "poison",
       "fighting"
@@ -16224,6 +16844,7 @@
     ]
   },
   "omanyte": {
+    "dex": 138,
     "types": [
       "rock",
       "water"
@@ -16251,6 +16872,7 @@
     ]
   },
   "omastar": {
+    "dex": 139,
     "types": [
       "rock",
       "water"
@@ -16278,6 +16900,7 @@
     ]
   },
   "onix": {
+    "dex": 95,
     "types": [
       "rock",
       "ground"
@@ -16305,6 +16928,7 @@
     ]
   },
   "oranguru": {
+    "dex": 765,
     "types": [
       "normal",
       "psychic"
@@ -16331,6 +16955,7 @@
     ]
   },
   "orbeetle": {
+    "dex": 826,
     "types": [
       "bug",
       "psychic"
@@ -16359,6 +16984,7 @@
     ]
   },
   "oricorio": {
+    "dex": 741,
     "types": [
       "fire",
       "flying"
@@ -16383,6 +17009,7 @@
     ]
   },
   "orthworm": {
+    "dex": 968,
     "types": [
       "steel"
     ],
@@ -16407,6 +17034,7 @@
     ]
   },
   "oshawott": {
+    "dex": 501,
     "types": [
       "water"
     ],
@@ -16433,6 +17061,7 @@
     ]
   },
   "overqwil": {
+    "dex": 904,
     "types": [
       "dark",
       "poison"
@@ -16460,6 +17089,7 @@
     ]
   },
   "pachirisu": {
+    "dex": 417,
     "types": [
       "electric"
     ],
@@ -16485,6 +17115,7 @@
     ]
   },
   "palafin": {
+    "dex": 964,
     "types": [
       "water"
     ],
@@ -16510,6 +17141,7 @@
     ]
   },
   "palkia": {
+    "dex": 484,
     "types": [
       "water",
       "dragon"
@@ -16535,6 +17167,7 @@
     ]
   },
   "palossand": {
+    "dex": 770,
     "types": [
       "ghost",
       "ground"
@@ -16561,6 +17194,7 @@
     ]
   },
   "palpitoad": {
+    "dex": 536,
     "types": [
       "water",
       "ground"
@@ -16589,6 +17223,7 @@
     ]
   },
   "pancham": {
+    "dex": 674,
     "types": [
       "fighting"
     ],
@@ -16615,6 +17250,7 @@
     ]
   },
   "pangoro": {
+    "dex": 675,
     "types": [
       "fighting",
       "dark"
@@ -16642,6 +17278,7 @@
     ]
   },
   "panpour": {
+    "dex": 515,
     "types": [
       "water"
     ],
@@ -16667,6 +17304,7 @@
     ]
   },
   "pansage": {
+    "dex": 511,
     "types": [
       "grass"
     ],
@@ -16692,6 +17330,7 @@
     ]
   },
   "pansear": {
+    "dex": 513,
     "types": [
       "fire"
     ],
@@ -16717,6 +17356,7 @@
     ]
   },
   "paras": {
+    "dex": 46,
     "types": [
       "bug",
       "grass"
@@ -16744,6 +17384,7 @@
     ]
   },
   "parasect": {
+    "dex": 47,
     "types": [
       "bug",
       "grass"
@@ -16771,6 +17412,7 @@
     ]
   },
   "passimian": {
+    "dex": 766,
     "types": [
       "fighting"
     ],
@@ -16795,6 +17437,7 @@
     ]
   },
   "patrat": {
+    "dex": 504,
     "types": [
       "normal"
     ],
@@ -16821,6 +17464,7 @@
     ]
   },
   "pawmi": {
+    "dex": 921,
     "types": [
       "electric"
     ],
@@ -16848,6 +17492,7 @@
     ]
   },
   "pawmo": {
+    "dex": 922,
     "types": [
       "electric",
       "fighting"
@@ -16876,6 +17521,7 @@
     ]
   },
   "pawmot": {
+    "dex": 923,
     "types": [
       "electric",
       "fighting"
@@ -16904,6 +17550,7 @@
     ]
   },
   "pawniard": {
+    "dex": 624,
     "types": [
       "dark",
       "steel"
@@ -16932,6 +17579,7 @@
     ]
   },
   "pecharunt": {
+    "dex": 1025,
     "types": [
       "poison",
       "ghost"
@@ -16956,6 +17604,7 @@
     ]
   },
   "pelipper": {
+    "dex": 279,
     "types": [
       "water",
       "flying"
@@ -16983,6 +17632,7 @@
     ]
   },
   "perrserker": {
+    "dex": 863,
     "types": [
       "steel"
     ],
@@ -17010,6 +17660,7 @@
     ]
   },
   "persian": {
+    "dex": 53,
     "types": [
       "normal"
     ],
@@ -17037,6 +17688,7 @@
     ]
   },
   "petilil": {
+    "dex": 548,
     "types": [
       "grass"
     ],
@@ -17063,6 +17715,7 @@
     ]
   },
   "phanpy": {
+    "dex": 231,
     "types": [
       "ground"
     ],
@@ -17088,6 +17741,7 @@
     ]
   },
   "phantump": {
+    "dex": 708,
     "types": [
       "ghost",
       "grass"
@@ -17115,6 +17769,7 @@
     ]
   },
   "pheromosa": {
+    "dex": 795,
     "types": [
       "bug",
       "fighting"
@@ -17139,6 +17794,7 @@
     ]
   },
   "phione": {
+    "dex": 489,
     "types": [
       "water"
     ],
@@ -17163,6 +17819,7 @@
     ]
   },
   "pichu": {
+    "dex": 172,
     "types": [
       "electric"
     ],
@@ -17189,6 +17846,7 @@
     ]
   },
   "pidgeot": {
+    "dex": 18,
     "types": [
       "normal",
       "flying"
@@ -17217,6 +17875,7 @@
     ]
   },
   "pidgeotto": {
+    "dex": 17,
     "types": [
       "normal",
       "flying"
@@ -17245,6 +17904,7 @@
     ]
   },
   "pidgey": {
+    "dex": 16,
     "types": [
       "normal",
       "flying"
@@ -17273,6 +17933,7 @@
     ]
   },
   "pidove": {
+    "dex": 519,
     "types": [
       "normal",
       "flying"
@@ -17301,6 +17962,7 @@
     ]
   },
   "pignite": {
+    "dex": 499,
     "types": [
       "fire",
       "fighting"
@@ -17328,6 +17990,7 @@
     ]
   },
   "pikachu": {
+    "dex": 25,
     "types": [
       "electric"
     ],
@@ -17354,6 +18017,7 @@
     ]
   },
   "pikipek": {
+    "dex": 731,
     "types": [
       "normal",
       "flying"
@@ -17382,6 +18046,7 @@
     ]
   },
   "piloswine": {
+    "dex": 221,
     "types": [
       "ice",
       "ground"
@@ -17410,6 +18075,7 @@
     ]
   },
   "pincurchin": {
+    "dex": 871,
     "types": [
       "electric"
     ],
@@ -17434,6 +18100,7 @@
     ]
   },
   "pineco": {
+    "dex": 204,
     "types": [
       "bug"
     ],
@@ -17459,6 +18126,7 @@
     ]
   },
   "pinsir": {
+    "dex": 127,
     "types": [
       "bug"
     ],
@@ -17484,6 +18152,7 @@
     ]
   },
   "piplup": {
+    "dex": 393,
     "types": [
       "water"
     ],
@@ -17510,6 +18179,7 @@
     ]
   },
   "plusle": {
+    "dex": 311,
     "types": [
       "electric"
     ],
@@ -17534,6 +18204,7 @@
     ]
   },
   "poipole": {
+    "dex": 803,
     "types": [
       "poison"
     ],
@@ -17558,6 +18229,7 @@
     ]
   },
   "politoed": {
+    "dex": 186,
     "types": [
       "water"
     ],
@@ -17586,6 +18258,7 @@
     ]
   },
   "poliwag": {
+    "dex": 60,
     "types": [
       "water"
     ],
@@ -17614,6 +18287,7 @@
     ]
   },
   "poliwhirl": {
+    "dex": 61,
     "types": [
       "water"
     ],
@@ -17642,6 +18316,7 @@
     ]
   },
   "poliwrath": {
+    "dex": 62,
     "types": [
       "water",
       "fighting"
@@ -17671,6 +18346,7 @@
     ]
   },
   "poltchageist": {
+    "dex": 1012,
     "types": [
       "grass",
       "ghost"
@@ -17697,6 +18373,7 @@
     ]
   },
   "polteageist": {
+    "dex": 855,
     "types": [
       "ghost"
     ],
@@ -17722,6 +18399,7 @@
     ]
   },
   "ponyta": {
+    "dex": 77,
     "types": [
       "fire"
     ],
@@ -17748,6 +18426,7 @@
     ]
   },
   "poochyena": {
+    "dex": 261,
     "types": [
       "dark"
     ],
@@ -17774,6 +18453,7 @@
     ]
   },
   "popplio": {
+    "dex": 728,
     "types": [
       "water"
     ],
@@ -17800,6 +18480,7 @@
     ]
   },
   "porygon": {
+    "dex": 137,
     "types": [
       "normal"
     ],
@@ -17827,6 +18508,7 @@
     ]
   },
   "porygon2": {
+    "dex": 233,
     "types": [
       "normal"
     ],
@@ -17854,6 +18536,7 @@
     ]
   },
   "porygonz": {
+    "dex": 474,
     "types": [
       "normal"
     ],
@@ -17881,6 +18564,7 @@
     ]
   },
   "primarina": {
+    "dex": 730,
     "types": [
       "water",
       "fairy"
@@ -17908,6 +18592,7 @@
     ]
   },
   "primeape": {
+    "dex": 57,
     "types": [
       "fighting"
     ],
@@ -17935,6 +18620,7 @@
     ]
   },
   "prinplup": {
+    "dex": 394,
     "types": [
       "water"
     ],
@@ -17961,6 +18647,7 @@
     ]
   },
   "probopass": {
+    "dex": 476,
     "types": [
       "rock",
       "steel"
@@ -17988,6 +18675,7 @@
     ]
   },
   "psyduck": {
+    "dex": 54,
     "types": [
       "water"
     ],
@@ -18014,6 +18702,7 @@
     ]
   },
   "pumpkaboo": {
+    "dex": 710,
     "types": [
       "ghost",
       "grass"
@@ -18041,6 +18730,7 @@
     ]
   },
   "pupitar": {
+    "dex": 247,
     "types": [
       "rock",
       "ground"
@@ -18067,6 +18757,7 @@
     ]
   },
   "purrloin": {
+    "dex": 509,
     "types": [
       "dark"
     ],
@@ -18093,6 +18784,7 @@
     ]
   },
   "purugly": {
+    "dex": 432,
     "types": [
       "normal"
     ],
@@ -18119,6 +18811,7 @@
     ]
   },
   "pyroar": {
+    "dex": 668,
     "types": [
       "fire",
       "normal"
@@ -18146,6 +18839,7 @@
     ]
   },
   "pyukumuku": {
+    "dex": 771,
     "types": [
       "water"
     ],
@@ -18170,6 +18864,7 @@
     ]
   },
   "quagsire": {
+    "dex": 195,
     "types": [
       "water",
       "ground"
@@ -18198,6 +18893,7 @@
     ]
   },
   "quaquaval": {
+    "dex": 914,
     "types": [
       "water",
       "fighting"
@@ -18225,6 +18921,7 @@
     ]
   },
   "quaxly": {
+    "dex": 912,
     "types": [
       "water"
     ],
@@ -18251,6 +18948,7 @@
     ]
   },
   "quaxwell": {
+    "dex": 913,
     "types": [
       "water"
     ],
@@ -18277,6 +18975,7 @@
     ]
   },
   "quilava": {
+    "dex": 156,
     "types": [
       "fire"
     ],
@@ -18303,6 +19002,7 @@
     ]
   },
   "quilladin": {
+    "dex": 651,
     "types": [
       "grass"
     ],
@@ -18329,6 +19029,7 @@
     ]
   },
   "qwilfish": {
+    "dex": 211,
     "types": [
       "water",
       "poison"
@@ -18356,6 +19057,7 @@
     ]
   },
   "raboot": {
+    "dex": 814,
     "types": [
       "fire"
     ],
@@ -18382,6 +19084,7 @@
     ]
   },
   "rabsca": {
+    "dex": 954,
     "types": [
       "bug",
       "psychic"
@@ -18408,6 +19111,7 @@
     ]
   },
   "ragingbolt": {
+    "dex": 1021,
     "types": [
       "electric",
       "dragon"
@@ -18432,6 +19136,7 @@
     ]
   },
   "raichu": {
+    "dex": 26,
     "types": [
       "electric"
     ],
@@ -18458,6 +19163,7 @@
     ]
   },
   "raikou": {
+    "dex": 243,
     "types": [
       "electric"
     ],
@@ -18482,6 +19188,7 @@
     ]
   },
   "ralts": {
+    "dex": 280,
     "types": [
       "psychic",
       "fairy"
@@ -18511,6 +19218,7 @@
     ]
   },
   "rampardos": {
+    "dex": 409,
     "types": [
       "rock"
     ],
@@ -18536,6 +19244,7 @@
     ]
   },
   "rapidash": {
+    "dex": 78,
     "types": [
       "fire"
     ],
@@ -18562,6 +19271,7 @@
     ]
   },
   "raticate": {
+    "dex": 20,
     "types": [
       "normal"
     ],
@@ -18588,6 +19298,7 @@
     ]
   },
   "rattata": {
+    "dex": 19,
     "types": [
       "normal"
     ],
@@ -18614,6 +19325,7 @@
     ]
   },
   "rayquaza": {
+    "dex": 384,
     "types": [
       "dragon",
       "flying"
@@ -18638,6 +19350,7 @@
     ]
   },
   "regice": {
+    "dex": 378,
     "types": [
       "ice"
     ],
@@ -18662,6 +19375,7 @@
     ]
   },
   "regidrago": {
+    "dex": 895,
     "types": [
       "dragon"
     ],
@@ -18685,6 +19399,7 @@
     ]
   },
   "regieleki": {
+    "dex": 894,
     "types": [
       "electric"
     ],
@@ -18708,6 +19423,7 @@
     ]
   },
   "regigigas": {
+    "dex": 486,
     "types": [
       "normal"
     ],
@@ -18731,6 +19447,7 @@
     ]
   },
   "regirock": {
+    "dex": 377,
     "types": [
       "rock"
     ],
@@ -18755,6 +19472,7 @@
     ]
   },
   "registeel": {
+    "dex": 379,
     "types": [
       "steel"
     ],
@@ -18779,6 +19497,7 @@
     ]
   },
   "relicanth": {
+    "dex": 369,
     "types": [
       "water",
       "rock"
@@ -18805,6 +19524,7 @@
     ]
   },
   "rellor": {
+    "dex": 953,
     "types": [
       "bug"
     ],
@@ -18830,6 +19550,7 @@
     ]
   },
   "remoraid": {
+    "dex": 223,
     "types": [
       "water"
     ],
@@ -18856,6 +19577,7 @@
     ]
   },
   "reshiram": {
+    "dex": 643,
     "types": [
       "dragon",
       "fire"
@@ -18880,6 +19602,7 @@
     ]
   },
   "reuniclus": {
+    "dex": 579,
     "types": [
       "psychic"
     ],
@@ -18907,6 +19630,7 @@
     ]
   },
   "revavroom": {
+    "dex": 966,
     "types": [
       "steel",
       "poison"
@@ -18933,6 +19657,7 @@
     ]
   },
   "rhydon": {
+    "dex": 112,
     "types": [
       "ground",
       "rock"
@@ -18961,6 +19686,7 @@
     ]
   },
   "rhyhorn": {
+    "dex": 111,
     "types": [
       "ground",
       "rock"
@@ -18989,6 +19715,7 @@
     ]
   },
   "rhyperior": {
+    "dex": 464,
     "types": [
       "ground",
       "rock"
@@ -19017,6 +19744,7 @@
     ]
   },
   "ribombee": {
+    "dex": 743,
     "types": [
       "bug",
       "fairy"
@@ -19044,6 +19772,7 @@
     ]
   },
   "rillaboom": {
+    "dex": 812,
     "types": [
       "grass"
     ],
@@ -19070,6 +19799,7 @@
     ]
   },
   "riolu": {
+    "dex": 447,
     "types": [
       "fighting"
     ],
@@ -19096,6 +19826,7 @@
     ]
   },
   "roaringmoon": {
+    "dex": 1005,
     "types": [
       "dragon",
       "dark"
@@ -19120,6 +19851,7 @@
     ]
   },
   "rockruff": {
+    "dex": 744,
     "types": [
       "rock"
     ],
@@ -19146,6 +19878,7 @@
     ]
   },
   "roggenrola": {
+    "dex": 524,
     "types": [
       "rock"
     ],
@@ -19173,6 +19906,7 @@
     ]
   },
   "rolycoly": {
+    "dex": 837,
     "types": [
       "rock"
     ],
@@ -19200,6 +19934,7 @@
     ]
   },
   "rookidee": {
+    "dex": 821,
     "types": [
       "flying"
     ],
@@ -19227,6 +19962,7 @@
     ]
   },
   "roselia": {
+    "dex": 315,
     "types": [
       "grass",
       "poison"
@@ -19255,6 +19991,7 @@
     ]
   },
   "roserade": {
+    "dex": 407,
     "types": [
       "grass",
       "poison"
@@ -19283,6 +20020,7 @@
     ]
   },
   "rotom": {
+    "dex": 479,
     "types": [
       "electric",
       "ghost"
@@ -19307,6 +20045,7 @@
     ]
   },
   "rowlet": {
+    "dex": 722,
     "types": [
       "grass",
       "flying"
@@ -19334,6 +20073,7 @@
     ]
   },
   "rufflet": {
+    "dex": 627,
     "types": [
       "normal",
       "flying"
@@ -19361,6 +20101,7 @@
     ]
   },
   "runerigus": {
+    "dex": 867,
     "types": [
       "ground",
       "ghost"
@@ -19387,6 +20128,7 @@
     ]
   },
   "sableye": {
+    "dex": 302,
     "types": [
       "dark",
       "ghost"
@@ -19413,6 +20155,7 @@
     ]
   },
   "salamence": {
+    "dex": 373,
     "types": [
       "dragon",
       "flying"
@@ -19440,6 +20183,7 @@
     ]
   },
   "salandit": {
+    "dex": 757,
     "types": [
       "poison",
       "fire"
@@ -19466,6 +20210,7 @@
     ]
   },
   "salazzle": {
+    "dex": 758,
     "types": [
       "poison",
       "fire"
@@ -19492,6 +20237,7 @@
     ]
   },
   "samurott": {
+    "dex": 503,
     "types": [
       "water"
     ],
@@ -19518,6 +20264,7 @@
     ]
   },
   "sandaconda": {
+    "dex": 844,
     "types": [
       "ground"
     ],
@@ -19544,6 +20291,7 @@
     ]
   },
   "sandile": {
+    "dex": 551,
     "types": [
       "ground",
       "dark"
@@ -19572,6 +20320,7 @@
     ]
   },
   "sandshrew": {
+    "dex": 27,
     "types": [
       "ground"
     ],
@@ -19597,6 +20346,7 @@
     ]
   },
   "sandslash": {
+    "dex": 28,
     "types": [
       "ground"
     ],
@@ -19622,6 +20372,7 @@
     ]
   },
   "sandyshocks": {
+    "dex": 989,
     "types": [
       "electric",
       "ground"
@@ -19646,6 +20397,7 @@
     ]
   },
   "sandygast": {
+    "dex": 769,
     "types": [
       "ghost",
       "ground"
@@ -19672,6 +20424,7 @@
     ]
   },
   "sawk": {
+    "dex": 539,
     "types": [
       "fighting"
     ],
@@ -19697,6 +20450,7 @@
     ]
   },
   "sawsbuck": {
+    "dex": 586,
     "types": [
       "normal",
       "grass"
@@ -19724,6 +20478,7 @@
     ]
   },
   "scatterbug": {
+    "dex": 664,
     "types": [
       "bug"
     ],
@@ -19751,6 +20506,7 @@
     ]
   },
   "sceptile": {
+    "dex": 254,
     "types": [
       "grass"
     ],
@@ -19777,6 +20533,7 @@
     ]
   },
   "scizor": {
+    "dex": 212,
     "types": [
       "bug",
       "steel"
@@ -19805,6 +20562,7 @@
     ]
   },
   "scolipede": {
+    "dex": 545,
     "types": [
       "bug",
       "poison"
@@ -19833,6 +20591,7 @@
     ]
   },
   "scorbunny": {
+    "dex": 813,
     "types": [
       "fire"
     ],
@@ -19859,6 +20618,7 @@
     ]
   },
   "scovillain": {
+    "dex": 952,
     "types": [
       "grass",
       "fire"
@@ -19886,6 +20646,7 @@
     ]
   },
   "scrafty": {
+    "dex": 560,
     "types": [
       "dark",
       "fighting"
@@ -19913,6 +20674,7 @@
     ]
   },
   "scraggy": {
+    "dex": 559,
     "types": [
       "dark",
       "fighting"
@@ -19940,6 +20702,7 @@
     ]
   },
   "screamtail": {
+    "dex": 985,
     "types": [
       "fairy",
       "psychic"
@@ -19964,6 +20727,7 @@
     ]
   },
   "scyther": {
+    "dex": 123,
     "types": [
       "bug",
       "flying"
@@ -19992,6 +20756,7 @@
     ]
   },
   "seadra": {
+    "dex": 117,
     "types": [
       "water"
     ],
@@ -20019,6 +20784,7 @@
     ]
   },
   "seaking": {
+    "dex": 119,
     "types": [
       "water"
     ],
@@ -20045,6 +20811,7 @@
     ]
   },
   "sealeo": {
+    "dex": 364,
     "types": [
       "ice",
       "water"
@@ -20073,6 +20840,7 @@
     ]
   },
   "seedot": {
+    "dex": 273,
     "types": [
       "grass"
     ],
@@ -20100,6 +20868,7 @@
     ]
   },
   "seel": {
+    "dex": 86,
     "types": [
       "water"
     ],
@@ -20126,6 +20895,7 @@
     ]
   },
   "seismitoad": {
+    "dex": 537,
     "types": [
       "water",
       "ground"
@@ -20154,6 +20924,7 @@
     ]
   },
   "sentret": {
+    "dex": 161,
     "types": [
       "normal"
     ],
@@ -20180,6 +20951,7 @@
     ]
   },
   "serperior": {
+    "dex": 497,
     "types": [
       "grass"
     ],
@@ -20206,6 +20978,7 @@
     ]
   },
   "servine": {
+    "dex": 496,
     "types": [
       "grass"
     ],
@@ -20232,6 +21005,7 @@
     ]
   },
   "seviper": {
+    "dex": 336,
     "types": [
       "poison"
     ],
@@ -20256,6 +21030,7 @@
     ]
   },
   "sewaddle": {
+    "dex": 540,
     "types": [
       "bug",
       "grass"
@@ -20284,6 +21059,7 @@
     ]
   },
   "sharpedo": {
+    "dex": 319,
     "types": [
       "water",
       "dark"
@@ -20310,6 +21086,7 @@
     ]
   },
   "shaymin": {
+    "dex": 492,
     "types": [
       "grass"
     ],
@@ -20333,6 +21110,7 @@
     ]
   },
   "shedinja": {
+    "dex": 292,
     "types": [
       "bug",
       "ghost"
@@ -20359,6 +21137,7 @@
     ]
   },
   "shelgon": {
+    "dex": 372,
     "types": [
       "dragon"
     ],
@@ -20385,6 +21164,7 @@
     ]
   },
   "shellder": {
+    "dex": 90,
     "types": [
       "water"
     ],
@@ -20411,6 +21191,7 @@
     ]
   },
   "shellos": {
+    "dex": 422,
     "types": [
       "water"
     ],
@@ -20437,6 +21218,7 @@
     ]
   },
   "shelmet": {
+    "dex": 616,
     "types": [
       "bug"
     ],
@@ -20463,6 +21245,7 @@
     ]
   },
   "shieldon": {
+    "dex": 410,
     "types": [
       "rock",
       "steel"
@@ -20489,6 +21272,7 @@
     ]
   },
   "shiftry": {
+    "dex": 275,
     "types": [
       "grass",
       "dark"
@@ -20517,6 +21301,7 @@
     ]
   },
   "shiinotic": {
+    "dex": 756,
     "types": [
       "grass",
       "fairy"
@@ -20544,6 +21329,7 @@
     ]
   },
   "shinx": {
+    "dex": 403,
     "types": [
       "electric"
     ],
@@ -20571,6 +21357,7 @@
     ]
   },
   "shroodle": {
+    "dex": 944,
     "types": [
       "poison",
       "normal"
@@ -20598,6 +21385,7 @@
     ]
   },
   "shroomish": {
+    "dex": 285,
     "types": [
       "grass"
     ],
@@ -20624,6 +21412,7 @@
     ]
   },
   "shuckle": {
+    "dex": 213,
     "types": [
       "bug",
       "rock"
@@ -20650,6 +21439,7 @@
     ]
   },
   "shuppet": {
+    "dex": 353,
     "types": [
       "ghost"
     ],
@@ -20676,6 +21466,7 @@
     ]
   },
   "sigilyph": {
+    "dex": 561,
     "types": [
       "psychic",
       "flying"
@@ -20702,6 +21493,7 @@
     ]
   },
   "silcoon": {
+    "dex": 266,
     "types": [
       "bug"
     ],
@@ -20729,6 +21521,7 @@
     ]
   },
   "silicobra": {
+    "dex": 843,
     "types": [
       "ground"
     ],
@@ -20755,6 +21548,7 @@
     ]
   },
   "silvally": {
+    "dex": 773,
     "types": [
       "normal"
     ],
@@ -20779,6 +21573,7 @@
     ]
   },
   "simipour": {
+    "dex": 516,
     "types": [
       "water"
     ],
@@ -20804,6 +21599,7 @@
     ]
   },
   "simisage": {
+    "dex": 512,
     "types": [
       "grass"
     ],
@@ -20829,6 +21625,7 @@
     ]
   },
   "simisear": {
+    "dex": 514,
     "types": [
       "fire"
     ],
@@ -20854,6 +21651,7 @@
     ]
   },
   "sinistcha": {
+    "dex": 1013,
     "types": [
       "grass",
       "ghost"
@@ -20880,6 +21678,7 @@
     ]
   },
   "sinistea": {
+    "dex": 854,
     "types": [
       "ghost"
     ],
@@ -20905,6 +21704,7 @@
     ]
   },
   "sirfetchd": {
+    "dex": 865,
     "types": [
       "fighting"
     ],
@@ -20930,6 +21730,7 @@
     ]
   },
   "sizzlipede": {
+    "dex": 850,
     "types": [
       "fire",
       "bug"
@@ -20957,6 +21758,7 @@
     ]
   },
   "skarmory": {
+    "dex": 227,
     "types": [
       "steel",
       "flying"
@@ -20983,6 +21785,7 @@
     ]
   },
   "skeledirge": {
+    "dex": 911,
     "types": [
       "fire",
       "ghost"
@@ -21010,6 +21813,7 @@
     ]
   },
   "skiddo": {
+    "dex": 672,
     "types": [
       "grass"
     ],
@@ -21035,6 +21839,7 @@
     ]
   },
   "skiploom": {
+    "dex": 188,
     "types": [
       "grass",
       "flying"
@@ -21063,6 +21868,7 @@
     ]
   },
   "skitty": {
+    "dex": 300,
     "types": [
       "normal"
     ],
@@ -21089,6 +21895,7 @@
     ]
   },
   "skorupi": {
+    "dex": 451,
     "types": [
       "poison",
       "bug"
@@ -21116,6 +21923,7 @@
     ]
   },
   "skrelp": {
+    "dex": 690,
     "types": [
       "poison",
       "water"
@@ -21143,6 +21951,7 @@
     ]
   },
   "skuntank": {
+    "dex": 435,
     "types": [
       "poison",
       "dark"
@@ -21170,6 +21979,7 @@
     ]
   },
   "skwovet": {
+    "dex": 819,
     "types": [
       "normal"
     ],
@@ -21195,6 +22005,7 @@
     ]
   },
   "slaking": {
+    "dex": 289,
     "types": [
       "normal"
     ],
@@ -21220,6 +22031,7 @@
     ]
   },
   "slakoth": {
+    "dex": 287,
     "types": [
       "normal"
     ],
@@ -21245,6 +22057,7 @@
     ]
   },
   "sliggoo": {
+    "dex": 705,
     "types": [
       "dragon"
     ],
@@ -21272,6 +22085,7 @@
     ]
   },
   "slitherwing": {
+    "dex": 988,
     "types": [
       "bug",
       "fighting"
@@ -21296,6 +22110,7 @@
     ]
   },
   "slowbro": {
+    "dex": 80,
     "types": [
       "water",
       "psychic"
@@ -21324,6 +22139,7 @@
     ]
   },
   "slowking": {
+    "dex": 199,
     "types": [
       "water",
       "psychic"
@@ -21352,6 +22168,7 @@
     ]
   },
   "slowpoke": {
+    "dex": 79,
     "types": [
       "water",
       "psychic"
@@ -21380,6 +22197,7 @@
     ]
   },
   "slugma": {
+    "dex": 218,
     "types": [
       "fire"
     ],
@@ -21406,6 +22224,7 @@
     ]
   },
   "slurpuff": {
+    "dex": 685,
     "types": [
       "fairy"
     ],
@@ -21431,6 +22250,7 @@
     ]
   },
   "smeargle": {
+    "dex": 235,
     "types": [
       "normal"
     ],
@@ -21456,6 +22276,7 @@
     ]
   },
   "smoliv": {
+    "dex": 928,
     "types": [
       "grass",
       "normal"
@@ -21483,6 +22304,7 @@
     ]
   },
   "smoochum": {
+    "dex": 238,
     "types": [
       "ice",
       "psychic"
@@ -21510,6 +22332,7 @@
     ]
   },
   "sneasel": {
+    "dex": 215,
     "types": [
       "dark",
       "ice"
@@ -21538,6 +22361,7 @@
     ]
   },
   "sneasler": {
+    "dex": 903,
     "types": [
       "fighting",
       "poison"
@@ -21566,6 +22390,7 @@
     ]
   },
   "snivy": {
+    "dex": 495,
     "types": [
       "grass"
     ],
@@ -21592,6 +22417,7 @@
     ]
   },
   "snom": {
+    "dex": 872,
     "types": [
       "ice",
       "bug"
@@ -21618,6 +22444,7 @@
     ]
   },
   "snorlax": {
+    "dex": 143,
     "types": [
       "normal"
     ],
@@ -21644,6 +22471,7 @@
     ]
   },
   "snorunt": {
+    "dex": 361,
     "types": [
       "ice"
     ],
@@ -21671,6 +22499,7 @@
     ]
   },
   "snover": {
+    "dex": 459,
     "types": [
       "grass",
       "ice"
@@ -21697,6 +22526,7 @@
     ]
   },
   "snubbull": {
+    "dex": 209,
     "types": [
       "fairy"
     ],
@@ -21723,6 +22553,7 @@
     ]
   },
   "sobble": {
+    "dex": 816,
     "types": [
       "water"
     ],
@@ -21749,6 +22580,7 @@
     ]
   },
   "solgaleo": {
+    "dex": 791,
     "types": [
       "psychic",
       "steel"
@@ -21776,6 +22608,7 @@
     ]
   },
   "solosis": {
+    "dex": 577,
     "types": [
       "psychic"
     ],
@@ -21803,6 +22636,7 @@
     ]
   },
   "solrock": {
+    "dex": 338,
     "types": [
       "rock",
       "psychic"
@@ -21827,6 +22661,7 @@
     ]
   },
   "spearow": {
+    "dex": 21,
     "types": [
       "normal",
       "flying"
@@ -21853,6 +22688,7 @@
     ]
   },
   "spectrier": {
+    "dex": 897,
     "types": [
       "ghost"
     ],
@@ -21876,6 +22712,7 @@
     ]
   },
   "spewpa": {
+    "dex": 665,
     "types": [
       "bug"
     ],
@@ -21902,6 +22739,7 @@
     ]
   },
   "spheal": {
+    "dex": 363,
     "types": [
       "ice",
       "water"
@@ -21930,6 +22768,7 @@
     ]
   },
   "spidops": {
+    "dex": 918,
     "types": [
       "bug"
     ],
@@ -21955,6 +22794,7 @@
     ]
   },
   "spinarak": {
+    "dex": 167,
     "types": [
       "bug",
       "poison"
@@ -21982,6 +22822,7 @@
     ]
   },
   "spinda": {
+    "dex": 327,
     "types": [
       "normal"
     ],
@@ -22007,6 +22848,7 @@
     ]
   },
   "spiritomb": {
+    "dex": 442,
     "types": [
       "ghost",
       "dark"
@@ -22032,6 +22874,7 @@
     ]
   },
   "spoink": {
+    "dex": 325,
     "types": [
       "psychic"
     ],
@@ -22058,6 +22901,7 @@
     ]
   },
   "sprigatito": {
+    "dex": 906,
     "types": [
       "grass"
     ],
@@ -22084,6 +22928,7 @@
     ]
   },
   "spritzee": {
+    "dex": 682,
     "types": [
       "fairy"
     ],
@@ -22109,6 +22954,7 @@
     ]
   },
   "squawkabilly": {
+    "dex": 931,
     "types": [
       "normal",
       "flying"
@@ -22135,6 +22981,7 @@
     ]
   },
   "squirtle": {
+    "dex": 7,
     "types": [
       "water"
     ],
@@ -22161,6 +23008,7 @@
     ]
   },
   "stakataka": {
+    "dex": 805,
     "types": [
       "rock",
       "steel"
@@ -22185,6 +23033,7 @@
     ]
   },
   "stantler": {
+    "dex": 234,
     "types": [
       "normal"
     ],
@@ -22211,6 +23060,7 @@
     ]
   },
   "staraptor": {
+    "dex": 398,
     "types": [
       "normal",
       "flying"
@@ -22238,6 +23088,7 @@
     ]
   },
   "staravia": {
+    "dex": 397,
     "types": [
       "normal",
       "flying"
@@ -22265,6 +23116,7 @@
     ]
   },
   "starly": {
+    "dex": 396,
     "types": [
       "normal",
       "flying"
@@ -22292,6 +23144,7 @@
     ]
   },
   "starmie": {
+    "dex": 121,
     "types": [
       "water",
       "psychic"
@@ -22319,6 +23172,7 @@
     ]
   },
   "staryu": {
+    "dex": 120,
     "types": [
       "water"
     ],
@@ -22345,6 +23199,7 @@
     ]
   },
   "steelix": {
+    "dex": 208,
     "types": [
       "steel",
       "ground"
@@ -22372,6 +23227,7 @@
     ]
   },
   "steenee": {
+    "dex": 762,
     "types": [
       "grass"
     ],
@@ -22399,6 +23255,7 @@
     ]
   },
   "stonjourner": {
+    "dex": 874,
     "types": [
       "rock"
     ],
@@ -22422,6 +23279,7 @@
     ]
   },
   "stoutland": {
+    "dex": 508,
     "types": [
       "normal"
     ],
@@ -22449,6 +23307,7 @@
     ]
   },
   "stufful": {
+    "dex": 759,
     "types": [
       "normal",
       "fighting"
@@ -22476,6 +23335,7 @@
     ]
   },
   "stunfisk": {
+    "dex": 618,
     "types": [
       "ground",
       "electric"
@@ -22502,6 +23362,7 @@
     ]
   },
   "stunky": {
+    "dex": 434,
     "types": [
       "poison",
       "dark"
@@ -22529,6 +23390,7 @@
     ]
   },
   "sudowoodo": {
+    "dex": 185,
     "types": [
       "rock"
     ],
@@ -22555,6 +23417,7 @@
     ]
   },
   "suicune": {
+    "dex": 245,
     "types": [
       "water"
     ],
@@ -22579,6 +23442,7 @@
     ]
   },
   "sunflora": {
+    "dex": 192,
     "types": [
       "grass"
     ],
@@ -22605,6 +23469,7 @@
     ]
   },
   "sunkern": {
+    "dex": 191,
     "types": [
       "grass"
     ],
@@ -22631,6 +23496,7 @@
     ]
   },
   "surskit": {
+    "dex": 283,
     "types": [
       "bug",
       "water"
@@ -22657,6 +23523,7 @@
     ]
   },
   "swablu": {
+    "dex": 333,
     "types": [
       "normal",
       "flying"
@@ -22683,6 +23550,7 @@
     ]
   },
   "swadloon": {
+    "dex": 541,
     "types": [
       "bug",
       "grass"
@@ -22711,6 +23579,7 @@
     ]
   },
   "swalot": {
+    "dex": 317,
     "types": [
       "poison"
     ],
@@ -22737,6 +23606,7 @@
     ]
   },
   "swampert": {
+    "dex": 260,
     "types": [
       "water",
       "ground"
@@ -22764,6 +23634,7 @@
     ]
   },
   "swanna": {
+    "dex": 581,
     "types": [
       "water",
       "flying"
@@ -22791,6 +23662,7 @@
     ]
   },
   "swellow": {
+    "dex": 277,
     "types": [
       "normal",
       "flying"
@@ -22817,6 +23689,7 @@
     ]
   },
   "swinub": {
+    "dex": 220,
     "types": [
       "ice",
       "ground"
@@ -22845,6 +23718,7 @@
     ]
   },
   "swirlix": {
+    "dex": 684,
     "types": [
       "fairy"
     ],
@@ -22870,6 +23744,7 @@
     ]
   },
   "swoobat": {
+    "dex": 528,
     "types": [
       "psychic",
       "flying"
@@ -22897,6 +23772,7 @@
     ]
   },
   "sylveon": {
+    "dex": 700,
     "types": [
       "fairy"
     ],
@@ -22929,6 +23805,7 @@
     ]
   },
   "tadbulb": {
+    "dex": 938,
     "types": [
       "electric"
     ],
@@ -22955,6 +23832,7 @@
     ]
   },
   "taillow": {
+    "dex": 276,
     "types": [
       "normal",
       "flying"
@@ -22981,6 +23859,7 @@
     ]
   },
   "talonflame": {
+    "dex": 663,
     "types": [
       "fire",
       "flying"
@@ -23008,6 +23887,7 @@
     ]
   },
   "tandemaus": {
+    "dex": 924,
     "types": [
       "normal"
     ],
@@ -23034,6 +23914,7 @@
     ]
   },
   "tangela": {
+    "dex": 114,
     "types": [
       "grass"
     ],
@@ -23060,6 +23941,7 @@
     ]
   },
   "tangrowth": {
+    "dex": 465,
     "types": [
       "grass"
     ],
@@ -23086,6 +23968,7 @@
     ]
   },
   "tapubulu": {
+    "dex": 787,
     "types": [
       "grass",
       "fairy"
@@ -23111,6 +23994,7 @@
     ]
   },
   "tapufini": {
+    "dex": 788,
     "types": [
       "water",
       "fairy"
@@ -23136,6 +24020,7 @@
     ]
   },
   "tapukoko": {
+    "dex": 785,
     "types": [
       "electric",
       "fairy"
@@ -23161,6 +24046,7 @@
     ]
   },
   "tapulele": {
+    "dex": 786,
     "types": [
       "psychic",
       "fairy"
@@ -23186,6 +24072,7 @@
     ]
   },
   "tarountula": {
+    "dex": 917,
     "types": [
       "bug"
     ],
@@ -23211,6 +24098,7 @@
     ]
   },
   "tatsugiri": {
+    "dex": 978,
     "types": [
       "dragon",
       "water"
@@ -23236,6 +24124,7 @@
     ]
   },
   "tauros": {
+    "dex": 128,
     "types": [
       "normal"
     ],
@@ -23261,6 +24150,7 @@
     ]
   },
   "teddiursa": {
+    "dex": 216,
     "types": [
       "normal"
     ],
@@ -23288,6 +24178,7 @@
     ]
   },
   "tentacool": {
+    "dex": 72,
     "types": [
       "water",
       "poison"
@@ -23315,6 +24206,7 @@
     ]
   },
   "tentacruel": {
+    "dex": 73,
     "types": [
       "water",
       "poison"
@@ -23342,6 +24234,7 @@
     ]
   },
   "tepig": {
+    "dex": 498,
     "types": [
       "fire"
     ],
@@ -23368,6 +24261,7 @@
     ]
   },
   "terapagos": {
+    "dex": 1024,
     "types": [
       "normal"
     ],
@@ -23391,6 +24285,7 @@
     ]
   },
   "terrakion": {
+    "dex": 639,
     "types": [
       "rock",
       "fighting"
@@ -23415,6 +24310,7 @@
     ]
   },
   "thievul": {
+    "dex": 828,
     "types": [
       "dark"
     ],
@@ -23441,6 +24337,7 @@
     ]
   },
   "throh": {
+    "dex": 538,
     "types": [
       "fighting"
     ],
@@ -23466,6 +24363,7 @@
     ]
   },
   "thundurus": {
+    "dex": 642,
     "types": [
       "electric",
       "flying"
@@ -23491,6 +24389,7 @@
     ]
   },
   "thwackey": {
+    "dex": 811,
     "types": [
       "grass"
     ],
@@ -23517,6 +24416,7 @@
     ]
   },
   "timburr": {
+    "dex": 532,
     "types": [
       "fighting"
     ],
@@ -23544,6 +24444,7 @@
     ]
   },
   "tinglu": {
+    "dex": 1003,
     "types": [
       "dark",
       "ground"
@@ -23568,6 +24469,7 @@
     ]
   },
   "tinkatink": {
+    "dex": 957,
     "types": [
       "fairy",
       "steel"
@@ -23596,6 +24498,7 @@
     ]
   },
   "tinkaton": {
+    "dex": 959,
     "types": [
       "fairy",
       "steel"
@@ -23624,6 +24527,7 @@
     ]
   },
   "tinkatuff": {
+    "dex": 958,
     "types": [
       "fairy",
       "steel"
@@ -23652,6 +24556,7 @@
     ]
   },
   "tirtouga": {
+    "dex": 564,
     "types": [
       "water",
       "rock"
@@ -23679,6 +24584,7 @@
     ]
   },
   "toedscool": {
+    "dex": 948,
     "types": [
       "ground",
       "grass"
@@ -23705,6 +24611,7 @@
     ]
   },
   "toedscruel": {
+    "dex": 949,
     "types": [
       "ground",
       "grass"
@@ -23731,6 +24638,7 @@
     ]
   },
   "togedemaru": {
+    "dex": 777,
     "types": [
       "electric",
       "steel"
@@ -23757,6 +24665,7 @@
     ]
   },
   "togekiss": {
+    "dex": 468,
     "types": [
       "fairy",
       "flying"
@@ -23785,6 +24694,7 @@
     ]
   },
   "togepi": {
+    "dex": 175,
     "types": [
       "fairy"
     ],
@@ -23812,6 +24722,7 @@
     ]
   },
   "togetic": {
+    "dex": 176,
     "types": [
       "fairy",
       "flying"
@@ -23840,6 +24751,7 @@
     ]
   },
   "torchic": {
+    "dex": 255,
     "types": [
       "fire"
     ],
@@ -23866,6 +24778,7 @@
     ]
   },
   "torkoal": {
+    "dex": 324,
     "types": [
       "fire"
     ],
@@ -23891,6 +24804,7 @@
     ]
   },
   "tornadus": {
+    "dex": 641,
     "types": [
       "flying"
     ],
@@ -23915,6 +24829,7 @@
     ]
   },
   "torracat": {
+    "dex": 726,
     "types": [
       "fire"
     ],
@@ -23941,6 +24856,7 @@
     ]
   },
   "torterra": {
+    "dex": 389,
     "types": [
       "grass",
       "ground"
@@ -23968,6 +24884,7 @@
     ]
   },
   "totodile": {
+    "dex": 158,
     "types": [
       "water"
     ],
@@ -23994,6 +24911,7 @@
     ]
   },
   "toucannon": {
+    "dex": 733,
     "types": [
       "normal",
       "flying"
@@ -24022,6 +24940,7 @@
     ]
   },
   "toxapex": {
+    "dex": 748,
     "types": [
       "poison",
       "water"
@@ -24049,6 +24968,7 @@
     ]
   },
   "toxel": {
+    "dex": 848,
     "types": [
       "electric",
       "poison"
@@ -24076,6 +24996,7 @@
     ]
   },
   "toxicroak": {
+    "dex": 454,
     "types": [
       "poison",
       "fighting"
@@ -24103,6 +25024,7 @@
     ]
   },
   "toxtricity": {
+    "dex": 849,
     "types": [
       "electric",
       "poison"
@@ -24130,6 +25052,7 @@
     ]
   },
   "tranquill": {
+    "dex": 520,
     "types": [
       "normal",
       "flying"
@@ -24158,6 +25081,7 @@
     ]
   },
   "trapinch": {
+    "dex": 328,
     "types": [
       "ground"
     ],
@@ -24185,6 +25109,7 @@
     ]
   },
   "treecko": {
+    "dex": 252,
     "types": [
       "grass"
     ],
@@ -24211,6 +25136,7 @@
     ]
   },
   "trevenant": {
+    "dex": 709,
     "types": [
       "ghost",
       "grass"
@@ -24238,6 +25164,7 @@
     ]
   },
   "tropius": {
+    "dex": 357,
     "types": [
       "grass",
       "flying"
@@ -24264,6 +25191,7 @@
     ]
   },
   "trubbish": {
+    "dex": 568,
     "types": [
       "poison"
     ],
@@ -24290,6 +25218,7 @@
     ]
   },
   "trumbeak": {
+    "dex": 732,
     "types": [
       "normal",
       "flying"
@@ -24318,6 +25247,7 @@
     ]
   },
   "tsareena": {
+    "dex": 763,
     "types": [
       "grass"
     ],
@@ -24345,6 +25275,7 @@
     ]
   },
   "turtonator": {
+    "dex": 776,
     "types": [
       "fire",
       "dragon"
@@ -24369,6 +25300,7 @@
     ]
   },
   "turtwig": {
+    "dex": 387,
     "types": [
       "grass"
     ],
@@ -24395,6 +25327,7 @@
     ]
   },
   "tympole": {
+    "dex": 535,
     "types": [
       "water"
     ],
@@ -24422,6 +25355,7 @@
     ]
   },
   "tynamo": {
+    "dex": 602,
     "types": [
       "electric"
     ],
@@ -24447,6 +25381,7 @@
     ]
   },
   "typenull": {
+    "dex": 772,
     "types": [
       "normal"
     ],
@@ -24471,6 +25406,7 @@
     ]
   },
   "typhlosion": {
+    "dex": 157,
     "types": [
       "fire"
     ],
@@ -24497,6 +25433,7 @@
     ]
   },
   "tyranitar": {
+    "dex": 248,
     "types": [
       "rock",
       "dark"
@@ -24524,6 +25461,7 @@
     ]
   },
   "tyrantrum": {
+    "dex": 697,
     "types": [
       "rock",
       "dragon"
@@ -24550,6 +25488,7 @@
     ]
   },
   "tyrogue": {
+    "dex": 236,
     "types": [
       "fighting"
     ],
@@ -24578,6 +25517,7 @@
     ]
   },
   "tyrunt": {
+    "dex": 696,
     "types": [
       "rock",
       "dragon"
@@ -24604,6 +25544,7 @@
     ]
   },
   "umbreon": {
+    "dex": 197,
     "types": [
       "dark"
     ],
@@ -24636,6 +25577,7 @@
     ]
   },
   "unfezant": {
+    "dex": 521,
     "types": [
       "normal",
       "flying"
@@ -24664,6 +25606,7 @@
     ]
   },
   "unown": {
+    "dex": 201,
     "types": [
       "psychic"
     ],
@@ -24687,6 +25630,7 @@
     ]
   },
   "ursaluna": {
+    "dex": 901,
     "types": [
       "ground",
       "normal"
@@ -24715,6 +25659,7 @@
     ]
   },
   "ursaring": {
+    "dex": 217,
     "types": [
       "normal"
     ],
@@ -24742,6 +25687,7 @@
     ]
   },
   "urshifu": {
+    "dex": 892,
     "types": [
       "fighting",
       "dark"
@@ -24767,6 +25713,7 @@
     ]
   },
   "uxie": {
+    "dex": 480,
     "types": [
       "psychic"
     ],
@@ -24790,6 +25737,7 @@
     ]
   },
   "vanillish": {
+    "dex": 583,
     "types": [
       "ice"
     ],
@@ -24817,6 +25765,7 @@
     ]
   },
   "vanillite": {
+    "dex": 582,
     "types": [
       "ice"
     ],
@@ -24844,6 +25793,7 @@
     ]
   },
   "vanilluxe": {
+    "dex": 584,
     "types": [
       "ice"
     ],
@@ -24871,6 +25821,7 @@
     ]
   },
   "vaporeon": {
+    "dex": 134,
     "types": [
       "water"
     ],
@@ -24903,6 +25854,7 @@
     ]
   },
   "varoom": {
+    "dex": 965,
     "types": [
       "steel",
       "poison"
@@ -24929,6 +25881,7 @@
     ]
   },
   "veluza": {
+    "dex": 976,
     "types": [
       "water",
       "psychic"
@@ -24954,6 +25907,7 @@
     ]
   },
   "venipede": {
+    "dex": 543,
     "types": [
       "bug",
       "poison"
@@ -24982,6 +25936,7 @@
     ]
   },
   "venomoth": {
+    "dex": 49,
     "types": [
       "bug",
       "poison"
@@ -25009,6 +25964,7 @@
     ]
   },
   "venonat": {
+    "dex": 48,
     "types": [
       "bug",
       "poison"
@@ -25036,6 +25992,7 @@
     ]
   },
   "venusaur": {
+    "dex": 3,
     "types": [
       "grass",
       "poison"
@@ -25063,6 +26020,7 @@
     ]
   },
   "vespiquen": {
+    "dex": 416,
     "types": [
       "bug",
       "flying"
@@ -25089,6 +26047,7 @@
     ]
   },
   "vibrava": {
+    "dex": 329,
     "types": [
       "ground",
       "dragon"
@@ -25115,6 +26074,7 @@
     ]
   },
   "victini": {
+    "dex": 494,
     "types": [
       "psychic",
       "fire"
@@ -25139,6 +26099,7 @@
     ]
   },
   "victreebel": {
+    "dex": 71,
     "types": [
       "grass",
       "poison"
@@ -25166,6 +26127,7 @@
     ]
   },
   "vigoroth": {
+    "dex": 288,
     "types": [
       "normal"
     ],
@@ -25191,6 +26153,7 @@
     ]
   },
   "vikavolt": {
+    "dex": 738,
     "types": [
       "bug",
       "electric"
@@ -25217,6 +26180,7 @@
     ]
   },
   "vileplume": {
+    "dex": 45,
     "types": [
       "grass",
       "poison"
@@ -25245,6 +26209,7 @@
     ]
   },
   "virizion": {
+    "dex": 640,
     "types": [
       "grass",
       "fighting"
@@ -25269,6 +26234,7 @@
     ]
   },
   "vivillon": {
+    "dex": 666,
     "types": [
       "bug",
       "flying"
@@ -25297,6 +26263,7 @@
     ]
   },
   "volbeat": {
+    "dex": 313,
     "types": [
       "bug"
     ],
@@ -25322,6 +26289,7 @@
     ]
   },
   "volcanion": {
+    "dex": 721,
     "types": [
       "fire",
       "water"
@@ -25346,6 +26314,7 @@
     ]
   },
   "volcarona": {
+    "dex": 637,
     "types": [
       "bug",
       "fire"
@@ -25372,6 +26341,7 @@
     ]
   },
   "voltorb": {
+    "dex": 100,
     "types": [
       "electric"
     ],
@@ -25398,6 +26368,7 @@
     ]
   },
   "vullaby": {
+    "dex": 629,
     "types": [
       "dark",
       "flying"
@@ -25425,6 +26396,7 @@
     ]
   },
   "vulpix": {
+    "dex": 37,
     "types": [
       "fire"
     ],
@@ -25450,6 +26422,7 @@
     ]
   },
   "wailmer": {
+    "dex": 320,
     "types": [
       "water"
     ],
@@ -25476,6 +26449,7 @@
     ]
   },
   "wailord": {
+    "dex": 321,
     "types": [
       "water"
     ],
@@ -25502,6 +26476,7 @@
     ]
   },
   "walkingwake": {
+    "dex": 1009,
     "types": [
       "water",
       "dragon"
@@ -25526,6 +26501,7 @@
     ]
   },
   "walrein": {
+    "dex": 365,
     "types": [
       "ice",
       "water"
@@ -25554,6 +26530,7 @@
     ]
   },
   "wartortle": {
+    "dex": 8,
     "types": [
       "water"
     ],
@@ -25580,6 +26557,7 @@
     ]
   },
   "watchog": {
+    "dex": 505,
     "types": [
       "normal"
     ],
@@ -25606,6 +26584,7 @@
     ]
   },
   "wattrel": {
+    "dex": 940,
     "types": [
       "electric",
       "flying"
@@ -25633,6 +26612,7 @@
     ]
   },
   "weavile": {
+    "dex": 461,
     "types": [
       "dark",
       "ice"
@@ -25660,6 +26640,7 @@
     ]
   },
   "weedle": {
+    "dex": 13,
     "types": [
       "bug",
       "poison"
@@ -25687,6 +26668,7 @@
     ]
   },
   "weepinbell": {
+    "dex": 70,
     "types": [
       "grass",
       "poison"
@@ -25714,6 +26696,7 @@
     ]
   },
   "weezing": {
+    "dex": 110,
     "types": [
       "poison"
     ],
@@ -25740,6 +26723,7 @@
     ]
   },
   "whimsicott": {
+    "dex": 547,
     "types": [
       "grass",
       "fairy"
@@ -25767,6 +26751,7 @@
     ]
   },
   "whirlipede": {
+    "dex": 544,
     "types": [
       "bug",
       "poison"
@@ -25795,6 +26780,7 @@
     ]
   },
   "whiscash": {
+    "dex": 340,
     "types": [
       "water",
       "ground"
@@ -25822,6 +26808,7 @@
     ]
   },
   "whismur": {
+    "dex": 293,
     "types": [
       "normal"
     ],
@@ -25848,6 +26835,7 @@
     ]
   },
   "wigglytuff": {
+    "dex": 40,
     "types": [
       "normal",
       "fairy"
@@ -25876,6 +26864,7 @@
     ]
   },
   "wiglett": {
+    "dex": 960,
     "types": [
       "water"
     ],
@@ -25902,6 +26891,7 @@
     ]
   },
   "wimpod": {
+    "dex": 767,
     "types": [
       "bug",
       "water"
@@ -25927,6 +26917,7 @@
     ]
   },
   "wingull": {
+    "dex": 278,
     "types": [
       "water",
       "flying"
@@ -25954,6 +26945,7 @@
     ]
   },
   "wishiwashi": {
+    "dex": 746,
     "types": [
       "water"
     ],
@@ -25977,6 +26969,7 @@
     ]
   },
   "wochien": {
+    "dex": 1001,
     "types": [
       "dark",
       "grass"
@@ -26001,6 +26994,7 @@
     ]
   },
   "wobbuffet": {
+    "dex": 202,
     "types": [
       "psychic"
     ],
@@ -26026,6 +27020,7 @@
     ]
   },
   "woobat": {
+    "dex": 527,
     "types": [
       "psychic",
       "flying"
@@ -26053,6 +27048,7 @@
     ]
   },
   "wooloo": {
+    "dex": 831,
     "types": [
       "normal"
     ],
@@ -26079,6 +27075,7 @@
     ]
   },
   "wooper": {
+    "dex": 194,
     "types": [
       "water",
       "ground"
@@ -26107,6 +27104,7 @@
     ]
   },
   "wormadam": {
+    "dex": 413,
     "types": [
       "bug",
       "grass"
@@ -26134,6 +27132,7 @@
     ]
   },
   "wugtrio": {
+    "dex": 961,
     "types": [
       "water"
     ],
@@ -26160,6 +27159,7 @@
     ]
   },
   "wurmple": {
+    "dex": 265,
     "types": [
       "bug"
     ],
@@ -26188,6 +27188,7 @@
     ]
   },
   "wynaut": {
+    "dex": 360,
     "types": [
       "psychic"
     ],
@@ -26213,6 +27214,7 @@
     ]
   },
   "wyrdeer": {
+    "dex": 899,
     "types": [
       "normal",
       "psychic"
@@ -26240,6 +27242,7 @@
     ]
   },
   "xatu": {
+    "dex": 178,
     "types": [
       "psychic",
       "flying"
@@ -26267,6 +27270,7 @@
     ]
   },
   "xerneas": {
+    "dex": 716,
     "types": [
       "fairy"
     ],
@@ -26290,6 +27294,7 @@
     ]
   },
   "xurkitree": {
+    "dex": 796,
     "types": [
       "electric"
     ],
@@ -26313,6 +27318,7 @@
     ]
   },
   "yamask": {
+    "dex": 562,
     "types": [
       "ghost"
     ],
@@ -26338,6 +27344,7 @@
     ]
   },
   "yamper": {
+    "dex": 835,
     "types": [
       "electric"
     ],
@@ -26363,6 +27370,7 @@
     ]
   },
   "yanma": {
+    "dex": 193,
     "types": [
       "bug",
       "flying"
@@ -26390,6 +27398,7 @@
     ]
   },
   "yanmega": {
+    "dex": 469,
     "types": [
       "bug",
       "flying"
@@ -26417,6 +27426,7 @@
     ]
   },
   "yungoos": {
+    "dex": 734,
     "types": [
       "normal"
     ],
@@ -26443,6 +27453,7 @@
     ]
   },
   "yveltal": {
+    "dex": 717,
     "types": [
       "dark",
       "flying"
@@ -26467,6 +27478,7 @@
     ]
   },
   "zacian": {
+    "dex": 888,
     "types": [
       "fairy"
     ],
@@ -26490,6 +27502,7 @@
     ]
   },
   "zamazenta": {
+    "dex": 889,
     "types": [
       "fighting"
     ],
@@ -26513,6 +27526,7 @@
     ]
   },
   "zangoose": {
+    "dex": 335,
     "types": [
       "normal"
     ],
@@ -26537,6 +27551,7 @@
     ]
   },
   "zapdos": {
+    "dex": 145,
     "types": [
       "electric",
       "flying"
@@ -26562,6 +27577,7 @@
     ]
   },
   "zarude": {
+    "dex": 893,
     "types": [
       "dark",
       "grass"
@@ -26586,6 +27602,7 @@
     ]
   },
   "zebstrika": {
+    "dex": 523,
     "types": [
       "electric"
     ],
@@ -26612,6 +27629,7 @@
     ]
   },
   "zekrom": {
+    "dex": 644,
     "types": [
       "dragon",
       "electric"
@@ -26636,6 +27654,7 @@
     ]
   },
   "zeraora": {
+    "dex": 807,
     "types": [
       "electric"
     ],
@@ -26659,6 +27678,7 @@
     ]
   },
   "zigzagoon": {
+    "dex": 263,
     "types": [
       "normal"
     ],
@@ -26686,6 +27706,7 @@
     ]
   },
   "zoroark": {
+    "dex": 571,
     "types": [
       "dark"
     ],
@@ -26710,6 +27731,7 @@
     ]
   },
   "zorua": {
+    "dex": 570,
     "types": [
       "dark"
     ],
@@ -26734,6 +27756,7 @@
     ]
   },
   "zubat": {
+    "dex": 41,
     "types": [
       "poison",
       "flying"
@@ -26761,6 +27784,7 @@
     ]
   },
   "zweilous": {
+    "dex": 634,
     "types": [
       "dark",
       "dragon"
@@ -26787,6 +27811,7 @@
     ]
   },
   "zygarde": {
+    "dex": 718,
     "types": [
       "dragon",
       "ground"
