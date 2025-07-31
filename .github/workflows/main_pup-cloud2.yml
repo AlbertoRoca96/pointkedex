@@ -7,28 +7,24 @@ on:
 
 permissions:
   contents: read        # for actions/checkout
-  id-token: write       # for azure/login (OIDC)
+  id-token: write       # for azure/login OIDC
 
 env:
-  WEBAPP_NAME: pup-cloud2           # must match your Web App name (lowercase)
-  RG_NAME:     Pup-Cloud2_group     # exact Resource Group name
-  ACR_NAME:    pupcloud2            # ACR short name (no .azurecr.io)
-  IMAGE_REPO:  pup-cloud2           # repo inside ACR
-  TAG_NAME:    alroca               # GitHub release tag
-  ASSET_FILE:  pokedex_resnet50.h5
-  ACR_USERNAME: PupCloud2
-  ACR_PASSWORD: ${{ secrets.ACR_PASSWORD }}
+  WEBAPP_NAME: Pup-Cloud2            # ← exact Web App name (case-sensitive)
+  RESOURCE_GROUP: Pup-Cloud2_group   # ← exact Resource Group name
+  ACR_NAME: pupcloud2                # ACR short name (lowercase)
+  IMAGE_REPO: pup-cloud2             # repo name inside ACR
+  TAG_NAME: alroca                   # GitHub release tag
+  ASSET_FILE: pokedex_resnet50.h5
 
 jobs:
-  build_and_deploy:
+  build-and-deploy:
     runs-on: ubuntu-latest
 
     steps:
-      # 1) Checkout
       - name: 📂 Checkout code
         uses: actions/checkout@v4
 
-      # 2) Login to Azure via OIDC
       - name: 🔑 Azure Login (OIDC)
         uses: azure/login@v2
         with:
@@ -36,19 +32,16 @@ jobs:
           tenant-id:       ${{ secrets.AZURE_TENANT_ID }}
           subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
 
-      # 3) Login to ACR
-      - name: 🐳 ACR Login
-        run: |
-          echo "${{ env.ACR_PASSWORD }}" \
-            | docker login ${{ env.ACR_NAME }}.azurecr.io \
-                --username "${{ env.ACR_USERNAME }}" \
-                --password-stdin
+      - name: 🐳 ACR Login via Azure OIDC
+        uses: azure/docker-login@v1
+        with:
+          login-server: ${{ env.ACR_NAME }}.azurecr.io
 
-      # 4) Build & Push
       - name: 🏗️ Build & Push Docker image
         run: |
           IMAGE_TAG=${{ github.sha }}
           FULL_IMAGE=${{ env.ACR_NAME }}.azurecr.io/${{ env.IMAGE_REPO }}:$IMAGE_TAG
+
           MODEL_URL="https://github.com/${{ github.repository }}/releases/download/${{ env.TAG_NAME }}/${{ env.ASSET_FILE }}"
 
           docker build \
@@ -57,15 +50,12 @@ jobs:
             -t "$FULL_IMAGE" .
           docker push "$FULL_IMAGE"
 
-      # 5) Give Azure time to sync its cache (prevents “resource doesn’t exist”)
-      - name: ⏳ Wait for resource propagation
-        run: sleep 60
+      - name: ⏳ Wait for Azure cache
+        run: sleep 30
 
-      # 6) Deploy container to Web App
-      - name: 🚀 Deploy to Azure Web App for Containers
+      - name: 🚀 Deploy to Web App for Containers
         uses: azure/webapps-deploy@v3
         with:
-          app-name:            ${{ env.WEBAPP_NAME }}
-          resource-group-name: ${{ env.RG_NAME }}
-          images:              ${{ env.ACR_NAME }}.azurecr.io/${{ env.IMAGE_REPO }}:${{ github.sha }}
-          slot-name:           production
+          app-name:             ${{ env.WEBAPP_NAME }}
+          resource-group-name:  ${{ env.RESOURCE_GROUP }}
+          images:               ${{ env.ACR_NAME }}.azurecr.io/${{ env.IMAGE_REPO }}:${{ github.sha }}
