@@ -1,57 +1,43 @@
 name: Deploy to HF Space
-
 on:
   push:
-    branches: [main]          # every push to main
-  workflow_dispatch:          # manual trigger in Actions tab
-
-env:
-  HF_SPACE: AlbertoRoca96-web/pointkedex   # change here if you ever rename the Space
-
+    branches: [main]
+  workflow_dispatch:
 jobs:
-  deploy:
+  space:
     runs-on: ubuntu-latest
-
     steps:
-    # ── 1. checkout ────────────────────────────────────────────
-    - uses: actions/checkout@v4
-      with:
-        fetch-depth: 0
-        submodules: false          # **never** initialise sub-modules
-
-    # ── 2. git identity for the commit we’ll create below ──────
-    - name: Git user
-      run: |
-        git config --global user.email "github-actions@users.noreply.github.com"
-        git config --global user.name  "github-actions"
-
-    # ── 3. clone the target Space repo (shallow) ───────────────
-    - name: Clone Space
-      env: { HF_TOKEN: ${{ secrets.HF_TOKEN }} }
-      run: |
-        git clone --depth 1 \
-          https://huggingface.co/spaces/${{ env.HF_SPACE }} hf-space
-        ls -al hf-space | head
-
-    # ── 4. copy just the runtime assets we need on HF ──────────
-    - name: Rsync project → Space
-      run: |
-        rsync -a --delete \
-          Dockerfile predict_server.py \
-          index.html styles.css app.js config.js \
-          flavor_text.json class_indices.json pokedex_data.json \
-          manifest.webmanifest service-worker.js \
-          hf-space/
-
-    # ── 5. commit & push if anything changed ───────────────────
-    - name: Commit & push
-      env: { HF_TOKEN: ${{ secrets.HF_TOKEN }} }
-      run: |
-        cd hf-space
-        if [[ -n "$(git status --porcelain)" ]]; then
-          git add -A
-          git commit -m "Auto-sync from GitHub $(date -u '+%Y-%m-%dT%H:%M:%SZ')"
-          git push https://${HF_TOKEN}@huggingface.co/spaces/${{ env.HF_SPACE }} HEAD:main
-        else
-          echo "No changes – nothing to push."
-        fi
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          submodules: false
+      - name: Git identity
+        run: |
+          git config --global user.name "github-actions"
+          git config --global user.email "github-actions@users.noreply.github.com"
+      - name: Clone Space repo
+        env:
+          HF_TOKEN: ${{ secrets.HF_TOKEN }}
+        run: |
+          git clone --depth 1 https://AlbertoRoca96-web:${HF_TOKEN}@huggingface.co/spaces/AlbertoRoca96-web/pointkedex hf-space
+      - name: Copy app bundle
+        run: |
+          rsync -a --delete \
+            Dockerfile predict_server.py \
+            index.html styles.css app.js config.js \
+            flavor_text.json class_indices.json pokedex_data.json \
+            manifest.webmanifest service-worker.js \
+            web_model/ \
+            hf-space/
+      - name: Push to Space
+        env:
+          HF_TOKEN: ${{ secrets.HF_TOKEN }}
+        run: |
+          cd hf-space
+          if ! git diff --quiet; then
+            git add -A
+            git commit -m "Auto-sync from GitHub $(date -u +'%Y-%m-%dT%H:%M:%SZ')"
+            git push origin HEAD:main
+          else
+            echo "No changes to push."
+          fi
