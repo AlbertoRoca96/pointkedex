@@ -2,16 +2,15 @@
 FROM python:3.11-slim AS builder
 WORKDIR /app
 
-# ── Build-time args (injected by CI) ────────────────────
-ARG MODEL_URL               # e.g. https://…/releases/download/…/pokedex_resnet50.h5
+# ── Build-time args (injected by CI) ──────────────
+ARG MODEL_URL                     # e.g. https://…/releases/download/.../pokedex_resnet50.h5
 ARG ASSET_FILE=pokedex_resnet50.h5
 
-# 1) Copy source, fetch model, install build deps, convert to TF-JS
+# 1) Copy source + fetch model + install build deps + convert to TF-JS
 COPY . /app
 RUN set -eux; \
     apt-get update && \
-    apt-get install -y --no-install-recommends \
-      curl ca-certificates && \
+    apt-get install -y --no-install-recommends curl ca-certificates && \
     curl -L --fail -o "/app/${ASSET_FILE}" "${MODEL_URL}" && \
     pip install --no-cache-dir \
       tensorflow pillow tensorflowjs \
@@ -28,7 +27,7 @@ RUN set -eux; \
 FROM python:3.11-slim
 WORKDIR /app
 
-# Copy only the built artifacts and source
+# Copy built artifacts + application code
 COPY --from=builder /app /app
 
 # Install only runtime deps
@@ -38,16 +37,9 @@ RUN set -eux; \
       tensorflow pillow numpy \
       torch==2.2.1 torchvision==0.17.1 ultralytics
 
-# Expose the port the app binds to
+# Expose the port your app binds to
 ENV PORT=80
 EXPOSE 80
 
 # Launch the Flask app via Gunicorn
-CMD [
-  "gunicorn",
-  "--bind", "0.0.0.0:${PORT}",
-  "predict_server:app",
-  "--workers", "2",
-  "--threads", "4",
-  "--timeout", "120"
-]
+CMD ["gunicorn", "--bind", "0.0.0.0:80", "predict_server:app", "--workers", "2", "--threads", "4", "--timeout", "120"]
