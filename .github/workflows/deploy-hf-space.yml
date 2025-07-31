@@ -10,21 +10,25 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      # 1️⃣  Check out the code – 100 % vanilla, NO sub-modules.
+      # 1️⃣ Check out the code – sub-modules off (avoids earlier 128 error)
       - uses: actions/checkout@v4
-        with:
-          submodules: 'false'        # <-- critical: skip sub-module init
+        with: { submodules: 'false' }
 
-      # 2️⃣  Log in to Hugging Face Hub (non-interactive).
+      # 2️⃣ Enable Git LFS inside the runner (needed for your .h5 file)
+      - name: Enable Git LFS
+        run: git lfs install --local
+
+      # 3️⃣ Log in to Hugging Face Hub (non-interactive CLI)
       - name: Login to HF Hub
         env:
-          HF_TOKEN: ${{ secrets.HF_TOKEN }}   # PAT with write scope
+          HF_TOKEN: ${{ secrets.HF_TOKEN }}   # PAT with *write* scope
         run: |
           pip install --quiet --user huggingface_hub
           huggingface-cli login --token "$HF_TOKEN" --add-to-git-credential
 
-      # 3️⃣  Force-push this commit to the Space repo.
+      # 4️⃣ Push the current commit to the *new* Space repo
       - name: Push to Space
         run: |
-          git remote add space https://huggingface.co/spaces/AlbertoRoca96-web/pointkedex-api
+          git remote add space https://huggingface.co/spaces/AlbertoRoca96-web/pointkedex
+          # push the exact commit SHA so parallel builds don't race
           git push --force space ${{ github.sha }}:main
