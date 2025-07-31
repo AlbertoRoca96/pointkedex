@@ -1,0 +1,25 @@
+name: Deploy to HF Space
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with: { submodules: 'false' }      # skip broken sub-module
+
+      - name: Login to HF Hub
+        env:
+          HF_TOKEN: ${{ secrets.HF_TOKEN }}
+        run: |
+          pip install --quiet --user huggingface_hub        # CLI install  :contentReference[oaicite:6]{index=6}
+          huggingface-cli login --token "$HF_TOKEN" --add-to-git-credential   # no --yes  :contentReference[oaicite:7]{index=7}
+
+      - name: Push to Space
+        run: |
+          git remote add space https://huggingface.co/spaces/AlbertoRoca96-web/pointkedex-api
+          git push --force space ${{ github.sha }}:main
