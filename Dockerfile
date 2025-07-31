@@ -1,8 +1,8 @@
-##########################  Stage 1 – builder  ##########################
+########################## Stage 1 – Builder ##########################
 FROM python:3.11-slim AS builder
 WORKDIR /app
 
-ARG MODEL_URL                     # e.g. https://…/releases/download/…/pokedex_resnet50.h5
+ARG MODEL_URL                 # e.g. https://…/releases/download/…/pokedex_resnet50.h5
 ARG ASSET_FILE=pokedex_resnet50.h5
 
 # 1) Copy source + fetch model
@@ -20,11 +20,11 @@ RUN pip install --no-cache-dir \
     tensorflowjs_converter \
         --input_format=keras "/app/${ASSET_FILE}" /app/web_model_res
 
-##########################  Stage 2 – runtime  ##########################
+########################## Stage 2 – Runtime ##########################
 FROM python:3.11-slim
 WORKDIR /app
 
-# Copy everything from builder
+# Copy everything from the builder stage
 COPY --from=builder /app /app
 
 # Install only runtime deps
@@ -33,10 +33,10 @@ RUN pip install --no-cache-dir \
         tensorflow pillow numpy \
         torch==2.2.1 torchvision==0.17.1 ultralytics
 
-# Expose and tell Flask/Gunicorn what PORT to use
+# Expose port and set default
 ENV PORT=80
 EXPOSE 80
 
-# ← Shell form avoids JSON-parse errors and expands $PORT at runtime :contentReference[oaicite:0]{index=0}
+# Shell form so $PORT expands correctly, no JSON parsing errors
 CMD gunicorn --bind 0.0.0.0:${PORT} predict_server:app \
     --workers 2 --threads 4 --timeout 120
