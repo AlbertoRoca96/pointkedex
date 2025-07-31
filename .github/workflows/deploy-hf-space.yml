@@ -10,21 +10,53 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v4
+      - name: Check out repo (full history, no submodules)
+        uses: actions/checkout@v4
         with:
+          fetch-depth: 0          # important: get full history so push isn't a shallow update
           submodules: 'false'
+
+      - name: Ensure full history (safe guard)
+        run: |
+          if [ -f .git/shallow ]; then
+            echo "Repository is shallow; unshallowing..."
+            git fetch --prune --unshallow
+          else
+            echo "Full clone already."
+          fi
+
+      - name: Enable Git LFS
+        run: |
+          git lfs install --local
 
       - name: Login to HF Hub
         env:
           HF_TOKEN: ${{ secrets.HF_TOKEN }}
         run: |
           pip install --quiet --user huggingface_hub
-          huggingface-cli login --token "$HF_TOKEN"    # no --yes required
+          huggingface-cli login --token "$HF_TOKEN" --add-to-git-credential
 
-      - name: Push to Space (with embedded PAT)
+      - name: Push to Space with retry
         env:
-          HF_TOKEN: ${{ secrets.HF_TOKEN }}
           HF_USERNAME: AlbertoRoca96-web
+          HF_TOKEN: ${{ secrets.HF_TOKEN }}
         run: |
-          git push --force https://${HF_USERNAME}:${HF_TOKEN}@huggingface.co/spaces/${HF_USERNAME}/pointkedex \
-            main:main
+          set -e
+          TARGET="https://${HF_USERNAME}:${HF_TOKEN}@huggingface.co/spaces/${HF_USERNAME}/pointkedex"
+          # retry logic to tolerate transient LFS hook glitches
+          for i in 1 2 3; do
+            echo "Attempt #$i pushing to Space..."
+            if git push --force "$TARGET" main:main; then
+              echo "Push succeeded"
+              break
+            else
+              echo "Push failed; sleeping before retry"
+              sleep $((i * 5))
+              # refresh LFS state just in case
+              git lfs install --local
+            fi
+            if [ "$i" = "3" ]; then
+              echo "All retries exhausted, failing."
+              exit 1
+            fi
+          done
