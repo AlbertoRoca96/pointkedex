@@ -1,4 +1,4 @@
-name: Deploy to HF Space
+name: Sync to Hugging Face Space
 
 on:
   push:
@@ -9,49 +9,56 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
-      - name: Check out code
+      # 1. Check out your source repo (the one with Dockerfile, predict_server.py, etc.)
+      - name: Checkout source
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
-          submodules: 'false'
 
-      - name: Download .h5 from GitHub Release
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}    # built-in token is fine if release is public or accessible
-          REPO: "AlbertoRoca96/pointkedex"
-          ASSET_NAME: "pokedex_resnet50.h5"
+      # 2. Configure git user for commits
+      - name: Configure Git
         run: |
-          # install jq for JSON parsing
-          apt-get update && apt-get install -y jq curl
+          git config --global user.name "github-actions"
+          git config --global user.email "github-actions@users.noreply.github.com"
 
-          echo "Fetching latest release info..."
-          release_info=$(curl -s -H "Accept: application/vnd.github+json" \
-            -H "Authorization: token ${GITHUB_TOKEN}" \
-            "https://api.github.com/repos/${REPO}/releases/latest")
+      # 3. Clone the Hugging Face Space repository into a subdir
+      - name: Clone HF Space repo
+        env:
+          HF_TOKEN: ${{ secrets.HF_TOKEN }}
+        run: |
+          git clone https://AlbertoRoca96-web:${HF_TOKEN}@huggingface.co/spaces/AlbertoRoca96-web/pointkedex hf-space
+          ls -R hf-space | head -100
 
-          asset_url=$(echo "$release_info" | jq -r \
-            ".assets[] | select(.name==\"${ASSET_NAME}\") | .browser_download_url")
-
-          if [ -z "$asset_url" ] || [ "$asset_url" = "null" ]; then
-            echo "ERROR: Could not find asset '${ASSET_NAME}' in latest release."
-            exit 1
+      # 4. Copy needed files into the Space repo (overwrite)
+      - name: Sync files
+        run: |
+          # adjust these paths if your project structure differs
+          rsync -a --delete \
+            Dockerfile \
+            predict_server.py \
+            index.html app.js config.js flavor_text.json class_indices.json \
+            README.md \
+            hf-space/
+          # ensure README has Docker front-matter
+          if ! head -n3 hf-space/README.md | grep -q 'sdk: docker'; then
+            cat <<'EOF' > hf-space/README.md
+---
+sdk: docker
+app_port: 7860
+---
+EOF
           fi
 
-          echo "Downloading ${ASSET_NAME}..."
-          curl -L -H "Authorization: token ${GITHUB_TOKEN}" -o "${ASSET_NAME}" "$asset_url"
-          ls -lh "${ASSET_NAME}"
-
-      - name: Login to HF Hub
+      # 5. Commit & push if there are changes
+      - name: Commit & push to HF Space
         env:
           HF_TOKEN: ${{ secrets.HF_TOKEN }}
         run: |
-          pip install --quiet --user huggingface_hub
-          huggingface-cli login --token "$HF_TOKEN" --add-to-git-credential
-
-      - name: Push to Space with embedded PAT
-        env:
-          HF_USERNAME: AlbertoRoca96-web
-          HF_TOKEN: ${{ secrets.HF_TOKEN }}
-        run: |
-          git remote add space https://${HF_USERNAME}:${HF_TOKEN}@huggingface.co/spaces/${HF_USERNAME}/pointkedex
-          git push --force space main:main
+          cd hf-space
+          git add -A
+          if git diff --cached --quiet; then
+            echo "No changes to push."
+          else
+            git commit -m "Sync app files from GitHub main"
+            git push
+          fi
