@@ -10,13 +10,12 @@ permissions:
   id-token: write       # for azure/login OIDC
 
 env:
-  WEBAPP_NAME: pup-cloud2           # Azure Web App (lower-case)
-  ACR_NAME:    pupcloud2            # ACR short name (no .azurecr.io)
-  IMAGE_REPO:  pup-cloud2           # repo name inside ACR
-  TAG_NAME:    alroca               # exact GitHub Release tag
-  ASSET_FILE:  pokedex_resnet50.h5
-  ACR_USERNAME: PupCloud2
-  ACR_PASSWORD: Vb1JK69MXN4EtFrCtHx8jOoEo9hwvF2jdcboOYkQ9d+ACRBDo0Wj
+  WEBAPP_NAME: Pup-Cloud2          # ↳ **exact** Site name (see Azure portal)
+  RESOURCE_GROUP: Pup-Cloud2_group # ↳ Resource-group that owns the site
+  ACR_NAME: pupcloud2              # ↳ ACR short name (no .azurecr.io)
+  IMAGE_REPO: pup-cloud2           # ↳ repo inside ACR
+  TAG_NAME: alroca                # ↳ GitHub Release tag that holds the model asset
+  ASSET_FILE: pokedex_resnet50.h5  # ↳ asset name stored in the release
 
 jobs:
   build_and_deploy:
@@ -24,10 +23,10 @@ jobs:
 
     steps:
       # 1) Checkout the code
-      - name: 📂 Checkout repo
+      - name: 📂 Checkout repository
         uses: actions/checkout@v4
 
-      # 2) Azure login (OIDC)
+      # 2) Azure login via OpenID Connect (no secrets needed)
       - name: 🔑 Azure login (OIDC)
         uses: azure/login@v2
         with:
@@ -35,13 +34,11 @@ jobs:
           tenant-id:       ${{ secrets.AZURE_TENANT_ID }}
           subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
 
-      # 3) ACR login
+      # 3) ACR login using the federated identity
       - name: 🐳 ACR login
-        run: |
-          echo "${{ env.ACR_PASSWORD }}" | docker login ${{ env.ACR_NAME }}.azurecr.io \
-            --username "${{ env.ACR_USERNAME }}" --password-stdin
+        run: az acr login --name ${{ env.ACR_NAME }}
 
-      # 4) Build & push Docker image
+      # 4) Build & push the Docker image
       - name: 🏗️ Build & push Docker image
         run: |
           IMAGE_TAG=${{ github.sha }}
@@ -53,16 +50,34 @@ jobs:
             --build-arg MODEL_URL="$MODEL_URL" \
             --build-arg ASSET_FILE="${{ env.ASSET_FILE }}" \
             -t "$FULL_IMAGE" .
+
           docker push "$FULL_IMAGE"
+          echo "FULL_IMAGE=$FULL_IMAGE" >> $GITHUB_ENV
 
-      # **Solution: add a short delay to let Azure cache update before deployment**
-      - name: ⏳ Wait for Azure to refresh resource cache
-        run: sleep 60
+      # 5) (Optional one-off) Ensure the App Service exists — safe to re-run
+      - name: 🛠️ Ensure Web App exists
+        run: |
+          az group create -n ${{ env.RESOURCE_GROUP }} -l canadacentral
 
-      # 5) Deploy the freshly‑pushed image
-      - name: 🚀 Deploy to Web App for Containers
+          az appservice plan create \
+            -g ${{ env.RESOURCE_GROUP }} \
+            -n ${{ env.WEBAPP_NAME }}-plan \
+            --is-linux --sku B1 || true
+
+          az webapp create \
+            -g ${{ env.RESOURCE_GROUP }} \
+            -p ${{ env.WEBAPP_NAME }}-plan \
+            -n ${{ env.WEBAPP_NAME }} \
+            --deployment-container-image-name "$FULL_IMAGE" || true
+
+      # 6) Short wait to let ARM cache propagate
+      - name: ⏳ Wait for ARM cache flush
+        run: sleep 30
+
+      # 7) Deploy the freshly-pushed image
+      - name: 🚀 Deploy container to Web App
         uses: azure/webapps-deploy@v3
         with:
           app-name:             ${{ env.WEBAPP_NAME }}
-          resource-group-name:  Pup-Cloud2_group     # ← corrected
+          resource-group-name:  ${{ env.RESOURCE_GROUP }}
           images:               ${{ env.ACR_NAME }}.azurecr.io/${{ env.IMAGE_REPO }}:${{ github.sha }}
