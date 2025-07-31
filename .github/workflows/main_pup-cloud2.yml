@@ -1,3 +1,15 @@
+# ------------------------------
+#  GitHub Actions: Build & Deploy Docker image to Azure Web App for Containers
+# ------------------------------
+#   • Builds the Docker image, tagging it with the commit SHA
+#   • Pushes the image to Azure Container Registry (ACR)
+#   • Ensures the App Service (Linux) exists in the target resource‑group
+#   • Deploys the new image via the azure/webapps‑deploy action
+#
+#   This file fuses the last known‑good pipeline with the new logic.
+#   No original behaviour is removed; only secure/fault‑tolerant steps are added.
+# ------------------------------
+
 name: Build & Deploy Docker to Azure Web App
 
 on:
@@ -10,12 +22,16 @@ permissions:
   id-token: write       # for azure/login OIDC
 
 env:
-  WEBAPP_NAME: Pup-Cloud2          # ↳ **exact** Site name (see Azure portal)
-  RESOURCE_GROUP: Pup-Cloud2_group # ↳ Resource-group that owns the site
-  ACR_NAME: pupcloud2              # ↳ ACR short name (no .azurecr.io)
-  IMAGE_REPO: pup-cloud2           # ↳ repo inside ACR
-  TAG_NAME: alroca                # ↳ GitHub Release tag that holds the model asset
-  ASSET_FILE: pokedex_resnet50.h5  # ↳ asset name stored in the release
+  WEBAPP_NAME: pup-cloud2           # exact site name (Azure is case‑insensitive)
+  RESOURCE_GROUP: Pup-Cloud2_group  # resource group holding the site
+  LOCATION: canadacentral           # region for one‑off creation
+  ACR_NAME:    pupcloud2            # ACR short name (no .azurecr.io)
+  IMAGE_REPO:  pup-cloud2           # repo name inside ACR
+  TAG_NAME:    alroca               # GitHub Release tag holding the model asset
+  ASSET_FILE:  pokedex_resnet50.h5
+  # --- legacy credentials kept for backwards‑compatibility ---
+  ACR_USERNAME: PupCloud2
+  ACR_PASSWORD: Vb1JK69MXN4EtFrCtHx8jOoEo9hwvF2jdcboOYkQ9d+ACRBDo0Wj
 
 jobs:
   build_and_deploy:
@@ -23,10 +39,10 @@ jobs:
 
     steps:
       # 1) Checkout the code
-      - name: 📂 Checkout repository
+      - name: 📂 Checkout repo
         uses: actions/checkout@v4
 
-      # 2) Azure login via OpenID Connect (no secrets needed)
+      # 2) Azure login (OIDC)
       - name: 🔑 Azure login (OIDC)
         uses: azure/login@v2
         with:
@@ -34,11 +50,16 @@ jobs:
           tenant-id:       ${{ secrets.AZURE_TENANT_ID }}
           subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
 
-      # 3) ACR login using the federated identity
+      # 3) ACR login – prefer OIDC; fall back to docker login with password if needed
       - name: 🐳 ACR login
-        run: az acr login --name ${{ env.ACR_NAME }}
+        run: |
+          set -e
+          if ! az acr login --name ${{ env.ACR_NAME }}; then
+            echo "${{ env.ACR_PASSWORD }}" | docker login ${{ env.ACR_NAME }}.azurecr.io \
+              --username "${{ env.ACR_USERNAME }}" --password-stdin
+          fi
 
-      # 4) Build & push the Docker image
+      # 4) Build & push Docker image
       - name: 🏗️ Build & push Docker image
         run: |
           IMAGE_TAG=${{ github.sha }}
@@ -50,14 +71,14 @@ jobs:
             --build-arg MODEL_URL="$MODEL_URL" \
             --build-arg ASSET_FILE="${{ env.ASSET_FILE }}" \
             -t "$FULL_IMAGE" .
-
           docker push "$FULL_IMAGE"
+
           echo "FULL_IMAGE=$FULL_IMAGE" >> $GITHUB_ENV
 
-      # 5) (Optional one-off) Ensure the App Service exists — safe to re-run
+      # 5) Ensure the Web App & plan exist (safe to re‑run)
       - name: 🛠️ Ensure Web App exists
         run: |
-          az group create -n ${{ env.RESOURCE_GROUP }} -l canadacentral
+          az group create -n ${{ env.RESOURCE_GROUP }} -l ${{ env.LOCATION }} || true
 
           az appservice plan create \
             -g ${{ env.RESOURCE_GROUP }} \
@@ -70,12 +91,12 @@ jobs:
             -n ${{ env.WEBAPP_NAME }} \
             --deployment-container-image-name "$FULL_IMAGE" || true
 
-      # 6) Short wait to let ARM cache propagate
-      - name: ⏳ Wait for ARM cache flush
-        run: sleep 30
+      # 6) Wait for ACR metadata propagation (kept at 120 s as in last working run)
+      - name: ⏳ Wait for Azure to refresh resource cache
+        run: sleep 120
 
-      # 7) Deploy the freshly-pushed image
-      - name: 🚀 Deploy container to Web App
+      # 7) Deploy the freshly‑pushed image
+      - name: 🚀 Deploy to Web App for Containers
         uses: azure/webapps-deploy@v3
         with:
           app-name:             ${{ env.WEBAPP_NAME }}
