@@ -1,45 +1,57 @@
-name: Sync to Hugging Face Space
+name: Deploy to HF Space
 
 on:
   push:
-    branches: [main]
-  workflow_dispatch:
+    branches: [main]          # every push to main
+  workflow_dispatch:          # manual trigger in Actions tab
+
+env:
+  HF_SPACE: AlbertoRoca96-web/pointkedex   # change here if you ever rename the Space
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
+
     steps:
-      - name: Checkout source
-        uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
-          submodules: false
+    # ── 1. checkout ────────────────────────────────────────────
+    - uses: actions/checkout@v4
+      with:
+        fetch-depth: 0
+        submodules: false          # **never** initialise sub-modules
 
-      - name: Configure Git
-        run: |
-          git config --global user.name "github-actions"
-          git config --global user.email "github-actions@users.noreply.github.com"
+    # ── 2. git identity for the commit we’ll create below ──────
+    - name: Git user
+      run: |
+        git config --global user.email "github-actions@users.noreply.github.com"
+        git config --global user.name  "github-actions"
 
-      - name: Clone HF Space repo
-        env:
-          HF_TOKEN: ${{ secrets.HF_TOKEN }}
-        run: |
-          git clone https://AlbertoRoca96-web:${HF_TOKEN}@huggingface.co/spaces/AlbertoRoca96-web/pointkedex hf-space
-          ls -R hf-space | head -100
+    # ── 3. clone the target Space repo (shallow) ───────────────
+    - name: Clone Space
+      env: { HF_TOKEN: ${{ secrets.HF_TOKEN }} }
+      run: |
+        git clone --depth 1 \
+          https://huggingface.co/spaces/${{ env.HF_SPACE }} hf-space
+        ls -al hf-space | head
 
-      - name: Sync files
-        run: |
-          rsync -a --delete Dockerfile predict_server.py index.html app.js config.js flavor_text.json class_indices.json hf-space/
+    # ── 4. copy just the runtime assets we need on HF ──────────
+    - name: Rsync project → Space
+      run: |
+        rsync -a --delete \
+          Dockerfile predict_server.py \
+          index.html styles.css app.js config.js \
+          flavor_text.json class_indices.json pokedex_data.json \
+          manifest.webmanifest service-worker.js \
+          hf-space/
 
-      - name: Commit & push to HF Space
-        env:
-          HF_TOKEN: ${{ secrets.HF_TOKEN }}
-        run: |
-          cd hf-space
+    # ── 5. commit & push if anything changed ───────────────────
+    - name: Commit & push
+      env: { HF_TOKEN: ${{ secrets.HF_TOKEN }} }
+      run: |
+        cd hf-space
+        if [[ -n "$(git status --porcelain)" ]]; then
           git add -A
-          if git diff --cached --quiet; then
-            echo "No changes to push."
-          else
-            git commit -m "Sync app files from GitHub main"
-            git push
-          fi
+          git commit -m "Auto-sync from GitHub $(date -u '+%Y-%m-%dT%H:%M:%SZ')"
+          git push https://${HF_TOKEN}@huggingface.co/spaces/${{ env.HF_SPACE }} HEAD:main
+        else
+          echo "No changes – nothing to push."
+        fi
