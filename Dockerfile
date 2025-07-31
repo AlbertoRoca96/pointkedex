@@ -1,43 +1,53 @@
-##########################  Stage 1 – builder  ##########################
+##########################  Stage 1 – Builder  ##########################
 FROM python:3.11-slim AS builder
 WORKDIR /app
 
-# ── Build‑time arguments (all injected from the workflow) ──────────────
-ARG MODEL_URL                     # full https://…/releases/download/… URL
+# ── Build-time args (injected by CI) ────────────────────
+ARG MODEL_URL               # e.g. https://…/releases/download/…/pokedex_resnet50.h5
 ARG ASSET_FILE=pokedex_resnet50.h5
 
-# 1) Copy your source code (predict_server.py, etc.)
+# 1) Copy source, fetch model, install build deps, convert to TF-JS
 COPY . /app
-
-# 2) Fetch the *.h5 model from the Release
-RUN apt-get update && \
-    apt-get install -y --no-install-recommends curl ca-certificates && \
+RUN set -eux; \
+    apt-get update && \
+    apt-get install -y --no-install-recommends \
+      curl ca-certificates && \
     curl -L --fail -o "/app/${ASSET_FILE}" "${MODEL_URL}" && \
+    pip install --no-cache-dir \
+      tensorflow pillow tensorflowjs \
+      torch==2.2.1 torchvision==0.17.1 torchaudio==2.2.1 ultralytics && \
+    tensorflowjs_converter \
+      --input_format=keras "/app/${ASSET_FILE}" /app/web_model_res && \
+    apt-get purge -y --auto-remove curl ca-certificates && \
     rm -rf /var/lib/apt/lists/*
 
-# 3) Install ML stacks once and convert to TF‑JS
-RUN pip install --no-cache-dir \
-        tensorflow pillow tensorflowjs \
-        torch==2.2.1 torchvision==0.17.1 torchaudio==2.2.1 ultralytics && \
-    tensorflowjs_converter \
-        --input_format=keras \
-        "/app/${ASSET_FILE}" \
-        /app/web_model_res
 #########################################################################
 
 
-##########################  Stage 2 – runtime  ##########################
+##########################  Stage 2 – Runtime  ############################
 FROM python:3.11-slim
 WORKDIR /app
 
-# Bring application + web_model_res over from the builder stage
+# Copy only the built artifacts and source
 COPY --from=builder /app /app
 
-# Runtime dependencies only
-RUN pip install --no-cache-dir \
-        gunicorn flask flask-cors tensorflow pillow numpy \
-        torch==2.2.1 torchvision==0.17.1 ultralytics
+# Install only runtime deps
+RUN set -eux; \
+    pip install --no-cache-dir \
+      gunicorn flask flask-cors \
+      tensorflow pillow numpy \
+      torch==2.2.1 torchvision==0.17.1 ultralytics
 
+# Expose the port the app binds to
 ENV PORT=80
 EXPOSE 80
-CMD ["gunicorn","-b","0.0.0.0:80","predict_server:app","--workers","2","--threads","4","--timeout","120"]
+
+# Launch the Flask app via Gunicorn
+CMD [
+  "gunicorn",
+  "--bind", "0.0.0.0:${PORT}",
+  "predict_server:app",
+  "--workers", "2",
+  "--threads", "4",
+  "--timeout", "120"
+]
