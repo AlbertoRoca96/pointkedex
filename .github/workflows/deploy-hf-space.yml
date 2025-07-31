@@ -9,19 +9,16 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
-      # 1. Check out your source repo (the one with Dockerfile, predict_server.py, etc.)
       - name: Checkout source
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
 
-      # 2. Configure git user for commits
       - name: Configure Git
         run: |
           git config --global user.name "github-actions"
           git config --global user.email "github-actions@users.noreply.github.com"
 
-      # 3. Clone the Hugging Face Space repository into a subdir
       - name: Clone HF Space repo
         env:
           HF_TOKEN: ${{ secrets.HF_TOKEN }}
@@ -29,10 +26,8 @@ jobs:
           git clone https://AlbertoRoca96-web:${HF_TOKEN}@huggingface.co/spaces/AlbertoRoca96-web/pointkedex hf-space
           ls -R hf-space | head -100
 
-      # 4. Copy needed files into the Space repo (overwrite)
       - name: Sync files
         run: |
-          # adjust these paths if your project structure differs
           rsync -a --delete \
             Dockerfile \
             predict_server.py \
@@ -49,7 +44,6 @@ app_port: 7860
 EOF
           fi
 
-      # 5. Commit & push if there are changes
       - name: Commit & push to HF Space
         env:
           HF_TOKEN: ${{ secrets.HF_TOKEN }}
