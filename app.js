@@ -17,83 +17,137 @@ let currentName = "";
 })();
 
 /* ---------- helpers ---------- */
-const $ = q => document.querySelector(q);
+const $   = q => document.querySelector(q);
 const show = el => el.style.display = "flex";
 const hide = el => el.style.display = "none";
 
-function mToFtIn(dm){               // decimetres → feet′in″
-  const cm = dm * 10;
-  const inches = cm / 2.54;
-  const ft = Math.floor(inches / 12);
-  const inch = Math.round(inches % 12);
-  return `${ft}'${inch}"`;
+/* ----- text-to-speech helper (restored) ---------------- */
+function speakText(txt){
+  if(!("speechSynthesis" in window) || !txt) return;
+  try{ speechSynthesis.cancel(); }catch{}
+  speaking = true;
+  const u = new SpeechSynthesisUtterance(txt);
+  u.onend = u.onerror = () => { speaking = false; requestAnimationFrame(loop); };
+  speechSynthesis.speak(u);
 }
-function kgToLb(hg){                // hectograms → lb
+
+/* ----- unit converters -------------------------------- */
+const mToFtIn = dm => {
+  const inches = dm * 3.937007874;                // 10 cm → dm
+  return `${Math.floor(inches/12)}'${Math.round(inches%12)}"`;
+};
+const kgToLb = hg => {
   const kg = hg / 10;
   return `${kg.toFixed(1)} kg (${(kg*2.205).toFixed(1)} lb)`;
-}
+};
+
 function renderStats(d){
-  $("#stats-name").textContent = `${d.name}  (#${d.dex.toString().padStart(4,"0")})`;
+  $("#stats-name").textContent =
+    `${d.name}  (#${String(d.dex).padStart(4,"0")})`;
   $("#stats-desc").textContent = d.description;
+
   const types = $("#stats-types"); types.innerHTML="";
   (d.types||[]).forEach(t=>{
-    const s=document.createElement("span"); s.className="type"; s.textContent=t; types.appendChild(s);
+    const s=document.createElement("span");
+    s.className="type";
+    s.textContent=t;
+    types.appendChild(s);
   });
+
+  $("#stats-abilities").textContent =
+    `Abilities: ${(d.abilities||[]).join(", ")}`;
+
   const tbl=$("#stats-table"); tbl.innerHTML="";
   Object.entries(d.base_stats||{}).forEach(([k,v])=>{
-    const tr=document.createElement("tr"); tr.innerHTML=`<td>${k}</td><td>${v}</td>`; tbl.appendChild(tr);
+    const tr=document.createElement("tr");
+    tr.innerHTML=`<td>${k}</td><td>${v}</td>`;
+    tbl.appendChild(tr);
   });
-  $("#stats-misc").textContent = `Abilities: ${(d.abilities||[]).join(", ")}\nHeight: ${mToFtIn(d.height)}  •  Weight: ${kgToLb(d.weight)}`;
+
+  $("#stats-misc").textContent =
+    `Height: ${mToFtIn(d.height)}   •   Weight: ${kgToLb(d.weight)}`;
 }
 
 /* ---------- main ---------- */
 $("#start").onclick = async () => {
-  if ("speechSynthesis" in window) try{ speechSynthesis.speak(new SpeechSynthesisUtterance("")); }catch{}
-  $("#start").style.display="none";
+  if ("speechSynthesis" in window)
+    try{ speechSynthesis.speak(new SpeechSynthesisUtterance("")); }catch{}
+  $("#start").style.display = "none";
 
   const cam=$("#cam"), work=$("#worker"), label=$("#label");
-  const endpoint=(window.API_BASE||"")+"api/predict";
+  const endpoint = (window.API_BASE||"") + "api/predict";
 
   async function openCam(){
     const ideal={facingMode:"environment",width:{ideal:1280},height:{ideal:720}};
-    try{return await navigator.mediaDevices.getUserMedia({video:ideal});}
+    try{ return await navigator.mediaDevices.getUserMedia({video:ideal}); }
     catch{
       const dev=await navigator.mediaDevices.enumerateDevices();
-      const rear=dev.find(d=>d.kind==="videoinput"&&/back/i.test(d.label));
-      return navigator.mediaDevices.getUserMedia({video:{deviceId:{exact:rear.deviceId},width:1280,height:720}});
+      const rear=dev.find(d=>d.kind==="videoinput" && /back/i.test(d.label));
+      return navigator.mediaDevices.getUserMedia({
+        video:{deviceId:{exact:rear.deviceId},width:1280,height:720}
+      });
     }
   }
-  try{ cam.srcObject=await openCam(); await cam.play(); }catch(e){ $("#alert").textContent=e.message; return; }
+  try{ cam.srcObject = await openCam(); await cam.play(); }
+  catch(e){ $("#alert").textContent = e.message; return; }
 
   requestAnimationFrame(loop);
 
   async function loop(){
-    if(speaking || $("#prompt").style.display==="flex" || $("#stats-panel").style.display==="flex") return;
+    if(speaking || $("#prompt").style.display==="flex"
+                 || $("#stats-panel").style.display==="flex")
+        return;
+
     if(!cam.videoWidth) return requestAnimationFrame(loop);
 
-    const p=cam.videoHeight>cam.videoWidth, s=p?cam.videoWidth:cam.videoHeight;
-    work.width=work.height=s; const c=work.getContext("2d");
-    if(p){ c.save(); c.translate(0,s); c.rotate(-Math.PI/2); c.drawImage(cam,(cam.videoHeight-s)/2,(cam.videoWidth-s)/2,s,s,0,0,s,s); c.restore(); }
-    else { c.drawImage(cam,(cam.videoWidth-s)/2,(cam.videoHeight-s)/2,s,s,0,0,s,s); }
+    const p = cam.videoHeight > cam.videoWidth;
+    const s = p ? cam.videoWidth : cam.videoHeight;
+    work.width = work.height = s;
+    const ctx = work.getContext("2d");
+    if(p){
+      ctx.save(); ctx.translate(0,s); ctx.rotate(-Math.PI/2);
+      ctx.drawImage(cam,(cam.videoHeight-s)/2,(cam.videoWidth-s)/2,s,s,0,0,s,s);
+      ctx.restore();
+    }else{
+      ctx.drawImage(cam,(cam.videoWidth-s)/2,(cam.videoHeight-s)/2,s,s,0,0,s,s);
+    }
 
-    const jpeg=work.toDataURL("image/jpeg",JPEG_QUAL);
-    const r=await fetch(endpoint,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({image:jpeg})});
+    const jpeg = work.toDataURL("image/jpeg",JPEG_QUAL);
+    const r = await fetch(endpoint,{
+      method:"POST",
+      headers:{"Content-Type":"application/json"},
+      body:JSON.stringify({image:jpeg})
+    });
     if(!r.ok) return requestAnimationFrame(loop);
-    const {name,conf,stable}=await r.json();
-    label.textContent=`${name} ${(conf*100).toFixed(1)} %`;
 
-    const idx=labels.indexOf(name); same=idx===last?same+1:1; last=idx;
-    const ready=stable===true ? stable : (same>=STABLE_N && conf>=CONF_THR);
-    if(ready){ currentName=name; promptUser(name,conf); } else requestAnimationFrame(loop);
+    const {name,conf,stable} = await r.json();
+    label.textContent = `${name} ${(conf*100).toFixed(1)} %`;
+
+    const idx = labels.indexOf(name);
+    same = idx===last ? same+1 : 1;   last = idx;
+    const ready = stable===true ? true : (same>=STABLE_N && conf>=CONF_THR);
+    if(ready){ currentName=name; promptUser(name,conf); }
+    else requestAnimationFrame(loop);
   }
 
-  function promptUser(n,c){ $("#prompt-text").textContent=`Looks like ${n} (${(c*100).toFixed(1)}%). Show its stats?`; show($("#prompt")); }
+  function promptUser(n,c){
+    $("#prompt-text").textContent =
+      `Looks like ${n} (${(c*100).toFixed(1)}%). Show its stats?`;
+    show($("#prompt"));
+  }
 
   $("#btn-stats").onclick = async ()=>{
     hide($("#prompt"));
-    const d=await fetch(`${window.API_BASE}api/pokemon/${currentName.toLowerCase()}`).then(r=>r.json());
-    renderStats({...d,name:currentName});
+    const d = await fetch(
+      `${window.API_BASE}api/pokemon/${currentName.toLowerCase()}`
+    ).then(r=>r.json());
+    renderStats({...d, name:currentName});
     show($("#stats-panel"));
+
+    // speak description or fallback to first flavour text
+    const speakTxt = d.description
+                 || (flavor[currentName.toLowerCase()]?.[0] || "");
+    speakText(speakTxt);
   };
   $("#btn-dismiss").onclick = ()=>{ hide($("#prompt")); requestAnimationFrame(loop); };
   $("#stats-close").onclick  = ()=>{ hide($("#stats-panel")); requestAnimationFrame(loop); };
