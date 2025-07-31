@@ -1,8 +1,8 @@
-########################## Stage 1 – Builder ##########################
+##########################  Stage 1 – builder  ##########################
 FROM python:3.11-slim AS builder
 WORKDIR /app
 
-ARG MODEL_URL                 # e.g. https://…/releases/download/…/pokedex_resnet50.h5
+ARG MODEL_URL                     # e.g. https://…/releases/download/…/pokedex_resnet50.h5
 ARG ASSET_FILE=pokedex_resnet50.h5
 
 # 1) Copy source + fetch model
@@ -20,7 +20,7 @@ RUN pip install --no-cache-dir \
     tensorflowjs_converter \
         --input_format=keras "/app/${ASSET_FILE}" /app/web_model_res
 
-########################## Stage 2 – Runtime ##########################
+##########################  Stage 2 – runtime  ##########################
 FROM python:3.11-slim
 WORKDIR /app
 
@@ -37,6 +37,6 @@ RUN pip install --no-cache-dir \
 ENV PORT=80
 EXPOSE 80
 
-# Use shell form so $PORT expands; no JSON parse errors
+# ← Shell form avoids JSON-parse errors and expands $PORT at runtime :contentReference[oaicite:0]{index=0}
 CMD gunicorn --bind 0.0.0.0:${PORT} predict_server:app \
-     --workers 2 --threads 4 --timeout 120
+    --workers 2 --threads 4 --timeout 120
