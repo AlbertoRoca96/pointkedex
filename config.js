@@ -10,7 +10,7 @@
 
   // 3) Default to your Hugging Face Space.
   //    Change only the sub-domain if you rename the Space later.
-  const HF_SPACE = 'https://AlbertoRoca96-web-pointkedex-api.hf.space/';
+  const HF_SPACE = 'https://AlbertoRoca96-web-pointkedex.hf.space/';
 
   // 4) If this page is being served *inside* that Space, you can derive the
   //    origin dynamically (useful when you `docker run` locally):
