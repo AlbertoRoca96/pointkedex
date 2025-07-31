@@ -1,21 +1,13 @@
 /* ---------- tunables ---------- */
-const CONF_THR   = 0.12;   // speak ≥ 12 %
-const STABLE_N   = 4;      // identical idx frames before lock
-const RESUME_MS  = 6000;   // speech guard‑timeout
-const JPEG_QUAL  = 0.85;   // 0‑1: clarity vs. size
-/* -------------------------------------------- */
+const CONF_THR   = 0.20;   // speak ≥ 20%
+const STABLE_N   = 3;      // identical idx frames before lock
+const RESUME_MS  = 6000;
+const JPEG_QUAL  = 0.85;
 
 /* ---------- globals ---------- */
 let flavor = {};
 let labels = [];
 let last = -1, same = 0, speaking = false;
-/* -------------------------------------------- */
-
-const alert = msg => {
-  const a = document.getElementById("alert");
-  a.textContent = msg;
-  a.style.display = "block";
-};
 
 /* ---------- preload assets ---------- */
 (async () => {
@@ -26,11 +18,10 @@ const alert = msg => {
 
 /* ---------- main entry ---------- */
 document.getElementById("start").onclick = async () => {
-  /* unlock speech immediately on user tap */
   if ("speechSynthesis" in window) {
     try { speechSynthesis.speak(new SpeechSynthesisUtterance("")); } catch {}
   } else {
-    alert("🔇 This device lacks speech‑synthesis support.");
+    alert("🔇 This device lacks speech-synthesis support.");
   }
 
   document.getElementById("start").style.display = "none";
@@ -38,9 +29,8 @@ document.getElementById("start").onclick = async () => {
   const cam    = document.getElementById("cam");
   const worker = document.getElementById("worker");
   const label  = document.getElementById("label");
-    const endpoint = (window.API_BASE || "") + "api/predict";  // no leading slash so GH-Pages subfolder works
+  const endpoint = (window.API_BASE || "") + "api/predict";
 
-  /* open rear camera – Android multi‑lens fallback */
   async function openCamera () {
     const ideal = {
       facingMode: "environment",
@@ -64,38 +54,32 @@ document.getElementById("start").onclick = async () => {
 
   cam.srcObject = stream;
   await cam.play();
-
-  /* iOS Safari sometimes never fires loadeddata */
   requestAnimationFrame(loop);
 
-  /* -------------- prediction loop -------------- */
   async function loop () {
     if (speaking) return;
 
     if (!cam.videoWidth || !cam.videoHeight) {
-      return requestAnimationFrame(loop);    // camera warming up
+      return requestAnimationFrame(loop);
     }
 
-    /* decide orientation once per frame */
     const portrait = cam.videoHeight > cam.videoWidth;
-    const s = portrait ? cam.videoWidth : cam.videoHeight;  // shorter edge
+    const s = portrait ? cam.videoWidth : cam.videoHeight;
     worker.width = worker.height = s;
     const ctx = worker.getContext("2d");
 
     if (portrait) {
-      /* Android often delivers portrait feed – rotate 90° CCW */
       ctx.save();
       ctx.translate(0, s);
       ctx.rotate(-Math.PI / 2);
       ctx.drawImage(
         cam,
-        (cam.videoHeight - s) / 2,           // note swapped axes
+        (cam.videoHeight - s) / 2,
         (cam.videoWidth  - s) / 2,
         s, s, 0, 0, s, s
       );
       ctx.restore();
     } else {
-      /* landscape feed – straightforward centre crop */
       ctx.drawImage(
         cam,
         (cam.videoWidth  - s) / 2,
@@ -104,7 +88,6 @@ document.getElementById("start").onclick = async () => {
       );
     }
 
-    /* encode JPEG & send */
     const jpeg = worker.toDataURL("image/jpeg", JPEG_QUAL);
     let res;
     try {
@@ -119,20 +102,21 @@ document.getElementById("start").onclick = async () => {
     }
     if (!res.ok) { alert("API error"); return; }
 
-    const { name, conf } = await res.json();
+    const { name, conf, stable } = await res.json();
     label.textContent = `${name}  ${(conf * 100).toFixed(1)} %`;
 
     const idx = labels.indexOf(name);
     same = (idx === last ? same + 1 : 1);
     last = idx;
 
-    if (same >= STABLE_N && conf >= CONF_THR) speak(name);
+    // Use backend stable if provided; otherwise fallback to frontend logic
+    const shouldSpeak = stable === true ? stable : (same >= STABLE_N && conf >= CONF_THR);
+    if (shouldSpeak) speak(name);
     else requestAnimationFrame(loop);
   }
 
-  /* -------------- text‑to‑speech helper -------------- */
   function speak (poke) {
-    if (!("speechSynthesis" in window)) return;  // already alerted
+    if (!("speechSynthesis" in window)) return;
 
     const key = poke.toLowerCase().replace(/[^a-z0-9-]/g, "");
     const txt = flavor[key]?.[0];
@@ -155,4 +139,3 @@ document.getElementById("start").onclick = async () => {
     speechSynthesis.speak(u);
   }
 };
-
