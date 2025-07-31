@@ -5,7 +5,8 @@ import io
 import json
 import os
 from pathlib import Path
-from typing import Any, Dict
+from typing import Any, Dict, Tuple
+from collections import deque
 
 import numpy as np
 import tensorflow as tf
@@ -19,8 +20,12 @@ from flask_cors import CORS
 ROOT_DIR       = Path(__file__).resolve().parent
 MODEL_PATH     = Path(os.getenv("MODEL_PATH",  ROOT_DIR / "pokedex_resnet50.h5"))
 LABELS_PATH    = Path(os.getenv("LABELS_PATH", ROOT_DIR / "class_indices.json"))
-INPUT_SIZE     = (224, 224)                # ResNet-50 default size
+INPUT_SIZE     = (224, 224)
 CONF_THRESHOLD = float(os.getenv("CONF_THRESH", 0.05))
+
+# new smoothing/stability params
+THRESH_CONF = 0.20
+STABLE_COUNT = 3
 
 # ────────────────────────────────────────────────────────
 # Load model + labels once at startup
@@ -31,24 +36,26 @@ print("[INFO] Model loaded")
 
 def load_labels(path: Path) -> Dict[int, str]:
     raw = json.loads(path.read_text(encoding="utf-8"))
-    # Case 1: mapping index string -> name, e.g. { "0": "Bulbasaur", ... }
     if all(k.isdigit() for k in raw.keys()):
         return {int(k): v for k, v in raw.items()}
-    # Case 2: mapping name -> index, invert it
     if all(isinstance(v, int) for v in raw.values()):
         return {v: k for k, v in raw.items()}
-    # Fallback: try hybrid, pick numeric keys first
     result: Dict[int, str] = {}
     for k, v in raw.items():
         if k.isdigit():
             result[int(k)] = v
     if result:
         return result
-    # Last resort: enumerate values
     return {i: str(v) for i, v in enumerate(raw.values())}
 
 idx2name = load_labels(LABELS_PATH)
 print(f"[INFO] Loaded {len(idx2name)} labels")
+
+# ────────────────────────────────────────────────────────
+# Stability state per client
+# ────────────────────────────────────────────────────────
+# maps client identifier -> deque of recent (idx, conf)
+_recent: Dict[str, deque[Tuple[int, float]]] = {}
 
 # ────────────────────────────────────────────────────────
 # Flask app
@@ -73,6 +80,10 @@ def _preprocess(b64_jpeg: str) -> np.ndarray:
     arr       = tf.keras.applications.resnet50.preprocess_input(arr)
     return np.expand_dims(arr, axis=0)
 
+def client_id() -> str:
+    # fallback to remote addr; can be replaced with header if needed
+    return request.headers.get("X-Client-ID", request.remote_addr or "unknown")
+
 @app.route('/api/predict', methods=['POST'])
 @app.route('/pointkedex/api/predict', methods=['POST'])
 def predict() -> Any:
@@ -93,7 +104,23 @@ def predict() -> Any:
         traceback.print_exc(file=sys.stderr)
         return jsonify({"error": str(exc)}), 500
 
-    return jsonify({"name": name, "conf": round(conf, 4)})
+    cid = client_id()
+    dq = _recent.setdefault(cid, deque(maxlen=STABLE_COUNT))
+    dq.append((pred_idx, conf))
+
+    stable = False
+    if len(dq) == STABLE_COUNT:
+        # check if all indexes equal and all confidences >= threshold
+        idxs, confs = zip(*dq)
+        if all(i == idxs[0] for i in idxs) and all(c >= THRESH_CONF for c in confs):
+            stable = True
+
+    response = {
+        "name": name,
+        "conf": round(conf, 4),
+        "stable": stable,
+    }
+    return jsonify(response)
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=int(os.getenv("PORT", "5000")), debug=False)
