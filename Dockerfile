@@ -1,42 +1,54 @@
-########################## Stage 1 – Builder ##########################
+# syntax=docker/dockerfile:1          # enables BuildKit extras like --mount=cache
+
+##########################  Stage 1 – builder  ##########################
 FROM python:3.11-slim AS builder
 WORKDIR /app
 
-ARG MODEL_URL                 # e.g. https://…/releases/download/…/pokedex_resnet50.h5
-ARG ASSET_FILE=pokedex_resnet50.h5
+# ---------------- env hygiene ----------------
+ENV PIP_DISABLE_PIP_VERSION_CHECK=1 \
+    PYTHONDONTWRITEBYTECODE=1 \
+    PYTHONUNBUFFERED=1
 
-# 1) Copy source + fetch model
+# ---------------- args ----------------
+ARG MODEL_URL                         # ex: https://huggingface.co/.../pokedex_resnet50.h5
+ARG MODEL_FILE=pokedex_resnet50.h5
+
+# ---------------- copy source first (cache) ---------------
 COPY . /app
-RUN set -eux; \
+
+# ---------------- system + build-time deps ----------------
+RUN --mount=type=cache,target=/root/.cache/pip \
+    set -eux; \
     apt-get update && \
     apt-get install -y --no-install-recommends curl ca-certificates && \
-    curl -L --fail -o "/app/${ASSET_FILE}" "${MODEL_URL}" && \
+    pip install --no-cache-dir \
+         tensorflow pillow tensorflowjs \
+         torch==2.2.1 torchvision==0.17.1 torchaudio==2.2.1 ultralytics && \
+    curl -L --fail -o "${MODEL_FILE}" "${MODEL_URL}" && \
+    tensorflowjs_converter --input_format=keras "${MODEL_FILE}" web_model && \
     rm -rf /var/lib/apt/lists/*
 
-# 2) Install ML libs & convert to TF-JS
-RUN pip install --no-cache-dir \
-        tensorflow pillow tensorflowjs \
-        torch==2.2.1 torchvision==0.17.1 torchaudio==2.2.1 ultralytics && \
-    tensorflowjs_converter \
-        --input_format=keras "/app/${ASSET_FILE}" /app/web_model_res
-
-########################## Stage 2 – Runtime ##########################
+##########################  Stage 2 – runtime  ##########################
 FROM python:3.11-slim
 WORKDIR /app
 
-# Copy everything from the builder stage
-COPY --from=builder /app /app
+# ---------------- env hygiene ----------------
+ENV PIP_DISABLE_PIP_VERSION_CHECK=1 \
+    PYTHONDONTWRITEBYTECODE=1 \
+    PYTHONUNBUFFERED=1 \
+    PORT=7860                              # Hugging Face will override if needed
 
-# Install only runtime deps
-RUN pip install --no-cache-dir \
-        gunicorn flask flask-cors \
-        tensorflow pillow numpy \
-        torch==2.2.1 torchvision==0.17.1 ultralytics
+# ---------------- runtime deps only ----------------
+RUN --mount=type=cache,target=/root/.cache/pip \
+    pip install --no-cache-dir \
+         gunicorn flask flask-cors tensorflow pillow numpy \
+         torch==2.2.1 torchvision==0.17.1 ultralytics
 
-# Expose port and set default
-ENV PORT=80
-EXPOSE 80
+# ---------------- bring in app + assets ----------------
+COPY --from=builder /app /app            # includes .py, TF-JS shards *and* the .h5 file
 
-# Shell form so $PORT expands correctly, no JSON parsing errors
-CMD gunicorn --bind 0.0.0.0:${PORT} predict_server:app \
+# ---------------- expose & launch ----------------
+EXPOSE 7860
+CMD gunicorn -b 0.0.0.0:${PORT} predict_server:app \
     --workers 2 --threads 4 --timeout 120
+
