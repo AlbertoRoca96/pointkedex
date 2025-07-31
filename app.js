@@ -13,122 +13,88 @@ let currentName = "";
 (async () => {
   flavor = await fetch("flavor_text.json").then(r => r.json());
   labels = Object.entries(await fetch("class_indices.json").then(r => r.json()))
-                 .reduce((arr,[n,i]) => (arr[i]=n,arr),[]);
+                 .reduce((a,[n,i]) => (a[i]=n, a), []);
 })();
 
-/* ---------- UI helpers ---------- */
-const $ = sel => document.querySelector(sel);
+/* ---------- helpers ---------- */
+const $ = q => document.querySelector(q);
 const show = el => el.style.display = "flex";
 const hide = el => el.style.display = "none";
 
-const alertBox = msg => { $("#alert").textContent = msg; $("#alert").style.display="block"; };
-
-const renderStats = data => {
-  $("#stats-name").textContent = data.name || currentName;
-  $("#stats-desc").textContent = data.description || "";
-  const typeBox = $("#stats-types");
-  typeBox.innerHTML = "";
-  (data.types||[]).forEach(t=>{
-    const span=document.createElement("span");
-    span.className="type";
-    span.textContent=t;
-    typeBox.appendChild(span);
+function mToFtIn(dm){               // decimetres → feet′in″
+  const cm = dm * 10;
+  const inches = cm / 2.54;
+  const ft = Math.floor(inches / 12);
+  const inch = Math.round(inches % 12);
+  return `${ft}'${inch}"`;
+}
+function kgToLb(hg){                // hectograms → lb
+  const kg = hg / 10;
+  return `${kg.toFixed(1)} kg (${(kg*2.205).toFixed(1)} lb)`;
+}
+function renderStats(d){
+  $("#stats-name").textContent = `${d.name}  (#${d.dex.toString().padStart(4,"0")})`;
+  $("#stats-desc").textContent = d.description;
+  const types = $("#stats-types"); types.innerHTML="";
+  (d.types||[]).forEach(t=>{
+    const s=document.createElement("span"); s.className="type"; s.textContent=t; types.appendChild(s);
   });
-  const tbl = $("#stats-table");
-  tbl.innerHTML = "";
-  if(data.base_stats){
-    Object.entries(data.base_stats).forEach(([k,v])=>{
-      const tr=document.createElement("tr");
-      tr.innerHTML=`<td>${k}</td><td>${v}</td>`;
-      tbl.appendChild(tr);
-    });
-  }
-  $("#stats-misc").textContent = `Height: ${data.height}   Weight: ${data.weight}`;
-};
+  const tbl=$("#stats-table"); tbl.innerHTML="";
+  Object.entries(d.base_stats||{}).forEach(([k,v])=>{
+    const tr=document.createElement("tr"); tr.innerHTML=`<td>${k}</td><td>${v}</td>`; tbl.appendChild(tr);
+  });
+  $("#stats-misc").textContent = `Abilities: ${(d.abilities||[]).join(", ")}\nHeight: ${mToFtIn(d.height)}  •  Weight: ${kgToLb(d.weight)}`;
+}
 
-/* ---------- main entry ---------- */
+/* ---------- main ---------- */
 $("#start").onclick = async () => {
   if ("speechSynthesis" in window) try{ speechSynthesis.speak(new SpeechSynthesisUtterance("")); }catch{}
   $("#start").style.display="none";
 
-  const cam   = $("#cam");
-  const work  = $("#worker");
-  const label = $("#label");
-  const endpoint = (window.API_BASE||"")+"api/predict";
+  const cam=$("#cam"), work=$("#worker"), label=$("#label");
+  const endpoint=(window.API_BASE||"")+"api/predict";
 
-  async function openCamera(){
+  async function openCam(){
     const ideal={facingMode:"environment",width:{ideal:1280},height:{ideal:720}};
     try{return await navigator.mediaDevices.getUserMedia({video:ideal});}
     catch{
-      const devs=await navigator.mediaDevices.enumerateDevices();
-      const rear=devs.find(d=>d.kind==="videoinput"&&/back/i.test(d.label));
-      if(!rear)throw new Error("no rear camera");
+      const dev=await navigator.mediaDevices.enumerateDevices();
+      const rear=dev.find(d=>d.kind==="videoinput"&&/back/i.test(d.label));
       return navigator.mediaDevices.getUserMedia({video:{deviceId:{exact:rear.deviceId},width:1280,height:720}});
     }
   }
-  try{ cam.srcObject=await openCamera(); await cam.play(); }catch(e){ alertBox("❌ camera error (“"+e.message+"”)"); return; }
+  try{ cam.srcObject=await openCam(); await cam.play(); }catch(e){ $("#alert").textContent=e.message; return; }
 
   requestAnimationFrame(loop);
 
   async function loop(){
-    if(speaking||$("#prompt").style.display==="flex"||$("#stats-panel").style.display==="flex")return;
-    if(!cam.videoWidth||!cam.videoHeight){return requestAnimationFrame(loop);}
+    if(speaking || $("#prompt").style.display==="flex" || $("#stats-panel").style.display==="flex") return;
+    if(!cam.videoWidth) return requestAnimationFrame(loop);
 
-    const portrait=cam.videoHeight>cam.videoWidth;
-    const s=portrait?cam.videoWidth:cam.videoHeight;
-    work.width=work.height=s;
-    const ctx=work.getContext("2d");
-    if(portrait){
-      ctx.save(); ctx.translate(0,s); ctx.rotate(-Math.PI/2);
-      ctx.drawImage(cam,(cam.videoHeight-s)/2,(cam.videoWidth-s)/2,s,s,0,0,s,s);
-      ctx.restore();
-    }else{
-      ctx.drawImage(cam,(cam.videoWidth-s)/2,(cam.videoHeight-s)/2,s,s,0,0,s,s);
-    }
+    const p=cam.videoHeight>cam.videoWidth, s=p?cam.videoWidth:cam.videoHeight;
+    work.width=work.height=s; const c=work.getContext("2d");
+    if(p){ c.save(); c.translate(0,s); c.rotate(-Math.PI/2); c.drawImage(cam,(cam.videoHeight-s)/2,(cam.videoWidth-s)/2,s,s,0,0,s,s); c.restore(); }
+    else { c.drawImage(cam,(cam.videoWidth-s)/2,(cam.videoHeight-s)/2,s,s,0,0,s,s); }
 
     const jpeg=work.toDataURL("image/jpeg",JPEG_QUAL);
-    let res;
-    try{ res=await fetch(endpoint,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({image:jpeg})}); }
-    catch{ alertBox("❌ network error"); return;}
-    if(!res.ok){ alertBox("API error"); return;}
+    const r=await fetch(endpoint,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({image:jpeg})});
+    if(!r.ok) return requestAnimationFrame(loop);
+    const {name,conf,stable}=await r.json();
+    label.textContent=`${name} ${(conf*100).toFixed(1)} %`;
 
-    const {name,conf,stable}=await res.json();
-    label.textContent=`${name}  ${(conf*100).toFixed(1)} %`;
-
-    const idx=labels.indexOf(name);
-    same=(idx===last?same+1:1); last=idx;
-    const shouldPrompt = stable===true ? stable : (same>=STABLE_N && conf>=CONF_THR);
-    if(shouldPrompt){ currentName=name; promptUser(name,conf); }
-    else requestAnimationFrame(loop);
+    const idx=labels.indexOf(name); same=idx===last?same+1:1; last=idx;
+    const ready=stable===true ? stable : (same>=STABLE_N && conf>=CONF_THR);
+    if(ready){ currentName=name; promptUser(name,conf); } else requestAnimationFrame(loop);
   }
 
-  function promptUser(name,conf){
-    $("#prompt-text").textContent=`Looks like ${name} (${(conf*100).toFixed(1)}%). Show its stats?`;
-    show($("#prompt"));
-  }
+  function promptUser(n,c){ $("#prompt-text").textContent=`Looks like ${n} (${(c*100).toFixed(1)}%). Show its stats?`; show($("#prompt")); }
 
-  /* ---------- prompt buttons ---------- */
   $("#btn-stats").onclick = async ()=>{
     hide($("#prompt"));
-    try{
-      const data=await fetch(`${window.API_BASE}api/pokemon/${currentName.toLowerCase()}`).then(r=>r.json());
-      renderStats({...data,name:currentName});
-      show($("#stats-panel"));
-      if("speechSynthesis"in window){
-        const speakTxt=data.description||flavor[currentName.toLowerCase()]?.[0]||"";
-        if(speakTxt){
-          speaking=true;
-          const u=new SpeechSynthesisUtterance(speakTxt);
-          u.onend=u.onerror=()=>{speaking=false; requestAnimationFrame(loop);};
-          speechSynthesis.speak(u);
-        }
-      }
-    }catch(e){
-      alertBox("Failed to fetch stats");
-      requestAnimationFrame(loop);
-    }
+    const d=await fetch(`${window.API_BASE}api/pokemon/${currentName.toLowerCase()}`).then(r=>r.json());
+    renderStats({...d,name:currentName});
+    show($("#stats-panel"));
   };
   $("#btn-dismiss").onclick = ()=>{ hide($("#prompt")); requestAnimationFrame(loop); };
-
-  $("#stats-close").onclick = ()=>{ hide($("#stats-panel")); requestAnimationFrame(loop); };
+  $("#stats-close").onclick  = ()=>{ hide($("#stats-panel")); requestAnimationFrame(loop); };
 };
