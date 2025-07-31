@@ -28,15 +28,7 @@ jobs:
 
       - name: Sync files
         run: |
-          rsync -a --delete Dockerfile predict_server.py index.html app.js config.js flavor_text.json class_indices.json README.md hf-space/
-          if ! head -n3 hf-space/README.md | grep -q 'sdk: docker'; then
-cat <<'EOF' > hf-space/README.md
----
-sdk: docker
-app_port: 7860
----
-EOF
-          fi
+          rsync -a --delete Dockerfile predict_server.py index.html app.js config.js flavor_text.json class_indices.json hf-space/
 
       - name: Commit & push to HF Space
         env:
