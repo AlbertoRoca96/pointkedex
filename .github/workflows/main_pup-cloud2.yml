@@ -8,12 +8,13 @@ on:
 jobs:
   deploy:
     runs-on: ubuntu-latest
-
     steps:
       - uses: actions/checkout@v4
+        with:
+          submodules: 'false'        # skip the bad sub-module
 
       - name: Login to HF Hub
-        uses: huggingface/huggingface-cli-login@v1
+        uses: huggingface/huggingface-cli-login@v1.1.0
         with:
           huggingface_token: ${{ secrets.HF_TOKEN }}
 
