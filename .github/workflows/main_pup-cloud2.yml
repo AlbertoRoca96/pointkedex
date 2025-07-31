@@ -1,71 +1,68 @@
 name: Build & Deploy Docker to Azure Web App
+
 on:
   push:
     branches: [ main ]
   workflow_dispatch:
 
 permissions:
-  contents: read
-  id-token: write
+  contents: read        # for actions/checkout
+  id-token: write       # for azure/login OIDC
 
 env:
-  WEBAPP_NAME: pup-cloud2
-  ACR_NAME:    pupcloud2
-  IMAGE_REPO:  pup-cloud2
-  TAG_NAME:    alroca
+  WEBAPP_NAME: pup-cloud2           # Azure Web App (lower-case)
+  ACR_NAME:    pupcloud2            # ACR short name (no .azurecr.io)
+  IMAGE_REPO:  pup-cloud2           # repo name inside ACR
+  TAG_NAME:    alroca               # exact GitHub Release tag
   ASSET_FILE:  pokedex_resnet50.h5
+  ACR_USERNAME: PupCloud2
+  ACR_PASSWORD: Vb1JK69MXN4EtFrCtHx8jOoEo9hwvF2jdcboOYkQ9d+ACRBDo0Wj
 
 jobs:
   build_and_deploy:
     runs-on: ubuntu-latest
+
     steps:
+      # 1) Checkout the code
       - name: 📂 Checkout repo
         uses: actions/checkout@v4
 
+      # 2) Azure login (OIDC)
       - name: 🔑 Azure login (OIDC)
         uses: azure/login@v2
         with:
           client-id:       ${{ secrets.AZURE_CLIENT_ID }}
           tenant-id:       ${{ secrets.AZURE_TENANT_ID }}
           subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
-          auth-type:       oidc                             # OIDC avoids needing a client secret :contentReference[oaicite:5]{index=5}
 
-      - name: Ensure Azure resources exist
-        uses: azure/cli@v1
-        with:
-          azcliversion: 2.45.0
-          inlineScript: |
-            az group create --name "${{ secrets.AZURE_RESOURCE_GROUP }}" --location eastus
-            az appservice plan create --name "${{ secrets.AZURE_APP_SERVICE_PLAN }}" \
-                                       --resource-group "${{ secrets.AZURE_RESOURCE_GROUP }}" --sku B1 --is-linux
-            az webapp show --resource-group "${{ secrets.AZURE_RESOURCE_GROUP }}" \
-                           --name "${{ env.WEBAPP_NAME }}" \
-            || az webapp create --resource-group "${{ secrets.AZURE_RESOURCE_GROUP }}" \
-                                --plan "${{ secrets.AZURE_APP_SERVICE_PLAN }}" \
-                                --name "${{ env.WEBAPP_NAME }}" \
-                                --deployment-container-image-name "${{ env.ACR_NAME }}.azurecr.io/${{ env.IMAGE_REPO }}:${{ github.sha }}"
-
+      # 3) ACR login
       - name: 🐳 ACR login
-        uses: azure/docker-login@v1
-        with:
-          login-server: ${{ env.ACR_NAME }}.azurecr.io
-          username:     ${{ secrets.ACR_USERNAME }}
-          password:     ${{ secrets.ACR_PASSWORD }}       # store this as a secret :contentReference[oaicite:6]{index=6}
+        run: |
+          echo "${{ env.ACR_PASSWORD }}" | docker login ${{ env.ACR_NAME }}.azurecr.io \
+            --username "${{ env.ACR_USERNAME }}" --password-stdin
 
+      # 4) Build & push Docker image
       - name: 🏗️ Build & push Docker image
         run: |
           IMAGE_TAG=${{ github.sha }}
           FULL_IMAGE=${{ env.ACR_NAME }}.azurecr.io/${{ env.IMAGE_REPO }}:$IMAGE_TAG
-          docker build --build-arg MODEL_URL="https://github.com/${{ github.repository }}/releases/download/${{ env.TAG_NAME }}/${{ env.ASSET_FILE }}" \
-                       --build-arg ASSET_FILE="${{ env.ASSET_FILE }}" -t "$FULL_IMAGE" .
+
+          MODEL_URL="https://github.com/${{ github.repository }}/releases/download/${{ env.TAG_NAME }}/${{ env.ASSET_FILE }}"
+
+          docker build \
+            --build-arg MODEL_URL="$MODEL_URL" \
+            --build-arg ASSET_FILE="${{ env.ASSET_FILE }}" \
+            -t "$FULL_IMAGE" .
           docker push "$FULL_IMAGE"
 
-      - name: ⏳ Wait for Azure to refresh
+      # **Solution: add a short delay to let Azure cache update before deployment**
+      - name: ⏳ Wait for Azure to refresh resource cache
         run: sleep 60
 
-      - name: 🚀 Deploy to Web App for Containers
+      # 5) Deploy the freshly‑pushed image
+      - name: 🚀 Deploy to Web App for Containers
         uses: azure/webapps-deploy@v3
         with:
-          app-name:            ${{ env.WEBAPP_NAME }}
-          resource-group-name: ${{ secrets.AZURE_RESOURCE_GROUP }}
-          images:              ${{ env.ACR_NAME }}.azurecr.io/${{ env.IMAGE_REPO }}:${{ github.sha }}
+          app-name:             ${{ env.WEBAPP_NAME }}
+          resource-group-name:  Pup-Cloud2_group     # ← corrected
+          images:               ${{ env.ACR_NAME }}.azurecr.io/${{ env.IMAGE_REPO }}:${{ github.sha }}
