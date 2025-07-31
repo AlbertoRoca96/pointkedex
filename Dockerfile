@@ -51,4 +51,3 @@ COPY --from=builder /app /app            # includes .py, TF-JS shards *and* the 
 EXPOSE 7860
 CMD gunicorn -b 0.0.0.0:${PORT} predict_server:app \
     --workers 2 --threads 4 --timeout 120
-
