@@ -8,17 +8,21 @@ on:
 jobs:
   deploy:
     runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-        with: { submodules: 'false' }      # skip broken sub-module
 
+    steps:
+      # 1. get the code – skip sub-modules or remove them from the repo
+      - uses: actions/checkout@v4
+        with: { submodules: 'false' }
+
+      # 2. log in to HF Hub
       - name: Login to HF Hub
         env:
           HF_TOKEN: ${{ secrets.HF_TOKEN }}
         run: |
-          pip install --quiet --user huggingface_hub        # CLI install  :contentReference[oaicite:6]{index=6}
-          huggingface-cli login --token "$HF_TOKEN" --add-to-git-credential   # no --yes  :contentReference[oaicite:7]{index=7}
+          pip install --quiet --user huggingface_hub
+          huggingface-cli login --token "$HF_TOKEN" --add-to-git-credential
 
+      # 3. push this commit to your Space repo
       - name: Push to Space
         run: |
           git remote add space https://huggingface.co/spaces/AlbertoRoca96-web/pointkedex-api
