@@ -45,7 +45,13 @@ const kgToLb = hg => {
 function renderUsage(u){
   const box = $("#stats-usage");
   box.innerHTML = "";
-  if(!u || (!u.moves && !u.abilities && !u.items)) return;
+
+  /* nothing came back (or slug not present) */
+  if(!u || (!u.moves?.length && !u.abilities?.length && !u.items?.length)){
+    box.style.display = "none";
+    return;
+  }
+  box.style.display = "block";
 
   const sect = (label,list)=> {
     if(!list?.length) return;
