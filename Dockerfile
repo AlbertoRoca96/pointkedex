@@ -14,9 +14,7 @@ ARG MODEL_NAME="pokedex_resnet50.h5"
 
 COPY . /app
 
-# Install build dependencies and machine‑learning libraries.  Both TensorFlow
-# and PyTorch are installed here; the final image will only include the
-# runtime dependencies from the next stage.
+# ─── install build deps + ML libs (unchanged packages) ────────────────────
 RUN --mount=type=cache,target=/root/.cache/pip \
     set -eux; \
     apt-get update && \
@@ -26,9 +24,7 @@ RUN --mount=type=cache,target=/root/.cache/pip \
         torch==2.2.1 torchvision==0.17.1 torchaudio==2.2.1 ultralytics && \
     rm -rf /var/lib/apt/lists/*
 
-# Download the Keras model asset from the GitHub release and convert it
-# to TensorFlow.js format for the PWA.  This step uses the GitHub API to
-# locate the asset by name.
+# ─── fetch .h5 from GitHub release and convert to TF-JS ───────────────────
 RUN set -eux; \
     if [ "${RELEASE_TAG}" = "latest" ]; then \
       api="https://api.github.com/repos/${GITHUB_REPO}/releases/latest"; \
@@ -56,9 +52,12 @@ WORKDIR /app
 ENV PIP_DISABLE_PIP_VERSION_CHECK=1 \
     PYTHONDONTWRITEBYTECODE=1 \
     PYTHONUNBUFFERED=1 \
-    PORT=7860
+    PORT=7860 \
+    CUDA_VISIBLE_DEVICES=-1 \
+    TF_CPP_MIN_LOG_LEVEL=2 \
+    MPLCONFIGDIR=/tmp/mpl
 
-# Install only the runtime dependencies for the API server.
+# ─── runtime deps (unchanged packages) ────────────────────────────────────
 RUN --mount=type=cache,target=/root/.cache/pip \
     pip install --no-cache-dir \
         gunicorn flask flask-cors tensorflow pillow numpy \
@@ -67,6 +66,4 @@ RUN --mount=type=cache,target=/root/.cache/pip \
 COPY --from=builder /app /app
 
 EXPOSE 7860
-
-# Run the Flask app with Gunicorn.
 CMD gunicorn -b 0.0.0.0:${PORT:-7860} predict_server:app --workers 2 --threads 4 --timeout 120
