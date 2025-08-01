@@ -1,47 +1,111 @@
-on:
-  push:
-    branches: [main]
-  workflow_dispatch:
+from __future__ import annotations
+import base64, io, json, os, sys, time
+from collections import deque
+from pathlib import Path
+from typing import Any, Dict, Tuple
 
-jobs:
-  deploy:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout source
-        uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
-          submodules: false
+import numpy as np
+import tensorflow as tf
+from PIL import Image
+from flask import Flask, jsonify, request, send_from_directory
+from flask_cors import CORS
 
-      - name: Configure Git
-        run: |
-          git config --global user.name "github-actions"
-          git config --global user.email "github-actions@users.noreply.github.com"
+# ────────────────────────────
+# Config / paths
+# ────────────────────────────
+ROOT        = Path(__file__).resolve().parent
+MODEL_PATH  = Path(os.getenv("MODEL_PATH",  ROOT / "pokedex_resnet50.h5"))
+LABEL_PATH  = Path(os.getenv("LABELS_PATH", ROOT / "class_indices.json"))
+DEX_PATH    = Path(os.getenv("DEX_PATH",   ROOT / "pokedex_data.json"))
+USAGE_PATH  = Path(os.getenv("USAGE_PATH", ROOT / "usage_data.json"))  # NEW
 
-      - name: Clone HF Space repo
-        env:
-          HF_TOKEN: ${{ secrets.HF_TOKEN }}
-        run: |
-          git clone https://AlbertoRoca96-web:${HF_TOKEN}@huggingface.co/spaces/AlbertoRoca96-web/pointkedex hf-space
-          ls -R hf-space | head -100
+INPUT_SIZE  = (224, 224)
+CONF_THRESH = float(os.getenv("CONF_THRESH", 0.05))
 
-      - name: Sync files
-        run: |
-          rsync -a --delete \
-            Dockerfile predict_server.py index.html app.js styles.css \
-            config.js flavor_text.json class_indices.json pokedex_data.json \
-            usage_data.json \
-            hf-space/
+THRESH_CONF = 0.20       # ≥20 % conf
+STABLE_CNT  = 3          # …for 3 frames
 
-      - name: Commit & push to HF Space
-        env:
-          HF_TOKEN: ${{ secrets.HF_TOKEN }}
-        run: |
-          cd hf-space
-          git add -A
-          if git diff --cached --quiet; then
-            echo "No changes to push."
-          else
-            git commit -m "Sync app files from GitHub main"
-            git push
-          fi
+# ────────────────────────────
+# Load model & data once
+# ────────────────────────────
+print("[⇢] loading model…", file=sys.stderr)
+model = tf.keras.models.load_model(MODEL_PATH, compile=False)
+print("[✓] model ready", file=sys.stderr)
+
+def load_labels() -> Dict[int, str]:
+    raw = json.loads(LABEL_PATH.read_text('utf-8'))
+    if all(k.isdigit() for k in raw):
+        return {int(k): v for k, v in raw.items()}
+    if all(isinstance(v, int) for v in raw.values()):
+        return {v: k for k, v in raw.items()}
+    raise ValueError("class_indices.json schema unknown")
+
+IDX2NAME = load_labels()
+POKEDEX  = json.loads(DEX_PATH.read_text('utf-8'))
+USAGE    = json.loads(USAGE_PATH.read_text('utf-8')) if USAGE_PATH.exists() else {}
+print(f"[✓] {len(IDX2NAME)} labels, {len(POKEDEX)} dex entries, {len(USAGE)} usage", file=sys.stderr)
+
+# ────────────────────────────
+# Flask
+# ────────────────────────────
+app = Flask(__name__, static_folder=str(ROOT))
+CORS(app)
+
+_recent: Dict[str, deque[Tuple[int, float]]] = {}
+def cid() -> str:  # client id for stability tracking
+    return request.headers.get("X-Client-ID", request.remote_addr or "anon")
+
+# ---------- static files ----------
+@app.route("/")
+def root(): return send_from_directory(str(ROOT), "index.html")
+@app.route("/<path:p>")
+def static_file(p: str): return send_from_directory(str(ROOT), p)
+
+# ---------- image classifier ----------
+def preprocess(b64: str) -> np.ndarray:
+    if "," in b64:
+        b64 = b64.split(",", 1)[1]
+    rgb = Image.open(io.BytesIO(base64.b64decode(b64))).convert("RGB").resize(INPUT_SIZE)
+    arr = tf.keras.preprocessing.image.img_to_array(rgb)
+    arr = tf.keras.applications.resnet50.preprocess_input(arr)
+    return arr[None]
+
+@app.route('/api/predict', methods=['POST'])
+@app.route('/pointkedex/api/predict', methods=['POST'])  # GH-Pages sub-dir
+def predict() -> Any:
+    img = (request.get_json(silent=True) or {}).get("image")
+    if not img:
+        return jsonify({"error": "missing image"}), 400
+    try:
+        prob = model.predict(preprocess(img), verbose=0)[0]
+        conf = float(prob.max())
+        idx  = int(prob.argmax())
+        name = IDX2NAME.get(idx, "Unknown")
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
+
+    dq = _recent.setdefault(cid(), deque(maxlen=STABLE_CNT))
+    dq.append((idx, conf))
+    stable = len(dq) == STABLE_CNT and all(i == idx for i, _ in dq) and all(c >= THRESH_CONF for _, c in dq)
+    return jsonify({"name": name, "conf": round(conf, 4), "stable": stable})
+
+# ---------- pokédex stats ----------
+@app.route('/api/pokemon/<slug>')
+@app.route('/pointkedex/api/pokemon/<slug>')
+def pokemon(slug: str) -> Any:
+    data = POKEDEX.get(slug.lower())
+    if not data:
+        return jsonify({"error": "not found"}), 404
+    return jsonify(data)
+
+# ---------- competitive usage (NEW) ----------
+@app.route('/api/usage/<slug>')
+@app.route('/pointkedex/api/usage/<slug>')
+def usage(slug: str) -> Any:
+    data = USAGE.get(slug.lower(), {})
+    return jsonify(data)
+
+# ----------------------------------------------------
+if __name__ == "__main__":
+    port = int(os.getenv("PORT", 5000))
+    app.run(host="0.0.0.0", port=port, debug=False)
