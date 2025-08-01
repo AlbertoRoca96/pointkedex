@@ -46,7 +46,6 @@ WORKDIR /app
 ENV PIP_DISABLE_PIP_VERSION_CHECK=1 \
     PYTHONDONTWRITEBYTECODE=1 \
     PYTHONUNBUFFERED=1 \
-    PORT=7860 \
     CUDA_VISIBLE_DEVICES=-1 \
     TF_CPP_MIN_LOG_LEVEL=2 \
     MPLCONFIGDIR=/tmp/matplotlib
@@ -57,4 +56,4 @@ RUN --mount=type=cache,target=/root/.cache/pip \
 COPY --from=builder /app /app
 
 EXPOSE 7860
-CMD gunicorn -b 0.0.0.0:${PORT} predict_server:app --workers 2 --threads 4 --timeout 120
+CMD gunicorn -b 0.0.0.0:7860 predict_server:app --workers 2 --threads 4 --timeout 120
