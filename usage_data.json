@@ -5554,137 +5554,92 @@
     "abilities": [],
     "items": []
   },
-  "stunfisk": {
+  "1111": {
     "moves": [],
     "abilities": [],
     "items": []
   },
-  "rotom": {
+  "1112": {
     "moves": [],
     "abilities": [],
     "items": []
   },
-  "politoed": {
+  "1113": {
     "moves": [],
     "abilities": [],
     "items": []
   },
-  "rufflet": {
+  "1114": {
     "moves": [],
     "abilities": [],
     "items": []
   },
-  "ironcrown": {
+  "1115": {
     "moves": [],
     "abilities": [],
     "items": []
   },
-  "makuhita": {
+  "1116": {
     "moves": [],
     "abilities": [],
     "items": []
   },
-  "abomasnow": {
+  "wooper": {
     "moves": [],
     "abilities": [],
     "items": []
   },
-  "vespiquen": {
+  "charmeleon": {
     "moves": [],
     "abilities": [],
     "items": []
   },
-  "charmander": {
+  "cranidos": {
     "moves": [],
     "abilities": [],
     "items": []
   },
-  "tornadus": {
+  "charcadet": {
     "moves": [],
     "abilities": [],
     "items": []
   },
-  "gougingfire": {
+  "hatterene": {
     "moves": [],
     "abilities": [],
     "items": []
   },
-  "aurorus": {
+  "sprigatito": {
     "moves": [],
     "abilities": [],
     "items": []
   },
-  "moltres": {
+  "dhelmise": {
     "moves": [],
     "abilities": [],
     "items": []
   },
-  "mawile": {
+  "vullaby": {
     "moves": [],
     "abilities": [],
     "items": []
   },
-  "lugia": {
+  "pignite": {
     "moves": [],
     "abilities": [],
     "items": []
   },
-  "alomomola": {
+  "zoroark": {
     "moves": [],
     "abilities": [],
     "items": []
   },
-  "xurkitree": {
+  "greedent": {
     "moves": [],
     "abilities": [],
     "items": []
   },
-  "pikachu": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "probopass": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "whismur": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "florges": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "greattusk": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "clobbopus": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "flareon": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "skiddo": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "solrock": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "stufful": {
+  "fearow": {
     "moves": [],
     "abilities": [],
     "items": []
@@ -5694,177 +5649,42 @@
     "abilities": [],
     "items": []
   },
+  "mewtwo": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "latias": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "wartortle": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "anorith": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "runerigus": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
   "charjabug": {
     "moves": [],
     "abilities": [],
     "items": []
   },
-  "ironjugulis": {
+  "eternatus": {
     "moves": [],
     "abilities": [],
     "items": []
   },
-  "rillaboom": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "kabuto": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "marowak": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "cetitan": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "roaringmoon": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "cyclizar": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "dragapult": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "seviper": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "sealeo": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "tangela": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "crocalor": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "kangaskhan": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "regice": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "shelmet": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "dodrio": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "dugtrio": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "ironvaliant": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "ferrothorn": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "bellsprout": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "genesect": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "snorunt": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "toxel": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "tranquill": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "grapploct": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "kirlia": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "cleffa": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "carbink": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "drilbur": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "inteleon": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "barboach": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "cresselia": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "pecharunt": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "cacnea": {
+  "nosepass": {
     "moves": [],
     "abilities": [],
     "items": []
@@ -5879,1297 +5699,7 @@
     "abilities": [],
     "items": []
   },
-  "aerodactyl": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "bisharp": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "kilowattrel": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "clefable": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "lycanroc": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "blacephalon": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "terrakion": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "eternatus": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "zamazenta": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "electrode": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "hippowdon": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "zygarde": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "pheromosa": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "tyranitar": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "victini": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "carracosta": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "oricorio": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "litten": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "gligar": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "pachirisu": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "kyogre": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "toedscruel": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "kakuna": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "reuniclus": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "wobbuffet": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "delibird": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "leafeon": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "pidgey": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "porygonz": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "chewtle": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "arcanine": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "lileep": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "mrmime": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "zekrom": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "indeedee": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "toxapex": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "persian": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "clauncher": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "pansage": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "flittle": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "pincurchin": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "metang": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "taillow": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "clodsire": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "minior": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "ursaluna": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "pidgeotto": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "chandelure": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "ledyba": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "hatterene": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "stakataka": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "palpitoad": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "turtwig": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "ironleaves": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "wyrdeer": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "lunatone": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "deerling": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "meditite": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "morpeko": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "weezing": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "jynx": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "charmeleon": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "gible": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "sceptile": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "gastly": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "glimmora": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "celebi": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "litwick": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "spectrier": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "roserade": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "thwackey": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "blaziken": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "goldeen": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "thievul": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "runerigus": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "watchog": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "shroodle": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "luxray": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "swadloon": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "cobalion": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "porygon": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "machop": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "mudsdale": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "smoochum": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "floette": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "dondozo": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "gardevoir": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "silvally": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "stantler": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "revavroom": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "ironthorns": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "koffing": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "mienfoo": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "sliggoo": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "landorus": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "palossand": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "orthworm": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "treecko": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "gimmighoul": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "beheeyem": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "spearow": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "slowpoke": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "glastrier": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "nidorina": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "necrozma": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "tauros": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "skrelp": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "komala": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "basculin": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "hitmontop": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "inkay": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "poliwhirl": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "rellor": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "binacle": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "hattrem": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "archen": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "corvisquire": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "lombre": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "infernape": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "gengar": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "slugma": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "onix": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "mimikyu": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "linoone": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "noivern": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "articuno": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "piplup": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "farigiraf": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "tyrunt": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "ninetales": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "swellow": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "grumpig": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "parasect": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "woobat": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "shaymin": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "rockruff": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "eldegoss": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "nidoranf": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "illumise": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "zangoose": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "reshiram": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "baxcalibur": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "marill": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "wishiwashi": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "horsea": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "primeape": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "buneary": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "garganacl": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "falinks": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "regieleki": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "ducklett": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "magcargo": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "beautifly": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "espurr": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "magmortar": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "feebas": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "chinchou": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "araquanid": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "squawkabilly": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "enamorus": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "scorbunny": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "cursola": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "hakamoo": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "patrat": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "fraxure": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "aggron": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "golett": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "throh": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "natu": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "honchkrow": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "vaporeon": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "eelektross": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "pawmo": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "muk": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "pignite": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "electrike": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "fuecoco": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "regigigas": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "boldore": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "simisage": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "spritzee": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "heatmor": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "froslass": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "hitmonlee": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "vigoroth": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "mareep": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "malamar": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "ditto": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "toucannon": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "melmetal": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "flaaffy": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "gastrodon": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "shellos": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "venusaur": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "scraggy": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "archeops": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "skorupi": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "exeggutor": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "paras": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "amoonguss": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "anorith": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "skwovet": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "sigilyph": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "grimmsnarl": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "combee": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "gulpin": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "bonsly": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "salandit": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "manaphy": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "thundurus": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "mothim": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "bronzor": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "tinglu": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "teddiursa": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "bewear": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "dartrix": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "noibat": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "naganadel": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "wooloo": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "yanmega": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "popplio": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "dialga": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "ribombee": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "aromatisse": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "scizor": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "tinkatink": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "nosepass": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "conkeldurr": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "silcoon": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "herdier": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "celesteela": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "bastiodon": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "pawmot": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "deino": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "tynamo": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "drizzile": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "greavard": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "veluza": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "sandygast": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "tepig": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "fennekin": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "hoopa": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "rapidash": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "meloetta": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "poochyena": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "heatran": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "chespin": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "porygon2": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "trevenant": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "dottler": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "braviary": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "medicham": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "solgaleo": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "morgrem": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "druddigon": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "slurpuff": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "tropius": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "shelgon": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "raichu": {
+  "timburr": {
     "moves": [],
     "abilities": [],
     "items": []
@@ -7179,1787 +5709,22 @@
     "abilities": [],
     "items": []
   },
-  "cherrim": {
+  "mamoswine": {
     "moves": [],
     "abilities": [],
     "items": []
   },
-  "bounsweet": {
+  "spritzee": {
     "moves": [],
     "abilities": [],
     "items": []
   },
-  "glameow": {
+  "rillaboom": {
     "moves": [],
     "abilities": [],
     "items": []
   },
-  "vibrava": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "drednaw": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "rookidee": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "stunky": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "wimpod": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "corsola": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "clefairy": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "cinderace": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "cinccino": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "munna": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "oranguru": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "mankey": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "hypno": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "chikorita": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "swanna": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "luxio": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "omastar": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "starly": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "sewaddle": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "arctovish": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "gloom": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "sandyshocks": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "wugtrio": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "dragalge": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "blastoise": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "phantump": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "seadra": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "flamigo": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "pangoro": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "weedle": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "weavile": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "zigzagoon": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "gliscor": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "klawf": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "skitty": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "bronzong": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "duraludon": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "meltan": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "relicanth": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "ivysaur": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "axew": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "mimejr": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "metapod": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "copperajah": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "pancham": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "pidove": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "shedinja": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "furret": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "wailmer": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "bidoof": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "surskit": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "bouffalant": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "fluttermane": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "frogadier": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "miltank": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "tandemaus": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "sneasel": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "crawdaunt": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "staryu": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "bruxish": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "toedscool": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "mantyke": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "cranidos": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "excadrill": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "zweilous": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "tinkaton": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "dachsbun": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "espeon": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "ceruledge": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "tapubulu": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "luvdisc": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "minun": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "fezandipiti": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "spoink": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "shellder": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "eevee": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "hooh": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "virizion": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "trumbeak": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "jigglypuff": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "magnezone": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "dusclops": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "sawk": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "umbreon": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "golem": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "appletun": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "crustle": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "meowscarada": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "emolga": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "spinarak": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "durant": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "arrokuda": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "pumpkaboo": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "suicune": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "kyurem": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "sobble": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "bellibolt": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "gholdengo": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "quaxly": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "vikavolt": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "aron": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "finizen": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "latios": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "dusknoir": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "stonjourner": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "castform": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "tadbulb": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "jolteon": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "misdreavus": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "farfetchd": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "pawmi": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "leavanny": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "poltchageist": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "wynaut": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "floatzel": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "minccino": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "basculegion": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "torchic": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "electivire": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "tatsugiri": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "seel": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "houndour": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "darumaka": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "meowstic": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "eiscue": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "elekid": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "gothita": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "pidgeot": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "pyukumuku": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "manectric": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "aipom": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "ludicolo": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "lillipup": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "wattrel": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "claydol": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "ironboulder": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "escavalier": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "heliolisk": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "flygon": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "gumshoos": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "burmy": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "granbull": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "lickitung": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "rayquaza": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "maractus": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "gallade": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "skiploom": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "annihilape": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "alcremie": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "joltik": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "foongus": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "abra": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "wochien": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "hariyama": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "charizard": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "dewpider": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "donphan": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "diancie": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "oddish": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "gigalith": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "weepinbell": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "crabominable": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "ampharos": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "hawlucha": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "okidogi": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "riolu": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "magearna": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "ironhands": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "irontreads": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "screamtail": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "duosion": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "crobat": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "darkrai": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "rattata": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "dhelmise": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "nickit": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "nihilego": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "larvesta": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "croagunk": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "bombirdier": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "calyrex": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "perrserker": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "dewott": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "skeledirge": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "dracozolt": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "cubone": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "corviknight": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "swampert": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "skarmory": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "zubat": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "omanyte": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "koraidon": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "empoleon": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "kricketot": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "magikarp": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "klefki": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "furfrou": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "lunala": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "clawitzer": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "cascoon": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "tyrogue": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "spewpa": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "poliwag": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "poliwrath": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "piloswine": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "sprigatito": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "frosmoth": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "jirachi": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "sizzlipede": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "chesnaught": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "grotle": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "tympole": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "regirock": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "palafin": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "absol": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "drakloak": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "graveler": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "munchlax": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "brutebonnet": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "quaquaval": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "gabite": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "fidough": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "dreepy": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "palkia": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "mareanie": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "oshawott": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "nuzleaf": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "incineroar": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "toxtricity": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "alakazam": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "lopunny": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "grafaiai": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "swirlix": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "togekiss": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "raticate": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "greninja": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "armarouge": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "carnivine": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "wurmple": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "varoom": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "dolliv": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "yungoos": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "maushold": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "trubbish": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "carvanha": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "dunsparce": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "brionne": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "arbok": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "wartortle": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "sentret": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "unfezant": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "hatenna": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "doduo": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "ironbundle": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "breloom": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "cottonee": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "panpour": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "hitmonchan": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "aegislash": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "bunnelby": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "plusle": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "polteageist": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "simisear": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "happiny": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "klang": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "tinkatuff": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "wormadam": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "wooper": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "bellossom": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "psyduck": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "karrablast": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "gorebyss": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "brambleghast": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "duskull": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "primarina": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "magby": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "blitzle": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "yanma": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "azurill": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "mienshao": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "hoppip": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "giratina": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "eelektrik": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "skuntank": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "igglybuff": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "tirtouga": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "obstagoon": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "mrrime": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "dragonite": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "mandibuzz": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "rhyperior": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "garbodor": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "typenull": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "beldum": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "prinplup": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "volcanion": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "carkol": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "gothitelle": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "milcery": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "pupitar": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "pawniard": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "tentacool": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "krabby": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "scyther": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "archaludon": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "cetoddle": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "vanillite": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "klink": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "goomy": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "drifblim": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "machamp": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "walrein": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "chatot": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "fletchinder": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "floragato": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "krokorok": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "quilava": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "sandile": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "slitherwing": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "zacian": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "scrafty": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "ponyta": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "quaxwell": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "sableye": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "exeggcute": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "noctowl": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "yveltal": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "vivillon": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "rabsca": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "swoobat": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "togedemaru": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "nidoranm": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "chimecho": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "voltorb": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "regidrago": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "snivy": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "tapufini": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "mismagius": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "dudunsparce": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "houndoom": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "electabuzz": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "gyarados": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "ekans": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "kricketune": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "wiglett": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "pansear": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "oinkologne": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "capsakid": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "ogerpon": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "silicobra": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "lickilicky": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "starmie": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "buzzwole": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "gogoat": {
+  "garganacl": {
     "moves": [],
     "abilities": [],
     "items": []
@@ -8969,22 +5734,7 @@
     "abilities": [],
     "items": []
   },
-  "wigglytuff": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "seismitoad": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "kartana": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "vanillish": {
+  "grumpig": {
     "moves": [],
     "abilities": [],
     "items": []
@@ -8994,107 +5744,162 @@
     "abilities": [],
     "items": []
   },
-  "nidoqueen": {
+  "emboar": {
     "moves": [],
     "abilities": [],
     "items": []
   },
-  "larvitar": {
+  "chinchou": {
     "moves": [],
     "abilities": [],
     "items": []
   },
-  "ariados": {
+  "toxicroak": {
     "moves": [],
     "abilities": [],
     "items": []
   },
-  "audino": {
+  "milcery": {
     "moves": [],
     "abilities": [],
     "items": []
   },
-  "dedenne": {
+  "nuzleaf": {
     "moves": [],
     "abilities": [],
     "items": []
   },
-  "ironmoth": {
+  "slakoth": {
     "moves": [],
     "abilities": [],
     "items": []
   },
-  "timburr": {
+  "litwick": {
     "moves": [],
     "abilities": [],
     "items": []
   },
-  "octillery": {
+  "goomy": {
     "moves": [],
     "abilities": [],
     "items": []
   },
-  "rampardos": {
+  "feraligatr": {
     "moves": [],
     "abilities": [],
     "items": []
   },
-  "zebstrika": {
+  "spewpa": {
     "moves": [],
     "abilities": [],
     "items": []
   },
-  "camerupt": {
+  "litleo": {
     "moves": [],
     "abilities": [],
     "items": []
   },
-  "glalie": {
+  "abra": {
     "moves": [],
     "abilities": [],
     "items": []
   },
-  "hydrapple": {
+  "gumshoos": {
     "moves": [],
     "abilities": [],
     "items": []
   },
-  "registeel": {
+  "meltan": {
     "moves": [],
     "abilities": [],
     "items": []
   },
-  "diggersby": {
+  "jirachi": {
     "moves": [],
     "abilities": [],
     "items": []
   },
-  "flapple": {
+  "ditto": {
     "moves": [],
     "abilities": [],
     "items": []
   },
-  "liepard": {
+  "quagsire": {
     "moves": [],
     "abilities": [],
     "items": []
   },
-  "cryogonal": {
+  "lokix": {
     "moves": [],
     "abilities": [],
     "items": []
   },
-  "mew": {
+  "trubbish": {
     "moves": [],
     "abilities": [],
     "items": []
   },
-  "tapulele": {
+  "palpitoad": {
     "moves": [],
     "abilities": [],
     "items": []
   },
-  "exploud": {
+  "masquerain": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "lillipup": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "gardevoir": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "hitmonchan": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "magmortar": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "milotic": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "absol": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "dragalge": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "oricorio": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "silvally": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "spearow": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "piplup": {
     "moves": [],
     "abilities": [],
     "items": []
@@ -9104,32 +5909,2097 @@
     "abilities": [],
     "items": []
   },
-  "zoroark": {
+  "buizel": {
     "moves": [],
     "abilities": [],
     "items": []
   },
-  "smeargle": {
+  "larvitar": {
     "moves": [],
     "abilities": [],
     "items": []
   },
-  "bayleef": {
+  "scizor": {
     "moves": [],
     "abilities": [],
     "items": []
   },
-  "xatu": {
+  "mienshao": {
     "moves": [],
     "abilities": [],
     "items": []
   },
-  "drifloon": {
+  "arboliva": {
     "moves": [],
     "abilities": [],
     "items": []
   },
-  "grimer": {
+  "capsakid": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "frigibax": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "luxio": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "ironboulder": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "beautifly": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "floragato": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "oshawott": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "dracovish": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "shuckle": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "melmetal": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "jolteon": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "baxcalibur": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "cetitan": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "glastrier": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "kirlia": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "kartana": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "yamper": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "tornadus": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "heliolisk": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "swampert": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "fluttermane": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "palafin": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "fletchinder": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "scovillain": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "scolipede": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "torchic": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "wattrel": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "pidove": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "froakie": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "floatzel": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "pumpkaboo": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "florges": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "accelgor": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "natu": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "impidimp": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "roggenrola": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "rhyperior": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "registeel": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "nacli": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "mismagius": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "lumineon": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "scatterbug": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "chansey": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "sinistcha": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "bramblin": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "vanillish": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "pawmo": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "nickit": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "oinkologne": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "grotle": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "mrmime": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "golduck": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "ducklett": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "sandaconda": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "carvanha": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "regice": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "kommoo": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "golem": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "growlithe": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "bonsly": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "slaking": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "liepard": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "wobbuffet": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "cherrim": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "miltank": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "sceptile": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "roaringmoon": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "mareep": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "zorua": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "ledyba": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "marowak": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "fezandipiti": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "pheromosa": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "vileplume": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "krokorok": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "altaria": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "bronzong": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "spidops": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "granbull": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "riolu": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "jigglypuff": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "ariados": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "squirtle": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "rayquaza": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "sandygast": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "eelektrik": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "maschiff": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "magnemite": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "deino": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "heatmor": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "whismur": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "gible": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "tranquill": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "victini": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "finizen": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "tatsugiri": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "tyrogue": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "shelmet": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "croagunk": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "glaceon": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "palkia": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "kangaskhan": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "slowbro": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "ninjask": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "ferroseed": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "smoliv": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "avalugg": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "sewaddle": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "shiftry": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "cursola": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "kyurem": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "rabsca": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "audino": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "hitmonlee": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "varoom": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "loudred": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "carkol": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "orbeetle": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "xurkitree": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "greninja": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "boltund": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "ceruledge": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "dusknoir": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "venipede": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "sneasel": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "sentret": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "bibarel": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "crobat": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "scyther": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "hoothoot": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "kingambit": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "dugtrio": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "foongus": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "claydol": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "typenull": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "klang": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "teddiursa": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "manaphy": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "donphan": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "vaporeon": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "thievul": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "dratini": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "reshiram": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "darumaka": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "drampa": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "salazzle": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "togekiss": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "stufful": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "cottonee": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "buneary": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "watchog": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "tinkaton": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "crocalor": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "nidoranf": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "cufant": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "porygonz": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "mothim": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "victreebel": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "dartrix": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "dachsbun": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "spectrier": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "blissey": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "miraidon": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "dustox": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "ironbundle": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "magikarp": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "silicobra": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "poochyena": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "espathra": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "fennekin": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "tauros": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "slugma": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "gloom": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "shellder": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "ironleaves": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "ampharos": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "krabby": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "igglybuff": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "pikipek": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "trapinch": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "elekid": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "minior": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "ralts": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "brambleghast": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "ironvaliant": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "starly": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "quilava": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "houndour": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "herdier": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "meditite": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "kyogre": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "sunflora": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "electabuzz": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "raticate": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "wormadam": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "suicune": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "electrode": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "zubat": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "simisage": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "chesnaught": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "bidoof": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "budew": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "rellor": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "stunfisk": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "bergmite": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "keldeo": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "chiyu": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "skarmory": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "murkrow": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "klawf": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "alakazam": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "stunky": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "greattusk": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "yanma": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "vigoroth": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "rattata": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "lotad": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "doublade": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "petilil": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "nihilego": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "shaymin": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "pikachu": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "applin": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "farfetchd": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "pancham": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "seismitoad": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "noivern": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "regieleki": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "deerling": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "hatenna": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "ledian": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "gothorita": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "crawdaunt": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "naclstack": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "armaldo": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "guzzlord": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "shuppet": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "patrat": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "bruxish": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "maractus": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "vibrava": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "gligar": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "sandile": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "medicham": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "weepinbell": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "toedscool": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "fidough": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "urshifu": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "sirfetchd": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "larvesta": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "sawsbuck": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "swellow": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "sinistea": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "skeledirge": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "espurr": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "piloswine": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "numel": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "tinglu": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "popplio": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "beheeyem": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "tarountula": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "ribombee": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "terapagos": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "kilowattrel": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "chikorita": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "quaquaval": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "primeape": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "dusclops": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "fuecoco": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "pichu": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "necrozma": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "farigiraf": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "aggron": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "nymble": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "vulpix": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "landorus": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "yanmega": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "raboot": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "rampardos": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "bewear": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "krookodile": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "floette": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "tirtouga": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "gourgeist": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "braviary": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "solosis": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "tandemaus": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "wimpod": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "mawile": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "pecharunt": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "torkoal": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "walrein": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "gogoat": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "dialga": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "pyukumuku": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "poliwag": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "unown": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "persian": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "dewott": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "primarina": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "pansage": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "finneon": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "corvisquire": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "gliscor": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "banette": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "jynx": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "pinsir": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "woobat": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "misdreavus": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "pidgey": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "enamorus": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "rhydon": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "gyarados": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "buzzwole": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "magearna": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "swoobat": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "hoopa": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "politoed": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "parasect": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "blastoise": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "wingull": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "magneton": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "clefairy": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "heracross": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "zapdos": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "passimian": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "amoonguss": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "cresselia": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "toxapex": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "toxtricity": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "tapufini": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "venomoth": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "zamazenta": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "dondozo": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "marill": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "qwilfish": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "bagon": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "seviper": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "drifblim": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "lombre": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "pupitar": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "darkrai": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "archaludon": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "sigilyph": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "clawitzer": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "slitherwing": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "rotom": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "mesprit": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "ekans": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "regirock": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "trevenant": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "cyndaquil": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "feebas": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "tinkatink": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "cosmoem": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "pincurchin": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "blipbug": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "vanillite": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "delibird": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "hydreigon": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "golurk": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "rookidee": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "groudon": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "swalot": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "darmanitan": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "joltik": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "frogadier": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "ogerpon": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "mienfoo": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "gengar": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "goldeen": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "froslass": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "lycanroc": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "brutebonnet": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "mantine": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "carracosta": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "yungoos": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "sharpedo": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "espeon": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "yamask": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "dolliv": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "tapulele": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "shroodle": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "snom": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "chingling": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "poipole": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "polteageist": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "wailmer": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "cramorant": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "aron": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "amaura": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "obstagoon": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "spiritomb": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "hoppip": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "mandibuzz": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "dragonite": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "machop": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "flygon": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "dunsparce": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "snubbull": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "xerneas": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "barraskewda": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "rhyhorn": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "lunala": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "volbeat": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "geodude": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "camerupt": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "koraidon": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "lapras": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "metang": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "sealeo": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "tapukoko": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "mightyena": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "noibat": {
     "moves": [],
     "abilities": [],
     "items": []
@@ -9144,572 +8014,17 @@
     "abilities": [],
     "items": []
   },
-  "togepi": {
+  "diancie": {
     "moves": [],
     "abilities": [],
     "items": []
   },
-  "unown": {
+  "weavile": {
     "moves": [],
     "abilities": [],
     "items": []
   },
-  "magnemite": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "grovyle": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "bibarel": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "geodude": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "spinda": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "lilligant": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "sirfetchd": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "arctibax": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "cloyster": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "talonflame": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "baltoy": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "slaking": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "dracovish": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "xerneas": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "totodile": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "keldeo": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "arboliva": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "grookey": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "mewtwo": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "scolipede": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "cyndaquil": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "cutiefly": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "golduck": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "marshtomp": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "raikou": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "roggenrola": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "coalossal": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "torkoal": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "pinsir": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "sunkern": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "wailord": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "torterra": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "vanilluxe": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "sinistea": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "zorua": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "galvantula": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "chiyu": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "roselia": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "dipplin": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "phione": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "typhlosion": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "miraidon": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "yamask": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "golurk": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "cacturne": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "shuckle": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "marshadow": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "numel": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "amaura": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "staravia": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "kadabra": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "lapras": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "garchomp": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "braixen": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "krookodile": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "quilladin": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "servine": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "rowlet": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "snubbull": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "whiscash": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "purrloin": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "golisopod": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "ragingbolt": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "clamperl": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "cufant": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "seedot": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "finneon": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "passimian": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "frillish": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "butterfree": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "cofagrigus": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "tyrantrum": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "cosmoem": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "togetic": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "goodra": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "haunter": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "nincada": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "hydreigon": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "masquerain": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "avalugg": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "azelf": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "sandslash": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "croconaw": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "steelix": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "cramorant": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "tentacruel": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "shroomish": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "decidueye": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "purugly": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "ledian": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "hoothoot": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "honedge": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "entei": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "swablu": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "golbat": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "tarountula": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "guzzlord": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "lampent": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "slakoth": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "victreebel": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "greedent": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "chienpao": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "buizel": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "squirtle": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "vileplume": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "uxie": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "machoke": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "delphox": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "staraptor": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "applin": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "sandshrew": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "caterpie": {
+  "charmander": {
     "moves": [],
     "abilities": [],
     "items": []
@@ -9719,272 +8034,122 @@
     "abilities": [],
     "items": []
   },
-  "slowking": {
+  "zekrom": {
     "moves": [],
     "abilities": [],
     "items": []
   },
-  "loudred": {
+  "celebi": {
     "moves": [],
     "abilities": [],
     "items": []
   },
-  "kingambit": {
+  "quilladin": {
     "moves": [],
     "abilities": [],
     "items": []
   },
-  "nidorino": {
+  "carbink": {
     "moves": [],
     "abilities": [],
     "items": []
   },
-  "armaldo": {
+  "wishiwashi": {
     "moves": [],
     "abilities": [],
     "items": []
   },
-  "espathra": {
+  "grookey": {
     "moves": [],
     "abilities": [],
     "items": []
   },
-  "kecleon": {
+  "arcanine": {
     "moves": [],
     "abilities": [],
     "items": []
   },
-  "vullaby": {
+  "mudkip": {
     "moves": [],
     "abilities": [],
     "items": []
   },
-  "samurott": {
+  "furret": {
     "moves": [],
     "abilities": [],
     "items": []
   },
-  "monferno": {
+  "togepi": {
     "moves": [],
     "abilities": [],
     "items": []
   },
-  "deoxys": {
+  "lickilicky": {
     "moves": [],
     "abilities": [],
     "items": []
   },
-  "meowth": {
+  "dedenne": {
     "moves": [],
     "abilities": [],
     "items": []
   },
-  "urshifu": {
+  "seadra": {
     "moves": [],
     "abilities": [],
     "items": []
   },
-  "sunflora": {
+  "crustle": {
     "moves": [],
     "abilities": [],
     "items": []
   },
-  "mamoswine": {
+  "ironjugulis": {
     "moves": [],
     "abilities": [],
     "items": []
   },
-  "zarude": {
+  "garbodor": {
     "moves": [],
     "abilities": [],
     "items": []
   },
-  "sneasler": {
+  "gothitelle": {
     "moves": [],
     "abilities": [],
     "items": []
   },
-  "kingdra": {
+  "meowstic": {
     "moves": [],
     "abilities": [],
     "items": []
   },
-  "delcatty": {
+  "dottler": {
     "moves": [],
     "abilities": [],
     "items": []
   },
-  "tsareena": {
+  "octillery": {
     "moves": [],
     "abilities": [],
     "items": []
   },
-  "murkrow": {
+  "ironcrown": {
     "moves": [],
     "abilities": [],
     "items": []
   },
-  "sylveon": {
+  "incineroar": {
     "moves": [],
     "abilities": [],
     "items": []
   },
-  "swalot": {
+  "sandslash": {
     "moves": [],
     "abilities": [],
     "items": []
   },
-  "blissey": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "flabebe": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "drampa": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "mesprit": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "elgyem": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "cosmog": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "dwebble": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "snover": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "bagon": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "glaceon": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "pikipek": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "meganium": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "smoliv": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "jumpluff": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "whimsicott": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "spheal": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "arceus": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "spidops": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "doublade": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "lechonk": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "lotad": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "raboot": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "gossifleur": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "dustox": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "shiftry": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "shinx": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "glimmet": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "lokix": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "combusken": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "pichu": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "frigibax": {
+  "azumarill": {
     "moves": [],
     "abilities": [],
     "items": []
@@ -9994,17 +8159,1192 @@
     "abilities": [],
     "items": []
   },
-  "sinistcha": {
+  "solrock": {
     "moves": [],
     "abilities": [],
     "items": []
   },
-  "mantine": {
+  "arctibax": {
     "moves": [],
     "abilities": [],
     "items": []
   },
-  "gourgeist": {
+  "croconaw": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "sylveon": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "azelf": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "durant": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "exploud": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "kadabra": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "onix": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "seedot": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "silcoon": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "furfrou": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "sobble": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "starmie": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "cyclizar": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "drilbur": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "regidrago": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "jumpluff": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "malamar": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "mimikyu": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "spheal": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "gastly": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "lileep": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "wynaut": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "leavanny": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "bombirdier": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "scorbunny": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "butterfree": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "palossand": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "tsareena": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "lunatone": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "arrokuda": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "ursaluna": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "dodrio": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "wyrdeer": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "articuno": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "celesteela": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "corviknight": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "honchkrow": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "torterra": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "servine": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "kabutops": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "cinccino": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "empoleon": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "stantler": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "tinkatuff": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "glimmora": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "flaaffy": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "bastiodon": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "castform": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "aromatisse": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "lilligant": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "smeargle": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "ludicolo": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "deoxys": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "electrike": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "scraggy": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "inkay": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "monferno": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "pelipper": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "girafarig": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "tepig": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "zebstrika": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "mrrime": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "ponyta": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "corphish": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "wugtrio": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "tynamo": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "centiskorch": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "grimmsnarl": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "mareanie": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "carnivine": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "dracozolt": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "aerodactyl": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "terrakion": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "exeggutor": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "axew": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "kingdra": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "drednaw": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "eelektross": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "staravia": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "unfezant": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "galvantula": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "dragapult": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "taillow": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "eldegoss": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "spinda": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "stakataka": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "prinplup": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "tentacool": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "morelull": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "shedinja": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "porygon": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "nidoranm": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "voltorb": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "gurdurr": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "arctovish": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "chimchar": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "hattrem": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "klink": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "bulbasaur": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "frillish": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "phanpy": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "wochien": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "alcremie": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "weezing": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "zygarde": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "stonjourner": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "weedle": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "bunnelby": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "chandelure": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "emolga": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "fraxure": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "luvdisc": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "magmar": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "tyrantrum": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "gossifleur": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "oddish": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "cutiefly": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "hydrapple": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "tentacruel": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "vanilluxe": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "steelix": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "bronzor": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "elgyem": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "infernape": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "seel": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "skitty": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "magcargo": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "beartic": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "wooloo": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "snorunt": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "cloyster": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "skiddo": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "meloetta": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "inteleon": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "appletun": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "basculegion": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "panpour": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "swinub": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "drizzile": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "eiscue": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "grimer": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "pyroar": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "greavard": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "poliwhirl": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "spoink": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "dreepy": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "combee": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "munchlax": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "simisear": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "wiglett": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "scrafty": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "sizzlipede": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "stoutland": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "klefki": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "druddigon": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "wigglytuff": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "basculin": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "phantump": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "arceus": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "glalie": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "cherubi": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "venusaur": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "dewgong": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "wailord": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "haunter": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "skrelp": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "staryu": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "linoone": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "ninetales": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "relicanth": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "tadbulb": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "uxie": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "entei": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "dudunsparce": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "rolycoly": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "togetic": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "kricketot": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "zweilous": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "clefable": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "clodsire": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "bellsprout": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "komala": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "azurill": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "moltres": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "gholdengo": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "leafeon": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "nidorino": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "abomasnow": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "drakloak": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "cubchoo": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "forretress": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "duraludon": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "bellossom": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "perrserker": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "skiploom": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "wurmple": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "screamtail": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "blaziken": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "garchomp": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "cacnea": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "ironhands": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "slowking": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "minccino": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "litten": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "orthworm": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "snorlax": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "turtwig": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "solgaleo": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "remoraid": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "graveler": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "clamperl": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "pidgeot": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "hitmontop": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "sawk": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "tangrowth": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "happiny": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "rockruff": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "simipour": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "tyrunt": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "sableye": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "porygon2": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "ursaring": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "crabominable": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "blitzle": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "sunkern": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "phione": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "poliwrath": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "poltchageist": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "shinx": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "hooh": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "barboach": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "virizion": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "golisopod": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "pineco": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "braixen": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "smoochum": {
     "moves": [],
     "abilities": [],
     "items": []
@@ -10019,242 +9359,7 @@
     "abilities": [],
     "items": []
   },
-  "impidimp": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "phanpy": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "solosis": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "hippopotas": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "magneton": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "trapinch": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "feraligatr": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "blipbug": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "grubbin": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "walkingwake": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "scatterbug": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "rhydon": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "kubfu": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "terapagos": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "pyroar": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "chimchar": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "heracross": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "bulbasaur": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "snorlax": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "banette": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "musharna": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "poipole": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "mightyena": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "venipede": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "shieldon": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "torracat": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "growlithe": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "quagsire": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "boltund": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "gothorita": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "rolycoly": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "dratini": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "bramblin": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "groudon": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "kabutops": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "ambipom": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "shuppet": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "budew": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "cubchoo": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "diglett": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "cradily": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "fomantis": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "sharpedo": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "helioptile": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "tapukoko": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "scovillain": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "maschiff": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "gurdurr": {
+  "swadloon": {
     "moves": [],
     "abilities": [],
     "items": []
@@ -10264,392 +9369,27 @@
     "abilities": [],
     "items": []
   },
-  "comfey": {
+  "flittle": {
     "moves": [],
     "abilities": [],
     "items": []
   },
-  "fearow": {
+  "cascoon": {
     "moves": [],
     "abilities": [],
     "items": []
   },
-  "houndstone": {
+  "yveltal": {
     "moves": [],
     "abilities": [],
     "items": []
   },
-  "lanturn": {
+  "cubone": {
     "moves": [],
     "abilities": [],
     "items": []
   },
-  "qwilfish": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "sandaconda": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "accelgor": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "zapdos": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "beedrill": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "venomoth": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "spiritomb": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "volbeat": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "munkidori": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "mabosstiff": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "rhyhorn": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "charcadet": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "lurantis": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "nymble": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "metagross": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "latias": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "forretress": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "swinub": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "remoraid": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "chansey": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "mudbray": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "pineco": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "azumarill": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "venonat": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "froakie": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "drapion": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "seaking": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "wingull": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "kingler": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "barraskewda": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "steenee": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "morelull": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "salazzle": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "orbeetle": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "yamper": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "milotic": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "sawsbuck": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "ferroseed": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "lumineon": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "ralts": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "pelipper": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "altaria": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "overqwil": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "simipour": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "fletchling": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "jellicent": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "tangrowth": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "vulpix": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "bergmite": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "mudkip": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "ninjask": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "whirlipede": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "kommoo": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "volcarona": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "beartic": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "snom": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "sudowoodo": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "ursaring": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "stoutland": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "litleo": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "chingling": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "naclstack": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "petilil": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "kleavor": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "slowbro": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "barbaracle": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "lucario": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "toxicroak": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "cherubi": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "girafarig": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "corphish": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "emboar": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "darmanitan": {
-    "moves": [],
-    "abilities": [],
-    "items": []
-  },
-  "dewgong": {
+  "grubbin": {
     "moves": [],
     "abilities": [],
     "items": []
@@ -10659,7 +9399,312 @@
     "abilities": [],
     "items": []
   },
-  "magmar": {
+  "makuhita": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "zarude": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "marshtomp": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "probopass": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "togedemaru": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "clobbopus": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "horsea": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "dwebble": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "comfey": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "beldum": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "lickitung": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "pangoro": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "arbok": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "pachirisu": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "psyduck": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "vespiquen": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "mew": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "throh": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "ironthorns": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "totodile": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "chimecho": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "plusle": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "clauncher": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "volcarona": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "copperajah": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "cleffa": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "shelgon": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "lampent": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "electivire": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "exeggcute": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "duosion": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "overqwil": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "alomomola": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "veluza": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "kecleon": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "lopunny": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "venonat": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "mudbray": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "frosmoth": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "gorebyss": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "tyranitar": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "sandshrew": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "zangoose": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "cobalion": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "swanna": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "lucario": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "kubfu": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "chespin": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "squawkabilly": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "whimsicott": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "coalossal": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "illumise": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "meowscarada": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "quaxwell": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "gimmighoul": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "kakuna": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "combusken": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "metagross": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "xatu": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "skuntank": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "araquanid": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "excadrill": {
     "moves": [],
     "abilities": [],
     "items": []
@@ -10669,12 +9714,997 @@
     "abilities": [],
     "items": []
   },
-  "nacli": {
+  "gulpin": {
     "moves": [],
     "abilities": [],
     "items": []
   },
-  "centiskorch": {
+  "hakamoo": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "swirlix": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "pawniard": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "magnezone": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "bounsweet": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "musharna": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "skorupi": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "skwovet": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "roselia": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "revavroom": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "helioptile": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "nincada": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "toucannon": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "hawlucha": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "aegislash": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "whiscash": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "boldore": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "golbat": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "toedscruel": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "raichu": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "fletchling": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "machoke": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "sliggoo": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "dipplin": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "minun": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "umbreon": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "quaxly": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "muk": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "koffing": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "naganadel": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "blacephalon": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "surskit": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "vikavolt": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "hariyama": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "tympole": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "shieldon": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "swablu": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "chatot": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "whirlipede": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "drifloon": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "gastrodon": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "shroomish": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "caterpie": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "noctowl": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "pawmi": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "gallade": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "kingler": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "zacian": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "annihilape": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "kleavor": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "archeops": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "magby": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "flabebe": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "okidogi": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "barbaracle": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "ironmoth": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "decidueye": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "delphox": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "manectric": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "honedge": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "tapubulu": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "cacturne": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "calyrex": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "genesect": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "golett": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "regigigas": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "grovyle": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "mudsdale": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "brionne": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "vivillon": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "bisharp": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "salandit": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "ferrothorn": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "hypno": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "sandyshocks": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "lugia": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "baltoy": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "purrloin": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "gothita": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "cosmog": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "goodra": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "oranguru": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "machamp": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "conkeldurr": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "eevee": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "paras": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "meowth": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "omastar": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "gougingfire": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "luxray": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "roserade": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "mankey": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "indeedee": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "mabosstiff": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "thundurus": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "burmy": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "heatran": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "mimejr": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "gigalith": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "latios": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "cofagrigus": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "aurorus": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "ambipom": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "bouffalant": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "hippowdon": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "nidoqueen": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "purugly": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "munna": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "reuniclus": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "morpeko": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "trumbeak": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "drapion": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "breloom": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "lechonk": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "aipom": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "metapod": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "staraptor": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "doduo": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "duskull": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "pawmot": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "charizard": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "sudowoodo": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "slurpuff": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "binacle": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "bellibolt": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "ragingbolt": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "steenee": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "typhlosion": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "rufflet": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "giratina": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "snivy": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "grapploct": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "fomantis": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "armarouge": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "treecko": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "flamigo": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "grafaiai": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "spinarak": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "marshadow": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "kabuto": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "beedrill": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "cetoddle": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "falinks": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "cinderace": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "raikou": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "diggersby": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "nidorina": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "cradily": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "houndstone": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "talonflame": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "jellicent": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "gabite": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "chienpao": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "diglett": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "glameow": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "mantyke": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "maushold": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "pidgeotto": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "lanturn": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "flapple": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "snover": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "chewtle": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "zigzagoon": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "cryogonal": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "seaking": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "flareon": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "archen": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "tangela": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "kricketune": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "toxel": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "corsola": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "houndoom": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "torracat": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "hippopotas": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "slowpoke": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "delcatty": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "meganium": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "rapidash": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "rowlet": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "escavalier": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "irontreads": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "omanyte": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "tropius": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "munkidori": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "walkingwake": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "thwackey": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "karrablast": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "pansear": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "bayleef": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "volcanion": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "samurott": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "glimmet": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "dewpider": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "ivysaur": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "sneasler": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "shellos": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "morgrem": {
+    "moves": [],
+    "abilities": [],
+    "items": []
+  },
+  "lurantis": {
     "moves": [],
     "abilities": [],
     "items": []
