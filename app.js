@@ -20,8 +20,9 @@ let currentName = "";
 const $   = q => document.querySelector(q);
 const show = el => el.style.display = "flex";
 const hide = el => el.style.display = "none";
+const toID = s => s.toLowerCase().replace(/[^a-z0-9]/g,'');
 
-/* ----- text-to-speech helper (unchanged) ---------- */
+/* ----- text-to-speech helper ---------- */
 function speakText(txt){
   if(!("speechSynthesis" in window) || !txt) return;
   try{ speechSynthesis.cancel(); }catch{}
@@ -45,14 +46,11 @@ const kgToLb = hg => {
 function renderUsage(u){
   const box = $("#stats-usage");
   box.innerHTML = "";
-
-  /* nothing came back (or slug not present) */
   if(!u || (!u.moves?.length && !u.abilities?.length && !u.items?.length)){
     box.style.display = "none";
     return;
   }
   box.style.display = "block";
-
   const sect = (label,list)=> {
     if(!list?.length) return;
     const span = document.createElement("span");
@@ -97,8 +95,8 @@ function renderStats(d){
   $("#stats-misc").textContent =
     `Height: ${mToFtIn(d.height)}   •   Weight: ${kgToLb(d.weight)}`;
 
-  /* fetch & render competitive usage ------------- */
-  fetch(`${window.API_BASE}api/usage/${d.name.toLowerCase()}`)
+  const slug = toID(d.name);
+  fetch(`${window.API_BASE}api/usage/${slug}`)
     .then(r=>r.ok?r.json():{})
     .then(renderUsage)
     .catch(()=>{});
@@ -132,7 +130,7 @@ $("#start").onclick = async () => {
   async function loop(){
     if(speaking || $("#prompt").style.display==="flex"
                  || $("#stats-panel").style.display==="flex")
-        return;
+      return;
 
     if(!cam.videoWidth) return requestAnimationFrame(loop);
 
@@ -174,14 +172,14 @@ $("#start").onclick = async () => {
 
   $("#btn-stats").onclick = async ()=>{
     hide($("#prompt"));
-    const d = await fetch(
-      `${window.API_BASE}api/pokemon/${currentName.toLowerCase()}`
-    ).then(r=>r.json());
+    const slug = toID(currentName);
+    const d = await fetch(`${window.API_BASE}api/pokemon/${slug}`)
+      .then(r=>r.json());
     renderStats({...d, name:currentName});
     show($("#stats-panel"));
 
     const speakTxt = d.description
-                 || (flavor[currentName.toLowerCase()]?.[0] || "");
+      || (flavor[currentName.toLowerCase()]?.[0] || "");
     speakText(speakTxt);
   };
   $("#btn-dismiss").onclick = ()=>{ hide($("#prompt")); requestAnimationFrame(loop); };
