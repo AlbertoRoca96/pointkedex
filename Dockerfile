@@ -15,7 +15,7 @@ ENV PIP_DISABLE_PIP_VERSION_CHECK=1 \
 # ---------- build-time args ----------
 ARG MODEL_NAME="pokedex_resnet50.h5"
 
-# Hugging Face Space (preferred)
+# Hugging Face Space first
 ARG HF_SPACE_REPO="AlbertoRoca96-web/pointkedex"
 ARG HF_TOKEN=""
 ARG HF_MODEL_URL=""
@@ -25,7 +25,7 @@ ARG GITHUB_REPO="AlbertoRoca96/pointkedex"
 ARG RELEASE_TAG="latest"
 ARG GITHUB_TOKEN=""
 
-# ---------- copy project (converter needs some code files) ----------
+# ---------- copy project (converter needs a few files) ----------
 COPY . /app
 
 # ---------- build-time Python & system deps ----------
@@ -34,8 +34,9 @@ RUN --mount=type=cache,target=/root/.cache/pip \
     apt-get update -yqq && \
     apt-get install -y --no-install-recommends curl ca-certificates jq && \
     pip install --no-cache-dir \
-        tensorflow-cpu==2.19.0 pillow \
-        tensorflowjs==4.14.0 \            # ← PINNED (avoids TF-DF crash)
+        tensorflow-cpu==2.19.0 \
+        pillow \
+        tensorflowjs==4.14.0 \
         torch==2.2.1 torchvision==0.17.1 torchaudio==2.2.1 ultralytics && \
     apt-get clean && rm -rf /var/lib/apt/lists/*
 
@@ -43,25 +44,18 @@ RUN --mount=type=cache,target=/root/.cache/pip \
 RUN set -eux; \
     got_model=""; \
     \
-    # 1) Space repo -----------------------------------------------------------
     space_raw="https://huggingface.co/spaces/${HF_SPACE_REPO}/resolve/main/${MODEL_NAME}"; \
-    echo "⇒ looking for model in Space ${HF_SPACE_REPO} …"; \
     if curl --head --silent --fail -H "Authorization: Bearer ${HF_TOKEN}" "${space_raw}" >/dev/null; then \
-        echo "✓ found in Space – downloading"; \
         curl -L -H "Authorization: Bearer ${HF_TOKEN}" -o "${MODEL_NAME}" "${space_raw}"; \
         got_model="yes"; \
     fi; \
     \
-    # 2) explicit HF_MODEL_URL -----------------------------------------------
     if [ -z "${got_model}" ] && [ -n "${HF_MODEL_URL}" ]; then \
-        echo "⇒ downloading model from custom HF_MODEL_URL"; \
         curl -L -H "Authorization: Bearer ${HF_TOKEN}" -o "${MODEL_NAME}" "${HF_MODEL_URL}"; \
         got_model="yes"; \
     fi; \
     \
-    # 3) GitHub release -------------------------------------------------------
     if [ -z "${got_model}" ]; then \
-        echo "⇒ downloading model from GitHub release"; \
         if [ "${RELEASE_TAG}" = "latest" ]; then \
             api="https://api.github.com/repos/${GITHUB_REPO}/releases/latest"; \
         else \
@@ -81,20 +75,18 @@ RUN set -eux; \
         fi; \
     fi; \
     \
-    # convert .h5 → TF-JS shards
     tensorflowjs_converter --input_format=keras "${MODEL_NAME}" web_model
 
 ############################  Stage 2 · runtime  ##############################
 FROM python:3.11-slim
 WORKDIR /app
 
-# ---------- environment hygiene ----------
 ENV PIP_DISABLE_PIP_VERSION_CHECK=1 \
     PYTHONDONTWRITEBYTECODE=1 \
     PYTHONUNBUFFERED=1 \
     PORT=7860 \
     TF_CPP_MIN_LOG_LEVEL=2 \
-    CUDA_VISIBLE_DEVICES=-1             
+    CUDA_VISIBLE_DEVICES=-1           
 
 # ---------- minimal system deps ----------
 RUN set -eux; \
@@ -110,10 +102,10 @@ RUN --mount=type=cache,target=/root/.cache/pip \
         torch==2.2.1 torchvision==0.17.1 ultralytics \
         requests requests-cache
 
-# ---------- app code & TF-JS model shards ----------
+# ---------- app code & TF-JS shards ----------
 COPY --from=builder /app /app
 
-# ---------- GPU-auto-detect shim (optional) ----------
+# ---------- GPU-auto-detect shim ----------
 RUN printf '%s\n' \
 '#!/usr/bin/env bash' \
 'set -e' \
