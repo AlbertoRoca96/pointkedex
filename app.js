@@ -21,7 +21,7 @@ const $   = q => document.querySelector(q);
 const show = el => el.style.display = "flex";
 const hide = el => el.style.display = "none";
 
-/* ----- text-to-speech helper (restored) ---------------- */
+/* ----- text-to-speech helper (unchanged) ---------- */
 function speakText(txt){
   if(!("speechSynthesis" in window) || !txt) return;
   try{ speechSynthesis.cancel(); }catch{}
@@ -31,15 +31,39 @@ function speakText(txt){
   speechSynthesis.speak(u);
 }
 
-/* ----- unit converters -------------------------------- */
+/* ----- unit converters ---------- */
 const mToFtIn = dm => {
-  const inches = dm * 3.937007874;                // 10 cm → dm
+  const inches = dm * 3.937007874;
   return `${Math.floor(inches/12)}'${Math.round(inches%12)}"`;
 };
 const kgToLb = hg => {
   const kg = hg / 10;
   return `${kg.toFixed(1)} kg (${(kg*2.205).toFixed(1)} lb)`;
 };
+
+/* ----- renderers ---------- */
+function renderUsage(u){
+  const box = $("#stats-usage");
+  box.innerHTML = "";
+  if(!u || (!u.moves && !u.abilities && !u.items)) return;
+
+  const sect = (label,list)=> {
+    if(!list?.length) return;
+    const span = document.createElement("span");
+    span.textContent = label+": ";
+    box.appendChild(span);
+    list.slice(0,6).forEach(v=>{
+      const t=document.createElement("span");
+      t.className="tag";
+      t.textContent=v;
+      box.appendChild(t);
+    });
+    box.appendChild(document.createElement("br"));
+  };
+  sect("Moves"    , u.moves);
+  sect("Abilities", u.abilities);
+  sect("Items"    , u.items);
+}
 
 function renderStats(d){
   $("#stats-name").textContent =
@@ -66,6 +90,12 @@ function renderStats(d){
 
   $("#stats-misc").textContent =
     `Height: ${mToFtIn(d.height)}   •   Weight: ${kgToLb(d.weight)}`;
+
+  /* fetch & render competitive usage ------------- */
+  fetch(`${window.API_BASE}api/usage/${d.name.toLowerCase()}`)
+    .then(r=>r.ok?r.json():{})
+    .then(renderUsage)
+    .catch(()=>{});
 }
 
 /* ---------- main ---------- */
@@ -144,7 +174,6 @@ $("#start").onclick = async () => {
     renderStats({...d, name:currentName});
     show($("#stats-panel"));
 
-    // speak description or fallback to first flavour text
     const speakTxt = d.description
                  || (flavor[currentName.toLowerCase()]?.[0] || "");
     speakText(speakTxt);
