@@ -52,7 +52,7 @@ ENV PIP_DISABLE_PIP_VERSION_CHECK=1 \
     PYTHONUNBUFFERED=1 \
     PORT=7860 \
     TF_CPP_MIN_LOG_LEVEL=2 \
-    CUDA_VISIBLE_DEVICES=-1          # <- make TF stick to CPU
+    CUDA_VISIBLE_DEVICES=-1
 
 RUN set -eux; \
     apt-get update -yqq && \
