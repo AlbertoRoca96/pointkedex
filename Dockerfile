@@ -13,11 +13,11 @@ ENV PIP_DISABLE_PIP_VERSION_CHECK=1 \
 
 # ─── build-time arguments ────────────────────────────────────────────────────
 ARG GITHUB_REPO="AlbertoRoca96/pointkedex"
-ARG RELEASE_TAG="latest"                       # or set to tag name
+ARG RELEASE_TAG="latest"                       
 ARG MODEL_NAME="pokedex_resnet50.h5"
 
-ARG HF_TOKEN=""                                # ← NEW  (optional)
-ARG HF_MODEL_URL=""                            # ← NEW  (optional)
+ARG HF_TOKEN=""                                
+ARG HF_MODEL_URL=""                            
 
 # need code here only for tensorflowjs_converter
 COPY . /app
@@ -63,7 +63,7 @@ ENV PIP_DISABLE_PIP_VERSION_CHECK=1 \
     PYTHONUNBUFFERED=1 \
     PORT=7860 \
     TF_CPP_MIN_LOG_LEVEL=2 \
-    CUDA_VISIBLE_DEVICES=-1             # keep TF from probing GPUs on HF CPU boxes
+    CUDA_VISIBLE_DEVICES=-1             
 
 # ---------- tiny system deps -------------------------------------------------
 RUN set -eux; \
