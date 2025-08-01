@@ -15,20 +15,20 @@ ENV PIP_DISABLE_PIP_VERSION_CHECK=1 \
 # ---------- build-time args ----------
 ARG MODEL_NAME="pokedex_resnet50.h5"
 
-# Hugging Face Space first
+# try Hugging Face Space first …
 ARG HF_SPACE_REPO="AlbertoRoca96-web/pointkedex"
 ARG HF_TOKEN=""
 ARG HF_MODEL_URL=""
 
-# GitHub fallback
+# … then fall back to GitHub release
 ARG GITHUB_REPO="AlbertoRoca96/pointkedex"
 ARG RELEASE_TAG="latest"
 ARG GITHUB_TOKEN=""
 
-# ---------- copy project (converter needs a few files) ----------
+# ---------- bring source in (converter needs it) ----------
 COPY . /app
 
-# ---------- build-time Python & system deps ----------
+# ---------- build-time system + Python deps ----------
 RUN --mount=type=cache,target=/root/.cache/pip \
     set -eux; \
     apt-get update -yqq && \
@@ -38,23 +38,22 @@ RUN --mount=type=cache,target=/root/.cache/pip \
         pillow \
         tensorflowjs==4.14.0 \
         torch==2.2.1 torchvision==0.17.1 torchaudio==2.2.1 ultralytics && \
+        
+    pip uninstall -y tensorflow_decision_forests && \
     apt-get clean && rm -rf /var/lib/apt/lists/*
 
-# ---------- download model & convert ----------
+# ---------- fetch model file & convert to TF-JS ----------
 RUN set -eux; \
     got_model=""; \
-    \
     space_raw="https://huggingface.co/spaces/${HF_SPACE_REPO}/resolve/main/${MODEL_NAME}"; \
     if curl --head --silent --fail -H "Authorization: Bearer ${HF_TOKEN}" "${space_raw}" >/dev/null; then \
         curl -L -H "Authorization: Bearer ${HF_TOKEN}" -o "${MODEL_NAME}" "${space_raw}"; \
         got_model="yes"; \
     fi; \
-    \
     if [ -z "${got_model}" ] && [ -n "${HF_MODEL_URL}" ]; then \
         curl -L -H "Authorization: Bearer ${HF_TOKEN}" -o "${MODEL_NAME}" "${HF_MODEL_URL}"; \
         got_model="yes"; \
     fi; \
-    \
     if [ -z "${got_model}" ]; then \
         if [ "${RELEASE_TAG}" = "latest" ]; then \
             api="https://api.github.com/repos/${GITHUB_REPO}/releases/latest"; \
@@ -74,7 +73,6 @@ RUN set -eux; \
             curl -L -o "${MODEL_NAME}" "${asset_url}"; \
         fi; \
     fi; \
-    \
     tensorflowjs_converter --input_format=keras "${MODEL_NAME}" web_model
 
 ############################  Stage 2 · runtime  ##############################
@@ -86,9 +84,9 @@ ENV PIP_DISABLE_PIP_VERSION_CHECK=1 \
     PYTHONUNBUFFERED=1 \
     PORT=7860 \
     TF_CPP_MIN_LOG_LEVEL=2 \
-    CUDA_VISIBLE_DEVICES=-1           
+    CUDA_VISIBLE_DEVICES=-1            
 
-# ---------- minimal system deps ----------
+# ---------- minimal OS libs ----------
 RUN set -eux; \
     apt-get update -yqq && \
     apt-get install -y --no-install-recommends \
@@ -102,10 +100,10 @@ RUN --mount=type=cache,target=/root/.cache/pip \
         torch==2.2.1 torchvision==0.17.1 ultralytics \
         requests requests-cache
 
-# ---------- app code & TF-JS shards ----------
+# ---------- copy app & model shards ----------
 COPY --from=builder /app /app
 
-# ---------- GPU-auto-detect shim ----------
+# ---------- optional GPU-detect shim ----------
 RUN printf '%s\n' \
 '#!/usr/bin/env bash' \
 'set -e' \
