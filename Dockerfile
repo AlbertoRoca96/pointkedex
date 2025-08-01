@@ -1,5 +1,14 @@
 # syntax=docker/dockerfile:1
+###############################################################################
+# Pointkedex – multi-stage image
+# 1) builder  : pulls the Keras model from GitHub releases and converts to TF-JS
+# 2) runtime  : slim Python base + minimal libs + auto-CPU fallback
+# Build with:  DOCKER_BUILDKIT=1  docker build -t pokedex-trainer .
+###############################################################################
 
+########################
+# ── Stage 1 : builder ─
+########################
 FROM python:3.11-slim AS builder
 WORKDIR /app
 
@@ -14,44 +23,55 @@ ARG MODEL_NAME="pokedex_resnet50.h5"
 
 COPY . /app
 
+# pip / apt cache mounts keep layers tiny (BuildKit required)
 RUN --mount=type=cache,target=/root/.cache/pip \
+    --mount=type=cache,target=/var/cache/apt \
+    --mount=type=cache,target=/var/lib/apt \
     set -eux; \
-    apt-get update && \
+    apt-get update -yqq && \
     apt-get install -y --no-install-recommends curl ca-certificates jq && \
     pip install --no-cache-dir \
         tensorflow pillow tensorflowjs \
         torch==2.2.1 torchvision==0.17.1 torchaudio==2.2.1 ultralytics && \
-    rm -rf /var/lib/apt/lists/*
+    apt-get clean && rm -rf /var/lib/apt/lists/*
 
+# grab model asset from GitHub release and export TF-JS files
 RUN set -eux; \
-    if [ "${RELEASE_TAG}" = "latest" ]; then \
-      api="https://api.github.com/repos/${GITHUB_REPO}/releases/latest"; \
-    else \
-      api="https://api.github.com/repos/${GITHUB_REPO}/releases/tags/${RELEASE_TAG}"; \
-    fi; \
-    header="Accept: application/vnd.github+json"; \
+    api="https://api.github.com/repos/${GITHUB_REPO}/releases"; \
+    [ "${RELEASE_TAG}" = "latest" ] || api="${api}/tags/${RELEASE_TAG}"; \
+    hdr="Accept: application/vnd.github+json"; \
     auth=""; \
-    if [ -n "${GITHUB_TOKEN}" ]; then \
-      auth="-H \"Authorization: token ${GITHUB_TOKEN}\""; \
-    fi; \
-    info=$(eval "curl -s -H '${header}' ${auth} \"${api}\""); \
-    url=$(echo "$info" | jq -r ".assets[] | select(.name==\"${MODEL_NAME}\") | .browser_download_url"); \
-    [ -n "$url" ] && [ "$url" != "null" ] || (echo "ERROR: asset not found"; exit 1); \
-    if [ -n "${GITHUB_TOKEN}" ]; then \
-      curl -L -H "Authorization: token ${GITHUB_TOKEN}" -o "${MODEL_NAME}" "$url"; \
-    else \
-      curl -L -o "${MODEL_NAME}" "$url"; \
-    fi; \
+    [ -z "${GITHUB_TOKEN}" ] || auth="-H \"Authorization: token ${GITHUB_TOKEN}\""; \
+    info=$(eval "curl -s ${auth} -H '${hdr}' \"${api}\""); \
+    url=$(echo "${info}" | jq -r ".assets[] | select(.name==\"${MODEL_NAME}\") | .browser_download_url"); \
+    [ -n "${url}" ] && [ "${url}" != "null" ] || { echo 'ERROR: asset not found'; exit 1; }; \
+    [ -z "${GITHUB_TOKEN}" ] \
+      && curl -L -o "${MODEL_NAME}" "${url}" \
+      || curl -L -H "Authorization: token ${GITHUB_TOKEN}" -o "${MODEL_NAME}" "${url}"; \
     tensorflowjs_converter --input_format=keras "${MODEL_NAME}" web_model
 
+#########################
+# ── Stage 2 : runtime ──
+#########################
 FROM python:3.11-slim
 WORKDIR /app
 
 ENV PIP_DISABLE_PIP_VERSION_CHECK=1 \
     PYTHONDONTWRITEBYTECODE=1 \
     PYTHONUNBUFFERED=1 \
-    PORT=7860
+    PORT=7860 \
+    MPLCONFIGDIR=/tmp \          # silence matplotlib cache warnings
+    TF_CPP_MIN_LOG_LEVEL=2
 
+# system libs needed by Pillow, OpenCV & speech
+RUN --mount=type=cache,target=/var/cache/apt \
+    --mount=type=cache,target=/var/lib/apt \
+    apt-get update -yqq && \
+    DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends \
+        libgl1 libglib2.0-0 espeak-ng libespeak-ng1 && \
+    apt-get clean && rm -rf /var/lib/apt/lists/*
+
+# python deps
 RUN --mount=type=cache,target=/root/.cache/pip \
     pip install --no-cache-dir \
         gunicorn flask flask-cors tensorflow pillow numpy \
@@ -59,5 +79,17 @@ RUN --mount=type=cache,target=/root/.cache/pip \
 
 COPY --from=builder /app /app
 
-EXPOSE 7860
-CMD gunicorn -b 0.0.0.0:${PORT:-7860} predict_server:app --workers 2 --threads 4 --timeout 120
+# entry-shim: if container isn’t launched with --gpus, force CPU
+RUN printf '%s\n' \
+'#!/usr/bin/env bash' \
+'set -e' \
+'if ! command -v nvidia-smi >/dev/null 2>&1; then' \
+'  echo "[INFO] NVIDIA runtime not detected – forcing CPU path."' \
+'  export CUDA_VISIBLE_DEVICES=""' \
+'fi' \
+'exec "$@"' > /entry.sh && chmod +x /entry.sh
+
+VOLUME ["/dev/shm"]
+
+ENTRYPOINT ["/entry.sh"]
+CMD ["gunicorn", "-b", "0.0.0.0:7860", "predict_server:app", "--workers", "2", "--threads", "4", "--timeout", "120"]
