@@ -1,9 +1,3 @@
-# syntax=docker/dockerfile:1
-###############################################################################
-# Pointkedex – HF Space image  (CPU-only; auto-fetch model)                   #
-###############################################################################
-
-############################  Stage 1 · builder  ##############################
 FROM python:3.11-slim AS builder
 WORKDIR /app
 
@@ -14,13 +8,13 @@ ENV PIP_DISABLE_PIP_VERSION_CHECK=1 \
 
 # ---------- build-time args ----------
 ARG MODEL_NAME="pokedex_resnet50.h5"
-ARG HF_SPACE_REPO="AlbertoRoca96-web/pointkedex"   # ← default = *this* Space
-ARG HF_TOKEN=""                                    # optional (private file)
-ARG HF_MODEL_URL=""                                # optional (custom URL)
+ARG HF_SPACE_REPO="AlbertoRoca96-web/pointkedex"   
+ARG HF_TOKEN=""                                    
+ARG HF_MODEL_URL=""                                
 
 ARG GITHUB_REPO="AlbertoRoca96/pointkedex"
 ARG RELEASE_TAG="latest"
-ARG GITHUB_TOKEN=""                                # optional, private release
+ARG GITHUB_TOKEN=""                                
 
 # ---------- copy project (for tfjs converter etc.) ----------
 COPY . /app
@@ -89,7 +83,7 @@ ENV PIP_DISABLE_PIP_VERSION_CHECK=1 \
     PYTHONUNBUFFERED=1 \
     PORT=7860 \
     TF_CPP_MIN_LOG_LEVEL=2 \
-    CUDA_VISIBLE_DEVICES=-1           # keep TF quiet about GPUs on CPU runners
+    CUDA_VISIBLE_DEVICES=-1           
 
 # ---------- minimal system deps ----------
 RUN set -eux; \
