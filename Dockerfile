@@ -1,8 +1,8 @@
 # syntax=docker/dockerfile:1
 ###############################################################################
 # Pointkedex – multi-stage image
-# 1) builder  : pulls the Keras model from GitHub releases and converts to TF-JS
-# 2) runtime  : slim Python base + minimal libs + auto-CPU fallback
+# 1) builder  : fetches Keras model asset + converts to TF-JS
+# 2) runtime  : slim Python base with auto-CPU fallback
 # Build with:  DOCKER_BUILDKIT=1  docker build -t pokedex-trainer .
 ###############################################################################
 
@@ -23,7 +23,6 @@ ARG MODEL_NAME="pokedex_resnet50.h5"
 
 COPY . /app
 
-# pip / apt cache mounts keep layers tiny (BuildKit required)
 RUN --mount=type=cache,target=/root/.cache/pip \
     --mount=type=cache,target=/var/cache/apt \
     --mount=type=cache,target=/var/lib/apt \
@@ -35,7 +34,6 @@ RUN --mount=type=cache,target=/root/.cache/pip \
         torch==2.2.1 torchvision==0.17.1 torchaudio==2.2.1 ultralytics && \
     apt-get clean && rm -rf /var/lib/apt/lists/*
 
-# grab model asset from GitHub release and export TF-JS files
 RUN set -eux; \
     api="https://api.github.com/repos/${GITHUB_REPO}/releases"; \
     [ "${RELEASE_TAG}" = "latest" ] || api="${api}/tags/${RELEASE_TAG}"; \
@@ -56,14 +54,14 @@ RUN set -eux; \
 FROM python:3.11-slim
 WORKDIR /app
 
+# one long ENV without inline comments
 ENV PIP_DISABLE_PIP_VERSION_CHECK=1 \
     PYTHONDONTWRITEBYTECODE=1 \
     PYTHONUNBUFFERED=1 \
     PORT=7860 \
-    MPLCONFIGDIR=/tmp \          # silence matplotlib cache warnings
+    MPLCONFIGDIR=/tmp \
     TF_CPP_MIN_LOG_LEVEL=2
 
-# system libs needed by Pillow, OpenCV & speech
 RUN --mount=type=cache,target=/var/cache/apt \
     --mount=type=cache,target=/var/lib/apt \
     apt-get update -yqq && \
@@ -71,7 +69,6 @@ RUN --mount=type=cache,target=/var/cache/apt \
         libgl1 libglib2.0-0 espeak-ng libespeak-ng1 && \
     apt-get clean && rm -rf /var/lib/apt/lists/*
 
-# python deps
 RUN --mount=type=cache,target=/root/.cache/pip \
     pip install --no-cache-dir \
         gunicorn flask flask-cors tensorflow pillow numpy \
@@ -79,7 +76,7 @@ RUN --mount=type=cache,target=/root/.cache/pip \
 
 COPY --from=builder /app /app
 
-# entry-shim: if container isn’t launched with --gpus, force CPU
+# auto-CPU shim
 RUN printf '%s\n' \
 '#!/usr/bin/env bash' \
 'set -e' \
