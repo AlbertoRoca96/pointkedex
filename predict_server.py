@@ -1,13 +1,17 @@
 from __future__ import annotations
+
 import base64, io, json, os, re, sys, time
 from collections import deque
 from pathlib import Path
 from typing import Any, Dict, Tuple
 
 # ─── silence every CUDA probe on CPU hosts ────────────────────────────────
+# Setting CUDA_VISIBLE_DEVICES to "-1" disables GPU access, which prevents
+# TensorFlow from attempting to initialise the CUDA runtime and eliminates
+# cuInit‑related errors when no GPU is available.
 os.environ.setdefault("CUDA_VISIBLE_DEVICES", "-1")   # no GPU → skip cuInit
+# Reduce TensorFlow logging verbosity.
 os.environ.setdefault("TF_CPP_MIN_LOG_LEVEL", "2")    # quiet TF logs
-# ───────────────────────────────────────────────────────────────────────────
 
 import numpy as np
 import tensorflow as tf
@@ -27,8 +31,8 @@ USAGE_PATH  = Path(os.getenv("USAGE_PATH", ROOT / "usage_data.json"))
 INPUT_SIZE  = (224, 224)
 CONF_THRESH = float(os.getenv("CONF_THRESH", 0.05))
 
-THRESH_CONF = 0.20       # ≥20 % conf
-STABLE_CNT  = 3          # …for 3 frames
+THRESH_CONF = 0.20       # ≥20 % confidence for stability
+STABLE_CNT  = 3          # consistent prediction over 3 frames
 
 # ────────────────────────────
 # Load model & data once
@@ -38,6 +42,11 @@ model = tf.keras.models.load_model(MODEL_PATH, compile=False)
 print("[✓] model ready", file=sys.stderr)
 
 def load_labels() -> Dict[int, str]:
+    """Load label mapping from class indices JSON.
+
+    The file may map indices to names or names to indices; this helper
+    normalises both formats into a dictionary keyed by index.
+    """
     raw = json.loads(LABEL_PATH.read_text('utf-8'))
     if all(k.isdigit() for k in raw):
         return {int(k): v for k, v in raw.items()}
@@ -50,7 +59,7 @@ POKEDEX  = json.loads(DEX_PATH.read_text('utf-8'))
 USAGE    = json.loads(USAGE_PATH.read_text('utf-8')) if USAGE_PATH.exists() else {}
 print(f"[✓] {len(IDX2NAME)} labels, {len(POKEDEX)} dex entries, {len(USAGE)} usage", file=sys.stderr)
 
-# helper to normalise Showdown ids  -------------------------
+# helper to normalise Showdown ids
 _RX_ID = re.compile(r"[^a-z0-9]+")
 def ps_id(name: str) -> str:
     return _RX_ID.sub("", name.lower())
@@ -62,17 +71,22 @@ app = Flask(__name__, static_folder=str(ROOT))
 CORS(app)
 
 _recent: Dict[str, deque[Tuple[int, float]]] = {}
-def cid() -> str:                       # client id for stability tracking
+def cid() -> str:
+    """Return a client identifier for stability tracking."""
     return request.headers.get("X-Client-ID", request.remote_addr or "anon")
 
 # ---------- static files ----------
 @app.route("/")
-def root(): return send_from_directory(str(ROOT), "index.html")
+def root() -> Any:
+    return send_from_directory(str(ROOT), "index.html")
+
 @app.route("/<path:p>")
-def static_file(p: str): return send_from_directory(str(ROOT), p)
+def static_file(p: str) -> Any:
+    return send_from_directory(str(ROOT), p)
 
 # ---------- image classifier ----------
 def preprocess(b64: str) -> np.ndarray:
+    """Decode a base64 JPEG/PNG into a preprocessed 224×224 RGB tensor."""
     if "," in b64:
         b64 = b64.split(",", 1)[1]
     rgb = Image.open(io.BytesIO(base64.b64decode(b64))).convert("RGB").resize(INPUT_SIZE)
@@ -93,11 +107,10 @@ def predict() -> Any:
         name = IDX2NAME.get(idx, "Unknown")
     except Exception as e:
         return jsonify({"error": str(e)}), 500
-
     dq = _recent.setdefault(cid(), deque(maxlen=STABLE_CNT))
     dq.append((idx, conf))
-    stable = len(dq)==STABLE_CNT and all(i==idx for i,_ in dq) and all(c>=THRESH_CONF for _,c in dq)
-    return jsonify({"name": name, "conf": round(conf,4), "stable": stable})
+    stable = len(dq) == STABLE_CNT and all(i == idx for i, _ in dq) and all(c >= THRESH_CONF for _, c in dq)
+    return jsonify({"name": name, "conf": round(conf, 4), "stable": stable})
 
 # ---------- pokédex stats ----------
 @app.route('/api/pokemon/<slug>')
@@ -112,8 +125,8 @@ def pokemon(slug: str) -> Any:
 @app.route('/api/usage/<slug>')
 @app.route('/pointkedex/api/usage/<slug>')
 def usage(slug: str) -> Any:
-    data = USAGE.get(slug.lower()) or USAGE.get(ps_id(slug))  # ← fallback
-    return jsonify(data or {})                               # always JSON
+    data = USAGE.get(slug.lower()) or USAGE.get(ps_id(slug))  # fallback to ps_id
+    return jsonify(data or {})  # always return JSON
 
 # ------------------------------------------------------------
 if __name__ == "__main__":
