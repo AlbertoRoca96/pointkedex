@@ -67,3 +67,4 @@ COPY --from=builder /app /app
 
 EXPOSE 7860
 CMD gunicorn -b 0.0.0.0:${PORT:-7860} predict_server:app --workers 2 --threads 4 --timeout 120
+
