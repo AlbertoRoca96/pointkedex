@@ -1,5 +1,5 @@
 from __future__ import annotations
-import base64, io, json, os, sys, time
+import base64, io, json, os, re, sys, time
 from collections import deque
 from pathlib import Path
 from typing import Any, Dict, Tuple
@@ -17,7 +17,7 @@ ROOT        = Path(__file__).resolve().parent
 MODEL_PATH  = Path(os.getenv("MODEL_PATH",  ROOT / "pokedex_resnet50.h5"))
 LABEL_PATH  = Path(os.getenv("LABELS_PATH", ROOT / "class_indices.json"))
 DEX_PATH    = Path(os.getenv("DEX_PATH",   ROOT / "pokedex_data.json"))
-USAGE_PATH  = Path(os.getenv("USAGE_PATH", ROOT / "usage_data.json"))  # NEW
+USAGE_PATH  = Path(os.getenv("USAGE_PATH", ROOT / "usage_data.json"))
 
 INPUT_SIZE  = (224, 224)
 CONF_THRESH = float(os.getenv("CONF_THRESH", 0.05))
@@ -45,6 +45,11 @@ POKEDEX  = json.loads(DEX_PATH.read_text('utf-8'))
 USAGE    = json.loads(USAGE_PATH.read_text('utf-8')) if USAGE_PATH.exists() else {}
 print(f"[✓] {len(IDX2NAME)} labels, {len(POKEDEX)} dex entries, {len(USAGE)} usage", file=sys.stderr)
 
+# helper to normalise show-down ids  -------------------------
+_RX_ID = re.compile(r"[^a-z0-9]+")
+def ps_id(name: str) -> str:
+    return _RX_ID.sub("", name.lower())
+
 # ────────────────────────────
 # Flask
 # ────────────────────────────
@@ -52,7 +57,7 @@ app = Flask(__name__, static_folder=str(ROOT))
 CORS(app)
 
 _recent: Dict[str, deque[Tuple[int, float]]] = {}
-def cid() -> str:  # client id for stability tracking
+def cid() -> str:                       # client id for stability tracking
     return request.headers.get("X-Client-ID", request.remote_addr or "anon")
 
 # ---------- static files ----------
@@ -71,7 +76,7 @@ def preprocess(b64: str) -> np.ndarray:
     return arr[None]
 
 @app.route('/api/predict', methods=['POST'])
-@app.route('/pointkedex/api/predict', methods=['POST'])  # GH-Pages sub-dir
+@app.route('/pointkedex/api/predict', methods=['POST'])
 def predict() -> Any:
     img = (request.get_json(silent=True) or {}).get("image")
     if not img:
@@ -86,8 +91,8 @@ def predict() -> Any:
 
     dq = _recent.setdefault(cid(), deque(maxlen=STABLE_CNT))
     dq.append((idx, conf))
-    stable = len(dq) == STABLE_CNT and all(i == idx for i, _ in dq) and all(c >= THRESH_CONF for _, c in dq)
-    return jsonify({"name": name, "conf": round(conf, 4), "stable": stable})
+    stable = len(dq)==STABLE_CNT and all(i==idx for i,_ in dq) and all(c>=THRESH_CONF for _,c in dq)
+    return jsonify({"name": name, "conf": round(conf,4), "stable": stable})
 
 # ---------- pokédex stats ----------
 @app.route('/api/pokemon/<slug>')
@@ -98,14 +103,15 @@ def pokemon(slug: str) -> Any:
         return jsonify({"error": "not found"}), 404
     return jsonify(data)
 
-# ---------- competitive usage (NEW) ----------
+# ---------- competitive usage ----------
 @app.route('/api/usage/<slug>')
 @app.route('/pointkedex/api/usage/<slug>')
 def usage(slug: str) -> Any:
-    data = USAGE.get(slug.lower(), {})
-    return jsonify(data)
+    data = USAGE.get(slug.lower()) or USAGE.get(ps_id(slug))  # ← fallback
+    # always return JSON (empty dict if unavailable) so client code is happy
+    return jsonify(data or {})
 
-# ----------------------------------------------------
+# ------------------------------------------------------------
 if __name__ == "__main__":
     port = int(os.getenv("PORT", 5000))
     app.run(host="0.0.0.0", port=port, debug=False)
