@@ -45,10 +45,3 @@ jobs:
             git commit -m "Sync app files from GitHub main"
             git push
           fi
-          git add -A
-          if git diff --cached --quiet; then
-            echo "No changes to push."
-          else
-            git commit -m "Sync app files from GitHub main"
-            git push
-          fi
