@@ -1,9 +1,8 @@
 # syntax=docker/dockerfile:1
 ###############################################################################
-# Pointkedex – multi-stage image
-# 1) builder  : fetches Keras model asset + converts to TF-JS
-# 2) runtime  : slim Python base with auto-CPU fallback
-# Build with:  DOCKER_BUILDKIT=1  docker build -t pokedex-trainer .
+# Pointkedex container
+# • Stage 1  (builder): fetch model from GitHub release → convert to TF-JS
+# • Stage 2  (runtime): slim Python + Flask/TensorFlow app
 ###############################################################################
 
 ########################
@@ -23,10 +22,7 @@ ARG MODEL_NAME="pokedex_resnet50.h5"
 
 COPY . /app
 
-RUN --mount=type=cache,target=/root/.cache/pip \
-    --mount=type=cache,target=/var/cache/apt \
-    --mount=type=cache,target=/var/lib/apt \
-    set -eux; \
+RUN set -eux; \
     apt-get update -yqq && \
     apt-get install -y --no-install-recommends curl ca-certificates jq && \
     pip install --no-cache-dir \
@@ -37,15 +33,10 @@ RUN --mount=type=cache,target=/root/.cache/pip \
 RUN set -eux; \
     api="https://api.github.com/repos/${GITHUB_REPO}/releases"; \
     [ "${RELEASE_TAG}" = "latest" ] || api="${api}/tags/${RELEASE_TAG}"; \
-    hdr="Accept: application/vnd.github+json"; \
-    auth=""; \
-    [ -z "${GITHUB_TOKEN}" ] || auth="-H \"Authorization: token ${GITHUB_TOKEN}\""; \
-    info=$(eval "curl -s ${auth} -H '${hdr}' \"${api}\""); \
+    info=$(curl -s -H "Accept: application/vnd.github+json" "${api}"); \
     url=$(echo "${info}" | jq -r ".assets[] | select(.name==\"${MODEL_NAME}\") | .browser_download_url"); \
     [ -n "${url}" ] && [ "${url}" != "null" ] || { echo 'ERROR: asset not found'; exit 1; }; \
-    [ -z "${GITHUB_TOKEN}" ] \
-      && curl -L -o "${MODEL_NAME}" "${url}" \
-      || curl -L -H "Authorization: token ${GITHUB_TOKEN}" -o "${MODEL_NAME}" "${url}"; \
+    curl -L -o "${MODEL_NAME}" "${url}"; \
     tensorflowjs_converter --input_format=keras "${MODEL_NAME}" web_model
 
 #########################
@@ -54,29 +45,25 @@ RUN set -eux; \
 FROM python:3.11-slim
 WORKDIR /app
 
-# one long ENV without inline comments
 ENV PIP_DISABLE_PIP_VERSION_CHECK=1 \
     PYTHONDONTWRITEBYTECODE=1 \
     PYTHONUNBUFFERED=1 \
-    PORT=7860 \
-    MPLCONFIGDIR=/tmp \
-    TF_CPP_MIN_LOG_LEVEL=2
+    PORT=7860
 
-RUN --mount=type=cache,target=/var/cache/apt \
-    --mount=type=cache,target=/var/lib/apt \
+# system libs for Pillow/tts
+RUN set -eux; \
     apt-get update -yqq && \
-    DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends \
+    apt-get install -y --no-install-recommends \
         libgl1 libglib2.0-0 espeak-ng libespeak-ng1 && \
     apt-get clean && rm -rf /var/lib/apt/lists/*
 
-RUN --mount=type=cache,target=/root/.cache/pip \
-    pip install --no-cache-dir \
+RUN pip install --no-cache-dir \
         gunicorn flask flask-cors tensorflow pillow numpy \
         torch==2.2.1 torchvision==0.17.1 ultralytics
 
 COPY --from=builder /app /app
 
-# auto-CPU shim
+# (optional) auto-CPU shim
 RUN printf '%s\n' \
 '#!/usr/bin/env bash' \
 'set -e' \
