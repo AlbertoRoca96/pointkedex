@@ -4,6 +4,11 @@ from collections import deque
 from pathlib import Path
 from typing import Any, Dict, Tuple
 
+# ─── silence every CUDA probe on CPU hosts ────────────────────────────────
+os.environ.setdefault("CUDA_VISIBLE_DEVICES", "-1")   # no GPU → skip cuInit
+os.environ.setdefault("TF_CPP_MIN_LOG_LEVEL", "2")    # quiet TF logs
+# ───────────────────────────────────────────────────────────────────────────
+
 import numpy as np
 import tensorflow as tf
 from PIL import Image
@@ -45,7 +50,7 @@ POKEDEX  = json.loads(DEX_PATH.read_text('utf-8'))
 USAGE    = json.loads(USAGE_PATH.read_text('utf-8')) if USAGE_PATH.exists() else {}
 print(f"[✓] {len(IDX2NAME)} labels, {len(POKEDEX)} dex entries, {len(USAGE)} usage", file=sys.stderr)
 
-# helper to normalise show-down ids  -------------------------
+# helper to normalise Showdown ids  -------------------------
 _RX_ID = re.compile(r"[^a-z0-9]+")
 def ps_id(name: str) -> str:
     return _RX_ID.sub("", name.lower())
@@ -108,8 +113,7 @@ def pokemon(slug: str) -> Any:
 @app.route('/pointkedex/api/usage/<slug>')
 def usage(slug: str) -> Any:
     data = USAGE.get(slug.lower()) or USAGE.get(ps_id(slug))  # ← fallback
-    # always return JSON (empty dict if unavailable) so client code is happy
-    return jsonify(data or {})
+    return jsonify(data or {})                               # always JSON
 
 # ------------------------------------------------------------
 if __name__ == "__main__":
