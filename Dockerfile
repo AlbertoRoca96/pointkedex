@@ -1,12 +1,11 @@
 # syntax=docker/dockerfile:1
-###########################################################################
+###############################################################################
 # Pointkedex – two-stage build
-#   • Stage 1  : fetch model + convert to TF-JS
-#   • Stage 2  : slim Flask/TensorFlow runtime
-# competitive usage is provided via usage_data.json already in the repo.
-###########################################################################
+#   • Stage 1 (builder): fetch model from GitHub release, convert to TF-JS
+#   • Stage 2 (runtime): slim Flask/TensorFlow server
+###############################################################################
 
-############################  Stage 1 – builder  ###########################
+############################  Stage 1 – builder  ##############################
 FROM python:3.11-slim AS builder
 WORKDIR /app
 
@@ -18,10 +17,10 @@ ENV PIP_DISABLE_PIP_VERSION_CHECK=1 \
 # ---------- build-time args ----------
 ARG GITHUB_TOKEN=""
 ARG GITHUB_REPO="AlbertoRoca96/pointkedex"
-ARG RELEASE_TAG="latest"
+ARG RELEASE_TAG="latest"                # or a specific tag
 ARG MODEL_NAME="pokedex_resnet50.h5"
 
-# ---------- copy repo sources ----------
+# ---------- copy source (usage_data.json etc.) ----------
 COPY . /app
 
 # ---------- system + Python build deps ----------
@@ -34,24 +33,28 @@ RUN set -eux; \
         torch==2.2.1 torchvision==0.17.1 torchaudio==2.2.1 ultralytics && \
     apt-get clean && rm -rf /var/lib/apt/lists/*
 
-# ---------- download .h5 from GitHub release & convert to web_model ----------
+# ---------- download model + convert ----------
 RUN set -eux; \
     api="https://api.github.com/repos/${GITHUB_REPO}/releases"; \
     if [ "${RELEASE_TAG}" != "latest" ]; then \
-      api="${api}/tags/${RELEASE_TAG}"; \
+        api="${api}/tags/${RELEASE_TAG}"; \
     fi; \
-    info=$(curl -s -H "Accept: application/vnd.github+json" "${api}"); \
-    url=$(echo "${info}" \
-          | jq -r --arg name "${MODEL_NAME}" '.assets[] | select(.name==$name) | .browser_download_url'); \
+    header="Accept: application/vnd.github+json"; \
+    rsp=$(curl -s -H "${header}" "${api}"); \
+    url=$(echo "${rsp}" | jq -r --arg name "${MODEL_NAME}" '.[].assets[]? | select(.name==$name) | .browser_download_url'); \
     [ -n "${url}" ] && [ "${url}" != "null" ] || { echo "ERROR: ${MODEL_NAME} not found"; exit 1; }; \
-    curl -L -o "${MODEL_NAME}" "${url}"; \
+    if [ -n "${GITHUB_TOKEN}" ]; then \
+        curl -L -H "Authorization: token ${GITHUB_TOKEN}" -o "${MODEL_NAME}" "${url}"; \
+    else \
+        curl -L -o "${MODEL_NAME}" "${url}"; \
+    fi; \
     tensorflowjs_converter --input_format=keras "${MODEL_NAME}" web_model
 
-############################  Stage 2 – runtime  ############################
+############################  Stage 2 – runtime  ##############################
 FROM python:3.11-slim
 WORKDIR /app
 
-# ---------- runtime environment ----------
+# ---------- environment ----------
 ENV PIP_DISABLE_PIP_VERSION_CHECK=1 \
     PYTHONDONTWRITEBYTECODE=1 \
     PYTHONUNBUFFERED=1 \
@@ -66,7 +69,7 @@ RUN set -eux; \
         libgl1 libglib2.0-0 espeak-ng libespeak-ng1 && \
     apt-get clean && rm -rf /var/lib/apt/lists/*
 
-# ---------- Python runtime deps ----------
+# ---------- runtime Python deps ----------
 RUN pip install --no-cache-dir \
         gunicorn flask flask-cors tensorflow pillow numpy \
         torch==2.2.1 torchvision==0.17.1 ultralytics \
@@ -75,7 +78,7 @@ RUN pip install --no-cache-dir \
 # ---------- copy artifacts from builder ----------
 COPY --from=builder /app /app
 
-# ---------- shim: silently fall back to CPU if container has no GPU ----------
+# ---------- GPU→CPU shim (silent fallback) ----------
 RUN printf '%s\n' \
 '#!/usr/bin/env bash' \
 'set -e' \
