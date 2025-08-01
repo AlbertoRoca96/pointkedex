@@ -30,6 +30,18 @@ canvas{display:none}
 #stats-table td{padding:4px;font-size:.9rem}
 #stats-table tr:nth-child(even){background:#2b2b2b}
 
-/* ---------- usage section ---------- */
-#stats-usage{margin-top:8px;font-size:.9rem;line-height:1.4}
-#stats-usage .tag{display:inline-block;background:#444;border-radius:4px;padding:2px 6px;margin:2px}
+/* ---------- competitive usage ---------- */
+#stats-usage{
+  margin:10px 0 4px;
+  font-size:.85rem;
+  line-height:1.4;
+}
+#stats-usage .tag{
+  display:inline-block;
+  margin:0 4px 4px 0;
+  padding:2px 6px;
+  border-radius:4px;
+  background:#444;
+  color:#fff;
+  text-transform:capitalize;
+}
