@@ -2,7 +2,7 @@
    Pointkedex Service Worker
    ───────────────────────── */
 
-const CACHE_VERSION = 'v5';
+const CACHE_VERSION = 'v3';
 const CACHE_NAME    = `pointkedex-${CACHE_VERSION}`;
 
 /* ---------------------------
