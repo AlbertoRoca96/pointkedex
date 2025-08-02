@@ -1,5 +1,4 @@
 # syntax=docker/dockerfile:1
-
 FROM python:3.11-slim AS builder
 WORKDIR /app
 
@@ -14,7 +13,6 @@ ARG MODEL_NAME="pokedex_resnet50.h5"
 
 COPY . /app
 
-# ─── install build deps + ML libs (unchanged packages) ────────────────────
 RUN --mount=type=cache,target=/root/.cache/pip \
     set -eux; \
     apt-get update && \
@@ -24,7 +22,6 @@ RUN --mount=type=cache,target=/root/.cache/pip \
         torch==2.2.1 torchvision==0.17.1 torchaudio==2.2.1 ultralytics && \
     rm -rf /var/lib/apt/lists/*
 
-# ─── fetch .h5 from GitHub release and convert to TF-JS ───────────────────
 RUN set -eux; \
     if [ "${RELEASE_TAG}" = "latest" ]; then \
       api="https://api.github.com/repos/${GITHUB_REPO}/releases/latest"; \
@@ -50,14 +47,13 @@ FROM python:3.11-slim
 WORKDIR /app
 
 ENV PIP_DISABLE_PIP_VERSION_CHECK=1 \
-    PYTHONDONTWRITEBYTECODE=1 \
-    PYTHONUNBUFFERED=1 \
-    PORT=7860 \
-    CUDA_VISIBLE_DEVICES=-1 \
-    TF_CPP_MIN_LOG_LEVEL=2 \
+    PYTHONDONTWRITEBYTECODE=1   \
+    PYTHONUNBUFFERED=1          \
+    PORT=7860                   \
+    CUDA_VISIBLE_DEVICES=-1     \
+    TF_CPP_MIN_LOG_LEVEL=2      \
     MPLCONFIGDIR=/tmp/mpl
 
-# ─── runtime deps (unchanged packages) ────────────────────────────────────
 RUN --mount=type=cache,target=/root/.cache/pip \
     pip install --no-cache-dir \
         gunicorn flask flask-cors tensorflow pillow numpy \
@@ -67,4 +63,3 @@ COPY --from=builder /app /app
 
 EXPOSE 7860
 CMD gunicorn -b 0.0.0.0:${PORT:-7860} predict_server:app --workers 2 --threads 4 --timeout 120
-
