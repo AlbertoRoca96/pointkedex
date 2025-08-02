@@ -5,101 +5,137 @@ const RESUME_MS = 6000;
 const JPEG_QUAL = 0.85;
 
 /* ---------- globals ---------- */
-let flavor = {}, labels = [];
-let last = -1, same = 0, speaking = false;
+let flavor = {};
+let labels = [];
+let last = -1;
+let same = 0;
+let speaking = false;
 let currentName = "";
+let promptVisible = false;
+let predictController = null;
 
 /* ---------- preload assets ---------- */
-(async () => {
-  flavor = await fetch("flavor_text.json").then(r => r.json());
-  labels = Object.entries(await fetch("class_indices.json").then(r => r.json()))
-                 .reduce((a,[n,i]) => (a[i]=n, a), []);
-})();
+async function loadAssets() {
+  try {
+    const [flavResp, classResp] = await Promise.all([
+      fetch("flavor_text.json"),
+      fetch("class_indices.json"),
+    ]);
+    flavor = flavResp.ok ? await flavResp.json() : {};
+    const classIndices = classResp.ok ? await classResp.json() : {};
+    labels = [];
+    if (classIndices && typeof classIndices === "object") {
+      for (const [name, idx] of Object.entries(classIndices)) {
+        if (typeof idx === "number") {
+          labels[idx] = name;
+        } else if (!isNaN(Number(name))) {
+          labels[Number(name)] = idx;
+        }
+      }
+    }
+  } catch (e) {
+    console.warn("[app.js] asset preload failed:", e);
+  }
+}
 
 /* ---------- helpers ---------- */
-const $   = q => document.querySelector(q);
-const show = el => el.style.display = "flex";
-const hide = el => el.style.display = "none";
-const toID = s => s.toLowerCase().replace(/[^a-z0-9]/g,'');
+const $ = q => document.querySelector(q);
+const show = el => { if (el) el.style.display = "flex"; };
+const hide = el => { if (el) el.style.display = "none"; };
+const toID = s => (typeof s === "string" ? s.toLowerCase().replace(/[^a-z0-9]/g, "") : "");
+const makeUrl = path => {
+  const base = (window.API_BASE || "").replace(/\/+$/, "");
+  return `${base}/${path.replace(/^\/+/, "")}`;
+};
 const debug = (...args) => console.debug("[app.js]", ...args);
 
 /* ----- text-to-speech helper ---------- */
-function speakText(txt){
-  if(!("speechSynthesis" in window) || !txt) return;
-  try{ speechSynthesis.cancel(); }catch{}
+function speakText(txt) {
+  if (!("speechSynthesis" in window) || !txt) return;
+  try { speechSynthesis.cancel(); } catch {}
   speaking = true;
   const u = new SpeechSynthesisUtterance(txt);
-  u.onend = u.onerror = () => { speaking = false; requestAnimationFrame(loop); };
+  u.onend = u.onerror = () => {
+    speaking = false;
+    requestAnimationFrame(loop);
+  };
   speechSynthesis.speak(u);
 }
 
 /* ----- unit converters ---------- */
 const mToFtIn = dm => {
   const inches = dm * 3.937007874;
-  return `${Math.floor(inches/12)}'${Math.round(inches%12)}"`;
+  return `${Math.floor(inches / 12)}'${Math.round(inches % 12)}"`;
 };
 const kgToLb = hg => {
   const kg = hg / 10;
-  return `${kg.toFixed(1)} kg (${(kg*2.205).toFixed(1)} lb)`;
+  return `${kg.toFixed(1)} kg (${(kg * 2.205).toFixed(1)} lb)`;
 };
 
 /* ----- renderers ---------- */
-function renderUsage(u){
+function renderUsage(u) {
   const box = $("#stats-usage");
+  if (!box) return;
   box.innerHTML = "";
-  if(!u || (!u.moves?.length && !u.abilities?.length && !u.items?.length)){
+  if (!u || (!u.moves?.length && !u.abilities?.length && !u.items?.length)) {
     box.style.display = "none";
     debug("no usage data to render", u);
     return;
   }
   box.style.display = "block";
-  const sect = (label,list)=> {
-    if(!list?.length) return;
+  const sect = (label, list) => {
+    if (!list?.length) return;
     const span = document.createElement("span");
-    span.textContent = label+": ";
+    span.textContent = label + ": ";
     box.appendChild(span);
-    list.slice(0,6).forEach(v=>{
-      const t=document.createElement("span");
-      t.className="tag";
-      t.textContent=v;
+    list.slice(0, 6).forEach(v => {
+      const t = document.createElement("span");
+      t.className = "tag";
+      t.textContent = v;
       box.appendChild(t);
     });
     box.appendChild(document.createElement("br"));
   };
-  sect("Moves"    , u.moves);
+  sect("Moves", u.moves);
   sect("Abilities", u.abilities);
-  sect("Items"    , u.items);
+  sect("Items", u.items);
 }
 
-function renderStats(d){
+function renderStats(d) {
   $("#stats-name").textContent =
-    `${d.name}  (#${String(d.dex).padStart(4,"0")})`;
-  $("#stats-desc").textContent = d.description;
+    `${d.name}  (#${String(d.dex).padStart(4, "0")})`;
+  $("#stats-desc").textContent = d.description || "";
 
-  const types = $("#stats-types"); types.innerHTML="";
-  (d.types||[]).forEach(t=>{
-    const s=document.createElement("span");
-    s.className="type";
-    s.textContent=t;
-    types.appendChild(s);
-  });
+  const types = $("#stats-types");
+  if (types) {
+    types.innerHTML = "";
+    (d.types || []).forEach(t => {
+      const s = document.createElement("span");
+      s.className = "type";
+      s.textContent = t;
+      types.appendChild(s);
+    });
+  }
 
   $("#stats-abilities").textContent =
-    `Abilities: ${(d.abilities||[]).join(", ")}`;
+    `Abilities: ${(d.abilities || []).join(", ")}`;
 
-  const tbl=$("#stats-table"); tbl.innerHTML="";
-  Object.entries(d.base_stats||{}).forEach(([k,v])=>{
-    const tr=document.createElement("tr");
-    tr.innerHTML=`<td>${k}</td><td>${v}</td>`;
-    tbl.appendChild(tr);
-  });
+  const tbl = $("#stats-table");
+  if (tbl) {
+    tbl.innerHTML = "";
+    Object.entries(d.base_stats || {}).forEach(([k, v]) => {
+      const tr = document.createElement("tr");
+      tr.innerHTML = `<td>${k}</td><td>${v}</td>`;
+      tbl.appendChild(tr);
+    });
+  }
 
   $("#stats-misc").textContent =
     `Height: ${mToFtIn(d.height)}   •   Weight: ${kgToLb(d.weight)}`;
 
   const slug = toID(d.name);
   debug("fetching usage for", d.name, "slug:", slug);
-  fetch(`${window.API_BASE}api/usage/${slug}`)
+  fetch(makeUrl(`api/usage/${slug}`))
     .then(r => {
       if (!r.ok) {
         console.warn("[usage] request failed:", r.status, r.statusText, "for slug", slug);
@@ -116,93 +152,183 @@ function renderStats(d){
     });
 }
 
-/* ---------- main ---------- */
-$("#start").onclick = async () => {
-  if ("speechSynthesis" in window)
-    try{ speechSynthesis.speak(new SpeechSynthesisUtterance("")); }catch{}
-  $("#start").style.display = "none";
+/* ---------- core loop ---------- */
+async function loop() {
+  if (speaking || promptVisible || $("#stats-panel")?.style.display === "flex") return;
 
-  const cam=$("#cam"), work=$("#worker"), label=$("#label");
-  const endpoint = (window.API_BASE||"") + "api/predict";
+  const cam = $("#cam"), work = $("#worker"), label = $("#label");
+  if (!cam || !work || !label) return;
+  if (!cam.videoWidth) return requestAnimationFrame(loop);
 
-  async function openCam(){
-    const ideal={facingMode:"environment",width:{ideal:1280},height:{ideal:720}};
-    try{ return await navigator.mediaDevices.getUserMedia({video:ideal}); }
-    catch{
-      const dev=await navigator.mediaDevices.enumerateDevices();
-      const rear=dev.find(d=>d.kind==="videoinput" && /back/i.test(d.label));
-      return navigator.mediaDevices.getUserMedia({
-        video:{deviceId:{exact:rear.deviceId},width:1280,height:720}
-      });
-    }
+  const portrait = cam.videoHeight > cam.videoWidth;
+  const s = portrait ? cam.videoWidth : cam.videoHeight;
+  work.width = work.height = s;
+  const ctx = work.getContext("2d");
+
+  if (portrait) {
+    ctx.save();
+    ctx.translate(0, s);
+    ctx.rotate(-Math.PI / 2);
+    ctx.drawImage(
+      cam,
+      (cam.videoHeight - s) / 2,
+      (cam.videoWidth - s) / 2,
+      s,
+      s,
+      0,
+      0,
+      s,
+      s
+    );
+    ctx.restore();
+  } else {
+    ctx.drawImage(
+      cam,
+      (cam.videoWidth - s) / 2,
+      (cam.videoHeight - s) / 2,
+      s,
+      s,
+      0,
+      0,
+      s,
+      s
+    );
   }
-  try{ cam.srcObject = await openCam(); await cam.play(); }
-  catch(e){ $("#alert").textContent = e.message; return; }
+
+  const jpeg = work.toDataURL("image/jpeg", JPEG_QUAL);
+  const endpoint = makeUrl("api/predict");
+
+  // cancel previous in-flight prediction if any (best practice: abort previous fetch). :contentReference[oaicite:1]{index=1}
+  if (predictController) {
+    predictController.abort();
+  }
+  predictController = new AbortController();
+  const signal = predictController.signal;
+
+  let response;
+  try {
+    response = await fetch(endpoint, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ image: jpeg }),
+      signal,
+    });
+  } catch (e) {
+    if (e.name === "AbortError") {
+      // expected when a newer frame cancels previous request. :contentReference[oaicite:2]{index=2}
+      return;
+    }
+    console.warn("[predict] network error", e);
+    return requestAnimationFrame(loop);
+  }
+
+  if (!response.ok) {
+    return requestAnimationFrame(loop);
+  }
+
+  let payload;
+  try {
+    payload = await response.json();
+  } catch (e) {
+    console.warn("[predict] parse error", e);
+    return requestAnimationFrame(loop);
+  }
+
+  const { name = "", conf = 0, stable = false } = payload;
+  label.textContent = `${name} ${(conf * 100).toFixed(1)} %`;
+
+  const idx = labels.indexOf(name);
+  same = idx === last ? same + 1 : 1;
+  last = idx;
+  const ready = stable === true || (same >= STABLE_N && conf >= CONF_THR);
+  if (ready && name) {
+    currentName = name;
+    promptUser(name, conf);
+  } else {
+    requestAnimationFrame(loop);
+  }
+}
+
+/* ---------- prompt + UI wiring ---------- */
+function promptUser(n, c) {
+  const promptEl = $("#prompt");
+  if (!promptEl) return;
+  $("#prompt-text").textContent =
+    `Looks like ${n} (${(c * 100).toFixed(1)}%). Show its stats?`;
+  show(promptEl);
+  promptVisible = true;
+}
+
+/* ---------- main entry ---------- */
+$("#start").onclick = async () => {
+  if ("speechSynthesis" in window) {
+    try { speechSynthesis.speak(new SpeechSynthesisUtterance("")); } catch {}
+  }
+  hide($("#start"));
+
+  await loadAssets();
+
+  const cam = $("#cam");
+  const openCam = async () => {
+    const ideal = { facingMode: "environment", width: { ideal: 1280 }, height: { ideal: 720 } };
+    try {
+      return await navigator.mediaDevices.getUserMedia({ video: ideal });
+    } catch {
+      const dev = await navigator.mediaDevices.enumerateDevices();
+      const rear = dev.find(d => d.kind === "videoinput" && /back/i.test(d.label));
+      if (rear) {
+        return navigator.mediaDevices.getUserMedia({
+          video: { deviceId: { exact: rear.deviceId }, width: 1280, height: 720 },
+        });
+      }
+      return navigator.mediaDevices.getUserMedia({ video: true });
+    }
+  };
+
+  try {
+    cam.srcObject = await openCam();
+    await cam.play();
+  } catch (e) {
+    $("#alert").textContent = e?.message || "Failed to open camera";
+    return;
+  }
 
   requestAnimationFrame(loop);
+};
 
-  async function loop(){
-    if(speaking || $("#prompt").style.display==="flex"
-                 || $("#stats-panel").style.display==="flex")
-      return;
+/* ---------- button handlers ---------- */
+$("#btn-stats").onclick = async () => {
+  hide($("#prompt"));
+  promptVisible = false;
 
-    if(!cam.videoWidth) return requestAnimationFrame(loop);
-
-    const p = cam.videoHeight > cam.videoWidth;
-    const s = p ? cam.videoWidth : cam.videoHeight;
-    work.width = work.height = s;
-    const ctx = work.getContext("2d");
-    if(p){
-      ctx.save(); ctx.translate(0,s); ctx.rotate(-Math.PI/2);
-      ctx.drawImage(cam,(cam.videoHeight-s)/2,(cam.videoWidth-s)/2,s,s,0,0,s,s);
-      ctx.restore();
-    }else{
-      ctx.drawImage(cam,(cam.videoWidth-s)/2,(cam.videoHeight-s)/2,s,s,0,0,s,s);
+  const slug = toID(currentName);
+  debug("stats requested for", currentName, "slug:", slug);
+  let d = {};
+  try {
+    const r = await fetch(makeUrl(`api/pokemon/${slug}`));
+    if (r.ok) {
+      d = await r.json();
+    } else {
+      console.warn("pokemon fetch failed", r.status, r.statusText);
     }
-
-    const jpeg = work.toDataURL("image/jpeg",JPEG_QUAL);
-    const r = await fetch(endpoint,{
-      method:"POST",
-      headers:{"Content-Type":"application/json"},
-      body:JSON.stringify({image:jpeg})
-    });
-    if(!r.ok) return requestAnimationFrame(loop);
-
-    const {name,conf,stable} = await r.json();
-    label.textContent = `${name} ${(conf*100).toFixed(1)} %`;
-
-    const idx = labels.indexOf(name);
-    same = idx===last ? same+1 : 1;   last = idx;
-    const ready = stable===true ? true : (same>=STABLE_N && conf>=CONF_THR);
-    if(ready){ currentName=name; promptUser(name,conf); }
-    else requestAnimationFrame(loop);
+  } catch (e) {
+    console.warn("pokemon fetch error", e);
   }
 
-  function promptUser(n,c){
-    $("#prompt-text").textContent =
-      `Looks like ${n} (${(c*100).toFixed(1)}%). Show its stats?`;
-    show($("#prompt"));
-  }
+  renderStats({ ...d, name: currentName });
+  show($("#stats-panel"));
 
-  $("#btn-stats").onclick = async ()=>{
-    hide($("#prompt"));
-    const slug = toID(currentName);
-    debug("stats requested for", currentName, "slug:", slug);
-    const d = await fetch(`${window.API_BASE}api/pokemon/${slug}`)
-      .then(r => {
-        if (!r.ok) {
-          console.warn("pokemon fetch failed", r.status, r.statusText);
-          return {};
-        }
-        return r.json();
-      });
-    renderStats({...d, name:currentName});
-    show($("#stats-panel"));
+  const speakTxt = d.description || (flavor[currentName.toLowerCase()]?.[0] || "");
+  speakText(speakTxt); // ensure speech synthesis cancellation logic handles rest. :contentReference[oaicite:3]{index=3}
+};
 
-    const speakTxt = d.description
-      || (flavor[currentName.toLowerCase()]?.[0] || "");
-    speakText(speakTxt);
-  };
-  $("#btn-dismiss").onclick = ()=>{ hide($("#prompt")); requestAnimationFrame(loop); };
-  $("#stats-close").onclick  = ()=>{ hide($("#stats-panel")); requestAnimationFrame(loop); };
+$("#btn-dismiss").onclick = () => {
+  hide($("#prompt"));
+  promptVisible = false;
+  requestAnimationFrame(loop);
+};
+
+$("#stats-close").onclick = () => {
+  hide($("#stats-panel"));
+  requestAnimationFrame(loop);
 };
