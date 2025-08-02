@@ -21,6 +21,7 @@ const $   = q => document.querySelector(q);
 const show = el => el.style.display = "flex";
 const hide = el => el.style.display = "none";
 const toID = s => s.toLowerCase().replace(/[^a-z0-9]/g,'');
+const debug = (...args) => console.debug("[app.js]", ...args);
 
 /* ----- text-to-speech helper ---------- */
 function speakText(txt){
@@ -48,6 +49,7 @@ function renderUsage(u){
   box.innerHTML = "";
   if(!u || (!u.moves?.length && !u.abilities?.length && !u.items?.length)){
     box.style.display = "none";
+    debug("no usage data to render", u);
     return;
   }
   box.style.display = "block";
@@ -96,10 +98,22 @@ function renderStats(d){
     `Height: ${mToFtIn(d.height)}   •   Weight: ${kgToLb(d.weight)}`;
 
   const slug = toID(d.name);
+  debug("fetching usage for", d.name, "slug:", slug);
   fetch(`${window.API_BASE}api/usage/${slug}`)
-    .then(r=>r.ok?r.json():{})
-    .then(renderUsage)
-    .catch(()=>{});
+    .then(r => {
+      if (!r.ok) {
+        console.warn("[usage] request failed:", r.status, r.statusText, "for slug", slug);
+        return {};
+      }
+      return r.json();
+    })
+    .then(u => {
+      debug("usage payload for", slug, u);
+      renderUsage(u);
+    })
+    .catch(e => {
+      console.warn("[usage] fetch error for slug", slug, e);
+    });
 }
 
 /* ---------- main ---------- */
@@ -173,8 +187,15 @@ $("#start").onclick = async () => {
   $("#btn-stats").onclick = async ()=>{
     hide($("#prompt"));
     const slug = toID(currentName);
+    debug("stats requested for", currentName, "slug:", slug);
     const d = await fetch(`${window.API_BASE}api/pokemon/${slug}`)
-      .then(r=>r.json());
+      .then(r => {
+        if (!r.ok) {
+          console.warn("pokemon fetch failed", r.status, r.statusText);
+          return {};
+        }
+        return r.json();
+      });
     renderStats({...d, name:currentName});
     show($("#stats-panel"));
 
