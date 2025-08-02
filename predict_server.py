@@ -38,15 +38,20 @@ def load_labels() -> Dict[int, str]:
 
 IDX2NAME = load_labels()
 POKEDEX  = json.loads(DEX_PATH.read_text("utf-8"))
-USAGE    = json.loads(USAGE_PATH.read_text("utf-8")) if USAGE_PATH.exists() else {}
-print(f"[✓] {len(IDX2NAME)} labels, {len(POKEDEX)} dex entries, {len(USAGE)} usage", file=sys.stderr)
+_raw_usage = json.loads(USAGE_PATH.read_text("utf-8")) if USAGE_PATH.exists() else {}
 
-_RX_ID = re.compile(r"[^a-z0-9]+")
+print(f"[✓] {len(IDX2NAME)} labels, {len(POKEDEX)} dex entries, {len(_raw_usage)} usage (raw)", file=sys.stderr)
+
+_NORMALIZE_RE = re.compile(r"[^a-z0-9]+")
 
 
-def ps_id(name: str) -> str:
-    return _RX_ID.sub("", name.lower())
+def normalize_key(k: str) -> str:
+    return _NORMALIZE_RE.sub("", k.lower())
 
+
+USAGE = { normalize_key(k): v for k, v in _raw_usage.items() }
+
+print(f"[✓] {len(USAGE)} usage entries after normalization", file=sys.stderr)
 
 app = Flask(__name__, static_folder=str(ROOT))
 CORS(app)
@@ -62,7 +67,7 @@ def root() -> Any:
 
 @app.route("/<path:p>")
 def static_file(p: str) -> Any:
-    if p.startswith("pointkedex/"):             # allow /pointkedex/* paths
+    if p.startswith("pointkedex/"):
         p = p.split("/", 1)[1]
     return send_from_directory(str(ROOT), p)
 
@@ -111,7 +116,10 @@ def pokemon(slug: str) -> Any:
 @app.route("/api/usage/<slug>")
 @app.route("/pointkedex/api/usage/<slug>")
 def usage(slug: str) -> Any:
-    data = USAGE.get(slug.lower()) or USAGE.get(ps_id(slug))
+    key = normalize_key(slug)
+    data = USAGE.get(key)
+    if data is None:
+        print(f"[!] usage miss for slug='{slug}' normalized='{key}'", file=sys.stderr)
     return jsonify(data or {})
 
 
