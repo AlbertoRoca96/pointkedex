@@ -2,7 +2,7 @@
    Pointkedex Service Worker
    ───────────────────────── */
 
-const CACHE_VERSION = 'v2';           // bump when assets change
+const CACHE_VERSION = 'v3';           // bump when assets change
 const CACHE_NAME    = `pointkedex-${CACHE_VERSION}`;
 
 /* ---------------------------
