@@ -7,7 +7,7 @@
   <meta name="mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <link rel="stylesheet" href="styles.css">
-  <link rel="manifest" href="pointkedex/manifest.webmanifest">
+  <link rel="manifest" href="manifest.webmanifest">
   <meta name="theme-color" content="#ef5350">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 </head>
@@ -51,7 +51,9 @@
 
   <script type="module">
     if ('serviceWorker' in navigator) {
-      window.addEventListener('load', () => navigator.serviceWorker.register('./pointkedex/service-worker.js'));
+      window.addEventListener('load', () =>
+        navigator.serviceWorker.register('./service-worker.js')
+      );
     }
   </script>
   <script src="config.js"></script>
