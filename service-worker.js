@@ -2,7 +2,7 @@
    Pointkedex Service Worker
    ───────────────────────── */
 
-const CACHE_VERSION = 'v4';           // bump when assets change
+const CACHE_VERSION = 'v5';
 const CACHE_NAME    = `pointkedex-${CACHE_VERSION}`;
 
 /* ---------------------------
@@ -11,6 +11,7 @@ const CACHE_NAME    = `pointkedex-${CACHE_VERSION}`;
 const CORE_ASSETS = [
   '/', '/index.html', '/styles.css', '/app.js',
   '/manifest.webmanifest', '/flavor_text.json', '/class_indices.json',
+  '/usage_data.json',
   '/web_model/model.json', '/web_model/group1-shard1of25.bin'
 ];
 
@@ -41,11 +42,8 @@ self.addEventListener('fetch', event => {
   if (request.method !== 'GET') return;
 
   const url = new URL(request.url);
-
-  /* 1) Never cache API calls ----------------------------------- */
   if (url.pathname.startsWith('/api/')) return;
 
-  /* 2) Serve app-shell files from cache if offline ------------- */
   const isCore = CORE_ASSETS.includes(url.pathname) || request.mode === 'navigate';
   if (isCore) {
     event.respondWith(
@@ -55,7 +53,6 @@ self.addEventListener('fetch', event => {
     return;
   }
 
-  /* 3) Everything else: network-first, cache-fallback ---------- */
   event.respondWith(
     fetch(request)
       .then(resp => {
