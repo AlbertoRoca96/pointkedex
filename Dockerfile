@@ -60,6 +60,7 @@ RUN --mount=type=cache,target=/root/.cache/pip \
         torch==2.2.1 torchvision==0.17.1 ultralytics
 
 COPY --from=builder /app /app
+COPY service-worker.js manifest.webmanifest /app/
 
 EXPOSE 7860
 CMD gunicorn -b 0.0.0.0:${PORT:-7860} predict_server:app --workers 2 --threads 4 --timeout 120
