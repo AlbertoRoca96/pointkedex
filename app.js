@@ -77,11 +77,17 @@ function renderUsage(u) {
   const box = $("#stats-usage");
   if (!box) return;
   box.innerHTML = "";
+
   if (!u || (!u.moves?.length && !u.abilities?.length && !u.items?.length)) {
-    box.style.display = "none";
+    box.style.display = "block";
+    const msg = document.createElement("div");
+    msg.textContent = "No competitive usage data yet.";
+    msg.style.fontStyle = "italic";
+    box.appendChild(msg);
     debug("no usage data to render", u);
     return;
   }
+
   box.style.display = "block";
   const sect = (label, list) => {
     if (!list?.length) return;
@@ -198,7 +204,6 @@ async function loop() {
   const jpeg = work.toDataURL("image/jpeg", JPEG_QUAL);
   const endpoint = makeUrl("api/predict");
 
-  // cancel previous in-flight prediction if any (best practice: abort previous fetch). :contentReference[oaicite:1]{index=1}
   if (predictController) {
     predictController.abort();
   }
@@ -215,7 +220,6 @@ async function loop() {
     });
   } catch (e) {
     if (e.name === "AbortError") {
-      // expected when a newer frame cancels previous request. :contentReference[oaicite:2]{index=2}
       return;
     }
     console.warn("[predict] network error", e);
@@ -319,7 +323,7 @@ $("#btn-stats").onclick = async () => {
   show($("#stats-panel"));
 
   const speakTxt = d.description || (flavor[currentName.toLowerCase()]?.[0] || "");
-  speakText(speakTxt); // ensure speech synthesis cancellation logic handles rest. :contentReference[oaicite:3]{index=3}
+  speakText(speakTxt);
 };
 
 $("#btn-dismiss").onclick = () => {
