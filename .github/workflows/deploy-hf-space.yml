@@ -23,32 +23,21 @@ jobs:
         run: |
           git clone https://AlbertoRoca96-web:${HF_TOKEN}@huggingface.co/spaces/AlbertoRoca96-web/pointkedex hf-space
 
-      - name: Fetch usage_data.json and pokedex_resnet50.h5 from release
+      - name: Install GitHub CLI
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y gh
+
+      - name: Authenticate GitHub CLI
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          apt-get update
-          apt-get install -y jq curl
-          OWNER=AlbertoRoca96
-          REPO=pointkedex
-          TAG=alroca
-          if [ "$TAG" = "latest" ]; then
-            api="https://api.github.com/repos/${OWNER}/${REPO}/releases/latest"
-          else
-            api="https://api.github.com/repos/${OWNER}/${REPO}/releases/tags/${TAG}"
-          fi
-          release_json=$(curl -s -H "Accept: application/vnd.github+json" -H "Authorization: Bearer ${GITHUB_TOKEN}" "$api")
-          if echo "$release_json" | jq -e '.message? | contains("Not Found")' >/dev/null 2>&1; then
-            release_json=$(curl -s -H "Accept: application/vnd.github+json" -H "Authorization: Bearer ${GITHUB_TOKEN}" "https://api.github.com/repos/${OWNER}/${REPO}/releases/latest")
-          fi
-          for NAME in usage_data.json pokedex_resnet50.h5; do
-            url=$(printf "%s" "$release_json" | jq -r ".assets[] | select(.name == \"${NAME}\") | .browser_download_url")
-            if [ -z "$url" ] || [ "$url" = "null" ]; then
-              echo "ERROR: asset ${NAME} not found in release (tag=${TAG})"
-              exit 1
-            fi
-            curl -L -H "Authorization: Bearer ${GITHUB_TOKEN}" -o "${NAME}" "$url"
-          done
+          echo "${GITHUB_TOKEN}" | gh auth login --with-token
+
+      - name: Download usage_data.json and .h5 from release
+        run: |
+          gh release download alroca --repo AlbertoRoca96/pointkedex -p usage_data.json -p pokedex_resnet50.h5 || \
+          gh release download --repo AlbertoRoca96/pointkedex -p usage_data.json -p pokedex_resnet50.h5
 
       - name: Sync files
         run: |
