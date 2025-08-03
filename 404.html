@@ -18,34 +18,98 @@
     <h1>Pointkedex</h1>
   </header>
 
-  <div id="alert"></div>
-
-  <video id="cam" playsinline autoplay muted></video>
-  <canvas id="worker"></canvas>
-  <div id="label">loading…</div>
-  <button id="start">Tap to start</button>
-
-  <div id="prompt" class="overlay">
-    <div class="dialog">
-      <p id="prompt-text"></p>
-      <div class="dialog-btns">
-        <button id="btn-stats">Show stats</button>
-        <button id="btn-dismiss">Dismiss</button>
-      </div>
+  <div class="controls">
+    <div class="tier-filters" id="tier-filters">
+      <!-- dynamically populated tier pills -->
+    </div>
+    <div class="search-bar">
+      <input id="search-input" placeholder="Search Pokémon..." aria-label="Search Pokémon" />
     </div>
   </div>
 
+  <div id="alert"></div>
+
+  <main id="content">
+    <!-- Recognition / camera area -->
+    <section id="vision-panel" class="panel">
+      <div class="vision-wrapper">
+        <video id="cam" playsinline autoplay muted></video>
+        <canvas id="worker"></canvas>
+        <div id="label">loading…</div>
+        <button id="start" class="primary">Tap to start</button>
+      </div>
+    </section>
+
+    <!-- Stats + build display -->
+    <section id="stats-wrapper" class="panel hidden">
+      <div id="sets-container">
+        <!-- Tier pills for the selected Pokémon's full_sets -->
+      </div>
+
+      <div id="cards-container">
+        <!-- Cards for overview / set variants -->
+      </div>
+    </section>
+  </main>
+
+  <!-- Templates (hidden) -->
+  <template id="card-template">
+    <div class="card set-card">
+      <div class="card-header">
+        <div class="set-info">
+          <div class="set-name"></div>
+          <div class="set-source"></div>
+        </div>
+        <div class="tier-badges"></div>
+      </div>
+      <div class="card-body">
+        <div class="moves-section">
+          <div class="section-title">Moves</div>
+          <div class="moves-list"></div>
+        </div>
+        <div class="abilities-items">
+          <div class="subgroup">
+            <div class="section-title">Abilities</div>
+            <div class="abilities-list"></div>
+          </div>
+          <div class="subgroup">
+            <div class="section-title">Items</div>
+            <div class="items-list"></div>
+          </div>
+        </div>
+        <div class="spread">
+          <div class="nature"></div>
+          <div class="evs"></div>
+        </div>
+      </div>
+      <div class="card-footer">
+        <div class="suggestions"></div>
+        <div class="credits"></div>
+      </div>
+    </div>
+  </template>
+
   <div id="stats-panel" class="overlay">
-    <div class="card">
+    <div class="card detail-card">
       <button id="stats-close" class="close">×</button>
-      <h2 id="stats-name"></h2>
-      <p id="stats-desc"></p>
-      <div id="stats-id"></div>
-      <div id="stats-types"></div>
-      <div id="stats-abilities"></div>
-      <table id="stats-table"></table>
-      <div id="stats-usage"></div>
-      <p id="stats-misc"></p>
+      <div class="detail-top">
+        <div class="name-tier">
+          <h2 id="stats-name"></h2>
+          <div id="stats-id"></div>
+        </div>
+        <div id="stats-types" class="types"></div>
+      </div>
+      <p id="stats-desc" class="description"></p>
+      <div class="base-stats-usage">
+        <div class="base-stats">
+          <table id="stats-table"></table>
+        </div>
+        <div class="usage-summary">
+          <h3>Competitive Usage</h3>
+          <div id="stats-usage"></div>
+        </div>
+      </div>
+      <div id="stats-misc" class="misc"></div>
     </div>
   </div>
 
