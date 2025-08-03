@@ -1,66 +1,74 @@
-# syntax=docker/dockerfile:1 
-FROM python:3.11-slim AS builder
-WORKDIR /app
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
 
-ENV PIP_DISABLE_PIP_VERSION_CHECK=1 \
-    PYTHONDONTWRITEBYTECODE=1 \
-    PYTHONUNBUFFERED=1
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout source
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
-ARG GITHUB_TOKEN=""
-ARG GITHUB_REPO="AlbertoRoca96/pointkedex"
-ARG RELEASE_TAG="latest"
-ARG MODEL_NAME="pokedex_resnet50.h5"
+      - name: Configure Git
+        run: |
+          git config --global user.name "github-actions"
+          git config --global user.email "github-actions@users.noreply.github.com"
 
-COPY . /app
+      - name: Clone HF Space repo
+        env:
+          HF_TOKEN: ${{ secrets.HF_TOKEN }}
+        run: |
+          git clone https://AlbertoRoca96-web:${HF_TOKEN}@huggingface.co/spaces/AlbertoRoca96-web/pointkedex hf-space
 
-RUN --mount=type=cache,target=/root/.cache/pip \
-    set -eux; \
-    apt-get update && \
-    apt-get install -y --no-install-recommends curl ca-certificates jq && \
-    pip install --no-cache-dir \
-        tensorflow pillow tensorflowjs \
-        torch==2.2.1 torchvision==0.17.1 torchaudio==2.2.1 ultralytics && \
-    rm -rf /var/lib/apt/lists/*
+      - name: Download usage_data.json from GitHub Release
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          OWNER="AlbertoRoca96"
+          REPO="pointkedex"
+          TAG="alroca"  # release tag you have
+          ASSET_NAME="usage_data.json"
 
-RUN set -eux; \
-    if [ "${RELEASE_TAG}" = "latest" ]; then \
-      api="https://api.github.com/repos/${GITHUB_REPO}/releases/latest"; \
-    else \
-      api="https://api.github.com/repos/${GITHUB_REPO}/releases/tags/${RELEASE_TAG}"; \
-    fi; \
-    header="Accept: application/vnd.github+json"; \
-    auth=""; \
-    if [ -n "${GITHUB_TOKEN}" ]; then \
-      auth="-H \"Authorization: token ${GITHUB_TOKEN}\""; \
-    fi; \
-    info=$(eval "curl -s -H '${header}' ${auth} \"${api}\""); \
-    url=$(echo "$info" | jq -r ".assets[] | select(.name==\"${MODEL_NAME}\") | .browser_download_url"); \
-    [ -n "$url" ] && [ "$url" != "null" ] || (echo "ERROR: asset not found"; exit 1); \
-    if [ -n "${GITHUB_TOKEN}" ]; then \
-      curl -L -H "Authorization: token ${GITHUB_TOKEN}" -o "${MODEL_NAME}" "$url"; \
-    else \
-      curl -L -o "${MODEL_NAME}" "$url"; \
-    fi; \
-    tensorflowjs_converter --input_format=keras "${MODEL_NAME}" web_model
+          # Fetch release metadata
+          release_json=$(curl -s -H "Accept: application/vnd.github+json" \
+            -H "Authorization: Bearer ${GITHUB_TOKEN}" \
+            "https://api.github.com/repos/${OWNER}/${REPO}/releases/tags/${TAG}")
 
-FROM python:3.11-slim
-WORKDIR /app
+          asset_id=$(echo "$release_json" | jq -r '.assets[] | select(.name=="'"${ASSET_NAME}"'") | .id')
 
-ENV PIP_DISABLE_PIP_VERSION_CHECK=1 \
-    PYTHONDONTWRITEBYTECODE=1   \
-    PYTHONUNBUFFERED=1          \
-    PORT=7860                   \
-    CUDA_VISIBLE_DEVICES=-1     \
-    TF_CPP_MIN_LOG_LEVEL=2      \
-    MPLCONFIGDIR=/tmp/mpl
+          if [ -z "$asset_id" ] || [ "$asset_id" = "null" ]; then
+            echo "❌ usage_data.json asset not found in release ${TAG}"
+            exit 1
+          fi
 
-RUN --mount=type=cache,target=/root/.cache/pip \
-    pip install --no-cache-dir \
-        gunicorn flask flask-cors tensorflow pillow numpy \
-        torch==2.2.1 torchvision==0.17.1 ultralytics
+          # Download the raw asset binary
+          curl -L \
+            -H "Accept: application/octet-stream" \
+            -H "Authorization: Bearer ${GITHUB_TOKEN}" \
+            "https://api.github.com/repos/${OWNER}/${REPO}/releases/assets/${asset_id}" \
+            -o usage_data.json
 
-COPY --from=builder /app /app
-COPY service-worker.js manifest.webmanifest /app/
+      # ── copy every file the app needs ─────────────────────────────
+      - name: Sync files
+        run: |
+          rsync -a --delete \
+            Dockerfile predict_server.py index.html app.js styles.css \
+            config.js flavor_text.json class_indices.json pokedex_data.json \
+            usage_data.json service-worker.js manifest.webmanifest \
+            hf-space/
 
-EXPOSE 7860
-CMD gunicorn -b 0.0.0.0:${PORT:-7860} predict_server:app --workers 2 --threads 4 --timeout 120
+      - name: Commit & push to HF Space
+        env:
+          HF_TOKEN: ${{ secrets.HF_TOKEN }}
+        run: |
+          cd hf-space
+          git add -A
+          if git diff --cached --quiet; then
+            echo "No changes to push."
+          else
+            git commit -m "Sync app files from GitHub main"
+            git push
+          fi
