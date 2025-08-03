@@ -23,6 +23,19 @@ jobs:
         run: |
           git clone https://AlbertoRoca96-web:${HF_TOKEN}@huggingface.co/spaces/AlbertoRoca96-web/pointkedex hf-space
 
+      - name: Enable Git LFS in HF Space and track large assets
+        run: |
+          cd hf-space
+          sudo apt-get update
+          sudo apt-get install -y git-lfs
+          git lfs install
+          git lfs track "usage_data.json" "pokedex_resnet50.h5"
+          git add .gitattributes
+          if ! git diff --cached --quiet; then
+            git commit -m "Enable Git LFS for large assets"
+          fi
+          cd ..
+
       - name: Fetch release assets
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -35,7 +48,7 @@ jobs:
           rsync -a --delete \
             Dockerfile predict_server.py index.html app.js styles.css \
             config.js flavor_text.json class_indices.json pokedex_data.json \
-            usage_data.json service-worker.js manifest.webmanifest \
+            usage_data.json service-worker.js manifest.webmanifest pokedex_resnet50.h5 \
             hf-space/
 
       - name: Commit & push to HF Space
