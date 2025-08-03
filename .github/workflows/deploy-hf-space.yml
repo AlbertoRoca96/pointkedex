@@ -23,41 +23,47 @@ jobs:
         run: |
           git clone https://AlbertoRoca96-web:${HF_TOKEN}@huggingface.co/spaces/AlbertoRoca96-web/pointkedex hf-space
 
-      - name: Download usage_data.json and .h5 from release (reliable)
+      - name: Download usage_data.json and .h5 from release (no jq, no python)
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          OWNER="AlbertoRoca96"
-          REPO="pointkedex"
-          TAG="alroca"
+          OWNER=AlbertoRoca96
+          REPO=pointkedex
+          TAG=alroca
           ASSETS=("usage_data.json" "pokedex_resnet50.h5")
 
-          # Use Python to fetch release JSON and extract browser_download_url for each asset.
-          eval "$(python3 - <<'PY'
-import os, json, subprocess, sys, textwrap, urllib.request
-owner=os.getenv("OWNER")
-repo=os.getenv("REPO")
-tag=os.getenv("TAG")
-token=os.getenv("GITHUB_TOKEN")
-api=f"https://api.github.com/repos/{owner}/{repo}/releases/tags/{tag}"
-req = urllib.request.Request(api, headers={"Accept": "application/vnd.github+json", "Authorization": f"Bearer {token}"})
-with urllib.request.urlopen(req, timeout=30) as r:
-    data=json.load(r)
-assets = {a["name"]: a["browser_download_url"] for a in data.get("assets", [])}
-# Print shell assignments for existing assets
-for name in ["usage_data.json","pokedex_resnet50.h5"]:
-    if name not in assets:
-        print(f'echo \"❌ {name} asset not found in release {tag}\"; exit 1;')
-        sys.exit(1)
-    url=assets[name]
-    safe = url.replace('"','\\"')
-    print(f'URL_{name.upper().replace(".","_")}=\"{safe}\"')
-PY"
-          )
+          # Get release metadata JSON
+          release_json=$(curl -s -H "Accept: application/vnd.github+json" \
+            -H "Authorization: Bearer ${GITHUB_TOKEN}" \
+            "https://api.github.com/repos/${OWNER}/${REPO}/releases/tags/${TAG}")
 
-          # Download the two assets using the URLs injected by Python
-          curl -L -H "Authorization: Bearer ${GITHUB_TOKEN}" -o usage_data.json "${URL_USAGE_DATA_JSON}"
-          curl -L -H "Authorization: Bearer ${GITHUB_TOKEN}" -o pokedex_resnet50.h5 "${URL_POKEDEX_RESNET50_H5}"
+          for NAME in "${ASSETS[@]}"; do
+            echo "Locating asset ${NAME} in release ${TAG}"
+
+            # Extract the asset ID by finding the block with the name then its id
+            asset_id=$(printf "%s" "$release_json" | tr ',' '\n' \
+              | awk -v name="\"name\":\"${NAME}\"" '
+                  index($0, name) { found=1 }
+                  found && /"id":/ {
+                    gsub(/[^0-9]/, "", $0)
+                    print $0
+                    exit
+                  }')
+
+            if [ -z "$asset_id" ]; then
+              echo "❌ could not find ID for ${NAME} in release ${TAG}"
+              exit 1
+            fi
+
+            echo "Found asset ID for ${NAME}: ${asset_id}"
+
+            # Download raw asset via assets API (requires Accept header)
+            curl -L \
+              -H "Accept: application/octet-stream" \
+              -H "Authorization: Bearer ${GITHUB_TOKEN}" \
+              "https://api.github.com/repos/${OWNER}/${REPO}/releases/assets/${asset_id}" \
+              -o "${NAME}"
+          done
 
       # ── copy every file the app needs ─────────────────────────────
       - name: Sync files
