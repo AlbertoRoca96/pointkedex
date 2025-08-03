@@ -23,21 +23,13 @@ jobs:
         run: |
           git clone https://AlbertoRoca96-web:${HF_TOKEN}@huggingface.co/spaces/AlbertoRoca96-web/pointkedex hf-space
 
-      - name: Install GitHub CLI
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y gh
-
-      - name: Authenticate GitHub CLI
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: |
-          echo "${GITHUB_TOKEN}" | gh auth login --with-token
-
       - name: Download usage_data.json and .h5 from release
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          gh release download alroca --repo AlbertoRoca96/pointkedex -p usage_data.json -p pokedex_resnet50.h5 || \
-          gh release download --repo AlbertoRoca96/pointkedex -p usage_data.json -p pokedex_resnet50.h5
+          if ! gh release download alroca --repo AlbertoRoca96/pointedex -p usage_data.json -p pokedex_resnet50.h5; then
+            gh release download latest --repo AlbertoRoca96/pointedex -p usage_data.json -p pokedex_resnet50.h5
+          fi
 
       - name: Sync files
         run: |
