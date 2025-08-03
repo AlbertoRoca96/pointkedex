@@ -23,13 +23,38 @@ jobs:
         run: |
           git clone https://AlbertoRoca96-web:${HF_TOKEN}@huggingface.co/spaces/AlbertoRoca96-web/pointkedex hf-space
 
+      - name: Download usage_data.json and .h5 from release (no jq)
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          OWNER=AlbertoRoca96
+          REPO=pointdex  # typo safeguard; if your actual repo is 'pointkedex', ensure it's spelled correctly here
+          REPO=pointkedex
+          TAG=alroca
+          for NAME in usage_data.json pokedex_resnet50.h5; do
+            echo "Fetching metadata for release ${TAG} to find ${NAME}"
+            release_json=$(curl -s -H "Accept: application/vnd.github+json" \
+              -H "Authorization: Bearer ${GITHUB_TOKEN}" \
+              "https://api.github.com/repos/${OWNER}/${REPO}/releases/tags/${TAG}")
+            # crude extraction: find the block with the asset name, then extract its browser_download_url
+            url=$(printf "%s" "$release_json" | tr ',' '\n' \
+              | awk '/"name":"'"${NAME}"'"/{f=1} f && /"browser_download_url"/{print; exit}' \
+              | sed -E 's/.*"([^"]+)".*/\1/')
+            if [ -z "$url" ]; then
+              echo "❌ could not find download URL for ${NAME} in release ${TAG}"
+              exit 1
+            fi
+            echo "Downloading ${NAME} from ${url}"
+            curl -L -H "Authorization: Bearer ${GITHUB_TOKEN}" -o "${NAME}" "$url"
+          done
+
       # ── copy every file the app needs ─────────────────────────────
       - name: Sync files
         run: |
           rsync -a --delete \
             Dockerfile predict_server.py index.html app.js styles.css \
             config.js flavor_text.json class_indices.json pokedex_data.json \
-            service-worker.js manifest.webmanifest \
+            usage_data.json service-worker.js manifest.webmanifest \
             hf-space/
 
       - name: Commit & push to HF Space
