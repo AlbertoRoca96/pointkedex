@@ -29,7 +29,7 @@ jobs:
           rsync -a --delete \
             Dockerfile predict_server.py index.html app.js styles.css \
             config.js flavor_text.json class_indices.json pokedex_data.json \
-            usage_data.json service-worker.js manifest.webmanifest \
+            service-worker.js manifest.webmanifest \
             hf-space/
 
       - name: Commit & push to HF Space
