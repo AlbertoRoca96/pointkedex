@@ -1,93 +1,329 @@
-/* ─────────────────────────
-   Pointkedex Service Worker
-   ───────────────────────── */
+:root {
+  --red: #ef5350;
+  --yellow: #ffeb3b;
+  --blue: #42a5f5;
+  --grey: #1f1f28;
+  --light: #f5f5f7;
+  --dark: #0f0f17;
+  --radius: 10px;
+  --transition: .25s cubic-bezier(.4,.2,.2,1);
+  --card-bg: #1e1e2a;
+  --shadow: 0 12px 40px -10px rgba(0,0,0,0.5);
+  font-family: "Segoe UI", Roboto, system-ui, -apple-system, sans-serif;
+}
 
-const CACHE_VERSION = 'v4';
-const CACHE_NAME    = `pointkedex-${CACHE_VERSION}`;
+* { box-sizing: border-box; }
 
-/* Core offline assets (kept minimal + dynamic) */
-const CORE_ASSETS = [
-  '/', '/index.html', '/styles.css', '/app.js',
-  '/manifest.webmanifest', '/flavor_text.json', '/class_indices.json',
-  '/usage_data.json'
-];
+body {
+  margin: 0;
+  background: var(--grey);
+  color: var(--light);
+  min-height: 100%;
+  overflow-x: hidden;
+}
 
-/* Install */
-self.addEventListener('install', event => {
-  event.waitUntil(
-    caches.open(CACHE_NAME).then(cache => cache.addAll(CORE_ASSETS))
-  );
-  self.skipWaiting();
-});
+/* ---------- header ---------- */
+.app-header {
+  position: sticky;
+  top: 0;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 16px;
+  background: rgba(20,20,35,0.95);
+  z-index: 50;
+}
+.app-header .logo {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: var(--yellow);
+  flex: none;
+}
+.app-header h1 {
+  margin: 0;
+  font-size: 1.2rem;
+  font-weight: 600;
+}
 
-/* Activate: purge old versions */
-self.addEventListener('activate', event => {
-  event.waitUntil(
-    caches.keys().then(keys =>
-      Promise.all(keys
-        .filter(k => k.startsWith('pointkedex-') && k !== CACHE_NAME)
-        .map(k => caches.delete(k))
-      )
-    )
-  );
-  self.clients.claim();
-});
+/* ---------- controls bar ---------- */
+.controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding: 8px 16px;
+  background: rgba(15,15,25,0.9);
+  position: sticky;
+  top: 56px;
+  z-index: 40;
+}
+.tier-filters {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+.tier-pill {
+  padding: 6px 12px;
+  border-radius: 999px;
+  background: #2a2a3e;
+  cursor: pointer;
+  font-size: .75rem;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  border: 2px solid transparent;
+  transition: all var(--transition);
+}
+.tier-pill.active {
+  background: var(--blue);
+  border-color: var(--light);
+  color: #000;
+}
+.search-bar {
+  margin-left: auto;
+  flex: 1;
+  max-width: 320px;
+}
+#search-input {
+  width: 100%;
+  padding: 8px 12px;
+  border-radius: 8px;
+  border: none;
+  font-size: 1rem;
+  background: #23233f;
+  color: var(--light);
+}
 
-/* Fetch strategy */
-self.addEventListener('fetch', event => {
-  const { request } = event;
-  if (request.method !== 'GET') return;
+/* ---------- vision panel ---------- */
+.panel { padding: 16px; }
 
-  const url = new URL(request.url);
+.vision-wrapper {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
 
-  // API calls: try network first, but fallback to cache
-  if (url.pathname.startsWith('/api/')) {
-    event.respondWith(
-      fetch(request)
-        .then(resp => {
-          if (resp.ok) {
-            // optional: cache useful API responses (like usage_data.json) for offline
-            const clone = resp.clone();
-            caches.open(CACHE_NAME).then(c => {
-              if (url.pathname.includes('usage') || url.pathname.includes('pokemon')) {
-                c.put(request, clone);
-              }
-            });
-          }
-          return resp;
-        })
-        .catch(() => caches.match(request))
-    );
-    return;
-  }
+#cam {
+  width: 100%;
+  max-width: 480px;
+  border-radius: 12px;
+  background: #000;
+  object-fit: cover;
+}
 
-  // Core static assets / navigation – stale-while-revalidate
-  const isCore = CORE_ASSETS.includes(url.pathname) || request.mode === 'navigate';
-  if (isCore) {
-    event.respondWith(
-      caches.match(request, { ignoreSearch: true }).then(cached => {
-        const network = fetch(request).then(fresh => {
-          if (fresh.ok) {
-            caches.open(CACHE_NAME).then(c => c.put(request, fresh.clone()));
-          }
-          return fresh;
-        }).catch(() => null);
-        return cached || network;
-      })
-    );
-    return;
-  }
+#label {
+  margin-top: 4px;
+  font-weight: 600;
+}
 
-  // Default: network, fallback to cache
-  event.respondWith(
-    fetch(request)
-      .then(resp => {
-        if (resp.ok && resp.type === 'basic') {
-          const clone = resp.clone();
-          caches.open(CACHE_NAME).then(c => c.put(request, clone));
-        }
-        return resp;
-      })
-      .catch(() => caches.match(request))
-  );
-});
+.primary {
+  padding: 14px 20px;
+  border: none;
+  border-radius: 8px;
+  background: linear-gradient(135deg,var(--red),var(--yellow));
+  color: #111;
+  font-weight: 700;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: filter var(--transition), transform var(--transition);
+}
+.primary:hover  { filter: brightness(1.05); }
+.primary:active { transform: scale(.97); }
+
+/* ---------- cards grid ---------- */
+#cards-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 16px;
+  padding: 16px;
+}
+
+/* ---------- set card ---------- */
+.card {
+  background: var(--card-bg);
+  border-radius: var(--radius);
+  padding: 16px;
+  position: relative;
+  box-shadow: var(--shadow);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  transition: transform var(--transition);
+}
+.card:hover { transform: translateY(-3px); }
+
+.card .close {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  background: var(--red);
+  border: none;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  color: #fff;
+  cursor: pointer;
+}
+
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: start;
+  gap: 8px;
+}
+.set-info .set-name   { font-weight: 700; font-size: 1rem; text-transform: capitalize; }
+.set-info .set-source { font-size: .6rem; color: #aaa; }
+
+.tier-badges {
+  display: flex;
+  gap: 4px;
+  flex-wrap: wrap;
+}
+.tier-badge {
+  background: #333;
+  padding: 4px 8px;
+  border-radius: 999px;
+  font-size: .55rem;
+  text-transform: uppercase;
+}
+
+/* ---------- moves ---------- */
+.moves-section { margin-top: 8px; }
+.section-title { font-weight: 600; margin-bottom: 6px; }
+
+.moves-list {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.move-card {
+  background: #1b1b2f;
+  padding: 8px 12px;
+  border-radius: 8px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: center;
+  position: relative;
+  font-size: .85rem;
+}
+.move-main {
+  flex: 1 1 100%;
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+  align-items: center;
+}
+.move-name { font-weight: 700; margin-right: 6px; }
+.badge {
+  background: rgba(255,255,255,0.08);
+  padding: 4px 8px;
+  border-radius: 6px;
+  font-size: .6rem;
+  text-transform: capitalize;
+}
+.move-details {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  font-size: .65rem;
+  color: #ccc;
+}
+.effect { font-style: italic; }
+
+/* ---------- abilities / items ---------- */
+.abilities-items { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 8px; }
+.subgroup        { flex: 1; }
+
+.abilities-list,
+.items-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.tag {
+  background: #2f2f50;
+  padding: 6px 10px;
+  border-radius: 6px;
+  font-size: .75rem;
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+}
+.tag.suggestion {
+  border: 1px dashed var(--yellow);
+  cursor: pointer;
+}
+
+.spread { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 6px; }
+.nature, .evs { font-size: .75rem; }
+
+/* ---------- card footer ---------- */
+.card-footer { margin-top: 8px; }
+.suggestions { margin-bottom: 6px; }
+.credits     { font-size: .55rem; color: #888; }
+
+/* ---------- stats overlay ---------- */
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(10,10,25,0.85);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  z-index: 100;
+}
+.detail-card { max-width: 950px; width: 100%; position: relative; }
+
+.detail-top {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  align-items: flex-start;
+}
+.name-tier { flex: 1; }
+
+.types {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+  margin-top: 4px;
+}
+.types .type {
+  background: var(--blue);
+  padding: 6px 12px;
+  border-radius: 999px;
+  font-size: .75rem;
+}
+
+.base-stats-usage {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+  margin-top: 12px;
+}
+.base-stats   { flex: 1; }
+.usage-summary{ flex: 1; }
+
+#stats-table          { width: 100%; border-collapse: collapse; }
+#stats-table td       { padding: 6px; border-bottom: 1px solid rgba(255,255,255,0.08); }
+.misc                 { margin-top: 8px; font-size: .9rem; }
+
+/* ---------- responsive tweaks ---------- */
+@media (max-width: 1024px) {
+  #cards-container    { grid-template-columns: repeat(auto-fit, minmax(240px,1fr)); }
+  .base-stats-usage   { flex-direction: column; }
+}
+
+/* ---------- NEW FIX: hide processing canvas so only one video appears ---------- */
+#worker {
+  position: absolute;   /* keep in DOM for JS but invisible */
+  width: 0;
+  height: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
