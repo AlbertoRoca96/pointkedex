@@ -31,8 +31,11 @@ jobs:
           REPO=pointkedex
           TAG=alroca
           for NAME in usage_data.json pokedex_resnet50.h5; do
-            release_json=$(curl -s -H "Accept: application/vnd.github+json" -H "Authorization: Bearer ${GITHUB_TOKEN}" "https://api.github.com/repos/${OWNER}/${REPO}/releases/tags/${TAG}")
-            url=$(printf "%s" "$release_json" | tr '\n' ' ' | sed 's/},/}\n/g' | grep -F "\"name\":\"${NAME}\"" -A8 | grep "browser_download_url" | head -1 | sed -E 's/.*"([^"]+)".*/\1/')
+            echo "Fetching ${NAME}"
+            release_json=$(curl -s -H "Accept: application/vnd.github+json" -H "Authorization: Bearer ${GITHUB_TOKEN}" \
+              "https://api.github.com/repos/${OWNER}/${REPO}/releases/tags/${TAG}")
+            url=$(printf "%s" "$release_json" | \
+              grep -Pzo '"name":"'"${NAME}"'".*?browser_download_url":"\K[^"]+')
             if [ -z "$url" ]; then
               echo "asset ${NAME} not found"
               exit 1
