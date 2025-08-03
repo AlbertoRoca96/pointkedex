@@ -6,7 +6,8 @@ const JPEG_QUAL = 0.85;
 /* ---------- globals ---------- */
 let flavor = {};
 let labels = [];
-let last = -1, same = 0;
+let last = -1,
+  same = 0;
 let speaking = false;
 let currentName = "";
 let promptVisible = false;
@@ -22,15 +23,22 @@ async function loadAssets() {
       fetch("class_indices.json"),
       fetch("usage_data.json"),
     ]);
+
+    if (!flavResp.ok) console.warn("[app.js] flavor_text.json fetch failed:", flavResp.status);
+    if (!classResp.ok) console.warn("[app.js] class_indices.json fetch failed:", classResp.status);
+    if (!usageResp.ok) console.warn("[app.js] usage_data.json fetch failed:", usageResp.status);
+
     flavor = flavResp.ok ? await flavResp.json() : {};
     const classIndices = classResp.ok ? await classResp.json() : {};
     labels = [];
+
     if (classIndices && typeof classIndices === "object") {
       Object.entries(classIndices).forEach(([name, idx]) => {
         if (typeof idx === "number") labels[idx] = name;
         else if (!isNaN(Number(name))) labels[Number(name)] = idx;
       });
     }
+
     allUsage = usageResp.ok ? await usageResp.json() : {};
     console.log("[app.js] loaded usage_data.json entries:", Object.keys(allUsage).length);
   } catch (e) {
@@ -52,7 +60,6 @@ const debug = (...args) => console.debug("[app.js]", ...args);
 
 /* parse move blob into structured object */
 function parseMoveBlob(blob = "") {
-  // sample blob: "Drill PeckNo additional effect.TypeFlyingCategoryPhysicalPower80 BPAccuracy100%Priority1"
   const result = {
     name: "",
     effect: "",
@@ -64,13 +71,9 @@ function parseMoveBlob(blob = "") {
     raw: blob,
   };
 
-  // Name is letters/spaces/hyphens until a capitalized word that is known to start attributes
-  const parts = blob.split('.');
-  // attempt to extract name: first token before any uppercase attribute like "No additional effect"
   const nameMatch = blob.match(/^([A-Za-z0-9 \-]+)/);
   if (nameMatch) result.name = nameMatch[1].trim();
 
-  // effect: between name and "Type"
   const effectMatch = blob.match(/^[A-Za-z0-9 \-]+(.*?)Type/);
   if (effectMatch) result.effect = effectMatch[1].trim();
 
@@ -127,8 +130,10 @@ function renderUsage(u) {
 }
 
 function renderStats(d, usage) {
-  $("#stats-name").textContent = `${d.name}  (#${String(d.dex).padStart(4, "0")})`;
-  $("#stats-desc").textContent = d.description || "";
+  const nameEl = $("#stats-name");
+  if (nameEl) nameEl.textContent = `${d.name}  (#${String(d.dex).padStart(4, "0")})`;
+  const descEl = $("#stats-desc");
+  if (descEl) descEl.textContent = d.description || "";
 
   const types = $("#stats-types");
   if (types) {
@@ -141,7 +146,9 @@ function renderStats(d, usage) {
     });
   }
 
-  $("#stats-abilities").textContent = `Abilities: ${(d.abilities || []).join(", ")}`;
+  const abilitiesEl = $("#stats-abilities");
+  if (abilitiesEl)
+    abilitiesEl.textContent = `Abilities: ${(d.abilities || []).join(", ")}`;
 
   const tbl = $("#stats-table");
   if (tbl) {
@@ -153,65 +160,69 @@ function renderStats(d, usage) {
     });
   }
 
-  $("#stats-misc").textContent = `Height: ${mToFtIn(d.height)}   •   Weight: ${kgToLb(d.weight)}`;
+  const misc = $("#stats-misc");
+  if (misc)
+    misc.textContent = `Height: ${mToFtIn(d.height)}   •   Weight: ${kgToLb(d.weight)}`;
 
   renderUsage(usage);
 }
 
-/* builds tier filter pills based on all tiers seen in usage_data */
+/* builds tier filter pills */
 function populateTierFilters() {
   const container = $("#tier-filters");
+  if (!container) return;
   container.innerHTML = "";
   const tiers = new Set();
 
-  // gather all tiers from currently loaded usage_data (looking at full_sets in sample usage)
   Object.values(allUsage).forEach(entry => {
     if (entry.full_sets) {
       Object.keys(entry.full_sets).forEach(t => tiers.add(t));
     }
   });
 
-  // default: all active
   if (currentTiers.size === 0) tiers.forEach(t => currentTiers.add(t));
 
-  Array.from(tiers).sort().forEach(tier => {
-    const pill = document.createElement("div");
-    pill.className = "tier-pill" + (currentTiers.has(tier) ? " active" : "");
-    pill.textContent = tier;
-    pill.dataset.tier = tier;
-    pill.onclick = () => {
-      if (currentTiers.has(tier)) currentTiers.delete(tier);
-      else currentTiers.add(tier);
-      pill.classList.toggle("active");
-      if (currentName) fetchAndRender(currentName);
-    };
-    container.appendChild(pill);
-  });
+  Array.from(tiers)
+    .sort()
+    .forEach(tier => {
+      const pill = document.createElement("div");
+      pill.className = "tier-pill" + (currentTiers.has(tier) ? " active" : "");
+      pill.textContent = tier;
+      pill.dataset.tier = tier;
+      pill.onclick = () => {
+        if (currentTiers.has(tier)) currentTiers.delete(tier);
+        else currentTiers.add(tier);
+        pill.classList.toggle("active");
+        if (currentName) fetchAndRender(currentName);
+      };
+      container.appendChild(pill);
+    });
 }
 
-/* make suggestion if abilities/items are empty */
+/* suggestion hints */
 function buildSuggestions(set, usageEntry) {
   const suggestions = [];
-  if ((!set.abilities || set.abilities.every(a=>!a.trim())) && usageEntry?.abilities?.length) {
+  if ((!set.abilities || set.abilities.every(a => !a.trim())) && usageEntry?.abilities?.length) {
     suggestions.push({
       type: "ability",
-      message: `Common abilities: ${usageEntry.abilities.slice(0,2).join(", ")}`,
-      items: usageEntry.abilities.slice(0,2),
+      message: `Common abilities: ${usageEntry.abilities.slice(0, 2).join(", ")}`,
+      items: usageEntry.abilities.slice(0, 2),
     });
   }
-  if ((!set.items || set.items.every(i=>!i.trim())) && usageEntry?.items?.length) {
+  if ((!set.items || set.items.every(i => !i.trim())) && usageEntry?.items?.length) {
     suggestions.push({
       type: "item",
-      message: `Common items: ${usageEntry.items.slice(0,2).join(", ")}`,
-      items: usageEntry.items.slice(0,2),
+      message: `Common items: ${usageEntry.items.slice(0, 2).join(", ")}`,
+      items: usageEntry.items.slice(0, 2),
     });
   }
   return suggestions;
 }
 
-/* render a full set card for a slug + set metadata */
+/* render set variant cards */
 function renderSetCards(slug, data) {
   const container = $("#cards-container");
+  if (!container) return;
   container.innerHTML = "";
 
   const usageEntry = allUsage[slug] || {};
@@ -229,131 +240,155 @@ function renderSetCards(slug, data) {
       const tpl = document.getElementById("card-template");
       if (!tpl) return;
       const card = tpl.content.firstElementChild.cloneNode(true);
-      card.querySelector(".set-name").textContent = set.name || "Unnamed";
-      card.querySelector(".set-source").textContent = set.source || "";
+      const setNameEl = card.querySelector(".set-name");
+      if (setNameEl) setNameEl.textContent = set.name || "Unnamed";
+      const setSourceEl = card.querySelector(".set-source");
+      if (setSourceEl) setSourceEl.textContent = set.source || "";
+
       const tierBadgeContainer = card.querySelector(".tier-badges");
-      const badge = document.createElement("div");
-      badge.className = "tier-badge";
-      badge.textContent = tier;
-      tierBadgeContainer.appendChild(badge);
+      if (tierBadgeContainer) {
+        const badge = document.createElement("div");
+        badge.className = "tier-badge";
+        badge.textContent = tier;
+        tierBadgeContainer.appendChild(badge);
+      }
 
       // Moves
       const movesList = card.querySelector(".moves-list");
-      movesList.innerHTML = "";
-      const movesRaw = (set.moves || []).filter(m => typeof m === "string");
-      movesRaw.slice(0, 6).forEach(blob => {
-        const mv = parseMoveBlob(blob);
-        const mvEl = document.createElement("div");
-        mvEl.className = "move-card";
-        const main = document.createElement("div");
-        main.className = "move-main";
-        const nameSpan = document.createElement("div");
-        nameSpan.className = "move-name";
-        nameSpan.textContent = mv.name || "(unknown)";
-        main.appendChild(nameSpan);
-        if (mv.type) {
-          const t = document.createElement("div");
-          t.className = "badge";
-          t.textContent = mv.type;
-          main.appendChild(t);
-        }
-        if (mv.category) {
-          const c = document.createElement("div");
-          c.className = "badge";
-          c.textContent = mv.category;
-          main.appendChild(c);
-        }
-        if (mv.priority !== null) {
-          const p = document.createElement("div");
-          p.className = "badge";
-          p.textContent = `Priority ${mv.priority}`;
-          main.appendChild(p);
-        }
-        mvEl.appendChild(main);
-        const details = document.createElement("div");
-        details.className = "move-details";
-        if (mv.power !== null) {
-          const power = document.createElement("div");
-          power.textContent = `Power: ${mv.power}`;
-          details.appendChild(power);
-        }
-        if (mv.accuracy) {
-          const acc = document.createElement("div");
-          acc.textContent = `Accuracy: ${mv.accuracy}`;
-          details.appendChild(acc);
-        }
-        if (mv.effect) {
-          const eff = document.createElement("div");
-          eff.className = "effect";
-          eff.textContent = `Effect: ${mv.effect}`;
-          details.appendChild(eff);
-        }
-        mvEl.appendChild(details);
-        movesList.appendChild(mvEl);
-      });
+      if (movesList) {
+        movesList.innerHTML = "";
+        const movesRaw = (set.moves || []).filter(m => typeof m === "string");
+        movesRaw.slice(0, 6).forEach(blob => {
+          const mv = parseMoveBlob(blob);
+          const mvEl = document.createElement("div");
+          mvEl.className = "move-card";
+
+          const main = document.createElement("div");
+          main.className = "move-main";
+
+          const nameSpan = document.createElement("div");
+          nameSpan.className = "move-name";
+          nameSpan.textContent = mv.name || "(unknown)";
+          main.appendChild(nameSpan);
+
+          if (mv.type) {
+            const t = document.createElement("div");
+            t.className = "badge";
+            t.textContent = mv.type;
+            main.appendChild(t);
+          }
+          if (mv.category) {
+            const c = document.createElement("div");
+            c.className = "badge";
+            c.textContent = mv.category;
+            main.appendChild(c);
+          }
+          if (mv.priority !== null) {
+            const p = document.createElement("div");
+            p.className = "badge";
+            p.textContent = `Priority ${mv.priority}`;
+            main.appendChild(p);
+          }
+
+          mvEl.appendChild(main);
+
+          const details = document.createElement("div");
+          details.className = "move-details";
+          if (mv.power !== null) {
+            const power = document.createElement("div");
+            power.textContent = `Power: ${mv.power}`;
+            details.appendChild(power);
+          }
+          if (mv.accuracy) {
+            const acc = document.createElement("div");
+            acc.textContent = `Accuracy: ${mv.accuracy}`;
+            details.appendChild(acc);
+          }
+          if (mv.effect) {
+            const eff = document.createElement("div");
+            eff.className = "effect";
+            eff.textContent = `Effect: ${mv.effect}`;
+            details.appendChild(eff);
+          }
+
+          mvEl.appendChild(details);
+          movesList.appendChild(mvEl);
+        });
+      }
 
       // Abilities
       const abilitiesList = card.querySelector(".abilities-list");
-      abilitiesList.innerHTML = "";
-      (set.abilities || []).forEach(a => {
-        const t = document.createElement("div");
-        t.className = "tag";
-        t.textContent = a || "(none)";
-        abilitiesList.appendChild(t);
-      });
+      if (abilitiesList) {
+        abilitiesList.innerHTML = "";
+        (set.abilities || []).forEach(a => {
+          const t = document.createElement("div");
+          t.className = "tag";
+          t.textContent = a || "(none)";
+          abilitiesList.appendChild(t);
+        });
+      }
 
       // Items
       const itemsList = card.querySelector(".items-list");
-      itemsList.innerHTML = "";
-      (set.items || []).forEach(i => {
-        const t = document.createElement("div");
-        t.className = "tag";
-        t.textContent = i || "(none)";
-        itemsList.appendChild(t);
-      });
+      if (itemsList) {
+        itemsList.innerHTML = "";
+        (set.items || []).forEach(i => {
+          const t = document.createElement("div");
+          t.className = "tag";
+          t.textContent = i || "(none)";
+          itemsList.appendChild(t);
+        });
+      }
 
-      // Spread (simple parsing: look for nature and EVs in moves array)
-      const nature = set.moves?.find(m => /^[A-Za-z]+$/.test(m) && m.toLowerCase() === m && !m.includes(" ")) || "";
-      card.querySelector(".nature").textContent = nature ? `Nature: ${nature}` : "";
+      // Spread heuristics
+      const natureEl = card.querySelector(".nature");
+      const nature = (set.moves || []).find(m => /^[A-Za-z]+$/.test(m) && m.toLowerCase() === m && !m.includes(" ")) || "";
+      if (natureEl) natureEl.textContent = nature ? `Nature: ${nature}` : "";
+
+      const evsEl = card.querySelector(".evs");
       const evs = [];
       ["252 Atk", "252 Spe", "252 HP", "4 Def", "4 SpD", "4 SpA"].forEach(e => {
         if ((set.moves || []).includes(e)) evs.push(e);
       });
-      card.querySelector(".evs").textContent = evs.length ? `EVs: ${evs.join(", ")}` : "";
+      if (evsEl) evsEl.textContent = evs.length ? `EVs: ${evs.join(", ")}` : "";
 
       // Suggestions
       const footerSug = card.querySelector(".suggestions");
-      footerSug.innerHTML = "";
-      const suggestions = buildSuggestions(set, usageEntry);
-      suggestions.forEach(s => {
-        const div = document.createElement("div");
-        div.className = "tag suggestion";
-        div.textContent = s.message;
-        // allow clicking to apply first suggestion element
-        div.onclick = () => {
-          if (s.type === "ability") {
-            // replace empty ability with first suggestion
-            card.querySelector(".abilities-list").innerHTML = "";
-            const t = document.createElement("div");
-            t.className = "tag";
-            t.textContent = s.items[0];
-            card.querySelector(".abilities-list").appendChild(t);
-          }
-          if (s.type === "item") {
-            card.querySelector(".items-list").innerHTML = "";
-            const t = document.createElement("div");
-            t.className = "tag";
-            t.textContent = s.items[0];
-            card.querySelector(".items-list").appendChild(t);
-          }
-        };
-        footerSug.appendChild(div);
-      });
+      if (footerSug) {
+        footerSug.innerHTML = "";
+        const suggestions = buildSuggestions(set, usageEntry);
+        suggestions.forEach(s => {
+          const div = document.createElement("div");
+          div.className = "tag suggestion";
+          div.textContent = s.message;
+          div.onclick = () => {
+            if (s.type === "ability" && abilitiesList) {
+              abilitiesList.innerHTML = "";
+              const t = document.createElement("div");
+              t.className = "tag";
+              t.textContent = s.items[0];
+              abilitiesList.appendChild(t);
+            }
+            if (s.type === "item" && itemsList) {
+              itemsList.innerHTML = "";
+              const t = document.createElement("div");
+              t.className = "tag";
+              t.textContent = s.items[0];
+              itemsList.appendChild(t);
+            }
+          };
+          footerSug.appendChild(div);
+        });
+      }
 
-      // Credits: authors / quality checks if present as trailing strings
+      // Credits
       const creditsEl = card.querySelector(".credits");
-      const credits = (set.moves || []).filter(m => /Written by|Quality checked by|Grammar checked by/i.test(m));
-      creditsEl.textContent = credits.join(" • ");
+      if (creditsEl) {
+        const credits = (set.moves || []).filter(m =>
+          /Written by|Quality checked by|Grammar checked by/i.test(m)
+        );
+        creditsEl.textContent = credits.join(" • ");
+      }
 
       container.appendChild(card);
     });
@@ -374,7 +409,9 @@ const kgToLb = hg => {
 async function loop() {
   if (speaking || promptVisible || $("#stats-panel")?.style.display === "flex") return;
 
-  const cam = $("#cam"), work = $("#worker"), label = $("#label");
+  const cam = $("#cam"),
+    work = $("#worker"),
+    label = $("#label");
   if (!cam || !work || !label || !cam.videoWidth) {
     return requestAnimationFrame(loop);
   }
@@ -388,17 +425,29 @@ async function loop() {
     ctx.save();
     ctx.translate(0, s);
     ctx.rotate(-Math.PI / 2);
-    ctx.drawImage(cam,
+    ctx.drawImage(
+      cam,
       (cam.videoHeight - s) / 2,
       (cam.videoWidth - s) / 2,
-      s, s, 0, 0, s, s
+      s,
+      s,
+      0,
+      0,
+      s,
+      s
     );
     ctx.restore();
   } else {
-    ctx.drawImage(cam,
+    ctx.drawImage(
+      cam,
       (cam.videoWidth - s) / 2,
       (cam.videoHeight - s) / 2,
-      s, s, 0, 0, s, s
+      s,
+      s,
+      0,
+      0,
+      s,
+      s
     );
   }
 
@@ -434,7 +483,8 @@ async function loop() {
   }
 
   const { name = "", conf = 0, stable = false } = data;
-  $("#label").textContent = `${name} ${(conf * 100).toFixed(1)} %`;
+  const labelEl = $("#label");
+  if (labelEl) labelEl.textContent = `${name} ${(conf * 100).toFixed(1)} %`;
 
   const idx = labels.indexOf(name);
   same = idx === last ? same + 1 : 1;
@@ -451,7 +501,6 @@ async function loop() {
 
 /* ---------- prompt + UI wiring ---------- */
 function promptUser(n, c) {
-  // immediately show stats area and load the Pokémon
   fetchAndRender(n);
 }
 
@@ -468,59 +517,87 @@ async function fetchAndRender(name) {
   }
   const usageEntry = allUsage[slug] || {};
 
-  // populate detail overlay
   renderStats({ ...dex, name }, usageEntry);
-  populateTierFilters(); // ensure the filter pills exist
-  document.getElementById("stats-wrapper").classList.remove("hidden");
+  populateTierFilters();
+  const statsWrapper = document.getElementById("stats-wrapper");
+  if (statsWrapper) statsWrapper.classList.remove("hidden");
   show($("#stats-panel"));
 
-  // render set cards if any
   if (usageEntry) {
     renderSetCards(slug, usageEntry);
   }
 }
 
-/* ---------- main ---------- */
-$("#start").onclick = async () => {
-  if ("speechSynthesis" in window)
-    try { speechSynthesis.speak(new SpeechSynthesisUtterance("")); } catch { }
+/* ---------- DOM-ready wiring ---------- */
+document.addEventListener("DOMContentLoaded", () => {
+  const startBtn = $("#start");
+  if (startBtn) {
+    startBtn.onclick = async () => {
+      if ("speechSynthesis" in window)
+        try {
+          speechSynthesis.speak(new SpeechSynthesisUtterance(""));
+        } catch {}
+      hide(startBtn);
+      await loadAssets();
 
-  hide($("#start"));
-  await loadAssets();
+      const cam = $("#cam");
+      const openCam = async () => {
+        const ideal = {
+          facingMode: "environment",
+          width: { ideal: 1280 },
+          height: { ideal: 720 },
+        };
+        try {
+          return await navigator.mediaDevices.getUserMedia({ video: ideal });
+        } catch {
+          const dev = await navigator.mediaDevices.enumerateDevices();
+          const rear = dev.find(d => d.kind === "videoinput" && /back/i.test(d.label));
+          if (rear)
+            return navigator.mediaDevices.getUserMedia({
+              video: { deviceId: { exact: rear.deviceId }, width: 1280, height: 720 },
+            });
+          return navigator.mediaDevices.getUserMedia({ video: true });
+        }
+      };
 
-  const cam = $("#cam");
-  const openCam = async () => {
-    const ideal = { facingMode: "environment", width: { ideal: 1280 }, height: { ideal: 720 } };
-    try { return await navigator.mediaDevices.getUserMedia({ video: ideal }); }
-    catch {
-      const dev = await navigator.mediaDevices.enumerateDevices();
-      const rear = dev.find(d => d.kind === "videoinput" && /back/i.test(d.label));
-      if (rear) return navigator.mediaDevices.getUserMedia({
-        video: { deviceId: { exact: rear.deviceId }, width: 1280, height: 720 }
-      });
-      return navigator.mediaDevices.getUserMedia({ video: true });
-    }
-  };
+      try {
+        cam.srcObject = await openCam();
+        await cam.play();
+      } catch (e) {
+        const alertEl = $("#alert");
+        if (alertEl) alertEl.textContent = e.message;
+        return;
+      }
 
-  try { cam.srcObject = await openCam(); await cam.play(); }
-  catch (e) { $("#alert").textContent = e.message; return; }
+      requestAnimationFrame(loop);
+    };
+  } else {
+    console.warn("[app.js] #start button missing in DOM");
+  }
 
-  requestAnimationFrame(loop);
-};
+  const btnStats = $("#btn-stats");
+  if (btnStats) {
+    btnStats.onclick = async () => {
+      hide($("#prompt"));
+      promptVisible = false;
+      if (!currentName) return;
+      await fetchAndRender(currentName);
+    };
+  }
 
-$("#btn-stats").onclick = async () => {
-  hide($("#prompt"));
-  promptVisible = false;
-  if (!currentName) return;
-  await fetchAndRender(currentName);
-};
+  const btnDismiss = $("#btn-dismiss");
+  if (btnDismiss) {
+    btnDismiss.onclick = () => {
+      hide($("#prompt"));
+      promptVisible = false;
+      requestAnimationFrame(loop);
+    };
+  }
 
-$("#btn-dismiss").onclick = () => {
-  hide($("#prompt"));
-  promptVisible = false;
-  requestAnimationFrame(loop);
-};
-
-$("#stats-close").onclick = () => {
-  hide($("#stats-panel"));
-};
+  const statsClose = $("#stats-close");
+  if (statsClose) {
+    statsClose.onclick = () => {
+      hide($("#stats-panel"));
+    };
+  }
+});
