@@ -162,9 +162,25 @@ function renderTierSets(list, container) {
     card.style.padding = "8px";
     card.style.margin = "4px 0";
     card.style.fontSize = ".85rem";
-    const title = set.name ? `<strong>${set.name}</strong><br>` : "";
-    const moves = Array.isArray(set.moves) ? set.moves.join(" • ") : "";
-    card.innerHTML = `${title}${moves}`;
+    card.style.whiteSpace = "normal";
+
+    // --- NEW: pretty print moves & extras in list form ---
+    const title = set.name ? `<strong>${set.name}</strong>` : "";
+    const moveList = Array.isArray(set.moves)
+      ? `<ul style="margin:4px 0 0 16px;padding:0;">${set.moves
+          .map(m => `<li>${m}</li>`).join("")}</ul>`
+      : "";
+
+    // abilities, item, nature etc. (optional)
+    let misc = "";
+    if (set.ability || set.item || set.nature) {
+      misc += "<br>";
+      if (set.ability) misc += `<em>Ability:</em> ${Array.isArray(set.ability) ? set.ability.join(", ") : set.ability}<br>`;
+      if (set.item)    misc += `<em>Item:</em> ${Array.isArray(set.item) ? set.item.join(", ") : set.item}<br>`;
+      if (set.nature)  misc += `<em>Nature:</em> ${Array.isArray(set.nature) ? set.nature.join(", ") : set.nature}<br>`;
+    }
+
+    card.innerHTML = `${title}${moveList}${misc}`;
     container.appendChild(card);
   });
 }
