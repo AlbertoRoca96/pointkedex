@@ -49,15 +49,17 @@
     </div>
   </div>
 
+  <!-- service-worker path fix: removed leading "./" -->
   <script type="module">
     if ('serviceWorker' in navigator) {
       window.addEventListener('load', () => {
-        navigator.serviceWorker.register('./service-worker.js')
+        navigator.serviceWorker.register('service-worker.js')
           .then(reg => console.log('Service worker registered, scope:', reg.scope))
           .catch(err => console.error('Service worker registration failed:', err));
       });
     }
   </script>
+
   <script src="config.js"></script>
   <script type="module" src="app.js"></script>
 </body>
