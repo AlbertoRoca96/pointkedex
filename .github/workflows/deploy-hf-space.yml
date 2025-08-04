@@ -60,9 +60,6 @@ jobs:
         run: |
           cd hf-space
           git add -A
-          if git diff --cached --quiet; then
-            echo "No changes to push."
-          else
-            git commit -m "Sync app files from GitHub main"
-            git push
+          git commit -m "Sync app files from GitHub main"
+          git push
           fi
