@@ -93,7 +93,7 @@ canvas{display:none}
   backdrop-filter:blur(3px);
   z-index:10;
 
-  /* NEW: allow the whole overlay to scroll if needed */
+  /* allow the whole overlay to scroll if needed */
   overflow-y:auto;
   overscroll-behavior:contain;
 }
@@ -108,8 +108,8 @@ canvas{display:none}
   box-shadow:0 4px 10px rgba(0,0,0,.4);
 }
 
-/* NEW: prevent the stats card from exceeding viewport height
-        and make its contents scrollable */
+/* prevent the stats card from exceeding viewport height
+   and make its contents scrollable */
 #stats-panel .card{
   max-height:90vh;          /* a little breathing room for top/bottom */
   overflow-y:auto;
@@ -235,4 +235,58 @@ canvas{display:none}
   overflow-y:auto;
   overscroll-behavior:contain;
   padding-right:4px;        /* little space for scrollbar */
+}
+
+/* ─────────── set details (added for new app.js markup) ─────────── */
+.set-header{
+  display:flex;
+  flex-wrap:wrap;
+  align-items:center;
+  gap:6px;
+  margin-bottom:4px;
+}
+
+.set-title{
+  font-weight:600;
+  font-size:.9rem;
+}
+
+.set-meta{
+  font-size:.75rem;
+  opacity:.75;
+  font-style:italic;
+}
+
+.move-list{
+  display:flex;
+  flex-wrap:wrap;
+  gap:4px;
+  margin-top:4px;
+}
+
+.move{
+  background:#444;
+  padding:2px 6px;
+  border-radius:4px;
+  font-size:.78rem;
+  line-height:1.2;
+}
+
+.move-name{font-weight:600}
+
+.ev-line{
+  margin-top:4px;
+  font-size:.78rem;
+  font-style:italic;
+  opacity:.85;
+}
+
+.nature{
+  display:inline-block;
+  margin-top:4px;
+  padding:2px 6px;
+  border-radius:4px;
+  background:#555;
+  font-size:.78rem;
+  text-transform:capitalize;
 }
