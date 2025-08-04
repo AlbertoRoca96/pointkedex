@@ -2,23 +2,33 @@
    Pointkedex Service Worker
    ───────────────────────── */
 
-const CACHE_VERSION = 'v3';
+const CACHE_VERSION = 'v4';                       // bump to flush bad cache
 const CACHE_NAME    = `pointkedex-${CACHE_VERSION}`;
+
+/* dynamic prefix: "" on HF Space, "/pointkedex" on GitHub Pages */
+const ROOT = self.registration.scope
+               .replace(self.location.origin, '')   // strip origin
+               .replace(/\/$/, '');                 // trim trailing slash
+
+/* helper to prefix asset paths with ROOT */
+const withRoot = p => `${ROOT}/${p}`;
 
 /* ---------------------------
    Core files needed offline
+   (NO leading slash -> scope-relative)
    --------------------------- */
-const CORE_ASSETS = [
-  '/', '/index.html', '/styles.css', '/app.js',
-  '/manifest.webmanifest', '/flavor_text.json', '/class_indices.json',
-  '/usage_data.json',
-  '/web_model/model.json', '/web_model/group1-shard1of25.bin'
+const CORE_FILES = [
+  'index.html', 'styles.css', 'app.js',
+  'manifest.webmanifest', 'flavor_text.json',
+  'class_indices.json', 'usage_data.json',
+  'web_model/model.json', 'web_model/group1-shard1of25.bin'
 ];
 
 /* --------------------------  Install  -------------------------- */
 self.addEventListener('install', event => {
   event.waitUntil(
-    caches.open(CACHE_NAME).then(cache => cache.addAll(CORE_ASSETS))
+    caches.open(CACHE_NAME)
+          .then(cache => cache.addAll(CORE_FILES.map(withRoot)))
   );
   self.skipWaiting();
 });
@@ -42,9 +52,16 @@ self.addEventListener('fetch', event => {
   if (request.method !== 'GET') return;
 
   const url = new URL(request.url);
-  if (url.pathname.startsWith('/api/')) return;
 
-  const isCore = CORE_ASSETS.includes(url.pathname) || request.mode === 'navigate';
+  /* never intercept API calls */
+  if (url.pathname.startsWith(`${ROOT}/api/`)) return;
+
+  /* treat nav requests and core files as cache-first */
+  const isCore =
+    url.pathname === `${ROOT}/` ||
+    url.pathname === `${ROOT}/index.html` ||
+    CORE_FILES.some(p => url.pathname === `${ROOT}/${p}`);
+
   if (isCore) {
     event.respondWith(
       caches.match(request, { ignoreSearch: true })
@@ -53,6 +70,7 @@ self.addEventListener('fetch', event => {
     return;
   }
 
+  /* everything else: network-first, then cache fallback */
   event.respondWith(
     fetch(request)
       .then(resp => {
