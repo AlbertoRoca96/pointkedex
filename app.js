@@ -67,13 +67,12 @@ const kgToLb = hg => {
   return `${kg.toFixed(1)} kg (${(kg*2.205).toFixed(1)} lb)`;
 };
 
-/* ----- renderers ---------- */
-function renderUsage(u) {
+/* ----- usage render helpers ---------- */
+function renderUsageSummary(u) {
   const box = $("#stats-usage");
   if (!box) return;
   box.innerHTML = "";
 
-  // Always show the box; if empty, show a placeholder
   if (!u || (!u.moves?.length && !u.abilities?.length && !u.items?.length)) {
     box.style.display = "block";
     const msg = document.createElement("div");
@@ -85,7 +84,7 @@ function renderUsage(u) {
   }
 
   box.style.display = "block";
-  ;["Moves", "Abilities", "Items"].forEach((label, i) => {
+  ["Moves", "Abilities", "Items"].forEach(label => {
     const key = label.toLowerCase();
     const list = u[key];
     if (!list?.length) return;
@@ -102,9 +101,77 @@ function renderUsage(u) {
   });
 }
 
+function buildTierTabs(fullSets) {
+  let tabs = $("#usage-tabs"), content = $("#usage-content");
+  if (!tabs) {
+    tabs = document.createElement("div");
+    tabs.id = "usage-tabs";
+    tabs.style.display = "flex";
+    tabs.style.flexWrap = "wrap";
+    tabs.style.gap = "6px";
+    tabs.style.margin = "10px 0 6px";
+    $("#stats-panel .card").appendChild(tabs);
+  }
+  if (!content) {
+    content = document.createElement("div");
+    content.id = "usage-content";
+    $("#stats-panel .card").appendChild(content);
+  }
+  tabs.innerHTML = "";
+  content.innerHTML = "";
+
+  const tiers = Object.keys(fullSets || {}).sort();
+  if (!tiers.length) return;
+
+  const activate = (tier) => {
+    Array.from(tabs.children).forEach(btn => btn.style.background = "var(--blue)");
+    const btn = $(`#usage-tabs button[data-tier='${tier}']`);
+    if (btn) btn.style.background = "#3390e0";
+    renderTierSets(fullSets[tier], content);
+  };
+
+  tiers.forEach((t, i) => {
+    const b = document.createElement("button");
+    b.textContent = t;
+    b.dataset.tier = t;
+    b.style.border = "none";
+    b.style.borderRadius = "var(--r)";
+    b.style.padding = "6px 10px";
+    b.style.cursor = "pointer";
+    b.style.fontWeight = "600";
+    b.style.background = "var(--blue)";
+    b.onclick = () => activate(t);
+    tabs.appendChild(b);
+    if (i === 0) activate(t);
+  });
+}
+
+function renderTierSets(list, container) {
+  container.innerHTML = "";
+  if (!Array.isArray(list) || !list.length) {
+    const p = document.createElement("p");
+    p.textContent = "No sets for this tier.";
+    p.style.fontStyle = "italic";
+    container.appendChild(p);
+    return;
+  }
+  list.forEach(set => {
+    const card = document.createElement("div");
+    card.style.background = "#333";
+    card.style.borderRadius = "var(--r)";
+    card.style.padding = "8px";
+    card.style.margin = "4px 0";
+    card.style.fontSize = ".85rem";
+    const title = set.name ? `<strong>${set.name}</strong><br>` : "";
+    const moves = Array.isArray(set.moves) ? set.moves.join(" • ") : "";
+    card.innerHTML = `${title}${moves}`;
+    container.appendChild(card);
+  });
+}
+
+/* ----- main stats renderer ---------- */
 function renderStats(d) {
-  $("#stats-name").textContent =
-    `${d.name}  (#${String(d.dex).padStart(4,"0")})`;
+  $("#stats-name").textContent = `${d.name}  (#${String(d.dex).padStart(4,"0")})`;
   $("#stats-desc").textContent = d.description || "";
 
   const types = $("#stats-types");
@@ -118,8 +185,7 @@ function renderStats(d) {
     });
   }
 
-  $("#stats-abilities").textContent =
-    `Abilities: ${(d.abilities||[]).join(", ")}`;
+  $("#stats-abilities").textContent = `Abilities: ${(d.abilities||[]).join(", ")}`;
 
   const tbl = $("#stats-table");
   if (tbl) {
@@ -131,14 +197,16 @@ function renderStats(d) {
     });
   }
 
-  $("#stats-misc").textContent =
-    `Height: ${mToFtIn(d.height)}   •   Weight: ${kgToLb(d.weight)}`;
+  $("#stats-misc").textContent = `Height: ${mToFtIn(d.height)}   •   Weight: ${kgToLb(d.weight)}`;
 
   const slug = toID(d.name);
   debug("fetching usage for", d.name, "slug:", slug);
   fetch(makeUrl(`api/usage/${slug}`))
     .then(r => r.ok ? r.json() : {})
-    .then(u => renderUsage(u))
+    .then(u => {
+      renderUsageSummary(u);
+      buildTierTabs(u.full_sets || {});
+    })
     .catch(e => console.warn("[usage] error for slug", slug, e));
 }
 
@@ -177,7 +245,6 @@ async function loop() {
   const jpeg = work.toDataURL("image/jpeg", JPEG_QUAL);
   const endpoint = makeUrl("api/predict");
 
-  // abort previous prediction if still in flight
   if (predictController) predictController.abort();
   predictController = new AbortController();
   const signal = predictController.signal;
@@ -224,8 +291,7 @@ async function loop() {
 
 /* ---------- prompt + UI wiring ---------- */
 function promptUser(n,c){
-  $("#prompt-text").textContent =
-    `Looks like ${n} (${(c*100).toFixed(1)}%). Show its stats?`;
+  $("#prompt-text").textContent = `Looks like ${n} (${(c*100).toFixed(1)}%). Show its stats?`;
   show($("#prompt"));
   promptVisible = true;
 }
