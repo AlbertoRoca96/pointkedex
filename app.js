@@ -23,7 +23,7 @@ const $      = q => document.querySelector(q);
 const show   = el => el && (el.style.display = "flex");
 const hide   = el => el && (el.style.display = "none");
 const toID   = s => (typeof s === "string" ? s.toLowerCase().replace(/[^a-z0-9]/g, "") : "");
-const makeUrl = p => `${(window.API_BASE || "").replace(/\/+$/, "")}/${p.replace(/^\/+/, "")}`;
+const makeUrl = p => `${(window.API_BASE || "").replace(/\/+\$/, "")}/${p.replace(/^\/+/,'')}`;
 
 /* ---------- asset loading ---------- */
 async function loadAssets() {
@@ -70,11 +70,31 @@ function getFlavorText(name) {
   if (Array.isArray(f) && f.length) return f[Math.floor(Math.random() * f.length)];
   if (typeof f === "object") {
     if (f.default) return f.default;
-    // pick first value
     const vals = Object.values(f);
     if (vals.length) return typeof vals[0] === "string" ? vals[0] : JSON.stringify(vals[0]);
   }
   return "";
+}
+
+/* ---------- render stats panel ---------- */
+function updateStatsPanel(name, conf, flavorText, usage) {
+  $("#stats-name").textContent = name;
+  $("#stats-desc").textContent = flavorText || "No flavor text.";
+  $("#stats-id").textContent = `Confidence: ${(conf*100).toFixed(1)}%`;
+
+  /* Usage tags */
+  const usageDiv = $("#stats-usage");
+  usageDiv.innerHTML = "";
+  if (usage && usage.moves) {
+    ["moves","abilities","items"].forEach(cat => {
+      (usage[cat]||[]).slice(0,4).forEach(x => {
+        const span=document.createElement("span");
+        span.className="tag";
+        span.textContent=`${cat.slice(0,1).toUpperCase()+cat.slice(1)}: ${x}`;
+        usageDiv.appendChild(span);
+      });
+    });
+  }
 }
 
 /* ---------- parsing helper (preserved) ---------- */
@@ -91,74 +111,22 @@ function parseMoveBlob(blob = "") {
   return out;
 }
 
-/* ---------- rendering / prediction display ---------- */
+/* ---------- fetch & render ---------- */
 async function fetchAndRender(name, conf) {
   try {
-    // Update the label (confidence display)
-    const labelEl = $("#label");
-    if (labelEl) labelEl.textContent = `${name} ${(conf * 100).toFixed(1)} %`;
-
-    // Flavor text
     const flavorText = getFlavorText(name);
-    // Usage data
-    const usage = allUsage[name] || {};
+    const usage = allUsage[toID(name)] || {};
 
-    // Render into set-cards (fallback placeholder if missing)
-    let cards = document.getElementById("set-cards");
-    if (!cards) {
-      // create a fallback container if none exists
-      cards = document.createElement("div");
-      cards.id = "set-cards";
-      cards.style.padding = "10px";
-      cards.style.maxWidth = "600px";
-      cards.style.margin = "8px auto";
-      cards.style.background = "#fff";
-      cards.style.border = "1px solid #ccc";
-      cards.style.fontFamily = "monospace";
-      document.body.appendChild(cards);
-    }
-    cards.innerHTML = ""; // clear previous
+    updateStatsPanel(name, conf, flavorText, usage);
 
-    // Header
-    const hdr = document.createElement("div");
-    hdr.style.marginBottom = "8px";
-    hdr.innerHTML = `<strong>Prediction:</strong> ${name} (${(conf * 100).toFixed(1)}%)`;
-    cards.appendChild(hdr);
-
-    // Flavor
-    if (flavorText) {
-      const flavDiv = document.createElement("div");
-      flavDiv.style.marginBottom = "6px";
-      flavDiv.textContent = `Flavor: ${flavorText}`;
-      cards.appendChild(flavDiv);
-    }
-
-    // Usage summary
-    const usageDiv = document.createElement("div");
-    usageDiv.style.marginBottom = "6px";
-    if (Object.keys(usage).length === 0) {
-      usageDiv.textContent = "No usage data available for this prediction.";
-    } else {
-      // Pretty-print a limited view
-      const pre = document.createElement("pre");
-      pre.style.maxHeight = "250px";
-      pre.style.overflow = "auto";
-      pre.textContent = JSON.stringify(usage, null, 2);
-      usageDiv.appendChild(pre);
-    }
-    cards.appendChild(usageDiv);
-
-    // Optionally add a timestamp / last updated
-    const foot = document.createElement("div");
-    foot.style.fontSize = "0.8em";
-    foot.style.color = "#666";
-    foot.textContent = `Rendered at ${new Date().toLocaleTimeString()}`;
-    cards.appendChild(foot);
+    /* Prompt overlay */
+    $("#prompt-text").textContent = `Found ${name}!`;
+    show($("#prompt"));
+    promptVisible = true;
   } catch (e) {
     console.warn("[fetchAndRender] error:", e);
   } finally {
-    // Schedule next loop after render
-    requestAnimationFrame(loop);
+    /* wait for user interaction, loop resumes when prompt dismissed */
   }
 }
 
@@ -175,7 +143,6 @@ async function loop() {
   const cam = $("#cam"), work = $("#worker");
   if (!cam || !work || !cam.videoWidth) return requestAnimationFrame(loop);
 
-  // Square-crop and rotate if portrait
   const portrait = cam.videoHeight > cam.videoWidth;
   const s = portrait ? cam.videoWidth : cam.videoHeight;
   work.width = work.height = s;
@@ -213,16 +180,11 @@ async function loop() {
   }
 
   let data = {};
-  try {
-    data = await resp.json();
-  } catch (e) {
-    return requestAnimationFrame(loop);
-  }
+  try { data = await resp.json(); } catch { return requestAnimationFrame(loop); }
 
   const { name = "", conf = 0, stable = false } = data;
   $("#label") && ($("#label").textContent = `${name} ${(conf * 100).toFixed(1)} %`);
 
-  // Determine index for stability tracking
   const idx = labels.indexOf(name);
   same = idx === lastIdx ? same + 1 : 1;
   lastIdx = idx;
@@ -237,34 +199,10 @@ async function loop() {
       currentName = name;
       await fetchAndRender(name, conf);
     } else {
-      // don't spam rendering; continue loop
       requestAnimationFrame(loop);
     }
   } else {
     requestAnimationFrame(loop);
-  }
-}
-
-/* ---------- camera selection helpers ---------- */
-async function chooseCamera() {
-  try {
-    return await navigator.mediaDevices.getUserMedia({
-      video: { facingMode: "environment", width: { ideal: 1280 }, height: { ideal: 720 } }
-    });
-  } catch {
-    try {
-      const devices = await navigator.mediaDevices.enumerateDevices();
-      const rear = devices.find(d => d.kind === "videoinput" && /back/i.test(d.label));
-      if (rear) {
-        return navigator.mediaDevices.getUserMedia({
-          video: { deviceId: { exact: rear.deviceId }, width: 1280, height: 720 }
-        });
-      }
-    } catch (e) {
-      console.warn("[chooseCamera] fallback enumeration failed:", e);
-    }
-    // last resort
-    return navigator.mediaDevices.getUserMedia({ video: true });
   }
 }
 
@@ -285,6 +223,19 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     requestAnimationFrame(loop);
+  });
+
+  /* overlay button handlers */
+  $("#btn-dismiss")?.addEventListener("click", () => {
+    hide($("#prompt"));
+    promptVisible = false;
+    requestAnimationFrame(loop);
+  });
+
+  $("#btn-stats")?.addEventListener("click", () => {
+    hide($("#prompt"));
+    show($("#stats-panel"));
+    promptVisible = false;
   });
 
   $("#stats-close")?.addEventListener("click", () => hide($("#stats-panel")));
