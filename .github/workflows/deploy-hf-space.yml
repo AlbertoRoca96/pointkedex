@@ -3,7 +3,9 @@ on:
     branches: [main]
   workflow_dispatch:
 
-jobs:/* ---------- tunables ---------- */
+jobs:
+
+/* ---------- tunables ---------- */
 const CONF_THR  = 0.20;   // min confidence to accept
 const STABLE_N  = 3;      // identical frames required
 const JPEG_QUAL = 0.85;   // transmitted JPEG quality
