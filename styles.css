@@ -46,7 +46,7 @@ canvas{display:none}
   text-transform:capitalize;
 }
 
-/* ---------- tier tab UI (new) ---------- */
+/* ---------- tier tab UI ---------- */
 .tab-strip{
   display:flex;
   flex-wrap:wrap;
@@ -78,4 +78,12 @@ canvas{display:none}
   border-radius:var(--r);
   font-size:.85rem;
   line-height:1.35;
+}
+
+/* ---------- scrollable usage content (new) ---------- */
+#usage-content{
+  max-height:60vh;
+  overflow-y:auto;
+  overscroll-behavior:contain;
+  padding-right:4px;
 }
