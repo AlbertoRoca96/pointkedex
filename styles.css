@@ -238,55 +238,13 @@ canvas{display:none}
 }
 
 /* ─────────── set details (added for new app.js markup) ─────────── */
-.set-header{
-  display:flex;
-  flex-wrap:wrap;
-  align-items:center;
-  gap:6px;
-  margin-bottom:4px;
-}
-
-.set-title{
-  font-weight:600;
-  font-size:.9rem;
-}
-
-.set-meta{
-  font-size:.75rem;
-  opacity:.75;
-  font-style:italic;
-}
-
 .move-list{
-  display:flex;
-  flex-wrap:wrap;
-  gap:4px;
-  margin-top:4px;
+  margin:4px 0 0 18px;      /* indent bullets a bit */
+  padding:0;
+  list-style-type:disc;
 }
-
-.move{
-  background:#444;
-  padding:2px 6px;
-  border-radius:4px;
+.set-meta{
   font-size:.78rem;
-  line-height:1.2;
-}
-
-.move-name{font-weight:600}
-
-.ev-line{
-  margin-top:4px;
-  font-size:.78rem;
-  font-style:italic;
-  opacity:.85;
-}
-
-.nature{
-  display:inline-block;
-  margin-top:4px;
-  padding:2px 6px;
-  border-radius:4px;
-  background:#555;
-  font-size:.78rem;
-  text-transform:capitalize;
+  opacity:.80;
+  line-height:1.35;
 }
