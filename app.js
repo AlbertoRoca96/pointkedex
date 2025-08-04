@@ -67,6 +67,19 @@ const kgToLb = hg => {
   return `${kg.toFixed(1)} kg (${(kg*2.205).toFixed(1)} lb)`;
 };
 
+/* ----- NEW helpers for prettier set display ---------- */
+const cleanMove = m => {
+  if (typeof m !== "string") return "";
+  const cut = m.indexOf("Type");
+  return (cut > 0 ? m.slice(0, cut) : m).trim();
+};
+const formatEV = ev =>
+  typeof ev === "string"
+    ? ev
+    : Object.entries(ev || {})
+        .map(([k, v]) => `${v} ${k.toUpperCase()}`)
+        .join(" / ");
+
 /* ----- usage render helpers ---------- */
 function renderUsageSummary(u) {
   const box = $("#stats-usage");
@@ -164,20 +177,26 @@ function renderTierSets(list, container) {
     card.style.fontSize = ".85rem";
     card.style.whiteSpace = "normal";
 
-    // --- NEW: pretty print moves & extras in list form ---
     const title = set.name ? `<strong>${set.name}</strong>` : "";
+
+    /* moves */
     const moveList = Array.isArray(set.moves)
-      ? `<ul style="margin:4px 0 0 16px;padding:0;">${set.moves
-          .map(m => `<li>${m}</li>`).join("")}</ul>`
+      ? `<ul class="move-list">${set.moves
+          .map(m => `<li>${cleanMove(m)}</li>`)
+          .join("")}</ul>`
       : "";
 
-    // abilities, item, nature etc. (optional)
+    /* meta lines */
     let misc = "";
-    if (set.ability || set.item || set.nature) {
-      misc += "<br>";
-      if (set.ability) misc += `<em>Ability:</em> ${Array.isArray(set.ability) ? set.ability.join(", ") : set.ability}<br>`;
+    if (set.ability || set.item || set.nature || set.evs || set.ivs || set.teratypes) {
+      misc += "<div class='set-meta'>";
       if (set.item)    misc += `<em>Item:</em> ${Array.isArray(set.item) ? set.item.join(", ") : set.item}<br>`;
+      if (set.ability) misc += `<em>Ability:</em> ${Array.isArray(set.ability) ? set.ability.join(", ") : set.ability}<br>`;
       if (set.nature)  misc += `<em>Nature:</em> ${Array.isArray(set.nature) ? set.nature.join(", ") : set.nature}<br>`;
+      if (set.evs)     misc += `<em>EVs:</em> ${formatEV(set.evs)}<br>`;
+      if (set.ivs)     misc += `<em>IVs:</em> ${formatEV(set.ivs)}<br>`;
+      if (set.teratypes) misc += `<em>Tera:</em> ${Array.isArray(set.teratypes) ? set.teratypes.join(", ") : set.teratypes}<br>`;
+      misc += "</div>";
     }
 
     card.innerHTML = `${title}${moveList}${misc}`;
