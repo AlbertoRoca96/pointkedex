@@ -24,42 +24,42 @@ jobs:
           rm -rf hf-space
           git clone https://AlbertoRoca96-web:${HF_TOKEN}@huggingface.co/spaces/AlbertoRoca96-web/pointkedex hf-space
 
-      - name: Download usage_data.json and .h5 from release (reliable)
+      - name: Ensure jq is available
+        run: |
+          if ! command -v jq >/dev/null; then
+            sudo apt-get update
+            sudo apt-get install -y jq
+          fi
+
+      - name: Download usage_data.json and .h5 from release (shell-only)
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          OWNER: "AlbertoRoca96"
-          REPO: "pointkedex"
-          TAG: "alroca"
         run: |
-          # Fetch release asset URLs
-          eval "$(
-            python3 - <<'PY'
-import os, json, urllib.request, sys
-owner=os.getenv("OWNER")
-repo=os.getenv("REPO")
-tag=os.getenv("TAG")
-token=os.getenv("GITHUB_TOKEN")
-api=f"https://api.github.com/repos/{owner}/{repo}/releases/tags/{tag}"
-req = urllib.request.Request(api, headers={
-    "Accept": "application/vnd.github+json",
-    "Authorization": f"Bearer {token}"
-})
-with urllib.request.urlopen(req, timeout=30) as r:
-    data=json.load(r)
-assets = {a["name"]: a["browser_download_url"] for a in data.get("assets", [])}
-for name in ["usage_data.json","pokedex_resnet50.h5"]:
-    if name not in assets:
-        print(f'echo \"❌ {name} asset not found in release {tag}\"; exit 1;')
-        sys.exit(1)
-    url=assets[name]
-    safe = url.replace('"','\\"')
-    print(f'URL_{name.upper().replace(".","_")}=\"{safe}\"')
-PY"
-          )
+          OWNER="AlbertoRoca96"
+          REPO="pointkedex"
+          TAG="alroca"
+
+          # Fetch the release JSON by tag
+          release_json=$(curl -sSL \
+            -H "Accept: application/vnd.github+json" \
+            -H "Authorization: Bearer ${GITHUB_TOKEN}" \
+            "https://api.github.com/repos/${OWNER}/${REPO}/releases/tags/${TAG}")
+
+          usage_url=$(printf '%s' "$release_json" | jq -r '.assets[] | select(.name=="usage_data.json") | .browser_download_url')
+          h5_url=$(printf '%s' "$release_json" | jq -r '.assets[] | select(.name=="pokedex_resnet50.h5") | .browser_download_url')
+
+          if [[ -z "$usage_url" || "$usage_url" == "null" ]]; then
+            echo "❌ usage_data.json asset not found in release ${TAG}"
+            exit 1
+          fi
+          if [[ -z "$h5_url" || "$h5_url" == "null" ]]; then
+            echo "❌ pokedex_resnet50.h5 asset not found in release ${TAG}"
+            exit 1
+          fi
 
           # Download the assets
-          curl -L -H "Authorization: Bearer ${GITHUB_TOKEN}" -o usage_data.json "${URL_USAGE_DATA_JSON}"
-          curl -L -H "Authorization: Bearer ${GITHUB_TOKEN}" -o pokedex_resnet50.h5 "${URL_POKEDEX_RESNET50_H5}"
+          curl -L -H "Authorization: Bearer ${GITHUB_TOKEN}" -o usage_data.json "$usage_url"
+          curl -L -H "Authorization: Bearer ${GITHUB_TOKEN}" -o pokedex_resnet50.h5 "$h5_url"
 
       - name: Sync files to HF Space
         run: |
