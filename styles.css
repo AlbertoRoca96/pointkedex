@@ -45,3 +45,37 @@ canvas{display:none}
   color:#fff;
   text-transform:capitalize;
 }
+
+/* ---------- tier tab UI (new) ---------- */
+.tab-strip{
+  display:flex;
+  flex-wrap:wrap;
+  gap:6px;
+  margin:10px 0;
+}
+.tab-btn{
+  cursor:pointer;
+  padding:4px 10px;
+  border-radius:var(--r);
+  font-size:.85rem;
+  font-weight:600;
+  background:#333;
+  border:1px solid #555;
+  color:var(--light);
+  transition:background var(--t);
+}
+.tab-btn:hover{background:#444}
+.tab-btn.active{
+  background:var(--blue);
+  border-color:var(--blue);
+}
+
+/* ---------- set list / card ---------- */
+.set-list{display:flex;flex-direction:column;gap:8px}
+.set-card{
+  background:#333;
+  padding:8px;
+  border-radius:var(--r);
+  font-size:.85rem;
+  line-height:1.35;
+}
