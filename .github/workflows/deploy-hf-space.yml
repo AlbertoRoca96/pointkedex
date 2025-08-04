@@ -8,21 +8,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout source
-        uses: actions/checkout@v4on:
-  push:
-    branches: [main]
-  workflow_dispatch:
-
-jobs:
-  deploy:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout source
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
 
-      - name: Configure Git
+      - name: Configure Git for commit
         run: |
           git config --global user.name "github-actions"
           git config --global user.email "github-actions@users.noreply.github.com"
@@ -31,30 +21,32 @@ jobs:
         env:
           HF_TOKEN: ${{ secrets.HF_TOKEN }}
         run: |
+          rm -rf hf-space
           git clone https://AlbertoRoca96-web:${HF_TOKEN}@huggingface.co/spaces/AlbertoRoca96-web/pointkedex hf-space
 
       - name: Download usage_data.json and .h5 from release (reliable)
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          OWNER: "AlbertoRoca96"
+          REPO: "pointkedex"
+          TAG: "alroca"
         run: |
-          OWNER="AlbertoRoca96"
-          REPO="pointkedex"
-          TAG="alroca"
-          ASSETS=("usage_data.json" "pokedex_resnet50.h5")
-
-          # Use Python to fetch release JSON and extract browser_download_url for each asset.
-          eval "$(python3 - <<'PY'
-import os, json, subprocess, sys, textwrap, urllib.request
+          # Fetch release asset URLs
+          eval "$(
+            python3 - <<'PY'
+import os, json, urllib.request, sys
 owner=os.getenv("OWNER")
 repo=os.getenv("REPO")
 tag=os.getenv("TAG")
 token=os.getenv("GITHUB_TOKEN")
 api=f"https://api.github.com/repos/{owner}/{repo}/releases/tags/{tag}"
-req = urllib.request.Request(api, headers={"Accept": "application/vnd.github+json", "Authorization": f"Bearer {token}"})
+req = urllib.request.Request(api, headers={
+    "Accept": "application/vnd.github+json",
+    "Authorization": f"Bearer {token}"
+})
 with urllib.request.urlopen(req, timeout=30) as r:
     data=json.load(r)
 assets = {a["name"]: a["browser_download_url"] for a in data.get("assets", [])}
-# Print shell assignments for existing assets
 for name in ["usage_data.json","pokedex_resnet50.h5"]:
     if name not in assets:
         print(f'echo \"❌ {name} asset not found in release {tag}\"; exit 1;')
@@ -65,46 +57,11 @@ for name in ["usage_data.json","pokedex_resnet50.h5"]:
 PY"
           )
 
-          # Download the two assets using the URLs injected by Python
+          # Download the assets
           curl -L -H "Authorization: Bearer ${GITHUB_TOKEN}" -o usage_data.json "${URL_USAGE_DATA_JSON}"
           curl -L -H "Authorization: Bearer ${GITHUB_TOKEN}" -o pokedex_resnet50.h5 "${URL_POKEDEX_RESNET50_H5}"
 
-      # ── copy every file the app needs ─────────────────────────────
-      - name: Sync files
-        run: |
-          rsync -a --delete \
-            Dockerfile predict_server.py index.html app.js styles.css \
-            config.js flavor_text.json class_indices.json pokedex_data.json \
-            usage_data.json service-worker.js manifest.webmanifest \
-            hf-space/
-
-      - name: Commit & push to HF Space
-        env:
-          HF_TOKEN: ${{ secrets.HF_TOKEN }}
-        run: |
-          cd hf-space
-          git add -A
-          if git diff --cached --quiet; then
-            echo "No changes to push."
-          else
-            git commit -m "Sync app files from GitHub main"
-            git push
-        with:
-          fetch-depth: 0
-
-      - name: Configure Git
-        run: |
-          git config --global user.name "github-actions"
-          git config --global user.email "github-actions@users.noreply.github.com"
-
-      - name: Clone HF Space repo
-        env:
-          HF_TOKEN: ${{ secrets.HF_TOKEN }}
-        run: |
-          git clone https://AlbertoRoca96-web:${HF_TOKEN}@huggingface.co/spaces/AlbertoRoca96-web/pointkedex hf-space
-
-      # ── copy every file the app needs ─────────────────────────────
-      - name: Sync files
+      - name: Sync files to HF Space
         run: |
           rsync -a --delete \
             Dockerfile predict_server.py index.html app.js styles.css \
