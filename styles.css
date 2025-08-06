@@ -86,14 +86,12 @@ canvas{display:none}
 .overlay{
   position:absolute;
   inset:0;
-  display:none;               /* shown via JS with display:flex */
+  display:none;
   align-items:center;
   justify-content:center;
   background:rgba(0,0,0,.6);
   backdrop-filter:blur(3px);
   z-index:10;
-
-  /* allow the whole overlay to scroll if needed */
   overflow-y:auto;
   overscroll-behavior:contain;
 }
@@ -108,10 +106,8 @@ canvas{display:none}
   box-shadow:0 4px 10px rgba(0,0,0,.4);
 }
 
-/* prevent the stats card from exceeding viewport height
-   and make its contents scrollable */
 #stats-panel .card{
-  max-height:90vh;          /* a little breathing room for top/bottom */
+  max-height:90vh;
   overflow-y:auto;
   overscroll-behavior:contain;
 }
@@ -200,7 +196,7 @@ canvas{display:none}
 }
 .tab-btn{
   cursor:pointer;
-  padding:4px 10px;
+  padding:6px 12px;
   border-radius:var(--r);
   font-size:.85rem;
   font-weight:600;
@@ -215,12 +211,7 @@ canvas{display:none}
   border-color:var(--blue);
 }
 
-/* ─────────── set list / card ─────────── */
-.set-list{
-  display:flex;
-  flex-direction:column;
-  gap:8px;
-}
+/* ─────────── set card ─────────── */
 .set-card{
   background:#333;
   padding:8px;
@@ -228,34 +219,47 @@ canvas{display:none}
   font-size:.85rem;
   line-height:1.35;
 }
-
-/* ─────────── scrollable tier-set container ─────────── */
-#usage-content{
-  max-height:60vh;          /* keeps internal list usable on small screens */
-  overflow-y:auto;
-  overscroll-behavior:contain;
-  padding-right:4px;        /* little space for scrollbar */
+.set-header{
+  margin-bottom:6px;
+}
+.set-name{
+  font-size:1rem;
+  font-weight:600;
 }
 
-/* ─────────── set details (added for new app.js markup) ─────────── */
+/* ─────────── move list ─────────── */
 .move-list{
-  margin:4px 0 0 18px;      /* indent bullets a bit */
+  margin:8px 0 0 18px;
   padding:0;
   list-style-type:disc;
 }
+.move-list li{
+  margin-bottom:4px;
+  cursor:help;
+}
+
+/* ─────────── metadata grid ─────────── */
 .set-meta{
-  display: grid;
-  grid-template-columns: max-content auto;
-  column-gap: 8px;
-  row-gap: 4px;
-  font-size: .78rem;
-  opacity: .8;
-  margin-top: 6px;
+  display:grid;
+  grid-template-columns:max-content auto;
+  column-gap:8px;
+  row-gap:4px;
+  font-size:.85rem;
+  margin-top:6px;
+  opacity:.8;
 }
-.set-meta dt {
-  font-weight: 600;
-  text-align: right;
+.set-meta dt{
+  font-weight:600;
+  text-align:right;
 }
-.set-meta dd {
-  margin: 0;
+.set-meta dd{
+  margin:0;
+}
+
+/* ─────────── scrollable tier-set container ─────────── */
+#usage-content{
+  max-height:60vh;
+  overflow-y:auto;
+  overscroll-behavior:contain;
+  padding-right:4px;
 }
