@@ -36,7 +36,7 @@ RUN set -eux; \
     fi; \
     info=$(eval "curl -s -H '${header}' ${auth} \"${api}\""); \
     # fetch model
-    model_url=$(echo "$info" | jq -r ".assets[] | select(.name==\"${MODEL_NAME}\") | .browser_download_url"); \
+    model_url=$(printf '%s' "$info" | jq -r ".assets[] | select(.name==\"${MODEL_NAME}\") | .browser_download_url"); \
     [ -n "$model_url" ] && [ "$model_url" != "null" ] || (echo "ERROR: model asset not found"; exit 1); \
     if [ -n "${GITHUB_TOKEN}" ]; then \
       curl -L -H "Authorization: token ${GITHUB_TOKEN}" -o "${MODEL_NAME}" "$model_url"; \
@@ -45,7 +45,7 @@ RUN set -eux; \
     fi; \
     tensorflowjs_converter --input_format=keras "${MODEL_NAME}" web_model; \
     # fetch usage data
-    usage_url=$(echo "$info" | jq -r ".assets[] | select(.name==\"${USAGE_DATA_NAME}\") | .browser_download_url"); \
+    usage_url=$(printf '%s' "$info" | jq -r ".assets[] | select(.name==\"${USAGE_DATA_NAME}\") | .browser_download_url"); \
     [ -n "$usage_url" ] && [ "$usage_url" != "null" ] || (echo "ERROR: usage_data asset not found"; exit 1); \
     if [ -n "${GITHUB_TOKEN}" ]; then \
       curl -L -H "Authorization: token ${GITHUB_TOKEN}" -o "${USAGE_DATA_NAME}" "$usage_url"; \
