@@ -244,7 +244,18 @@ canvas{display:none}
   list-style-type:disc;
 }
 .set-meta{
-  font-size:.78rem;
-  opacity:.80;
-  line-height:1.35;
+  display: grid;
+  grid-template-columns: max-content auto;
+  column-gap: 8px;
+  row-gap: 4px;
+  font-size: .78rem;
+  opacity: .8;
+  margin-top: 6px;
+}
+.set-meta dt {
+  font-weight: 600;
+  text-align: right;
+}
+.set-meta dd {
+  margin: 0;
 }
