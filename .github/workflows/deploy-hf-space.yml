@@ -1,4 +1,3 @@
-#woo
 on:
   push:
     branches: [main]
