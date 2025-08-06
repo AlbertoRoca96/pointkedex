@@ -117,12 +117,9 @@ function renderUsageSummary(u) {
 function buildTierTabs(fullSets) {
   let tabs = $("#usage-tabs"), content = $("#usage-content");
   if (!tabs) {
-    tabs = document.createElement("div");
+    tabs = document.createElement("nav");
     tabs.id = "usage-tabs";
-    tabs.style.display = "flex";
-    tabs.style.flexWrap = "wrap";
-    tabs.style.gap = "6px";
-    tabs.style.margin = "10px 0 6px";
+    tabs.className = "tab-strip";
     $("#stats-panel .card").appendChild(tabs);
   }
   if (!content) {
@@ -136,26 +133,21 @@ function buildTierTabs(fullSets) {
   const tiers = Object.keys(fullSets || {}).sort();
   if (!tiers.length) return;
 
-  const activate = (tier) => {
-    Array.from(tabs.children).forEach(btn => btn.style.background = "var(--blue)");
-    const btn = $(`#usage-tabs button[data-tier='${tier}']`);
-    if (btn) btn.style.background = "#3390e0";
+  function activate(tier) {
+    tabs.querySelectorAll("button").forEach(b => b.classList.remove("active"));
+    const button = tabs.querySelector(`button[data-tier='${tier}']`);
+    if (button) button.classList.add("active");
     renderTierSets(fullSets[tier], content);
-  };
+  }
 
-  tiers.forEach((t, i) => {
-    const b = document.createElement("button");
-    b.textContent = t;
-    b.dataset.tier = t;
-    b.style.border = "none";
-    b.style.borderRadius = "var(--r)";
-    b.style.padding = "6px 10px";
-    b.style.cursor = "pointer";
-    b.style.fontWeight = "600";
-    b.style.background = "var(--blue)";
-    b.onclick = () => activate(t);
-    tabs.appendChild(b);
-    if (i === 0) activate(t);
+  tiers.forEach((tier, i) => {
+    const button = document.createElement("button");
+    button.className = "tab-btn";
+    button.textContent = tier;
+    button.dataset.tier = tier;
+    button.addEventListener("click", () => activate(tier));
+    tabs.appendChild(button);
+    if (i === 0) activate(tier);
   });
 }
 
@@ -170,36 +162,55 @@ function renderTierSets(list, container) {
   }
   list.forEach(set => {
     const card = document.createElement("div");
-    card.style.background = "#333";
-    card.style.borderRadius = "var(--r)";
-    card.style.padding = "8px";
-    card.style.margin = "4px 0";
-    card.style.fontSize = ".85rem";
-    card.style.whiteSpace = "normal";
+    card.className = "set-card";
 
-    const title = set.name ? `<strong>${set.name}</strong>` : "";
-
-    /* moves */
-    const moveList = Array.isArray(set.moves)
-      ? `<ul class="move-list">${set.moves
-          .map(m => `<li>${cleanMove(m)}</li>`)
-          .join("")}</ul>`
-      : "";
-
-    /* meta lines */
-    let misc = "";
-    if (set.ability || set.item || set.nature || set.evs || set.ivs || set.teratypes) {
-      misc += "<div class='set-meta'>";
-      if (set.item)    misc += `<em>Item:</em> ${Array.isArray(set.item) ? set.item.join(", ") : set.item}<br>`;
-      if (set.ability) misc += `<em>Ability:</em> ${Array.isArray(set.ability) ? set.ability.join(", ") : set.ability}<br>`;
-      if (set.nature)  misc += `<em>Nature:</em> ${Array.isArray(set.nature) ? set.nature.join(", ") : set.nature}<br>`;
-      if (set.evs)     misc += `<em>EVs:</em> ${formatEV(set.evs)}<br>`;
-      if (set.ivs)     misc += `<em>IVs:</em> ${formatEV(set.ivs)}<br>`;
-      if (set.teratypes) misc += `<em>Tera:</em> ${Array.isArray(set.teratypes) ? set.teratypes.join(", ") : set.teratypes}<br>`;
-      misc += "</div>";
+    // Header
+    if (set.name) {
+      const header = document.createElement("header");
+      header.className = "set-header";
+      const strong = document.createElement("strong");
+      strong.className = "set-name";
+      strong.textContent = set.name;
+      header.appendChild(strong);
+      card.appendChild(header);
     }
 
-    card.innerHTML = `${title}${moveList}${misc}`;
+    // Moves
+    if (Array.isArray(set.moves)) {
+      const moveList = document.createElement("ul");
+      moveList.className = "move-list";
+      set.moves.forEach(m => {
+        const li = document.createElement("li");
+        const name = cleanMove(m);
+        li.textContent = name;
+        const rest = m.slice(name.length).trim();
+        if (rest) li.title = rest;
+        moveList.appendChild(li);
+      });
+      card.appendChild(moveList);
+    }
+
+    // Metadata
+    if (set.item || set.ability || set.nature || set.evs || set.ivs || set.teratypes) {
+      const dl = document.createElement("dl");
+      dl.className = "set-meta";
+      function addMeta(dtText, ddText) {
+        const dt = document.createElement("dt");
+        dt.textContent = dtText;
+        const dd = document.createElement("dd");
+        dd.textContent = ddText;
+        dl.appendChild(dt);
+        dl.appendChild(dd);
+      }
+      if (set.item)    addMeta("Item", Array.isArray(set.item) ? set.item.join(" / ") : set.item);
+      if (set.ability) addMeta("Ability", Array.isArray(set.ability) ? set.ability.join(" / ") : set.ability);
+      if (set.nature)  addMeta("Nature", Array.isArray(set.nature) ? set.nature.join(" / ") : set.nature);
+      if (set.evs)     addMeta("EVs", formatEV(set.evs));
+      if (set.ivs)     addMeta("IVs", formatEV(set.ivs));
+      if (set.teratypes) addMeta("Tera", Array.isArray(set.teratypes) ? set.teratypes.join(" / ") : set.teratypes);
+      card.appendChild(dl);
+    }
+
     container.appendChild(card);
   });
 }
