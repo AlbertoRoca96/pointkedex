@@ -117,9 +117,9 @@ function renderUsageSummary(u) {
 function buildTierTabs(fullSets) {
   let tabs = $("#usage-tabs"), content = $("#usage-content");
   if (!tabs) {
-    tabs = document.createElement("nav");
+    tabs = document.createElement("div");
     tabs.id = "usage-tabs";
-    tabs.className = "tab-strip";
+    tabs.classList.add("tab-strip");
     $("#stats-panel .card").appendChild(tabs);
   }
   if (!content) {
@@ -135,19 +135,19 @@ function buildTierTabs(fullSets) {
 
   function activate(tier) {
     tabs.querySelectorAll("button").forEach(b => b.classList.remove("active"));
-    const button = tabs.querySelector(`button[data-tier='${tier}']`);
-    if (button) button.classList.add("active");
+    const btn = tabs.querySelector(`button[data-tier='${tier}']`);
+    if (btn) btn.classList.add("active");
     renderTierSets(fullSets[tier], content);
   }
 
-  tiers.forEach((tier, i) => {
-    const button = document.createElement("button");
-    button.className = "tab-btn";
-    button.textContent = tier;
-    button.dataset.tier = tier;
-    button.addEventListener("click", () => activate(tier));
-    tabs.appendChild(button);
-    if (i === 0) activate(tier);
+  tiers.forEach((t, i) => {
+    const b = document.createElement("button");
+    b.classList.add("tab-btn");
+    b.textContent = t;
+    b.dataset.tier = t;
+    b.addEventListener("click", () => activate(t));
+    tabs.appendChild(b);
+    if (i === 0) activate(t);
   });
 }
 
@@ -160,54 +160,72 @@ function renderTierSets(list, container) {
     container.appendChild(p);
     return;
   }
+
   list.forEach(set => {
     const card = document.createElement("div");
-    card.className = "set-card";
+    card.classList.add("set-card");
 
-    // Header
+    // header
     if (set.name) {
       const header = document.createElement("header");
-      header.className = "set-header";
+      header.classList.add("set-header");
       const strong = document.createElement("strong");
-      strong.className = "set-name";
+      strong.classList.add("set-name");
       strong.textContent = set.name;
       header.appendChild(strong);
       card.appendChild(header);
     }
 
-    // Moves
-    if (Array.isArray(set.moves)) {
-      const moveList = document.createElement("ul");
-      moveList.className = "move-list";
+    // moves
+    if (Array.isArray(set.moves) && set.moves.length) {
+      const ul = document.createElement("ul");
+      ul.classList.add("move-list");
       set.moves.forEach(m => {
         const li = document.createElement("li");
-        const name = cleanMove(m);
-        li.textContent = name;
-        const rest = m.slice(name.length).trim();
-        if (rest) li.title = rest;
-        moveList.appendChild(li);
+        li.textContent = cleanMove(m);
+        const extra = m.slice(cleanMove(m).length).trim();
+        if (extra) li.title = extra;
+        ul.appendChild(li);
       });
-      card.appendChild(moveList);
+      card.appendChild(ul);
     }
 
-    // Metadata
+    // metadata
     if (set.item || set.ability || set.nature || set.evs || set.ivs || set.teratypes) {
       const dl = document.createElement("dl");
-      dl.className = "set-meta";
-      function addMeta(dtText, ddText) {
-        const dt = document.createElement("dt");
-        dt.textContent = dtText;
-        const dd = document.createElement("dd");
-        dd.textContent = ddText;
-        dl.appendChild(dt);
-        dl.appendChild(dd);
+      dl.classList.add("set-meta");
+
+      if (set.item) {
+        const div = document.createElement("div");
+        div.innerHTML = `<dt>Item</dt><dd>${Array.isArray(set.item) ? set.item.join(" / ") : set.item}</dd>`;
+        dl.appendChild(div);
       }
-      if (set.item)    addMeta("Item", Array.isArray(set.item) ? set.item.join(" / ") : set.item);
-      if (set.ability) addMeta("Ability", Array.isArray(set.ability) ? set.ability.join(" / ") : set.ability);
-      if (set.nature)  addMeta("Nature", Array.isArray(set.nature) ? set.nature.join(" / ") : set.nature);
-      if (set.evs)     addMeta("EVs", formatEV(set.evs));
-      if (set.ivs)     addMeta("IVs", formatEV(set.ivs));
-      if (set.teratypes) addMeta("Tera", Array.isArray(set.teratypes) ? set.teratypes.join(" / ") : set.teratypes);
+      if (set.ability) {
+        const div = document.createElement("div");
+        div.innerHTML = `<dt>Ability</dt><dd>${Array.isArray(set.ability) ? set.ability.join(" / ") : set.ability}</dd>`;
+        dl.appendChild(div);
+      }
+      if (set.nature) {
+        const div = document.createElement("div");
+        div.innerHTML = `<dt>Nature</dt><dd>${Array.isArray(set.nature) ? set.nature.join(" / ") : set.nature}</dd>`;
+        dl.appendChild(div);
+      }
+      if (set.evs) {
+        const div = document.createElement("div");
+        div.innerHTML = `<dt>EVs</dt><dd>${formatEV(set.evs)}</dd>`;
+        dl.appendChild(div);
+      }
+      if (set.ivs) {
+        const div = document.createElement("div");
+        div.innerHTML = `<dt>IVs</dt><dd>${formatEV(set.ivs)}</dd>`;
+        dl.appendChild(div);
+      }
+      if (set.teratypes) {
+        const div = document.createElement("div");
+        div.innerHTML = `<dt>Tera</dt><dd>${Array.isArray(set.teratypes) ? set.teratypes.join(" / ") : set.teratypes}</dd>`;
+        dl.appendChild(div);
+      }
+
       card.appendChild(dl);
     }
 
