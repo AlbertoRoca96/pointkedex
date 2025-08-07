@@ -1,43 +1,42 @@
 /* ---------- tunables ---------- */
 const CONF_THR = 0.20;
-const STABLE_N = 3;
+const STABLE_N  = 3;
 const JPEG_QUAL = 0.85;
 
 /* ---------- globals ---------- */
-let flavor = {};
-let labels = [];
-let last = -1, same = 0;
-let speaking = false;
-let currentName = "";
-let promptVisible = false;
-let predictController = null;
+let flavor           = {};
+let labels           = [];
+let last             = -1, same = 0;
+let speaking         = false;
+let currentName      = "";
+let promptVisible    = false;
+let predictController=null;
 
 /* ---------- preload assets ---------- */
 async function loadAssets(){
   try{
-    const [flv,cls]=await Promise.all([
-      fetch("flavor_text.json"),
-      fetch("class_indices.json")
+    const [flv, cls] = await Promise.all([
+      fetch("flavor_text.json"), fetch("class_indices.json")
     ]);
     flavor = flv.ok ? await flv.json() : {};
     const classIdx = cls.ok ? await cls.json() : {};
-    labels=[];
+    labels = [];
     if(classIdx && typeof classIdx==="object"){
       Object.entries(classIdx).forEach(([name,idx])=>{
         if(typeof idx==="number") labels[idx]=name;
-        else if(!isNaN(+name)) labels[+name]=idx;
+        else if(!isNaN(+name))    labels[+name]=idx;
       });
     }
   }catch(e){console.warn("[app.js] asset preload failed:",e);}
 }
 
 /* ---------- helpers ---------- */
-const $      = q => document.querySelector(q);
-const show   = el=>el&&(el.style.display="flex");
-const hide   = el=>el&&(el.style.display="none");
-const toID   = s => (typeof s==="string"?s.toLowerCase().replace(/[^a-z0-9]/g,""):"");
-const makeUrl= p => `${(window.API_BASE||"").replace(/\/+$/,"")}/${p.replace(/^\/+/,"")}`;
-const debug  = (...a)=>console.debug("[app.js]",...a);
+const $       = q  => document.querySelector(q);
+const show    = el => el&&(el.style.display="flex");
+const hide    = el => el&&(el.style.display="none");
+const toID    = s  => (typeof s==="string"?s.toLowerCase().replace(/[^a-z0-9]/g,""):"");
+const makeUrl = p  => `${(window.API_BASE||"").replace(/\/+$/,"")}/${p.replace(/^\/+/,"")}`;
+const debug   = (...a)=>console.debug("[app.js]",...a);
 
 /* ---------- speech helper ---------- */
 function speakText(txt){
@@ -50,31 +49,31 @@ function speakText(txt){
 }
 
 /* ---------- unit converters ---------- */
-const mToFtIn=dm=>{
-  const inches=dm*3.937007874;
-  return `${Math.floor(inches/12)}'${Math.round(inches%12)}"`;
+const mToFtIn = dm =>{const inches=dm*3.937007874;return`${Math.floor(inches/12)}'${Math.round(inches%12)}"`;};
+const kgToLb = hg =>{const kg=hg/10;return`${kg.toFixed(1)} kg (${(kg*2.205).toFixed(1)} lb)`;};
+
+/* ---------- formatting helpers ---------- */
+const CLEAN_MOVE_RE = /^(.*?)\s{0,2}(?:\d+%|\d+\s*\/|Has|This|Usually|User|Target|BPA|Power|Accuracy|Category|Type|\(|$)/i;
+const cleanMove = m=>{
+  if(typeof m!=="string") return "";
+  const match=CLEAN_MOVE_RE.exec(m.trim());
+  return (match?match[1]:m).replace(/[-–•]+$/,"").trim();
 };
-const kgToLb=hg=>{
-  const kg=hg/10;
-  return `${kg.toFixed(1)} kg (${(kg*2.205).toFixed(1)} lb)`;
-};
+const formatEV = ev=>typeof ev==="string"
+  ?ev
+  :Object.entries(ev||{}).map(([k,v])=>`${v} ${k.toUpperCase()}`).join(" / ");
 
-/* ---------- regex helpers ---------- */
-const CLEAN_MOVE_RE=/^(.*?)(?:Has|User|Usually|Hits|This|Target|More|Prevents|Doubles|Burns|Lowers|Raises|$)/i;
-const NATURES=["Hardy","Lonely","Brave","Adamant","Naughty","Bold","Docile","Relaxed","Impish","Lax","Timid","Hasty","Serious","Jolly","Naive","Modest","Mild","Quiet","Bashful","Rash","Calm","Gentle","Sassy","Careful","Quirky"];
-const EV_RE=/^\s*\d+\s+(HP|Atk|Def|SpA|SpD|Spe)\s*$/i;
-const CREDIT_RE=/^(written|quality checked|grammar checked)\b/i;
+/* ---------- constants ---------- */
+const NATURES   = ["Hardy","Lonely","Brave","Adamant","Naughty","Bold","Docile","Relaxed","Impish","Lax","Timid","Hasty","Serious","Jolly","Naive","Modest","Mild","Quiet","Bashful","Rash","Calm","Gentle","Sassy","Careful","Quirky"];
+const EV_RE     = /^\s*\d+\s+(HP|Atk|Def|SpA|SpD|Spe)\s*$/i;
+const CREDIT_RE = /^(written|quality checked|grammar checked)\b/i;
 
-/* ---------- cleaners ---------- */
-const cleanMoveName  = txt=>{const m=CLEAN_MOVE_RE.exec(txt.trim());return (m?m[1]:txt).replace(/[-–•]+$/,"").trim();};
-const cleanItem      = txt=>txt.replace(/\bHolder'?s.*$/i,"").trim();
-const cleanAbility   = txt=>txt.replace(/This Pokémon.*$/i,"").trim();
-const cleanLineStart = txt=>txt.replace(/^[-–•\s]+/,"").trim();
-const formatEV       = ev=>typeof ev==="string"
-  ? ev
-  : Object.entries(ev||{}).map(([k,v])=>`${v} ${k.toUpperCase()}`).join(" / ");
+/* line cleaners */
+const cleanItem    = txt=>txt.replace(/\bHolder'?s.*$/i,"").trim();
+const cleanAbility = txt=>txt.replace(/This Pokémon.*/i,"").trim();
+const cleanLine    = txt=>txt.replace(/^[-–•\s]+/,"").trim();
 
-/* ---------- usage summary ---------- */
+/* ---------- usage summary renderer ---------- */
 function renderUsageSummary(u){
   const box=$("#stats-usage");
   if(!box) return;
@@ -88,20 +87,17 @@ function renderUsageSummary(u){
   ["Moves","Abilities","Items"].forEach(lbl=>{
     const arr=u[lbl.toLowerCase()];
     if(!arr?.length) return;
-    const span=document.createElement("span");
-    span.textContent=lbl+": ";
-    box.appendChild(span);
+    const span=document.createElement("span"); span.textContent=lbl+": "; box.appendChild(span);
     arr.slice(0,6).forEach(v=>{
-      const tag=document.createElement("span");
-      tag.className="tag";tag.textContent=v;box.appendChild(tag);
+      const tag=document.createElement("span"); tag.className="tag"; tag.textContent=v; box.appendChild(tag);
     });
     box.appendChild(document.createElement("br"));
   });
 }
 
-/* ---------- tabs ---------- */
+/* ---------- tier tab factory ---------- */
 function buildTierTabs(fullSets){
-  let tabs=$("#usage-tabs"),content=$("#usage-content");
+  let tabs=$("#usage-tabs"), content=$("#usage-content");
   if(!tabs){
     tabs=document.createElement("div");tabs.id="usage-tabs";tabs.className="tab-strip";
     $("#stats-panel .card").appendChild(tabs);
@@ -111,75 +107,71 @@ function buildTierTabs(fullSets){
     $("#stats-panel .card").appendChild(content);
   }
   tabs.innerHTML="";content.innerHTML="";
-  const tiers=Object.keys(fullSets||{}).sort();
-  if(!tiers.length) return;
+  const tiers=Object.keys(fullSets||{}).sort(); if(!tiers.length) return;
   const activate=tier=>{
     tabs.querySelectorAll("button").forEach(b=>b.classList.remove("active"));
     tabs.querySelector(`button[data-tier='${tier}']`)?.classList.add("active");
     renderTierSets(fullSets[tier],content);
   };
   tiers.forEach((t,i)=>{
-    const btn=document.createElement("button");
-    btn.className="tab-btn";btn.dataset.tier=t;btn.textContent=t;
-    btn.onclick=()=>activate(t);
-    tabs.appendChild(btn);
-    if(i===0) activate(t);
+    const btn=document.createElement("button"); btn.className="tab-btn"; btn.dataset.tier=t; btn.textContent=t;
+    btn.onclick=()=>activate(t); tabs.appendChild(btn); if(i===0) activate(t);
   });
-}
-
-/* ---------- move line parser ---------- */
-function parseMoveLine(raw){
-  const trimmed=cleanLineStart(raw);
-  const name=cleanMoveName(trimmed);
-  const desc=trimmed.slice(name.length).replace(/^[:\-–\s]+/,"").trim();
-  return {name,desc};
 }
 
 /* ---------- set renderer ---------- */
 function renderTierSets(list,container){
   container.innerHTML="";
   if(!Array.isArray(list)||!list.length){
-    const p=document.createElement("p");
-    p.style.fontStyle="italic";p.textContent="No sets for this tier.";
+    const p=document.createElement("p");p.style.fontStyle="italic";p.textContent="No sets for this tier.";
     container.appendChild(p);return;
   }
-
   const frag=document.createDocumentFragment();
 
   list.forEach((src,i)=>{
-    const set={...src};              /* shallow clone */
-    let rawMoves=[],credits=[];
-    const push=lineRaw=>{
-      const line=cleanLineStart(lineRaw);
+    const set={...src};                          /* shallow clone */
+    let movesArr = [], credits=[];
+    const pushLine=lineRaw=>{
+      const line=cleanLine(lineRaw); if(!line) return;
       const low=line.toLowerCase();
 
-      if(!line) return;
       if(CREDIT_RE.test(low)){credits.push(line);return;}
 
+      /* EV / IV */
       if(low.startsWith("evs:")||EV_RE.test(line)){set.evs=set.evs?`${set.evs} / ${line}`:line;return;}
       if(low.startsWith("ivs:")){set.ivs=set.ivs?`${set.ivs} / ${line.slice(4).trim()}`:line.slice(4).trim();return;}
 
+      /* nature */
       if(NATURES.includes(line.trim())){set.nature=set.nature?`${set.nature} / ${line}`:line;return;}
       if(low.startsWith("nature:")){set.nature=line.split(":").slice(1).join(":").trim();return;}
 
+      /* ability */
       if(low.startsWith("ability:")){set.ability=cleanAbility(line.split(":").slice(1).join(":"));return;}
       if(/this pokemon'?s /i.test(low)){set.ability=cleanAbility(line);return;}
 
+      /* item */
       if(low.startsWith("item:")||/(choice|band|scarf|boots|orb|helmet|leftovers|berry|vest|plate|seed|belt)/i.test(low)){
         const val=cleanItem(line.split(":").slice(1).join(":")||line);
         set.item=set.item?`${set.item} / ${val}`:val;return;
       }
 
+      /* tera */
       if(low.startsWith("tera")){const val=line.replace(/^tera( type)?:?/i,"").trim();
         set.teratypes=set.teratypes?`${set.teratypes} / ${val}`:val;return;}
 
-      rawMoves.push(line);
+      /* otherwise treat as move line */
+      const name = cleanMove(line);
+      const desc = line.slice(name.length).trim();
+      movesArr.push({name, desc});
     };
 
-    (Array.isArray(set.moves)?set.moves:[]).forEach(push);
-
-    /* dedupe + parse moves */
-    const moveObjs=[...new Set(rawMoves)].map(parseMoveLine);
+    (Array.isArray(set.moves)?set.moves:[]).forEach(pushLine);
+    /* dedupe identical moves (keep first description) */
+    const seenNames=new Set();
+    movesArr = movesArr.filter(m=>{
+      if(seenNames.has(m.name)) return false;
+      seenNames.add(m.name); return true;
+    });
 
     if(credits.length) set.credits=[...new Set(credits)].join(" • ");
 
@@ -187,37 +179,35 @@ function renderTierSets(list,container){
       if(typeof set[k]==="string") set[k]=set[k].replace(/\s*\/\s*\/\s*/g," / ");
     });
 
-    /* ---- DOM ---- */
-    const card=document.createElement("div");
-    card.className="set-card";if(i>0) card.classList.add("collapsed");
+    /* ---------- build card ---------- */
+    const card=document.createElement("div");card.className="set-card";if(i>0) card.classList.add("collapsed");
 
-    const header=document.createElement("button");
-    header.className="set-header";header.type="button";
-    header.innerHTML=`<span class="chev">▸</span><span>${set.name||"Set"}</span>`;
-    header.onclick=()=>{
+    /* header */
+    const hdr=document.createElement("button");
+    hdr.className="set-header";hdr.type="button";
+    hdr.innerHTML=`<span class="chev">▸</span><span>${set.name||"Set"}</span>`;
+    hdr.onclick=()=>{
       card.classList.toggle("collapsed");
-      const chev=header.querySelector(".chev");
+      const chev=hdr.querySelector(".chev");
       chev.textContent=card.classList.contains("collapsed")?"▸":"▾";
       chev.style.transform=card.classList.contains("collapsed")?"rotate(0deg)":"rotate(90deg)";
     };
-    header.querySelector(".chev").style.transform=card.classList.contains("collapsed")?"rotate(0deg)":"rotate(90deg)";
-    card.appendChild(header);
+    hdr.querySelector(".chev").style.transform=card.classList.contains("collapsed")?"rotate(0deg)":"rotate(90deg)";
+    card.appendChild(hdr);
 
-    const tbl=document.createElement("table");
-    tbl.className="set-table";
+    /* table */
+    const tbl=document.createElement("table");tbl.className="set-table";
 
-    moveObjs.forEach(m=>{
-      const trName=document.createElement("tr");
-      trName.innerHTML=`<td class="move-name" colspan="2">${m.name}</td>`;
-      tbl.appendChild(trName);
-
-      if(m.desc){
-        const trDesc=document.createElement("tr");
-        trDesc.innerHTML=`<td class="move-desc" colspan="2">${m.desc}</td>`;
-        tbl.appendChild(trDesc);
-      }
+    /* moves */
+    movesArr.forEach(m=>{
+      const tr=document.createElement("tr");tr.className="move-row";
+      tr.innerHTML=`<td class="move-name" colspan="2">
+                      <strong>${m.name}</strong>${m.desc?`<span class="move-desc">${m.desc}</span>`:""}
+                    </td>`;
+      tbl.appendChild(tr);
     });
 
+    /* metadata rows helper */
     const addRow=(lbl,val)=>{
       if(!val||(Array.isArray(val)&&!val.length)) return;
       const tr=document.createElement("tr");
@@ -232,18 +222,16 @@ function renderTierSets(list,container){
     addRow("Tera",set.teratypes);
     addRow("Credits",set.credits);
 
-    const body=document.createElement("div");
-    body.className="set-body";body.appendChild(tbl);card.appendChild(body);
-    frag.appendChild(card);
+    const body=document.createElement("div");body.className="set-body";body.appendChild(tbl);
+    card.appendChild(body);frag.appendChild(card);
   });
-
   container.appendChild(frag);
 }
 
-/* toggle all */
+/* expand / collapse all */
 function toggleAllSets(expand){
   $("#usage-content")?.querySelectorAll(".set-card").forEach(c=>{
-    if(expand) c.classList.remove("collapsed");else c.classList.add("collapsed");
+    if(expand) c.classList.remove("collapsed"); else c.classList.add("collapsed");
     const chev=c.querySelector(".chev");
     if(chev){
       chev.textContent=expand?"▾":"▸";
@@ -252,7 +240,7 @@ function toggleAllSets(expand){
   });
 }
 
-/* ---------- stats render ---------- */
+/* ---------- stats panel renderer ---------- */
 function renderStats(d){
   $("#stats-name").textContent=`${d.name}  (#${String(d.dex).padStart(4,"0")})`;
   $("#stats-desc").textContent=d.description||"";
@@ -261,8 +249,7 @@ function renderStats(d){
   if(types){
     types.innerHTML="";
     (d.types||[]).forEach(t=>{
-      const s=document.createElement("span");
-      s.className="type";s.textContent=t;types.appendChild(s);
+      const s=document.createElement("span");s.className="type";s.textContent=t;types.appendChild(s);
     });
   }
   $("#stats-abilities").textContent=`Abilities: ${(d.abilities||[]).join(", ")}`;
@@ -271,8 +258,7 @@ function renderStats(d){
   if(tbl){
     tbl.innerHTML="";
     Object.entries(d.base_stats||{}).forEach(([k,v])=>{
-      const tr=document.createElement("tr");
-      tr.innerHTML=`<td>${k}</td><td>${v}</td>`;tbl.appendChild(tr);
+      const tr=document.createElement("tr");tr.innerHTML=`<td>${k}</td><td>${v}</td>`;tbl.appendChild(tr);
     });
   }
   $("#stats-misc").textContent=`Height: ${mToFtIn(d.height)}   •   Weight: ${kgToLb(d.weight)}`;
@@ -329,7 +315,7 @@ async function loop(){
   else requestAnimationFrame(loop);
 }
 
-/* ---------- prompt ---------- */
+/* ---------- prompt helpers ---------- */
 function promptUser(n,c){
   $("#prompt-text").textContent=`Looks like ${n} (${(c*100).toFixed(1)}%). Show its stats?`;
   show($("#prompt"));promptVisible=true;
@@ -337,7 +323,7 @@ function promptUser(n,c){
 
 /* ---------- main ---------- */
 $("#start").onclick=async()=>{
-  if("speechSynthesis" in window) try{speechSynthesis.speak(new SpeechSynthesisUtterance(""));}catch{}
+  if("speechSynthesis" in window)try{speechSynthesis.speak(new SpeechSynthesisUtterance(""));}catch{}
   hide($("#start"));await loadAssets();
 
   const cam=$("#cam");
@@ -347,8 +333,7 @@ $("#start").onclick=async()=>{
     catch{
       const dev=await navigator.mediaDevices.enumerateDevices();
       const rear=dev.find(d=>d.kind==="videoinput"&&/back/i.test(d.label));
-      if(rear) return navigator.mediaDevices.getUserMedia({
-        video:{deviceId:{exact:rear.deviceId},width:1280,height:720}});
+      if(rear) return navigator.mediaDevices.getUserMedia({video:{deviceId:{exact:rear.deviceId},width:1280,height:720}});
       return navigator.mediaDevices.getUserMedia({video:true});
     }
   };
@@ -359,8 +344,7 @@ $("#start").onclick=async()=>{
 
 $("#btn-stats").onclick=async()=>{
   hide($("#prompt"));promptVisible=false;
-  const slug=toID(currentName);
-  let d={};
+  const slug=toID(currentName);let d={};
   try{
     const r=await fetch(makeUrl(`api/pokemon/${slug}`));
     if(r.ok) d=await r.json(); else console.warn("pokemon fetch failed",r.status);
@@ -372,11 +356,11 @@ $("#btn-stats").onclick=async()=>{
 };
 
 $("#btn-dismiss").onclick=()=>{hide($("#prompt"));promptVisible=false;requestAnimationFrame(loop);};
-$("#stats-close").onclick=()=>{hide($("#stats-panel"));requestAnimationFrame(loop);};
+$("#stats-close").onclick =()=>{hide($("#stats-panel"));requestAnimationFrame(loop);};
 
 /* ---------- keyboard shortcuts ---------- */
 document.addEventListener("keydown",e=>{
   if(e.key==="Escape" && $("#stats-panel")?.style.display==="flex") $("#stats-close").click();
-  if(e.key==="ArrowLeft"||e.key==="[")  toggleAllSets(false);
-  if(e.key==="ArrowRight"||e.key==="]") toggleAllSets(true);
+  if(e.key==="ArrowLeft" || e.key==="[") toggleAllSets(false);
+  if(e.key==="ArrowRight"|| e.key==="]") toggleAllSets(true);
 });
