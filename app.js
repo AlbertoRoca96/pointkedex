@@ -119,7 +119,7 @@ function buildTierTabs(fullSets) {
   if (!tabs) {
     tabs = document.createElement("div");
     tabs.id = "usage-tabs";
-    tabs.classList.add("tab-strip");              /* NEW: use class for css */
+    tabs.classList.add("tab-strip");              /* NEW */
     $("#stats-panel .card").appendChild(tabs);
   }
   if (!content) {
@@ -133,7 +133,6 @@ function buildTierTabs(fullSets) {
   const tiers = Object.keys(fullSets || {}).sort();
   if (!tiers.length) return;
 
-  /* old inline‑style background logic kept, but replaced by class toggles */
   function activate(tier) {
     tabs.querySelectorAll("button").forEach(b => b.classList.remove("active"));
     const btn = tabs.querySelector(`button[data-tier='${tier}']`);
@@ -152,7 +151,7 @@ function buildTierTabs(fullSets) {
   });
 }
 
-/* ---------- ORIGINAL set renderer (retained for no‑omission rule) ---------- */
+/* ---------- ORIGINAL renderer ---------- */
 function renderTierSets(list, container) {
   container.innerHTML = "";
   if (!Array.isArray(list) || !list.length) {
@@ -162,8 +161,11 @@ function renderTierSets(list, container) {
     container.appendChild(p);
     return;
   }
+
   list.forEach(set => {
+    /* ----- simple card kept exactly as before ----- */
     const card = document.createElement("div");
+    card.className = "set-card";                   // NEW (was inline)
     card.style.background = "#333";
     card.style.borderRadius = "var(--r)";
     card.style.padding = "8px";
@@ -172,97 +174,71 @@ function renderTierSets(list, container) {
     card.style.whiteSpace = "normal";
 
     const title = set.name ? `<strong>${set.name}</strong>` : "";
-
-    /* moves */
     const moveList = Array.isArray(set.moves)
-      ? `<ul class="move-list">${set.moves
-          .map(m => `<li>${cleanMove(m)}</li>`)
-          .join("")}</ul>`
+      ? `<ul class="move-list">${set.moves.map(m => `<li>${cleanMove(m)}</li>`).join("")}</ul>`
       : "";
 
-    /* meta lines */
     let misc = "";
     if (set.ability || set.item || set.nature || set.evs || set.ivs || set.teratypes) {
       misc += "<div class='set-meta'>";
-      if (set.item)    misc += `<em>Item:</em> ${Array.isArray(set.item) ? set.item.join(", ") : set.item}<br>`;
+      if (set.item) misc += `<em>Item:</em> ${Array.isArray(set.item) ? set.item.join(", ") : set.item}<br>`;
       if (set.ability) misc += `<em>Ability:</em> ${Array.isArray(set.ability) ? set.ability.join(", ") : set.ability}<br>`;
-      if (set.nature)  misc += `<em>Nature:</em> ${Array.isArray(set.nature) ? set.nature.join(", ") : set.nature}<br>`;
-      if (set.evs)     misc += `<em>EVs:</em> ${formatEV(set.evs)}<br>`;
-      if (set.ivs)     misc += `<em>IVs:</em> ${formatEV(set.ivs)}<br>`;
+      if (set.nature) misc += `<em>Nature:</em> ${Array.isArray(set.nature) ? set.nature.join(", ") : set.nature}<br>`;
+      if (set.evs) misc += `<em>EVs:</em> ${formatEV(set.evs)}<br>`;
+      if (set.ivs) misc += `<em>IVs:</em> ${formatEV(set.ivs)}<br>`;
       if (set.teratypes) misc += `<em>Tera:</em> ${Array.isArray(set.teratypes) ? set.teratypes.join(", ") : set.teratypes}<br>`;
       misc += "</div>";
     }
 
-    /* original simple layout kept (but will be overwritten below) */
-    card.innerHTML = `${title}${moveList}${misc}`;
+    card.innerHTML = `${title}${moveList}${misc}`; /* original markup lives */
 
-    /* -------- Smogon‑style reflow -------- */
-    card.innerHTML = "";                              // clear previous markup
+    /* ---------- NEW Smogon‑style block (added *after* original) ---------- */
+    const hr = document.createElement("hr");       // NEW
+    hr.className = "sep";                          // NEW
+    card.appendChild(hr);                          // NEW
+
+    /* header */
     if (set.name) {
-      const hdr = document.createElement("header");
-      hdr.className = "set-header";
-      const strong = document.createElement("strong");
-      strong.className = "set-name";
-      strong.textContent = set.name;
-      hdr.appendChild(strong);
-      card.appendChild(hdr);
+      const hdr = document.createElement("header");   // NEW
+      hdr.className = "set-header";                   // NEW
+      const strong = document.createElement("strong");// NEW
+      strong.className = "set-name";                  // NEW
+      strong.textContent = set.name;                  // NEW
+      hdr.appendChild(strong);                        // NEW
+      card.appendChild(hdr);                          // NEW
     }
 
-    const grid = document.createElement("div");
-    grid.className = "set-grid";
+    /* two‑col grid */
+    const grid = document.createElement("div");       // NEW
+    grid.className = "set-grid";                      // NEW
+    card.appendChild(grid);                           // NEW
 
-    /* left column = numbered moves */
-    const movesCol = document.createElement("div");
-    movesCol.className = "set-left";
-    if (Array.isArray(set.moves)) {
-      set.moves.forEach((m, idx) => {
-        const row = document.createElement("div");
-        row.className = "move-row";
+    /* left = numbered moves */
+    const movesCol = document.createElement("div");   // NEW
+    movesCol.className = "set-left";                  // NEW
+    if (Array.isArray(set.moves)) {                   // NEW
+      set.moves.forEach((m, idx) => {                 // NEW
+        const row = document.createElement("div");    // NEW
+        row.className = "move-row";                   // NEW
         row.innerHTML =
-          `<span class="move-index">Move ${idx + 1}:</span> <span class="move-name">${cleanMove(m)}</span>`;
-        const extra = m.slice(cleanMove(m).length).trim();
-        if (extra) row.title = extra;                 // tooltip with full text
-        movesCol.appendChild(row);
+          `<span class="move-index">Move ${idx + 1}:</span> <span class="move-name">${cleanMove(m)}</span>`; // NEW
+        movesCol.appendChild(row);                    // NEW
       });
     }
-    grid.appendChild(movesCol);
+    grid.appendChild(movesCol);                       // NEW
 
-    /* right column = metadata dl grid */
-    const metaCol = document.createElement("dl");
-    metaCol.className = "set-meta";
-    if (set.item) {
-      const div = document.createElement("div");
-      div.innerHTML = `<dt>Item</dt><dd>${Array.isArray(set.item) ? set.item.join(" / ") : set.item}</dd>`;
-      metaCol.appendChild(div);
-    }
-    if (set.ability) {
-      const div = document.createElement("div");
-      div.innerHTML = `<dt>Ability</dt><dd>${Array.isArray(set.ability) ? set.ability.join(" / ") : set.ability}</dd>`;
-      metaCol.appendChild(div);
-    }
-    if (set.nature) {
-      const div = document.createElement("div");
-      div.innerHTML = `<dt>Nature</dt><dd>${Array.isArray(set.nature) ? set.nature.join(" / ") : set.nature}</dd>`;
-      metaCol.appendChild(div);
-    }
-    if (set.evs) {
-      const div = document.createElement("div");
-      div.innerHTML = `<dt>EVs</dt><dd>${formatEV(set.evs)}</dd>`;
-      metaCol.appendChild(div);
-    }
-    if (set.ivs) {
-      const div = document.createElement("div");
-      div.innerHTML = `<dt>IVs</dt><dd>${formatEV(set.ivs)}</dd>`;
-      metaCol.appendChild(div);
-    }
-    if (set.teratypes) {
-      const div = document.createElement("div");
-      div.innerHTML = `<dt>Tera</dt><dd>${Array.isArray(set.teratypes) ? set.teratypes.join(" / ") : set.teratypes}</dd>`;
-      metaCol.appendChild(div);
-    }
-    grid.appendChild(metaCol);
+    /* right = meta dl */
+    const metaCol = document.createElement("dl");     // NEW
+    metaCol.className = "set-meta smogon";            // NEW
+    if (set.item)   metaCol.innerHTML += `<dt>Item</dt><dd>${Array.isArray(set.item)?set.item.join(" / "):set.item}</dd>`;
+    if (set.ability)metaCol.innerHTML += `<dt>Ability</dt><dd>${Array.isArray(set.ability)?set.ability.join(" / "):set.ability}</dd>`;
+    if (set.nature) metaCol.innerHTML += `<dt>Nature</dt><dd>${Array.isArray(set.nature)?set.nature.join(" / "):set.nature}</dd>`;
+    if (set.evs)    metaCol.innerHTML += `<dt>EVs</dt><dd>${formatEV(set.evs)}</dd>`;
+    if (set.ivs)    metaCol.innerHTML += `<dt>IVs</dt><dd>${formatEV(set.ivs)}</dd>`;
+    if (set.teratypes) metaCol.innerHTML += `<dt>Tera</dt><dd>${Array.isArray(set.teratypes)?set.teratypes.join(" / "):set.teratypes}</dd>`;
+    grid.appendChild(metaCol);                        // NEW
+    /* ---------- end NEW block ---------- */
 
-    card.appendChild(grid);
     container.appendChild(card);
   });
 }
