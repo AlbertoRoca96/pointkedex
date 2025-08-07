@@ -68,11 +68,10 @@ const formatEV = ev=> typeof ev==="string"
   ? ev
   : Object.entries(ev||{}).map(([k,v])=>`${v} ${k.toUpperCase()}`).join(" / ");
 
-/* list of natures for quick detection */
+/* ---------- CONSTANTS ---------- */
 const NATURES = ["Hardy","Lonely","Brave","Adamant","Naughty","Bold","Docile","Relaxed","Impish","Lax","Timid","Hasty","Serious","Jolly","Naive","Modest","Mild","Quiet","Bashful","Rash","Calm","Gentle","Sassy","Careful","Quirky"];
-
-/* regex for EV / IV strings like `252 Atk` */
 const EV_RE = /^\s*\d+\s+(HP|Atk|Def|SpA|SpD|Spe)\s*$/i;
+const CREDIT_RE = /^(written|quality checked|grammar checked)\b/i;
 
 /* ---------- usage summary renderer ---------- */
 function renderUsageSummary(u){
@@ -101,9 +100,10 @@ function renderUsageSummary(u){
   });
 }
 
-/* ---------- tabs ---------- */
+/* ---------- tier‑tab factory ---------- */
 function buildTierTabs(fullSets){
   let tabs=$("#usage-tabs"),content=$("#usage-content");
+  /* create containers once */
   if(!tabs){
     tabs=document.createElement("div");
     tabs.id="usage-tabs";
@@ -144,91 +144,83 @@ function renderTierSets(list,container){
     container.appendChild(p); return;
   }
 
-  list.forEach(srcSet=>{
-    /* deep‑copy to avoid mutating original */
-    const set={...srcSet};
-    let movesClean=[];          /* real moves will be stored here */
-    let creditsLines=[];
+  list.forEach((src,i)=>{
+    /* clone so we never mutate source */
+    const set={...src};
+    let movesClean=[], credits=[];
+    const pushLine=line=>{
+      const low=line.toLowerCase().trim();
 
-    /* heuristic classifier */
-    const classifyLine=txt=>{
-      const low=txt.toLowerCase().trim();
+      if(CREDIT_RE.test(low)){ credits.push(line.trim()); return; }
 
-      /* credits */
-      if(/^written by|^quality checked|^grammar checked/i.test(low)){
-        creditsLines.push(txt.replace(/^[-–•\s]+/,"").trim()); return;
+      /* EV / IV lines */
+      if(low.startsWith("evs:")||EV_RE.test(line)){ set.evs=set.evs?`${set.evs} / ${line}`:line; return; }
+      if(low.startsWith("ivs:")){ set.ivs=set.ivs?`${set.ivs} / ${line.slice(4).trim()}`:line.slice(4).trim(); return; }
+
+      /* natures */
+      if(NATURES.includes(line.trim())){ set.nature=set.nature?`${set.nature} / ${line}`:line; return; }
+      if(low.startsWith("nature:")){ set.nature=line.split(":").slice(1).join(":").trim(); return; }
+
+      /* abilities */
+      if(low.startsWith("ability:")){ set.ability=line.split(":").slice(1).join(":").trim(); return; }
+      if(/this pokemon's attacks|this pokemon does not/i.test(low)){
+        set.ability=line.trim(); return;
       }
 
-      /* EVs / IVs */
-      if(low.startsWith("evs:")||EV_RE.test(txt)){
-        set.evs=set.evs?`${set.evs} / ${txt}`:txt; return;
-      }
-      if(low.startsWith("ivs:")){
-        set.ivs=set.ivs?`${set.ivs} / ${txt.slice(4).trim()}`:txt.slice(4).trim(); return;
-      }
-
-      /* Nature */
-      if(NATURES.includes(txt.trim())){
-        set.nature=set.nature?`${set.nature} / ${txt}`:txt; return;
-      }
-      if(low.startsWith("nature:")){
-        set.nature=txt.split(":").slice(1).join(":").trim(); return;
-      }
-
-      /* Ability hints */
-      if(low.startsWith("ability:")||low.includes("this pokemon")){
-        const val=txt.split(":").slice(1).join(":").trim()||txt;
-        set.ability=set.ability?`${set.ability} / ${val}`:val; return;
-      }
-
-      /* Item hints */
+      /* items */
       if(low.startsWith("item:")||
-         /holder'?s/i.test(low)||
-         /( choice| scarf| band| orb| boots| leftovers| berry| helmet| vest| belt|plate|seed)/i.test(low)){
-        const val=txt.split(":").slice(1).join(":").trim()||txt;
+         /(choice|band|scarf|boots|orb|helmet|leftovers|berry|vest|plate|seed)/i.test(low)){
+        const val=line.split(":").slice(1).join(":").trim()||line;
         set.item=set.item?`${set.item} / ${val}`:val; return;
       }
 
-      /* Tera */
+      /* tera */
       if(low.startsWith("tera")||low.startsWith("tera type")){
-        set.teratypes=set.teratypes?`${set.teratypes} / ${txt.replace(/^tera( type)?:?/i,"").trim()}`:
-          txt.replace(/^tera( type)?:?/i,"").trim();
+        set.teratypes=set.teratypes?`${set.teratypes} / ${line.replace(/^tera( type)?:?/i,"").trim()}`:
+          line.replace(/^tera( type)?:?/i,"").trim();
         return;
       }
 
-      /* Fallback → treat as move text */
-      movesClean.push(txt);
+      /* default ⇒ move */
+      movesClean.push(line);
     };
 
-    (Array.isArray(set.moves)?set.moves:[]).forEach(classifyLine);
-    set.moves=movesClean;
-    if(creditsLines.length) set.credits=creditsLines.join(" • ");
+    (Array.isArray(set.moves)?set.moves:[]).forEach(pushLine);
+    set.moves=[...new Set(movesClean.map(cleanMove))];   // de‑dupe identical moves
+    if(credits.length) set.credits=[...new Set(credits)].join(" • ");
 
-    /* build card */
+    /* -------------------- card DOM -------------------- */
     const card=document.createElement("div");
     card.className="set-card";
+    if(i>0) card.classList.add("collapsed");             // collapse all but first by default
 
+    /* header (clickable, toggles collapse) */
+    const hdr=document.createElement("button");
+    hdr.className="set-header";
+    hdr.type="button";
+    hdr.innerHTML=`<span class="chev">▸</span><span>${set.name||"Set"}</span>`;
+    hdr.onclick=()=>{
+      card.classList.toggle("collapsed");
+      hdr.querySelector(".chev").textContent=card.classList.contains("collapsed")?"▸":"▾";
+    };
+    hdr.querySelector(".chev").textContent=card.classList.contains("collapsed")?"▸":"▾";
+    card.appendChild(hdr);
+
+    /* table layout */
     const tbl=document.createElement("table");
     tbl.className="set-table";
 
-    if(set.name){
-      const cap=document.createElement("caption");
-      cap.className="set-name";
-      cap.textContent=set.name;
-      tbl.appendChild(cap);
-    }
-
     /* numbered moves */
-    set.moves.forEach((m,i)=>{
+    set.moves.forEach((m,idx)=>{
       const tr=document.createElement("tr");
       tr.className="move-row";
-      tr.innerHTML=`<th class="move-index">Move ${i+1}</th><td class="move-name">${cleanMove(m)}</td>`;
+      tr.innerHTML=`<th class="move-index">Move ${idx+1}</th><td class="move-name">${cleanMove(m)}</td>`;
       tbl.appendChild(tr);
     });
 
     /* helper to insert meta rows */
     const addRow=(lbl,val)=>{
-      if(!val|| (Array.isArray(val)&&!val.length)) return;
+      if(!val||(Array.isArray(val)&&!val.length)) return;
       const tr=document.createElement("tr");
       tr.innerHTML=`<th>${lbl}</th><td>${Array.isArray(val)?val.join(" / "):val}</td>`;
       tbl.appendChild(tr);
@@ -242,8 +234,18 @@ function renderTierSets(list,container){
     addRow("Tera",set.teratypes);
     addRow("Credits",set.credits);
 
-    card.appendChild(tbl);
+    const body=document.createElement("div");
+    body.className="set-body";
+    body.appendChild(tbl);
+    card.appendChild(body);
     container.appendChild(card);
+  });
+}
+
+function toggleAllSets(expand){
+  $("#usage-content")?.querySelectorAll(".set-card").forEach(c=>{
+    if(expand) c.classList.remove("collapsed"); else c.classList.add("collapsed");
+    const chev=c.querySelector(".chev"); if(chev) chev.textContent=expand?"▾":"▸";
   });
 }
 
@@ -275,7 +277,10 @@ function renderStats(d){
   const slug=toID(d.name);
   fetch(makeUrl(`api/usage/${slug}`))
     .then(r=>r.ok?r.json():{})
-    .then(u=>{renderUsageSummary(u); buildTierTabs(u.full_sets||{});})
+    .then(u=>{
+      renderUsageSummary(u);
+      buildTierTabs(u.full_sets||{});
+    })
     .catch(e=>console.warn("[usage] fetch error",e));
 }
 
@@ -370,3 +375,10 @@ $("#btn-stats").onclick=async()=>{
 
 $("#btn-dismiss").onclick=()=>{hide($("#prompt")); promptVisible=false; requestAnimationFrame(loop);};
 $("#stats-close").onclick=()=>{hide($("#stats-panel")); requestAnimationFrame(loop);};
+
+/* ---------- keyboard shortcuts (bonus UX) ---------- */
+document.addEventListener("keydown",e=>{
+  if(e.key==="Escape" && $("#stats-panel")?.style.display==="flex") $("#stats-close").click();
+  if(e.key==="ArrowLeft") toggleAllSets(false);
+  if(e.key==="ArrowRight") toggleAllSets(true);
+});
