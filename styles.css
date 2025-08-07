@@ -211,22 +211,23 @@ canvas{display:none}
   border-color:var(--blue);
 }
 
-/* ─────────── set card ─────────── */
+/* ─────────── set card (dark theme) ─────────── */
 .set-card {
-  background: #f3f8ff;
-  border: 1px solid #aac3ff;
+  background: #333;
+  border: 1px solid #444;
   border-radius: var(--r);
   margin: 8px 0;
   overflow: hidden;
 }
 .set-card-header {
-  background: #e1ebff;
+  background: #444;
   padding: 8px 12px;
-  border-bottom: 1px solid #aac3ff;
+  border-bottom: 1px solid #555;
 }
 .set-card-title {
   font-size: 1rem;
   font-weight: 600;
+  color: var(--light);
 }
 
 /* ─────────── set body grid ─────────── */
@@ -246,6 +247,7 @@ canvas{display:none}
 .move-list li {
   margin-bottom: 4px;
   cursor: help;
+  color: var(--light);
 }
 
 /* ─────────── metadata grid ─────────── */
@@ -255,6 +257,7 @@ canvas{display:none}
   column-gap: 8px;
   row-gap: 4px;
   font-size: .85rem;
+  color: var(--light);
 }
 .set-meta dt {
   font-weight: 600;
