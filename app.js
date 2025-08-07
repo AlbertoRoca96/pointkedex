@@ -67,7 +67,7 @@ const kgToLb = hg => {
   return `${kg.toFixed(1)} kg (${(kg*2.205).toFixed(1)} lb)`;  // unchanged
 };
 
-/* ----- NEW helpers for prettier set display ---------- */
+/* ----- helpers for set display ---------- */
 const cleanMove = m => {
   if (typeof m !== "string") return "";
   const cut = m.indexOf("Type");
@@ -80,7 +80,7 @@ const formatEV = ev =>
         .map(([k, v]) => `${v} ${k.toUpperCase()}`)
         .join(" / ");
 
-/* ----- usage render helpers ---------- */
+/* ---------- usage summary renderer ---------- */
 function renderUsageSummary(u) {
   const box = $("#stats-usage");
   if (!box) return;
@@ -114,12 +114,13 @@ function renderUsageSummary(u) {
   });
 }
 
+/* ---------- tier‑tab builder ---------- */
 function buildTierTabs(fullSets) {
   let tabs = $("#usage-tabs"), content = $("#usage-content");
   if (!tabs) {
     tabs = document.createElement("div");
     tabs.id = "usage-tabs";
-    tabs.classList.add("tab-strip");              /* NEW */
+    tabs.classList.add("tab-strip");
     $("#stats-panel .card").appendChild(tabs);
   }
   if (!content) {
@@ -133,25 +134,25 @@ function buildTierTabs(fullSets) {
   const tiers = Object.keys(fullSets || {}).sort();
   if (!tiers.length) return;
 
-  function activate(tier) {
+  function activate(t) {
     tabs.querySelectorAll("button").forEach(b => b.classList.remove("active"));
-    const btn = tabs.querySelector(`button[data-tier='${tier}']`);
+    const btn = tabs.querySelector(`button[data-tier='${t}']`);
     if (btn) btn.classList.add("active");
-    renderTierSets(fullSets[tier], content);
+    renderTierSets(fullSets[t], content);
   }
 
   tiers.forEach((t, i) => {
     const b = document.createElement("button");
-    b.classList.add("tab-btn");
+    b.className = "tab-btn";
     b.textContent = t;
     b.dataset.tier = t;
-    b.addEventListener("click", () => activate(t));
+    b.onclick = () => activate(t);
     tabs.appendChild(b);
     if (i === 0) activate(t);
   });
 }
 
-/* ---------- ORIGINAL renderer ---------- */
+/* ---------- set renderer ---------- */
 function renderTierSets(list, container) {
   container.innerHTML = "";
   if (!Array.isArray(list) || !list.length) {
@@ -162,88 +163,77 @@ function renderTierSets(list, container) {
     return;
   }
 
-  list.forEach(set => {
-    /* ----- simple card kept exactly as before ----- */
+  list.forEach(rawSet => {
+    /* --- clone & sanitise set so we never mutate the source data --- */
+    const set = { ...rawSet };
+
+    /* some APIs erroneously push meta lines inside `moves` – extract them */
+    let parsedMoves = [];
+    const tryExtract = (txt) => {
+      const lower = txt.toLowerCase();
+      const val = txt.split(":").slice(1).join(":").trim();
+      if (lower.startsWith("item:"))         set.item = val;
+      else if (lower.startsWith("ability:")) set.ability = val;
+      else if (lower.startsWith("nature:"))  set.nature = val;
+      else if (lower.startsWith("evs:"))     set.evs = val;
+      else if (lower.startsWith("ivs:"))     set.ivs = val;
+      else if (lower.startsWith("tera"))     set.teratypes = val;
+      else                                   parsedMoves.push(txt); /* real move */
+    };
+    if (Array.isArray(set.moves)) set.moves.forEach(tryExtract);
+    set.moves = parsedMoves;
+
+    /* ---------- build card ---------- */
     const card = document.createElement("div");
-    card.className = "set-card";                   // NEW (was inline)
-    card.style.background = "#333";
-    card.style.borderRadius = "var(--r)";
-    card.style.padding = "8px";
-    card.style.margin = "4px 0";
-    card.style.fontSize = ".85rem";
-    card.style.whiteSpace = "normal";
+    card.className = "set-card";
 
-    const title = set.name ? `<strong>${set.name}</strong>` : "";
-    const moveList = Array.isArray(set.moves)
-      ? `<ul class="move-list">${set.moves.map(m => `<li>${cleanMove(m)}</li>`).join("")}</ul>`
-      : "";
+    /* table layout */
+    const tbl = document.createElement("table");
+    tbl.className = "set-table";
 
-    let misc = "";
-    if (set.ability || set.item || set.nature || set.evs || set.ivs || set.teratypes) {
-      misc += "<div class='set-meta'>";
-      if (set.item) misc += `<em>Item:</em> ${Array.isArray(set.item) ? set.item.join(", ") : set.item}<br>`;
-      if (set.ability) misc += `<em>Ability:</em> ${Array.isArray(set.ability) ? set.ability.join(", ") : set.ability}<br>`;
-      if (set.nature) misc += `<em>Nature:</em> ${Array.isArray(set.nature) ? set.nature.join(", ") : set.nature}<br>`;
-      if (set.evs) misc += `<em>EVs:</em> ${formatEV(set.evs)}<br>`;
-      if (set.ivs) misc += `<em>IVs:</em> ${formatEV(set.ivs)}<br>`;
-      if (set.teratypes) misc += `<em>Tera:</em> ${Array.isArray(set.teratypes) ? set.teratypes.join(", ") : set.teratypes}<br>`;
-      misc += "</div>";
-    }
-
-    card.innerHTML = `${title}${moveList}${misc}`; /* original markup lives */
-
-    /* ---------- NEW Smogon‑style block (added *after* original) ---------- */
-    const hr = document.createElement("hr");       // NEW
-    hr.className = "sep";                          // NEW
-    card.appendChild(hr);                          // NEW
-
-    /* header */
     if (set.name) {
-      const hdr = document.createElement("header");   // NEW
-      hdr.className = "set-header";                   // NEW
-      const strong = document.createElement("strong");// NEW
-      strong.className = "set-name";                  // NEW
-      strong.textContent = set.name;                  // NEW
-      hdr.appendChild(strong);                        // NEW
-      card.appendChild(hdr);                          // NEW
+      const cap = document.createElement("caption");
+      cap.className = "set-name";
+      cap.textContent = set.name;
+      tbl.appendChild(cap);
     }
 
-    /* two‑col grid */
-    const grid = document.createElement("div");       // NEW
-    grid.className = "set-grid";                      // NEW
-    card.appendChild(grid);                           // NEW
-
-    /* left = numbered moves */
-    const movesCol = document.createElement("div");   // NEW
-    movesCol.className = "set-left";                  // NEW
-    if (Array.isArray(set.moves)) {                   // NEW
-      set.moves.forEach((m, idx) => {                 // NEW
-        const row = document.createElement("div");    // NEW
-        row.className = "move-row";                   // NEW
-        row.innerHTML =
-          `<span class="move-index">Move ${idx + 1}:</span> <span class="move-name">${cleanMove(m)}</span>`; // NEW
-        movesCol.appendChild(row);                    // NEW
+    /* numbered moves */
+    if (Array.isArray(set.moves)) {
+      set.moves.forEach((m, idx) => {
+        const tr = document.createElement("tr");
+        tr.className = "move-row";
+        tr.innerHTML = `<th class="move-index">Move ${idx + 1}</th><td class="move-name">${cleanMove(m)}</td>`;
+        tbl.appendChild(tr);
       });
     }
-    grid.appendChild(movesCol);                       // NEW
 
-    /* right = meta dl */
-    const metaCol = document.createElement("dl");     // NEW
-    metaCol.className = "set-meta smogon";            // NEW
-    if (set.item)   metaCol.innerHTML += `<dt>Item</dt><dd>${Array.isArray(set.item)?set.item.join(" / "):set.item}</dd>`;
-    if (set.ability)metaCol.innerHTML += `<dt>Ability</dt><dd>${Array.isArray(set.ability)?set.ability.join(" / "):set.ability}</dd>`;
-    if (set.nature) metaCol.innerHTML += `<dt>Nature</dt><dd>${Array.isArray(set.nature)?set.nature.join(" / "):set.nature}</dd>`;
-    if (set.evs)    metaCol.innerHTML += `<dt>EVs</dt><dd>${formatEV(set.evs)}</dd>`;
-    if (set.ivs)    metaCol.innerHTML += `<dt>IVs</dt><dd>${formatEV(set.ivs)}</dd>`;
-    if (set.teratypes) metaCol.innerHTML += `<dt>Tera</dt><dd>${Array.isArray(set.teratypes)?set.teratypes.join(" / "):set.teratypes}</dd>`;
-    grid.appendChild(metaCol);                        // NEW
-    /* ---------- end NEW block ---------- */
+    /* meta helper */
+    const pushRow = (label, value) => {
+      if (!value || (Array.isArray(value) && !value.length)) return;
+      const tr = document.createElement("tr");
+      const th = document.createElement("th");
+      th.textContent = label;
+      const td = document.createElement("td");
+      td.textContent = Array.isArray(value) ? value.join(" / ") : value;
+      tr.appendChild(th);
+      tr.appendChild(td);
+      tbl.appendChild(tr);
+    };
 
+    pushRow("Item", set.item);
+    pushRow("Ability", set.ability);
+    pushRow("Nature", set.nature);
+    if (set.evs)  pushRow("EVs",  formatEV(set.evs));
+    if (set.ivs)  pushRow("IVs",  formatEV(set.ivs));
+    if (set.teratypes) pushRow("Tera", set.teratypes);
+
+    card.appendChild(tbl);
     container.appendChild(card);
   });
 }
 
-/* ----- main stats renderer ---------- */
+/* ---------- main stats renderer ---------- */
 function renderStats(d) {
   $("#stats-name").textContent = `${d.name}  (#${String(d.dex).padStart(4,"0")})`;
   $("#stats-desc").textContent = d.description || "";
@@ -252,10 +242,10 @@ function renderStats(d) {
   if (types) {
     types.innerHTML = "";
     (d.types||[]).forEach(t => {
-      const s = document.createElement("span");
-      s.className = "type";
-      s.textContent = t;
-      types.appendChild(s);
+      const span = document.createElement("span");
+      span.className = "type";
+      span.textContent = t;
+      types.appendChild(span);
     });
   }
 
@@ -284,7 +274,7 @@ function renderStats(d) {
     .catch(e => console.warn("[usage] error for slug", slug, e));
 }
 
-/* ---------- core loop ---------- */
+/* ---------- core camera loop ---------- */
 async function loop() {
   if (speaking || promptVisible || $("#stats-panel")?.style.display==="flex") return;
 
@@ -302,18 +292,10 @@ async function loop() {
     ctx.save();
     ctx.translate(0, s);
     ctx.rotate(-Math.PI/2);
-    ctx.drawImage(cam,
-      (cam.videoHeight-s)/2,
-      (cam.videoWidth-s)/2,
-      s,s,0,0,s,s
-    );
+    ctx.drawImage(cam,(cam.videoHeight-s)/2,(cam.videoWidth-s)/2,s,s,0,0,s,s);
     ctx.restore();
   } else {
-    ctx.drawImage(cam,
-      (cam.videoWidth-s)/2,
-      (cam.videoHeight-s)/2,
-      s,s,0,0,s,s
-    );
+    ctx.drawImage(cam,(cam.videoWidth-s)/2,(cam.videoHeight-s)/2,s,s,0,0,s,s);
   }
 
   const jpeg = work.toDataURL("image/jpeg", JPEG_QUAL);
@@ -325,14 +307,14 @@ async function loop() {
 
   let res;
   try {
-    res = await fetch(endpoint, {
-      method: "POST",
-      headers: {"Content-Type":"application/json"},
-      body: JSON.stringify({image: jpeg}),
+    res = await fetch(endpoint,{
+      method:"POST",
+      headers:{"Content-Type":"application/json"},
+      body:JSON.stringify({image:jpeg}),
       signal,
     });
   } catch (e) {
-    if (e.name === "AbortError") return;
+    if (e.name==="AbortError") return;
     console.warn("[predict] network error", e);
     return requestAnimationFrame(loop);
   }
@@ -340,12 +322,8 @@ async function loop() {
   if (!res.ok) return requestAnimationFrame(loop);
 
   let data;
-  try {
-    data = await res.json();
-  } catch {
-    console.warn("[predict] parse error");
-    return requestAnimationFrame(loop);
-  }
+  try { data = await res.json(); }
+  catch { console.warn("[predict] parse error"); return requestAnimationFrame(loop); }
 
   const {name="", conf=0, stable=false} = data;
   label.textContent = `${name} ${(conf*100).toFixed(1)} %`;
@@ -363,7 +341,7 @@ async function loop() {
   }
 }
 
-/* ---------- prompt + UI wiring ---------- */
+/* ---------- prompt & UI wiring ---------- */
 function promptUser(n,c){
   $("#prompt-text").textContent = `Looks like ${n} (${(c*100).toFixed(1)}%). Show its stats?`;
   show($("#prompt"));
@@ -398,7 +376,7 @@ $("#start").onclick = async () => {
   requestAnimationFrame(loop);
 };
 
-$("#btn-stats").onclick = async ()=>{
+$("#btn-stats").onclick = async () => {
   hide($("#prompt")); promptVisible = false;
   const slug = toID(currentName);
   debug("stats requested for", currentName, "slug:", slug);
@@ -415,13 +393,13 @@ $("#btn-stats").onclick = async ()=>{
   speakText(txt);
 };
 
-$("#btn-dismiss").onclick = ()=>{
+$("#btn-dismiss").onclick = () => {
   hide($("#prompt"));
   promptVisible = false;
   requestAnimationFrame(loop);
 };
 
-$("#stats-close").onclick = ()=>{
+$("#stats-close").onclick = () => {
   hide($("#stats-panel"));
   requestAnimationFrame(loop);
 };
