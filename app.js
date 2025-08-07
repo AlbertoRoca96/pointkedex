@@ -165,17 +165,13 @@ function renderTierSets(list, container, tier) {
     const card = document.createElement("div");
     card.classList.add("set-card");
 
-    // header with title and export button
+    // header with just the title
     const header = document.createElement("div");
     header.classList.add("set-card-header");
     const title = document.createElement("div");
     title.classList.add("set-card-title");
     title.textContent = set.name || tier;
     header.appendChild(title);
-    const exp = document.createElement("button");
-    exp.classList.add("export-btn");
-    exp.textContent = "Export";
-    header.appendChild(exp);
     card.appendChild(header);
 
     // body: two columns → moves / metadata
