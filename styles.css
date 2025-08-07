@@ -256,6 +256,8 @@ canvas{display:none}
   border-bottom:1px solid var(--card-border);
 }
 .set-header .chev{font-size:.9rem;transition:transform var(--t);}
+.set-card:not(.collapsed) .chev{transform:rotate(90deg);}      /* ▲ NEW */
+.set-card.collapsed .chev{transform:rotate(0deg);}             /* ▲ NEW */
 
 .set-table{
   width:100%;
