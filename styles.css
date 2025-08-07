@@ -86,7 +86,7 @@ canvas{display:none}
 .overlay{
   position:absolute;
   inset:0;
-  display:none;
+  display:none;               /* shown via JS with display:flex */
   align-items:center;
   justify-content:center;
   background:rgba(0,0,0,.6);
@@ -106,8 +106,10 @@ canvas{display:none}
   box-shadow:0 4px 10px rgba(0,0,0,.4);
 }
 
+/* prevent the stats card from exceeding viewport height
+   and make its contents scrollable */
 #stats-panel .card{
-  max-height:90vh;
+  max-height:90vh;          /* a little breathing room for top/bottom */
   overflow-y:auto;
   overscroll-behavior:contain;
 }
@@ -211,7 +213,12 @@ canvas{display:none}
   border-color:var(--blue);
 }
 
-/* ─────────── set card ─────────── */
+/* ─────────── set list / card (original definition) ─────────── */
+.set-list{
+  display:flex;
+  flex-direction:column;
+  gap:8px;
+}
 .set-card{
   background:#333;
   padding:8px;
@@ -219,26 +226,65 @@ canvas{display:none}
   font-size:.85rem;
   line-height:1.35;
 }
-.set-header{
-  margin-bottom:6px;
+
+/* ─────────── scrollable tier-set container ─────────── */
+#usage-content{
+  max-height:60vh;          /* keeps internal list usable on small screens */
+  overflow-y:auto;
+  overscroll-behavior:contain;
+  padding-right:4px;        /* little space for scrollbar */
 }
+
+/* ─────────── set details (added for original app.js markup) ─────────── */
+.move-list{
+  margin:4px 0 0 18px;      /* indent bullets a bit */
+  padding:0;
+  list-style-type:disc;
+}
+.set-meta{
+  font-size:.78rem;
+  opacity:.80;
+  line-height:1.35;
+}
+
+/* ────────────────────────────────────────────────────────── */
+/*                     NEW  SMOGON‑STYLE RULES               */
+/* ────────────────────────────────────────────────────────── */
+
+/* override / extend card appearance */
+.set-card{
+  border:1px solid #8fa2c0;   /* subtle border like Smogon */
+  background:#f7f9fc;         /* light inner bg for contrast */
+  color:#111;                 /* dark text for readability */
+}
+
+/* header */
+.set-header{margin-bottom:6px;}
 .set-name{
   font-size:1rem;
   font-weight:600;
 }
 
-/* ─────────── move list ─────────── */
-.move-list{
-  margin:8px 0 0 18px;
-  padding:0;
-  list-style-type:disc;
-}
-.move-list li{
-  margin-bottom:4px;
-  cursor:help;
+/* two‑column grid wrapper */
+.set-grid{
+  display:grid;
+  grid-template-columns:max-content 1fr;
+  column-gap:24px;
 }
 
-/* ─────────── metadata grid ─────────── */
+/* left column – numbered moves */
+.move-row{margin:2px 0;}
+.move-index{
+  display:inline-block;
+  width:70px;
+  font-weight:600;
+  color:#888;
+  text-align:right;
+  margin-right:6px;
+}
+.move-name{text-transform:none;}
+
+/* right column tweaks (dl already defined) */
 .set-meta{
   display:grid;
   grid-template-columns:max-content auto;
@@ -248,18 +294,5 @@ canvas{display:none}
   margin-top:6px;
   opacity:.8;
 }
-.set-meta dt{
-  font-weight:600;
-  text-align:right;
-}
-.set-meta dd{
-  margin:0;
-}
-
-/* ─────────── scrollable tier-set container ─────────── */
-#usage-content{
-  max-height:60vh;
-  overflow-y:auto;
-  overscroll-behavior:contain;
-  padding-right:4px;
-}
+.set-meta dt{font-weight:600;text-align:right;}
+.set-meta dd{margin:0;}
