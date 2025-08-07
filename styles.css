@@ -86,7 +86,7 @@ canvas{display:none}
 .overlay{
   position:absolute;
   inset:0;
-  display:none;
+  display:none; /* shown via JS */
   align-items:center;
   justify-content:center;
   background:rgba(0,0,0,.6);
@@ -212,48 +212,61 @@ canvas{display:none}
 }
 
 /* ─────────── set card ─────────── */
-.set-card{
-  background:#333;
-  padding:8px;
-  border-radius:var(--r);
-  font-size:.85rem;
-  line-height:1.35;
+.set-card {
+  background: #f3f8ff;
+  border: 1px solid #aac3ff;
+  border-radius: var(--r);
+  margin: 8px 0;
+  overflow: hidden;
 }
-.set-header{
-  margin-bottom:6px;
+.set-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #e1ebff;
+  padding: 8px 12px;
+  border-bottom: 1px solid #aac3ff;
 }
-.set-name{
-  font-size:1rem;
-  font-weight:600;
+.set-card-title {
+  font-size: 1rem;
+  font-weight: 600;
 }
-
-/* ─────────── move list ─────────── */
-.move-list{
-  margin:8px 0 0 18px;
-  padding:0;
-  list-style-type:disc;
+.export-btn {
+  background: #fff;
+  border: 1px solid #888;
+  border-radius: var(--r);
+  padding: 2px 8px;
+  font-size: .8rem;
+  cursor: pointer;
 }
-.move-list li{
-  margin-bottom:4px;
-  cursor:help;
+.set-card-body {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  column-gap: 24px;
+  padding: 12px;
 }
-
-/* ─────────── metadata grid ─────────── */
-.set-meta{
-  display:grid;
-  grid-template-columns:max-content auto;
-  column-gap:8px;
-  row-gap:4px;
-  font-size:.85rem;
-  margin-top:6px;
-  opacity:.8;
+.move-list {
+  margin: 0;
+  padding-left: 20px;
+  list-style-type: decimal;
 }
-.set-meta dt{
-  font-weight:600;
-  text-align:right;
+.move-list li {
+  margin-bottom: 4px;
+  cursor: help;
 }
-.set-meta dd{
-  margin:0;
+.set-meta {
+  display: grid;
+  grid-template-columns: max-content auto;
+  column-gap: 8px;
+  row-gap: 4px;
+  font-size: .85rem;
+}
+.set-meta dt {
+  font-weight: 600;
+  text-align: right;
+}
+.set-meta dd {
+  margin: 0;
 }
 
 /* ─────────── scrollable tier-set container ─────────── */
