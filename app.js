@@ -70,9 +70,8 @@ const kgToLb = hg => {
 /* ----- NEW helpers for prettier set display ---------- */
 const cleanMove = m => {
   if (typeof m !== "string") return "";
-  // strip off any Type…Category…Power…Accuracy metadata
-  const cut = m.match(/(Type[A-Za-z]+Category[A-Za-z]+Power[0-9]+BPAccuracy[0-9%]+)/);
-  return cut ? m.slice(0, cut.index).trim() : m.trim();
+  const cut = m.indexOf("Type");
+  return (cut > 0 ? m.slice(0, cut) : m).trim();
 };
 const formatEV = ev =>
   typeof ev === "string"
@@ -80,15 +79,6 @@ const formatEV = ev =>
     : Object.entries(ev || {})
         .map(([k, v]) => `${v} ${k.toUpperCase()}`)
         .join(" / ");
-
-/* detect whether a line is a “move” vs. EV/IV/credits */
-function isMoveLine(line) {
-  // we assume moves always contain Type…Category markers
-  return /Type[A-Za-z]+Category[A-Za-z]+Power/.test(line);
-}
-function isCreditsLine(line) {
-  return /Written by|Quality checked|Grammar checked/.test(line);
-}
 
 /* ----- usage render helpers ---------- */
 function renderUsageSummary(u) {
@@ -172,91 +162,71 @@ function renderTierSets(list, container) {
   }
 
   list.forEach(set => {
-    // split out moves vs metadata vs credits
-    const moves = set.moves.filter(isMoveLine);
-    const metadata = set.moves.filter(m => !isMoveLine(m) && !isCreditsLine(m));
-    const credits = set.moves.filter(isCreditsLine);
-
     const card = document.createElement("div");
     card.classList.add("set-card");
 
     // header
-    const header = document.createElement("div");
-    header.classList.add("set-card-header");
-    const title = document.createElement("div");
-    title.classList.add("set-card-title");
-    title.textContent = set.name || "";
-    header.appendChild(title);
-    card.appendChild(header);
+    if (set.name) {
+      const header = document.createElement("header");
+      header.classList.add("set-header");
+      const strong = document.createElement("strong");
+      strong.classList.add("set-name");
+      strong.textContent = set.name;
+      header.appendChild(strong);
+      card.appendChild(header);
+    }
 
-    // body grid
-    const body = document.createElement("div");
-    body.classList.add("set-card-body");
-
-    // moves column
-    const movesCol = document.createElement("div");
-    if (moves.length) {
-      const ol = document.createElement("ol");
-      moves.forEach(m => {
+    // moves
+    if (Array.isArray(set.moves) && set.moves.length) {
+      const ul = document.createElement("ul");
+      ul.classList.add("move-list");
+      set.moves.forEach(m => {
         const li = document.createElement("li");
         li.textContent = cleanMove(m);
-        // tooltip shows remainder (type/category/etc.)
         const extra = m.slice(cleanMove(m).length).trim();
         if (extra) li.title = extra;
-        ol.appendChild(li);
+        ul.appendChild(li);
       });
-      movesCol.appendChild(ol);
+      card.appendChild(ul);
     }
-    body.appendChild(movesCol);
 
-    // metadata column
-    const metaCol = document.createElement("div");
-    const dl = document.createElement("dl");
-    dl.classList.add("set-meta");
-    metadata.forEach(line => {
-      // e.g. "Jolly" or "252 Atk" or "4 SpD" or "Dark / Fighting / Fire"
-      let [key, val] = ["", line];
-      // guess key by pattern:
-      if (/^[0-9]+ /.test(line)) key = "EVs/IVs";
-      else if (/^(Adamant|Jolly|Timid)/i.test(line)) key = "Nature";
-      else key = ""; 
-      const dt = document.createElement("dt");
-      const dd = document.createElement("dd");
-      if (key) {
-        dt.textContent = key + ":";
-        dd.textContent = val;
-        dl.appendChild(dt);
-        dl.appendChild(dd);
-      } else {
-        // unkeyed metadata (e.g. ability, tera type) live under their own dt
-        const parts = val.split(/Holder's|Type/).map(s=>s.trim()).filter(Boolean);
-        parts.forEach(p => {
-          const dtk = document.createElement("dt");
-          const ddv = document.createElement("dd");
-          dtk.textContent = "Info:";
-          ddv.textContent = p;
-          dl.appendChild(dtk);
-          dl.appendChild(ddv);
-        });
+    // metadata
+    if (set.item || set.ability || set.nature || set.evs || set.ivs || set.teratypes) {
+      const dl = document.createElement("dl");
+      dl.classList.add("set-meta");
+
+      if (set.item) {
+        const div = document.createElement("div");
+        div.innerHTML = `<dt>Item</dt><dd>${Array.isArray(set.item) ? set.item.join(" / ") : set.item}</dd>`;
+        dl.appendChild(div);
       }
-    });
-    metaCol.appendChild(dl);
-    body.appendChild(metaCol);
+      if (set.ability) {
+        const div = document.createElement("div");
+        div.innerHTML = `<dt>Ability</dt><dd>${Array.isArray(set.ability) ? set.ability.join(" / ") : set.ability}</dd>`;
+        dl.appendChild(div);
+      }
+      if (set.nature) {
+        const div = document.createElement("div");
+        div.innerHTML = `<dt>Nature</dt><dd>${Array.isArray(set.nature) ? set.nature.join(" / ") : set.nature}</dd>`;
+        dl.appendChild(div);
+      }
+      if (set.evs) {
+        const div = document.createElement("div");
+        div.innerHTML = `<dt>EVs</dt><dd>${formatEV(set.evs)}</dd>`;
+        dl.appendChild(div);
+      }
+      if (set.ivs) {
+        const div = document.createElement("div");
+        div.innerHTML = `<dt>IVs</dt><dd>${formatEV(set.ivs)}</dd>`;
+        dl.appendChild(div);
+      }
+      if (set.teratypes) {
+        const div = document.createElement("div");
+        div.innerHTML = `<dt>Tera</dt><dd>${Array.isArray(set.teratypes) ? set.teratypes.join(" / ") : set.teratypes}</dd>`;
+        dl.appendChild(div);
+      }
 
-    card.appendChild(body);
-
-    // credits block
-    if (credits.length) {
-      const credDiv = document.createElement("div");
-      credDiv.style.padding = "8px 12px";
-      credDiv.style.borderTop = "1px solid #555";
-      credDiv.style.fontSize = ".75rem";
-      credits.forEach(c => {
-        const p = document.createElement("p");
-        p.textContent = c;
-        credDiv.appendChild(p);
-      });
-      card.appendChild(credDiv);
+      card.appendChild(dl);
     }
 
     container.appendChild(card);
@@ -269,23 +239,27 @@ function renderStats(d) {
   $("#stats-desc").textContent = d.description || "";
 
   const types = $("#stats-types");
-  types.innerHTML = "";
-  (d.types||[]).forEach(t => {
-    const s = document.createElement("span");
-    s.className = "type";
-    s.textContent = t;
-    types.appendChild(s);
-  });
+  if (types) {
+    types.innerHTML = "";
+    (d.types||[]).forEach(t => {
+      const s = document.createElement("span");
+      s.className = "type";
+      s.textContent = t;
+      types.appendChild(s);
+    });
+  }
 
   $("#stats-abilities").textContent = `Abilities: ${(d.abilities||[]).join(", ")}`;
 
   const tbl = $("#stats-table");
-  tbl.innerHTML = "";
-  Object.entries(d.base_stats||{}).forEach(([k,v]) => {
-    const tr = document.createElement("tr");
-    tr.innerHTML = `<td>${k}</td><td>${v}</td>`;
-    tbl.appendChild(tr);
-  });
+  if (tbl) {
+    tbl.innerHTML = "";
+    Object.entries(d.base_stats||{}).forEach(([k,v]) => {
+      const tr = document.createElement("tr");
+      tr.innerHTML = `<td>${k}</td><td>${v}</td>`;
+      tbl.appendChild(tr);
+    });
+  }
 
   $("#stats-misc").textContent = `Height: ${mToFtIn(d.height)}   •   Weight: ${kgToLb(d.weight)}`;
 
