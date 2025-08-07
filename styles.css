@@ -1,6 +1,6 @@
 :root{
-  --red:#ef5350;--yellow:#ffeb3b;--blue:#42a5f5;--grey:#212121;
-  --light:#fff;--dark:#111;--back:rgba(0,0,0,.45);--r:6px;--t:.25s
+  --red:#ef5350; --yellow:#ffeb3b; --blue:#42a5f5; --grey:#212121;
+  --light:#fff; --dark:#111; --back:rgba(0,0,0,.45); --r:6px; --t:.25s
 }
 
 /* ─────────── base layout ─────────── */
@@ -50,6 +50,7 @@ html,body{
 #start:active{transform:scale(.97)}
 #start:focus-visible{outline:3px dashed var(--yellow);outline-offset:4px}
 
+/* alert banner */
 #alert{
   display:none;
   position:absolute;
@@ -60,6 +61,7 @@ html,body{
   text-align:center;
 }
 
+/* header */
 header.app-header{
   position:absolute;
   top:0;left:0;right:0;
@@ -70,15 +72,9 @@ header.app-header{
   pointer-events:none;
 }
 header.app-header .logo{
-  width:36px;height:36px;
-  border-radius:50%;
-  background:var(--yellow);
+  width:36px;height:36px;border-radius:50%;background:var(--yellow);
 }
-header.app-header h1{
-  margin:0;
-  font-size:1.2rem;
-  font-weight:600;
-}
+header.app-header h1{margin:0;font-size:1.2rem;font-weight:600}
 
 canvas{display:none}
 
@@ -86,7 +82,7 @@ canvas{display:none}
 .overlay{
   position:absolute;
   inset:0;
-  display:none;               /* shown via JS with display:flex */
+  display:none;              /* toggled via JS */
   align-items:center;
   justify-content:center;
   background:rgba(0,0,0,.6);
@@ -96,8 +92,8 @@ canvas{display:none}
   overscroll-behavior:contain;
 }
 
-.dialog,
-.card{
+/* dialog / card container */
+.dialog,.card{
   background:var(--dark);
   padding:20px;
   border-radius:var(--r);
@@ -105,28 +101,19 @@ canvas{display:none}
   color:var(--light);
   box-shadow:0 4px 10px rgba(0,0,0,.4);
 }
-
-/* prevent the stats card from exceeding viewport height
-   and make its contents scrollable */
 #stats-panel .card{
-  max-height:90vh;          /* a little breathing room for top/bottom */
+  max-height:90vh;
   overflow-y:auto;
   overscroll-behavior:contain;
 }
 
 .dialog-btns{
-  display:flex;
-  gap:12px;
-  margin-top:16px;
+  display:flex;gap:12px;margin-top:16px;
 }
 .dialog-btns button,
 .card .close{
-  cursor:pointer;
-  font-weight:600;
-  border:none;
-  border-radius:var(--r);
-  padding:8px 14px;
-  font-size:1rem;
+  cursor:pointer;font-weight:600;border:none;
+  border-radius:var(--r);padding:8px 14px;font-size:1rem;
   transition:background var(--t);
 }
 .dialog-btns button{background:var(--blue)}
@@ -135,157 +122,81 @@ canvas{display:none}
 .dialog-btns #btn-dismiss:hover{background:#666}
 
 .card .close{
-  position:absolute;
-  top:8px;right:8px;
-  background:var(--red);
-  color:var(--light);
-  line-height:1;
-  font-size:1.2rem;
-  width:32px;height:32px;
-  text-align:center;
-  padding:0;
+  position:absolute;top:8px;right:8px;
+  background:var(--red);color:var(--light);
+  line-height:1;font-size:1.2rem;width:32px;height:32px;
+  text-align:center;padding:0;
 }
-.card h2{
-  margin:0 0 6px;
-  font-size:1.4rem;
-  text-transform:capitalize;
-}
+.card h2{margin:0 0 6px;font-size:1.4rem;text-transform:capitalize}
 
 /* ─────────── stat details ─────────── */
 #stats-types{margin-bottom:8px}
 #stats-types .type{
-  display:inline-block;
-  margin-right:6px;
-  padding:2px 8px;
-  border-radius:var(--r);
-  background:var(--blue);
-  font-size:.9rem;
+  display:inline-block;margin-right:6px;padding:2px 8px;border-radius:var(--r);
+  background:var(--blue);font-size:.9rem;
 }
-
 #stats-table{
-  width:100%;
-  border-collapse:collapse;
-  margin:6px 0;
+  width:100%;border-collapse:collapse;margin:6px 0;
 }
-#stats-table td{
-  padding:4px;
-  font-size:.9rem;
-}
+#stats-table td{padding:4px;font-size:.9rem}
 #stats-table tr:nth-child(even){background:#2b2b2b}
 
-/* ─────────── competitive usage summary ─────────── */
+/* ─────────── usage summary ─────────── */
 #stats-usage{
-  margin:10px 0 4px;
-  font-size:.85rem;
-  line-height:1.4;
+  margin:10px 0 4px;font-size:.85rem;line-height:1.4;
 }
 #stats-usage .tag{
-  display:inline-block;
-  margin:0 4px 4px 0;
-  padding:2px 6px;
-  border-radius:4px;
-  background:#444;
-  color:#fff;
-  text-transform:capitalize;
+  display:inline-block;margin:0 4px 4px 0;padding:2px 6px;border-radius:4px;
+  background:#444;color:#fff;text-transform:capitalize;
 }
 
-/* ─────────── tier tab UI ─────────── */
+/* ─────────── tier tab strip ─────────── */
 .tab-strip{
-  display:flex;
-  flex-wrap:wrap;
-  gap:6px;
-  margin:10px 0;
+  display:flex;flex-wrap:wrap;gap:6px;margin:10px 0;
 }
 .tab-btn{
-  cursor:pointer;
-  padding:6px 12px;
-  border-radius:var(--r);
-  font-size:.85rem;
-  font-weight:600;
-  background:#333;
-  border:1px solid #555;
-  color:var(--light);
-  transition:background var(--t);
+  cursor:pointer;padding:6px 12px;border-radius:var(--r);
+  font-size:.85rem;font-weight:600;background:#333;border:1px solid #555;
+  color:var(--light);transition:background var(--t);
 }
 .tab-btn:hover{background:#444}
-.tab-btn.active{
-  background:var(--blue);
-  border-color:var(--blue);
-}
+.tab-btn.active{background:var(--blue);border-color:var(--blue)}
 
-/* ─────────── set list / card (original definition) ─────────── */
-.set-list{
-  display:flex;
-  flex-direction:column;
-  gap:8px;
-}
+/* ─────────── original set list (legacy) ─────────── */
+.set-list{display:flex;flex-direction:column;gap:8px}
 .set-card{
-  background:#333;
-  padding:8px;
-  border-radius:var(--r);
-  font-size:.85rem;
-  line-height:1.35;
+  background:#333;padding:8px;border-radius:var(--r);
+  font-size:.85rem;line-height:1.35;
 }
 
-/* ─────────── scrollable tier-set container ─────────── */
+/* scrollable container for sets */
 #usage-content{
-  max-height:60vh;          /* keeps internal list usable on small screens */
-  overflow-y:auto;
-  overscroll-behavior:contain;
-  padding-right:4px;        /* little space for scrollbar */
+  max-height:60vh;overflow-y:auto;overscroll-behavior:contain;padding-right:4px;
 }
 
-/* ─────────── set details (simple list) ─────────── */
-.move-list{
-  margin:4px 0 0 18px;
-  padding:0;
-  list-style-type:disc;
-}
-.set-meta{
-  font-size:.78rem;
-  opacity:.80;
-  line-height:1.35;
-}
+/* simple list fallback */
+.move-list{margin:4px 0 0 18px;padding:0;list-style-type:disc}
+.set-meta{font-size:.78rem;opacity:.8;line-height:1.35}
 
 /* ───────────────────────────────────────────── */
-/*           NEW  SMOGON‑STYLE ENHANCEMENTS      */
+/*           NEW  Smogon‑style polish            */
 /* ───────────────────────────────────────────── */
-
 .set-card{
-  border:1px solid #8fa2c0;           /* NEW subtle outline */
-  background:#f7f9fc;                 /* NEW light inner bg */
-  color:#111;                         /* NEW readable text */
+  border:1px solid #8fa2c0;background:#f7f9fc;color:#111;
 }
-.sep{border:none;border-top:1px solid #ccc;margin:6px 0;} /* NEW hr */
-
-.set-header{margin-bottom:6px;}       /* NEW */
-.set-name{font-size:1rem;font-weight:600;} /* NEW */
-
-.set-grid{
-  display:grid;                       /* NEW two‑column layout */
-  grid-template-columns:max-content 1fr;
-  column-gap:24px;
+.set-name{
+  display:block;font-size:1rem;font-weight:600;margin-bottom:4px;text-align:left;
 }
-
-.move-row{margin:2px 0;}              /* NEW */
-.move-index{
-  display:inline-block;
-  width:70px;
-  font-weight:600;
-  color:#888;
-  text-align:right;
-  margin-right:6px;
+.set-table{
+  width:100%;border-collapse:collapse;font-size:.85rem;
+  word-break:break-word;       /* prevent overflow on mobiles */
 }
-.move-name{text-transform:none;}
-
-.set-meta.smogon{                    /* NEW dedicated meta grid */
-  display:grid;
-  grid-template-columns:max-content auto;
-  column-gap:8px;
-  row-gap:4px;
-  font-size:.85rem;
-  margin-top:6px;
-  opacity:.8;
+.set-table caption{caption-side:top;margin-bottom:4px}
+.set-table th{
+  text-align:right;padding:2px 6px 2px 0;vertical-align:top;
+  font-weight:600;color:#555;white-space:nowrap;
 }
-.set-meta.smogon dt{font-weight:600;text-align:right;}
-.set-meta.smogon dd{margin:0;}
+.set-table td{padding:2px 0;text-align:left;color:#000}
+.set-table tr:nth-child(even) td{background:#eef2fa}
+.move-index{color:#888}
+.move-name{font-weight:500}
