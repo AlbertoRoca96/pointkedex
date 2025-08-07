@@ -220,9 +220,6 @@ canvas{display:none}
   overflow: hidden;
 }
 .set-card-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
   background: #e1ebff;
   padding: 8px 12px;
   border-bottom: 1px solid #aac3ff;
@@ -231,20 +228,16 @@ canvas{display:none}
   font-size: 1rem;
   font-weight: 600;
 }
-.export-btn {
-  background: #fff;
-  border: 1px solid #888;
-  border-radius: var(--r);
-  padding: 2px 8px;
-  font-size: .8rem;
-  cursor: pointer;
-}
+
+/* ─────────── set body grid ─────────── */
 .set-card-body {
   display: grid;
   grid-template-columns: 1fr auto;
   column-gap: 24px;
   padding: 12px;
 }
+
+/* ─────────── move list ─────────── */
 .move-list {
   margin: 0;
   padding-left: 20px;
@@ -254,6 +247,8 @@ canvas{display:none}
   margin-bottom: 4px;
   cursor: help;
 }
+
+/* ─────────── metadata grid ─────────── */
 .set-meta {
   display: grid;
   grid-template-columns: max-content auto;
@@ -270,9 +265,9 @@ canvas{display:none}
 }
 
 /* ─────────── scrollable tier-set container ─────────── */
-#usage-content{
-  max-height:60vh;
-  overflow-y:auto;
-  overscroll-behavior:contain;
-  padding-right:4px;
+#usage-content {
+  max-height: 60vh;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  padding-right: 4px;
 }
