@@ -20,7 +20,9 @@ html, body {
   overflow: hidden;
   box-sizing: border-box;
 }
-*, *::before, *::after { box-sizing: inherit; }
+*, *::before, *::after {
+  box-sizing: inherit;
+}
 
 #cam {
   position: absolute;
@@ -212,7 +214,7 @@ canvas { display: none; }
   color: var(--light);
   transition: background var(--t);
 }
-.tab-btn:hover  { background: #444; }
+.tab-btn:hover { background: #444; }
 .tab-btn.active { background: var(--blue); border-color: var(--blue); }
 
 /* ─────────── set card ─────────── */
@@ -221,7 +223,6 @@ canvas { display: none; }
   border: 1px solid #444;
   border-radius: var(--r);
   margin: 8px 0;
-  /* allow cards to expand vertically rather than cut off */
   overflow: visible;
 }
 .set-card-header {
@@ -241,7 +242,7 @@ canvas { display: none; }
   grid-template-columns: 1fr auto;
   column-gap: 24px;
   padding: 12px;
-  min-width: 0;               /* needed for overflow-wrap to work */
+  min-width: 0;
 }
 
 /* ─────────── move list ─────────── */
@@ -253,6 +254,9 @@ canvas { display: none; }
 .set-card-body ol li {
   margin-bottom: 4px;
   cursor: help;
+  overflow-wrap: break-word;
+  word-break: break-all;
+  white-space: normal;
 }
 
 /* ─────────── metadata grid ─────────── */
@@ -264,12 +268,16 @@ canvas { display: none; }
   font-size: .85rem;
   color: var(--light);
 }
+.set-meta dt,
+.set-meta dd {
+  margin: 0;
+  overflow-wrap: break-word;
+  word-break: break-all;
+  white-space: normal;
+}
 .set-meta dt {
   text-align: right;
   font-weight: 600;
-}
-.set-meta dd {
-  margin: 0;
 }
 
 /* ─────────── credits block ─────────── */
@@ -277,18 +285,6 @@ canvas { display: none; }
   margin: 4px 12px;
   font-size: .75rem;
   color: var(--light);
-}
-
-/* ─────────── wrap-fix additions ─────────── */
-/* break anywhere in long continuous strings */
-.set-card-body,
-.set-card-body ol,
-.set-card-body ol li,
-.set-meta dt,
-.set-meta dd {
-  overflow-wrap: anywhere;
-  word-break: break-word;
-  white-space: normal;
 }
 
 /* ─────────── responsive tweaks ─────────── */
