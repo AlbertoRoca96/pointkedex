@@ -62,7 +62,14 @@ const kgToLb = hg => {
 /* ---------- formatting helpers ---------- */
 const cleanMove = m=>{
   if(typeof m!=="string") return "";
-  const cut=m.indexOf("Type"); return (cut>0?m.slice(0,cut):m).trim();
+  let txt=m
+    .replace(/^Move\s*\d+\s*/i,"")                     // remove “Move N” prefix          // ▲ NEW
+    .replace(/Type[A-Z].*$/,"")                        // nuke trailing Smogon meta      // ▲ NEW
+    .replace(/[\.\•]+$/,"")                            // trailing dots/bullets          // ▲ NEW
+    .trim();
+  /* insert missing space before UpperCase following lower‑case (e.g. Fire BlastHas) */
+  txt=txt.replace(/([a-z])([A-Z])/g,"$1 $2");          // ▲ NEW
+  return txt;
 };
 const formatEV = ev=> typeof ev==="string"
   ? ev
@@ -151,6 +158,10 @@ function renderTierSets(list,container){
     const pushLine=line=>{
       const low=line.toLowerCase().trim();
 
+      /* strip “Move X” prefixes while preserving original for parsing moves */      // ▲ NEW
+      const mvPrefix=line.match(/^Move\s*\d+\s*/i);
+      if(mvPrefix){ pushLine(line.replace(/^Move\s*\d+\s*/i,"")); return; }          // ▲ NEW
+
       if(CREDIT_RE.test(low)){ credits.push(line.trim()); return; }
 
       /* EV / IV lines */
@@ -163,7 +174,7 @@ function renderTierSets(list,container){
 
       /* abilities */
       if(low.startsWith("ability:")){ set.ability=line.split(":").slice(1).join(":").trim(); return; }
-      if(/this pokemon's attacks|this pokemon does not/i.test(low)){
+      if(/this pokemon'?s attacks|this pokemon does not/i.test(low)){
         set.ability=line.trim(); return;
       }
 
@@ -374,7 +385,7 @@ $("#btn-stats").onclick=async()=>{
 };
 
 $("#btn-dismiss").onclick=()=>{hide($("#prompt")); promptVisible=false; requestAnimationFrame(loop);};
-$("#stats-close").onclick=()=>{hide($("#stats-panel")); requestAnimationFrame(loop);};
+$("#stats-close").onclick=()=>{hide($("#stats-panel")); requestAnimationFrame(loop);} ;
 
 /* ---------- keyboard shortcuts (bonus UX) ---------- */
 document.addEventListener("keydown",e=>{
