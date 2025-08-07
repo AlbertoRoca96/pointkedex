@@ -64,7 +64,7 @@ const mToFtIn = dm => {
 };
 const kgToLb = hg => {
   const kg = hg/10;
-  return `${kg.toFixed(1)} kg (${(kg*2.205).toFixed(1)} lb)`;
+  return `${kg.toFixed(1)} kg (${(kg*2.205).toFixed(1)} lb)`;  // unchanged
 };
 
 /* ----- NEW helpers for prettier set display ---------- */
@@ -119,7 +119,7 @@ function buildTierTabs(fullSets) {
   if (!tabs) {
     tabs = document.createElement("div");
     tabs.id = "usage-tabs";
-    tabs.classList.add("tab-strip");
+    tabs.classList.add("tab-strip");              /* NEW: use class for css */
     $("#stats-panel .card").appendChild(tabs);
   }
   if (!content) {
@@ -133,6 +133,7 @@ function buildTierTabs(fullSets) {
   const tiers = Object.keys(fullSets || {}).sort();
   if (!tiers.length) return;
 
+  /* old inline‑style background logic kept, but replaced by class toggles */
   function activate(tier) {
     tabs.querySelectorAll("button").forEach(b => b.classList.remove("active"));
     const btn = tabs.querySelector(`button[data-tier='${tier}']`);
@@ -151,6 +152,7 @@ function buildTierTabs(fullSets) {
   });
 }
 
+/* ---------- ORIGINAL set renderer (retained for no‑omission rule) ---------- */
 function renderTierSets(list, container) {
   container.innerHTML = "";
   if (!Array.isArray(list) || !list.length) {
@@ -160,75 +162,107 @@ function renderTierSets(list, container) {
     container.appendChild(p);
     return;
   }
-
   list.forEach(set => {
     const card = document.createElement("div");
-    card.classList.add("set-card");
+    card.style.background = "#333";
+    card.style.borderRadius = "var(--r)";
+    card.style.padding = "8px";
+    card.style.margin = "4px 0";
+    card.style.fontSize = ".85rem";
+    card.style.whiteSpace = "normal";
 
-    // header
+    const title = set.name ? `<strong>${set.name}</strong>` : "";
+
+    /* moves */
+    const moveList = Array.isArray(set.moves)
+      ? `<ul class="move-list">${set.moves
+          .map(m => `<li>${cleanMove(m)}</li>`)
+          .join("")}</ul>`
+      : "";
+
+    /* meta lines */
+    let misc = "";
+    if (set.ability || set.item || set.nature || set.evs || set.ivs || set.teratypes) {
+      misc += "<div class='set-meta'>";
+      if (set.item)    misc += `<em>Item:</em> ${Array.isArray(set.item) ? set.item.join(", ") : set.item}<br>`;
+      if (set.ability) misc += `<em>Ability:</em> ${Array.isArray(set.ability) ? set.ability.join(", ") : set.ability}<br>`;
+      if (set.nature)  misc += `<em>Nature:</em> ${Array.isArray(set.nature) ? set.nature.join(", ") : set.nature}<br>`;
+      if (set.evs)     misc += `<em>EVs:</em> ${formatEV(set.evs)}<br>`;
+      if (set.ivs)     misc += `<em>IVs:</em> ${formatEV(set.ivs)}<br>`;
+      if (set.teratypes) misc += `<em>Tera:</em> ${Array.isArray(set.teratypes) ? set.teratypes.join(", ") : set.teratypes}<br>`;
+      misc += "</div>";
+    }
+
+    /* original simple layout kept (but will be overwritten below) */
+    card.innerHTML = `${title}${moveList}${misc}`;
+
+    /* -------- Smogon‑style reflow -------- */
+    card.innerHTML = "";                              // clear previous markup
     if (set.name) {
-      const header = document.createElement("header");
-      header.classList.add("set-header");
+      const hdr = document.createElement("header");
+      hdr.className = "set-header";
       const strong = document.createElement("strong");
-      strong.classList.add("set-name");
+      strong.className = "set-name";
       strong.textContent = set.name;
-      header.appendChild(strong);
-      card.appendChild(header);
+      hdr.appendChild(strong);
+      card.appendChild(hdr);
     }
 
-    // moves
-    if (Array.isArray(set.moves) && set.moves.length) {
-      const ul = document.createElement("ul");
-      ul.classList.add("move-list");
-      set.moves.forEach(m => {
-        const li = document.createElement("li");
-        li.textContent = cleanMove(m);
+    const grid = document.createElement("div");
+    grid.className = "set-grid";
+
+    /* left column = numbered moves */
+    const movesCol = document.createElement("div");
+    movesCol.className = "set-left";
+    if (Array.isArray(set.moves)) {
+      set.moves.forEach((m, idx) => {
+        const row = document.createElement("div");
+        row.className = "move-row";
+        row.innerHTML =
+          `<span class="move-index">Move ${idx + 1}:</span> <span class="move-name">${cleanMove(m)}</span>`;
         const extra = m.slice(cleanMove(m).length).trim();
-        if (extra) li.title = extra;
-        ul.appendChild(li);
+        if (extra) row.title = extra;                 // tooltip with full text
+        movesCol.appendChild(row);
       });
-      card.appendChild(ul);
     }
+    grid.appendChild(movesCol);
 
-    // metadata
-    if (set.item || set.ability || set.nature || set.evs || set.ivs || set.teratypes) {
-      const dl = document.createElement("dl");
-      dl.classList.add("set-meta");
-
-      if (set.item) {
-        const div = document.createElement("div");
-        div.innerHTML = `<dt>Item</dt><dd>${Array.isArray(set.item) ? set.item.join(" / ") : set.item}</dd>`;
-        dl.appendChild(div);
-      }
-      if (set.ability) {
-        const div = document.createElement("div");
-        div.innerHTML = `<dt>Ability</dt><dd>${Array.isArray(set.ability) ? set.ability.join(" / ") : set.ability}</dd>`;
-        dl.appendChild(div);
-      }
-      if (set.nature) {
-        const div = document.createElement("div");
-        div.innerHTML = `<dt>Nature</dt><dd>${Array.isArray(set.nature) ? set.nature.join(" / ") : set.nature}</dd>`;
-        dl.appendChild(div);
-      }
-      if (set.evs) {
-        const div = document.createElement("div");
-        div.innerHTML = `<dt>EVs</dt><dd>${formatEV(set.evs)}</dd>`;
-        dl.appendChild(div);
-      }
-      if (set.ivs) {
-        const div = document.createElement("div");
-        div.innerHTML = `<dt>IVs</dt><dd>${formatEV(set.ivs)}</dd>`;
-        dl.appendChild(div);
-      }
-      if (set.teratypes) {
-        const div = document.createElement("div");
-        div.innerHTML = `<dt>Tera</dt><dd>${Array.isArray(set.teratypes) ? set.teratypes.join(" / ") : set.teratypes}</dd>`;
-        dl.appendChild(div);
-      }
-
-      card.appendChild(dl);
+    /* right column = metadata dl grid */
+    const metaCol = document.createElement("dl");
+    metaCol.className = "set-meta";
+    if (set.item) {
+      const div = document.createElement("div");
+      div.innerHTML = `<dt>Item</dt><dd>${Array.isArray(set.item) ? set.item.join(" / ") : set.item}</dd>`;
+      metaCol.appendChild(div);
     }
+    if (set.ability) {
+      const div = document.createElement("div");
+      div.innerHTML = `<dt>Ability</dt><dd>${Array.isArray(set.ability) ? set.ability.join(" / ") : set.ability}</dd>`;
+      metaCol.appendChild(div);
+    }
+    if (set.nature) {
+      const div = document.createElement("div");
+      div.innerHTML = `<dt>Nature</dt><dd>${Array.isArray(set.nature) ? set.nature.join(" / ") : set.nature}</dd>`;
+      metaCol.appendChild(div);
+    }
+    if (set.evs) {
+      const div = document.createElement("div");
+      div.innerHTML = `<dt>EVs</dt><dd>${formatEV(set.evs)}</dd>`;
+      metaCol.appendChild(div);
+    }
+    if (set.ivs) {
+      const div = document.createElement("div");
+      div.innerHTML = `<dt>IVs</dt><dd>${formatEV(set.ivs)}</dd>`;
+      metaCol.appendChild(div);
+    }
+    if (set.teratypes) {
+      const div = document.createElement("div");
+      div.innerHTML = `<dt>Tera</dt><dd>${Array.isArray(set.teratypes) ? set.teratypes.join(" / ") : set.teratypes}</dd>`;
+      metaCol.appendChild(div);
+    }
+    grid.appendChild(metaCol);
 
+    card.appendChild(grid);
     container.appendChild(card);
   });
 }
