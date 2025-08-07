@@ -1,6 +1,12 @@
 :root{
   --red:#ef5350;--yellow:#ffeb3b;--blue:#42a5f5;--grey:#212121;
-  --light:#fff;--dark:#111;--back:rgba(0,0,0,.45);--r:6px;--t:.25s
+  --light:#fff;--dark:#111;--back:rgba(0,0,0,.45);--r:6px;--t:.25s;
+
+  /* new palette tokens */
+  --card-border:#8fa2c0;
+  --card-bg:#f7f9fc;
+  --row-alt:#eef2fa;
+  --row-header:#e3eaf8;
 }
 
 /* ─────────── base layout ─────────── */
@@ -194,6 +200,9 @@ canvas{display:none}
   flex-wrap:wrap;
   gap:6px;
   margin:10px 0;
+  position:sticky;           /* stays visible while scrolling long lists */
+  top:0;
+  z-index:2;
 }
 .tab-btn{
   cursor:pointer;
@@ -212,20 +221,6 @@ canvas{display:none}
   border-color:var(--blue);
 }
 
-/* ─────────── set list / card (fallback) ─────────── */
-.set-list{
-  display:flex;
-  flex-direction:column;
-  gap:8px;
-}
-.set-card{
-  background:#333;
-  padding:8px;
-  border-radius:var(--r);
-  font-size:.85rem;
-  line-height:1.35;
-}
-
 /* ─────────── scrollable tier‑content ─────────── */
 #usage-content{
   max-height:60vh;
@@ -234,45 +229,39 @@ canvas{display:none}
   padding-right:4px;
 }
 
-/* ─────────── legacy details bullets ─────────── */
-.move-list{
-  margin:4px 0 0 18px;
-  padding:0;
-  list-style-type:disc;
-}
-.set-meta{
-  font-size:.78rem;
-  opacity:.80;
-  line-height:1.35;
-}
-
 /* ─────────────────────────────────────────────── */
 /*              SMOGON‑STYLE CARD RULES            */
 /* ─────────────────────────────────────────────── */
-
 .set-card{
-  border:1px solid #8fa2c0;
-  background:#f7f9fc;
+  border:1px solid var(--card-border);
+  background:var(--card-bg);
   color:#111;
+  margin-bottom:8px;
+  transition:max-height .25s ease,box-shadow .25s ease;
+  overflow:hidden;
 }
+.set-card.collapsed .set-body{display:none;}
+.set-card:not(.collapsed){box-shadow:0 2px 6px rgba(0,0,0,.25);}
 
-.set-name{
-  display:block;
-  font-size:1rem;
+.set-header{
+  all:unset;
+  cursor:pointer;
+  display:flex;
+  align-items:center;
+  gap:6px;
+  width:100%;
+  padding:6px 10px;
   font-weight:600;
-  margin-bottom:4px;
-  text-align:left;
+  background:var(--row-header);
+  border-bottom:1px solid var(--card-border);
 }
+.set-header .chev{font-size:.9rem;transition:transform var(--t);}
 
 .set-table{
   width:100%;
   border-collapse:collapse;
   font-size:.85rem;
   word-wrap:break-word;
-}
-.set-table caption{
-  caption-side:top;
-  margin-bottom:4px;
 }
 .set-table th{
   text-align:right;
@@ -287,6 +276,11 @@ canvas{display:none}
   text-align:left;
   color:#000;
 }
-.set-table tr:nth-child(even) td{background:#eef2fa}
+.set-table tr:nth-child(even) td{background:var(--row-alt)}
 .move-index{color:#888}
 .move-name{font-weight:500}
+
+/* allow horizontal swipe on very small screens */
+@media (max-width:480px){
+  .set-table td,.set-table th{font-size:.8rem;}
+}
