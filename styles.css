@@ -11,14 +11,18 @@
 }
 
 /* ─────────── base layout ─────────── */
-html,
-body {
+html, body {
   margin: 0;
   height: 100%;
   font-family: Segoe UI, Roboto, system-ui, -apple-system, sans-serif;
   color: var(--light);
   background: var(--grey);
   overflow: hidden;
+  box-sizing: border-box;
+}
+
+*, *::before, *::after {
+  box-sizing: inherit;
 }
 
 #cam {
@@ -32,9 +36,7 @@ body {
 
 #label {
   position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
+  bottom: 0; left: 0; right: 0;
   padding: 12px 16px;
   background: var(--back);
   text-align: center;
@@ -56,16 +58,14 @@ body {
   cursor: pointer;
   transition: filter var(--t), transform var(--t);
 }
-#start:hover    { filter: brightness(1.05); }
-#start:active   { transform: scale(.97); }
+#start:hover { filter: brightness(1.05); }
+#start:active { transform: scale(.97); }
 #start:focus-visible { outline: 3px dashed var(--yellow); outline-offset: 4px; }
 
 #alert {
   display: none;
   position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
+  top: 0; left: 0; right: 0;
   background: var(--red);
   color: var(--light);
   padding: 6px;
@@ -74,9 +74,7 @@ body {
 
 header.app-header {
   position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
+  top: 0; left: 0; right: 0;
   padding: 8px 16px;
   display: flex;
   align-items: center;
@@ -84,8 +82,7 @@ header.app-header {
   pointer-events: none;
 }
 header.app-header .logo {
-  width: 36px;
-  height: 36px;
+  width: 36px; height: 36px;
   border-radius: 50%;
   background: var(--yellow);
 }
@@ -102,24 +99,23 @@ canvas { display: none; }
 .overlay {
   position: absolute;
   inset: 0;
-  display: none; /* shown via JS */
+  display: none;               /* shown via JS */
   align-items: center;
   justify-content: center;
-  background: rgba(0, 0, 0, .6);
+  background: rgba(0,0,0,.6);
   backdrop-filter: blur(3px);
   z-index: 10;
   overflow-y: auto;
   overscroll-behavior: contain;
 }
 
-.dialog,
-.card {
+.dialog, .card {
   background: var(--dark);
   padding: 20px;
   border-radius: var(--r);
   max-width: 90%;
   color: var(--light);
-  box-shadow: 0 4px 10px rgba(0, 0, 0, .4);
+  box-shadow: 0 4px 10px rgba(0,0,0,.4);
 }
 
 #stats-panel .card {
@@ -143,10 +139,10 @@ canvas { display: none; }
   font-size: 1rem;
   transition: background var(--t);
 }
-.dialog-btns button            { background: var(--blue); }
-.dialog-btns button:hover      { background: #3390e0; }
-.dialog-btns #btn-dismiss      { background: #555; }
-.dialog-btns #btn-dismiss:hover{ background: #666; }
+.dialog-btns button { background: var(--blue); }
+.dialog-btns button:hover { background: #3390e0; }
+.dialog-btns #btn-dismiss { background: #555; }
+.dialog-btns #btn-dismiss:hover { background: #666; }
 
 .card .close {
   position: absolute;
@@ -222,8 +218,8 @@ canvas { display: none; }
   color: var(--light);
   transition: background var(--t);
 }
-.tab-btn:hover         { background: #444; }
-.tab-btn.active        { background: var(--blue); border-color: var(--blue); }
+.tab-btn:hover       { background: #444; }
+.tab-btn.active      { background: var(--blue); border-color: var(--blue); }
 
 
 /* ─────────── set card ─────────── */
@@ -251,6 +247,8 @@ canvas { display: none; }
   grid-template-columns: 1fr auto;
   column-gap: 24px;
   padding: 12px;
+  min-width: 0;               /* allow children to wrap */
+  overflow-wrap: break-word;
   word-wrap: break-word;
 }
 
@@ -259,11 +257,12 @@ canvas { display: none; }
   margin: 0;
   padding-left: 20px;
   list-style: decimal;
-  color: var(--light);
 }
 .set-card-body ol li {
   margin-bottom: 4px;
   cursor: help;
+  overflow-wrap: break-word;
+  word-break: break-word;
 }
 
 /* ─────────── metadata grid ─────────── */
@@ -278,9 +277,11 @@ canvas { display: none; }
 .set-meta dt {
   text-align: right;
   font-weight: 600;
+  overflow-wrap: break-word;
 }
 .set-meta dd {
   margin: 0;
+  overflow-wrap: break-word;
 }
 
 /* ─────────── credits block ─────────── */
@@ -288,4 +289,14 @@ canvas { display: none; }
   margin: 4px 12px;
   font-size: .75rem;
   color: var(--light);
+}
+
+/* ─────────── responsive tweaks ─────────── */
+@media (max-width: 600px) {
+  .set-card-body {
+    grid-template-columns: 1fr;
+  }
+  .tab-strip {
+    justify-content: center;
+  }
 }
