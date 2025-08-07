@@ -235,9 +235,9 @@ canvas{display:none}
   padding-right:4px;        /* little space for scrollbar */
 }
 
-/* ─────────── set details (added for original app.js markup) ─────────── */
+/* ─────────── set details (simple list) ─────────── */
 .move-list{
-  margin:4px 0 0 18px;      /* indent bullets a bit */
+  margin:4px 0 0 18px;
   padding:0;
   list-style-type:disc;
 }
@@ -247,33 +247,27 @@ canvas{display:none}
   line-height:1.35;
 }
 
-/* ────────────────────────────────────────────────────────── */
-/*                     NEW  SMOGON‑STYLE RULES               */
-/* ────────────────────────────────────────────────────────── */
+/* ───────────────────────────────────────────── */
+/*           NEW  SMOGON‑STYLE ENHANCEMENTS      */
+/* ───────────────────────────────────────────── */
 
-/* override / extend card appearance */
 .set-card{
-  border:1px solid #8fa2c0;   /* subtle border like Smogon */
-  background:#f7f9fc;         /* light inner bg for contrast */
-  color:#111;                 /* dark text for readability */
+  border:1px solid #8fa2c0;           /* NEW subtle outline */
+  background:#f7f9fc;                 /* NEW light inner bg */
+  color:#111;                         /* NEW readable text */
 }
+.sep{border:none;border-top:1px solid #ccc;margin:6px 0;} /* NEW hr */
 
-/* header */
-.set-header{margin-bottom:6px;}
-.set-name{
-  font-size:1rem;
-  font-weight:600;
-}
+.set-header{margin-bottom:6px;}       /* NEW */
+.set-name{font-size:1rem;font-weight:600;} /* NEW */
 
-/* two‑column grid wrapper */
 .set-grid{
-  display:grid;
+  display:grid;                       /* NEW two‑column layout */
   grid-template-columns:max-content 1fr;
   column-gap:24px;
 }
 
-/* left column – numbered moves */
-.move-row{margin:2px 0;}
+.move-row{margin:2px 0;}              /* NEW */
 .move-index{
   display:inline-block;
   width:70px;
@@ -284,8 +278,7 @@ canvas{display:none}
 }
 .move-name{text-transform:none;}
 
-/* right column tweaks (dl already defined) */
-.set-meta{
+.set-meta.smogon{                    /* NEW dedicated meta grid */
   display:grid;
   grid-template-columns:max-content auto;
   column-gap:8px;
@@ -294,5 +287,5 @@ canvas{display:none}
   margin-top:6px;
   opacity:.8;
 }
-.set-meta dt{font-weight:600;text-align:right;}
-.set-meta dd{margin:0;}
+.set-meta.smogon dt{font-weight:600;text-align:right;}
+.set-meta.smogon dd{margin:0;}
