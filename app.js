@@ -1,4 +1,4 @@
-/* ---------- tunables ---------- */
+/* ----------- tunables ----------- */
 const CONF_THR = 0.20;
 const STABLE_N  = 3;
 const JPEG_QUAL = 0.85;
