@@ -1,65 +1,87 @@
+name: Deploy to HF Space
+
 on:
   push:
     branches: [main]
   workflow_dispatch:
+    inputs:
+      release_tag:
+        description: "GitHub Release tag to pull assets from (leave blank for latest)"
+        required: false
+        default: ""
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
+    concurrency:
+      group: deploy-hf-space
+      cancel-in-progress: true
+
     steps:
       - name: Checkout source
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
 
-      - name: Configure Git for commit
+      - name: Install git-lfs, jq, rsync
         run: |
-          git config --global user.name "github-actions"
-          git config --global user.email "github-actions@users.noreply.github.com"
+          sudo apt-get update
+          sudo apt-get install -y git-lfs jq rsync
+          git lfs install
+
+      - name: Configure Git author
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
 
       - name: Clone HF Space repo
         env:
           HF_TOKEN: ${{ secrets.HF_TOKEN }}
         run: |
           rm -rf hf-space
-          git clone https://AlbertoRoca96-web:${HF_TOKEN}@huggingface.co/spaces/AlbertoRoca96-web/pointkedex hf-space
+          git clone "https://AlbertoRoca96-web:${HF_TOKEN}@huggingface.co/spaces/AlbertoRoca96-web/pointkedex" hf-space
 
-      - name: Ensure jq is available
-        run: |
-          if ! command -v jq >/dev/null; then
-            sudo apt-get update
-            sudo apt-get install -y jq
-          fi
+          # Ensure large binaries (e.g., .h5) are stored via LFS/Xet
+          cd hf-space
+          git lfs track "*.h5"
+          git add .gitattributes || true
+          git commit -m "track *.h5 with LFS" || true
+          cd ..
 
-      - name: Download usage_data.json and .h5 from release (shell-only)
+      - name: Resolve release to download
+        id: rel
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           OWNER="AlbertoRoca96"
           REPO="pointkedex"
-          TAG="alroca"
+          if [ -n "${{ github.event.inputs.release_tag }}" ]; then
+            API_URL="https://api.github.com/repos/${OWNER}/${REPO}/releases/tags/${{ github.event.inputs.release_tag }}"
+          else
+            API_URL="https://api.github.com/repos/${ OWNER }/${ REPO }/releases/latest"
+          fi
 
-          # Fetch the release JSON by tag
           release_json=$(curl -sSL \
             -H "Accept: application/vnd.github+json" \
             -H "Authorization: Bearer ${GITHUB_TOKEN}" \
-            "https://api.github.com/repos/${OWNER}/${REPO}/releases/tags/${TAG}")
+            "$API_URL")
 
           usage_url=$(printf '%s' "$release_json" | jq -r '.assets[] | select(.name=="usage_data.json") | .browser_download_url')
           h5_url=$(printf '%s' "$release_json" | jq -r '.assets[] | select(.name=="pokedex_resnet50.h5") | .browser_download_url')
 
-          if [[ -z "$usage_url" || "$usage_url" == "null" ]]; then
-            echo "❌ usage_data.json asset not found in release ${TAG}"
-            exit 1
-          fi
-          if [[ -z "$h5_url" || "$h5_url" == "null" ]]; then
-            echo "❌ pokedex_resnet50.h5 asset not found in release ${TAG}"
-            exit 1
-          fi
+          [ -n "$usage_url" ] && [ "$usage_url" != "null" ] || { echo "❌ usage_data.json not found"; exit 1; }
+          [ -n "$h5_url" ] && [ "$h5_url" != "null" ] || { echo "❌ pokedex_resnet50.h5 not found"; exit 1; }
 
-          # Download the assets
-          curl -L -H "Authorization: Bearer ${GITHUB_TOKEN}" -o usage_data.json "$usage_url"
-          curl -L -H "Authorization: Bearer ${GITHUB_TOKEN}" -o pokedex_resnet50.h5 "$h5_url"
+          echo "usage_url=$usage_url" >> "$GITHUB_OUTPUT"
+          echo "h5_url=$h5_url"       >> "$GITHUB_OUTPUT"
+
+      - name: Download release assets
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          curl -L -H "Authorization: Bearer ${GITHUB_TOKEN}" -o usage_data.json "${{ steps.rel.outputs.usage_url }}"
+          curl -L -H "Authorization: Bearer ${GITHUB_TOKEN}" -o pokedex_resnet50.h5 "${{ steps.rel.outputs.h5_url }}"
+          ls -lh usage_data.json pokedex_resnet50.h5
 
       - name: Sync files to HF Space
         run: |
@@ -67,6 +89,7 @@ jobs:
             Dockerfile predict_server.py index.html app.js styles.css \
             config.js flavor_text.json class_indices.json pokedex_data.json \
             usage_data.json service-worker.js manifest.webmanifest \
+            pokedex_resnet50.h5 \
             hf-space/
 
       - name: Commit & push to HF Space
@@ -74,10 +97,11 @@ jobs:
           HF_TOKEN: ${{ secrets.HF_TOKEN }}
         run: |
           cd hf-space
+          git lfs ls-files || true
           git add -A
           if git diff --cached --quiet; then
             echo "No changes to push."
           else
-            git commit -m "Sync app files from GitHub main"
+            git commit -m "Sync app files + updated model"
             git push
           fi
